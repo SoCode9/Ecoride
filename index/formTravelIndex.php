@@ -1,6 +1,6 @@
 <?php
 require_once "back/formTravelBack.php";
-require_once "commom.php";
+require_once "common.php";
 ?>
 
 <?php include 'templates/header.php'; ?>
