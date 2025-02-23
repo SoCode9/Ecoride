@@ -1,0 +1,75 @@
+/*En tête, navigation Visiteur*/
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #987B4D;
+    align-items: center;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 60px;
+    font-size: 18px;
+    align-items: center;
+
+}
+
+.navigation a {
+    color: white;
+    letter-spacing: 1px;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #F5F5F5;
+}
+
+.boutonNav:hover {
+    color: #F2C674;
+}
+
+.boutonNav:active {
+    color: #f0b74e;
+}
+
+#loginButton {
+    padding: 5px 10px;
+    border: white solid 1.5px;
+    border-radius: 15px;
+}
+
+#loginButton:hover {
+    background-color: #BD9F66;
+    color: rgb(255, 255, 255);
+}
+
+#loginButton:active {
+    background-color: #bb9247;
+
+}
+
+/*Pied de page*/
+.piedPage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #987B4D;
+    align-items: center;
+    font-size: 11px;
+    color: white;
+}
+
+.piedPage a {
+    color: white;
+}
