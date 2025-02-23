@@ -12,7 +12,9 @@ class Travel
     //private int $driver_id;
     private ?string $travelDate;
 
-    private ?string $travelDepartureCity;
+
+
+    private ?string $travelDepartureCity; 
     private ?string $travelArrivalCity;
     private ?string $travelDepartureTime;
     private ?string $travelArrivalTime;
@@ -61,6 +63,7 @@ class Travel
         }
 
     }
+
 
     public function searchTravels(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $noteDriver = null): array
     {
@@ -136,6 +139,8 @@ class Travel
     }
 
 
+
+
     public function displayTravelsBrut(string $sql, string $column = null)
     {
         // Vérifier si la connexion à la base de données est bien établie
@@ -193,7 +198,8 @@ class Travel
      * @return array return an array
      */
     public function allFuturesTravels(): array
-    {
+
+    { 
         if (!$this->pdo) {
             die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
         }
@@ -214,7 +220,8 @@ class Travel
         } else {
             echo "<p style='color: red;'>Erreur lors de l'exécution de la requête SQL.</p>";
             exit();
-        }
+        } 
+
         /*  test pour afficher les voyages
          echo "<pre>"; 
          print_r($travels);
