@@ -1,0 +1,128 @@
+.pageTitle {
+    color: #4D9856;
+    font-size: 18px;
+}
+
+/* BLOC ENTETE DETAIL TRAJET ET RESERVATION */
+
+.travelDetailsBookingBlock {
+    display: flex;
+    flex-direction: row;
+    background-color: #EDEDED;
+    padding: 24px;
+    border-radius: 15px;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
+/*BLOC DETAIL TRAJET*/
+
+.travelDetailsBlock {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 60%;
+    background-color: white;
+    padding: 24px;
+    border-radius: 15px;
+    box-sizing: border-box;
+
+}
+
+
+.locationAndTimeTravel {
+    display: flex;
+    flex-direction: row;
+}
+
+.timeLocationEllipse {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 8px;
+}
+
+.timeLocation {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+#ellipse {
+    width: 15px;
+    height: 15px;
+    background-color: #4D9856;
+    border-radius: 50%;
+    /* Rend l'ellipse ronde */
+    /*position: absolute;*/
+    /* Permet de le positionner facilement si nécessaire */
+}
+
+.durationLine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    width: 154px;
+    padding: 0px 0px 7px 0px;
+    /*aligner la ligne avec le ronds verts*/
+}
+
+.travelDuration {
+    color: #4D9856;
+}
+
+.line {
+    width: 100%;
+    /* Longueur de la ligne */
+    height: 2px;
+    /* Épaisseur de la ligne */
+    background-color: #4D9856;
+    /* Couleur de la ligne */
+}
+
+.seatsAndEco {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    align-items: end;
+}
+
+/*BLOC VALIDER RESERVATION*/
+
+.travelValidation {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 30%;
+
+}
+
+.nbPassengerCredit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.participateButton {
+    display: flex;
+    flex-direction: row;
+    background-color: #F2C674;
+    border-radius: 15px;
+    border: none;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.imgFilterDate {
+    width: 20px;
+    cursor: pointer;
+}
