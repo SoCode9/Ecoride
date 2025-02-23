@@ -12,7 +12,7 @@ class Travel
     //private int $driver_id;
     private ?string $travelDate;
 
-    private ?string $travelDepartureCity;
+    private ?string $travelDepartureCity; 
     private ?string $travelArrivalCity;
     private ?string $travelDepartureTime;
     private ?string $travelArrivalTime;
