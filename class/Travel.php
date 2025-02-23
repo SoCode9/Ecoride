@@ -12,6 +12,8 @@ class Travel
     //private int $driver_id;
     private ?string $travelDate;
 
+
+
     private ?string $travelDepartureCity; 
     private ?string $travelArrivalCity;
     private ?string $travelDepartureTime;
@@ -61,6 +63,83 @@ class Travel
         }
 
     }
+
+
+    public function searchTravels(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $noteDriver = null): array
+    {
+        if (!$this->pdo) {
+            die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
+        }
+        // Convertir la date de `dd.mm.yyyy` à `yyyy-mm-dd`
+        $dateObject = DateTime::createFromFormat('d.m.Y', $dateSearch);
+        if ($dateObject) {
+            $dateSearch = $dateObject->format('Y-m-d'); // Format SQL
+        }
+
+        $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, driver.driver_note AS driver_note, cars.car_electric AS car_electric, TIMESTAMPDIFF(MINUTE, travel_departure_time, travel_arrival_time)/60 AS travel_duration 
+        FROM travels 
+        JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id JOIN cars ON cars.car_id = travels.car_id  
+        WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city)";
+
+        if (isset($eco)) {
+            $sql .= " AND (car_electric = 1)";
+        }
+
+        if (!empty($maxPrice)) {
+            $sql .= " AND (travel_price <= :max_price)";
+        }
+
+        if (!empty($maxDuration)) {
+            $sql .= " AND TIMESTAMPDIFF(MINUTE, travels.travel_departure_time, travels.travel_arrival_time)/60 <= :max_duration";
+        }
+
+        if (!empty($noteDriver)) {
+            $sql .= " AND (driver_note >= :note_driver)";
+        }
+
+        $sql .= " ORDER BY travel_departure_time ASC";
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(":travel_date", $dateSearch, PDO::PARAM_STR);
+        $statement->bindParam(":departure_city", $departureCitySearch, PDO::PARAM_STR);
+        $statement->bindParam(":arrival_city", $arrivalCitySearch, PDO::PARAM_STR);
+
+        if (!empty($maxPrice)) {
+            $statement->bindParam(":max_price", $maxPrice, PDO::PARAM_INT);
+        }
+
+        if (!empty($maxDuration)) {
+            $statement->bindParam(":max_duration", $maxDuration, PDO::PARAM_INT);
+        }
+
+        if (!empty($noteDriver)) {
+            $statement->bindValue(":note_driver", number_format($noteDriver, 1, '.', ''), PDO::PARAM_STR);
+        }
+
+        if ($statement->execute()) {
+            $travels = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            //clean data with the right format
+            foreach ($travels as &$travel) {
+                $travel['travel_date'] = formatDate($travel['travel_date']);
+                $travel['travel_departure_time'] = formatTime($travel['travel_departure_time']);
+                $travel['travel_arrival_time'] = formatTime($travel['travel_arrival_time']);
+            }
+
+        } else {
+            echo "<p style='color: red;'>Erreur lors de l'exécution de la requête SQL.</p>";
+            exit();
+        }
+
+        // test pour afficher les voyages
+        /* echo "<pre>";
+        print_r($travels);
+        echo "</pre>"; */
+        return $travels;
+    }
+
+
+
 
     public function displayTravelsBrut(string $sql, string $column = null)
     {
@@ -119,6 +198,7 @@ class Travel
      * @return array return an array
      */
     public function allFuturesTravels(): array
+
     { 
         if (!$this->pdo) {
             die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
@@ -141,6 +221,7 @@ class Travel
             echo "<p style='color: red;'>Erreur lors de l'exécution de la requête SQL.</p>";
             exit();
         } 
+
         /*  test pour afficher les voyages
          echo "<pre>"; 
          print_r($travels);
@@ -156,43 +237,6 @@ class Travel
      * @param string $arrivalCitySearch //arrivalCity searched
      * @return array //return the array of all travels meeting the criteria
      */
-    public function searchTravels(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch): array
-    {
-        if (!$this->pdo) {
-            die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
-        }
-        // Convertir la date de `dd.mm.yyyy` à `yyyy-mm-dd`
-        $dateObject = DateTime::createFromFormat('d.m.Y', $dateSearch);
-        if ($dateObject) {
-            $dateSearch = $dateObject->format('Y-m-d'); // Format SQL
-        }
-
-        $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, driver.driver_note AS driver_note, cars.car_electric AS car_electric FROM travels JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id JOIN cars ON cars.car_id = travels.car_id  WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) ORDER BY travel_departure_time ASC";
-        $statement = $this->pdo->prepare($sql);
-        $statement->bindParam(":travel_date", $dateSearch, PDO::PARAM_STR);
-        $statement->bindParam(":departure_city", $departureCitySearch, PDO::PARAM_STR);
-        $statement->bindParam(":arrival_city", $arrivalCitySearch, PDO::PARAM_STR);
-        if ($statement->execute()) {
-            $travels = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            //clean data with the right format
-            foreach ($travels as &$travel) {
-                $travel['travel_date'] = formatDate($travel['travel_date']);
-                $travel['travel_departure_time'] = formatTime($travel['travel_departure_time']);
-                $travel['travel_arrival_time'] = formatTime($travel['travel_arrival_time']);
-            }
-
-        } else {
-            echo "<p style='color: red;'>Erreur lors de l'exécution de la requête SQL.</p>";
-            exit();
-        }
-
-        // test pour afficher les voyages
-        /* echo "<pre>";
-        print_r($travels);
-        echo "</pre>"; */
-        return $travels;
-    }
 
     public function getDriverPseudo($driver_id, $pdo)
     {
