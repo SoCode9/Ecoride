@@ -1,6 +1,6 @@
 <?php
 
-require_once '../commom.php';
+require_once '../common.php';
 
 //pour chaque trajet proposé
 
