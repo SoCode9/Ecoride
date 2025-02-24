@@ -56,8 +56,8 @@
                     ?>
                     </div>
                     <div class="ecoCriteria">
-                        <img src="../icons/Arbre 1.png" alt="Arbre" width="20px">
-                        <span>Ecologique</span>
+                        <span><?php
+                        echo formatEco(htmlspecialchars($travel['car_electric'])) ?></span>
                     </div>
                 </div>
 
