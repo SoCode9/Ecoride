@@ -6,6 +6,10 @@ require_once "../class/Travel.php";
 ?>
 
 <?php
+
+$travelInstance = new Travel($pdo);
+
+
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $travelId = intval($_GET['id']);
 } else {

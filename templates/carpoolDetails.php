@@ -28,7 +28,9 @@
                     </div>
 
                     <div class="durationLine">
-                        <div class="travelDuration">1h10</div>
+                        <div class="travelDuration">
+                            <?= htmlspecialchars($travelInstance->travelDuration($travel['travel_departure_time'], $travel['travel_arrival_time'])) ?>
+                        </div>
                         <div class="line"></div>
                     </div>
 
