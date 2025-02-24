@@ -10,7 +10,7 @@
 
         <!--Travel's details and booking block-->
 
-        <h1 class="pageTitle gras">Dimanche 15 mars 2026</h1>
+        <h1 class="pageTitle gras"><?= formatDateLong(htmlspecialchars($_SESSION['departure-date-search'])) ?? ''?></h1>
 
         <section class="travelDetailsBookingBlock">
             <div class="travelDetailsBlock">
