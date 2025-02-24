@@ -46,7 +46,15 @@
                 </div>
 
                 <div class="seatsAndEco">
-                    <div>3 places restantes</div>
+                    <div> <?php $placesAvailable = placesAvailable(placesOfferedNb: (int) $travel['places_offered'], placesAllocatedNb: (int) $travel['places_allocated']);
+                    if ($placesAvailable === 1) {
+                        echo htmlspecialchars($placesAvailable) . " place restante";
+                    } else {
+                        echo htmlspecialchars($placesAvailable) . " places restantes";
+                    }
+
+                    ?>
+                    </div>
                     <div class="ecoCriteria">
                         <img src="../icons/Arbre 1.png" alt="Arbre" width="20px">
                         <span>Ecologique</span>
