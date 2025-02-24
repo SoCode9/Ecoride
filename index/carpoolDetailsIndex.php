@@ -1,6 +1,7 @@
 <?php
 
 require_once '../back/carpoolSearchBack.php';
+require_once '../back/carpoolDetailsBack.php';
 
 ?>
 

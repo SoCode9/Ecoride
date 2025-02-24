@@ -10,7 +10,8 @@
 
         <!--Travel's details and booking block-->
 
-        <h1 class="pageTitle gras"><?= formatDateLong(htmlspecialchars($_SESSION['departure-date-search'])) ?? ''?></h1>
+        <h1 class="pageTitle gras"><?= formatDateLong(htmlspecialchars($_SESSION['departure-date-search'])) ?? '' ?>
+        </h1>
 
         <section class="travelDetailsBookingBlock">
             <div class="travelDetailsBlock">
@@ -19,8 +20,8 @@
 
                     <div class="timeLocationEllipse">
                         <div class="timeLocation">
-                            <span>12h00</span>
-                            <span>Annecy</span>
+                            <span><?= formatTime(htmlspecialchars($travel['travel_departure_time'])) ?></span>
+                            <span><?= htmlspecialchars($travel['travel_departure_city']) ?></span>
                         </div>
 
                         <div id="ellipse"></div>
@@ -34,8 +35,8 @@
                     <div class="timeLocationEllipse">
                         <div id="ellipse"></div>
                         <div class="timeLocation">
-                            <span>13h10</span>
-                            <span>Grenoble</span>
+                            <span><?= formatTime(htmlspecialchars($travel['travel_arrival_time'])) ?></span>
+                            <span><?= htmlspecialchars($travel['travel_arrival_city']) ?></span>
                         </div>
 
                     </div>
