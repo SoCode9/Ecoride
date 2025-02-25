@@ -144,7 +144,8 @@
                                     ?></span>
                                 <div class="seeDetailTrajet">
                                     <img class="imgFilter" src="../icons/LoupeRecherche.png" alt="">
-                                    <a href="carpoolDetailsIndex.php" class="travelDetailsLegend">Détail</a>
+                                    <a href="carpoolDetailsIndex.php?id=<?= htmlspecialchars($t['id']) ?>"
+                                        class="travelDetailsLegend">Détail</a>
 
                                 </div>
 

@@ -14,7 +14,7 @@ class Travel
 
 
 
-    private ?string $travelDepartureCity; 
+    private ?string $travelDepartureCity;
     private ?string $travelArrivalCity;
     private ?string $travelDepartureTime;
     private ?string $travelArrivalTime;
@@ -138,7 +138,23 @@ class Travel
         return $travels;
     }
 
+    /**
+     * Calculate the difference between the departure time and the arrival time of the travel
+     * @param string $travelDepartureTime
+     * @param string $travelArrivalTime
+     * @return string // return a duration (ex. 2h40)
+     */
+    public function travelDuration(string $travelDepartureTime, string $travelArrivalTime): string
+    {
+        // Convert string to DateTime Objects 
+        $departure = new DateTime($travelDepartureTime);
+        $arrival = new DateTime($travelArrivalTime);
 
+        // difference calcul
+        $interval = $departure->diff($arrival);
+
+        return $interval->format('%hh%I');
+    }
 
 
     public function displayTravelsBrut(string $sql, string $column = null)
@@ -198,8 +214,7 @@ class Travel
      * @return array return an array
      */
     public function allFuturesTravels(): array
-
-    { 
+    {
         if (!$this->pdo) {
             die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
         }
@@ -220,7 +235,7 @@ class Travel
         } else {
             echo "<p style='color: red;'>Erreur lors de l'exécution de la requête SQL.</p>";
             exit();
-        } 
+        }
 
         /*  test pour afficher les voyages
          echo "<pre>"; 
