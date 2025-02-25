@@ -55,8 +55,8 @@
 
                     ?>
                     </div>
-                    <div class="ecoCriteria">
-                        <span><?php
+                    <div >
+                        <span class="criteriaEco"><?php
                         echo formatEco(htmlspecialchars($travel['car_electric'])) ?></span>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                     <img src="../icons/Femme1.jpg" class="photo" alt="photo de l'utilisateur">
                     <div class="pseudoRating">
                         <span><?= htmlspecialchars($travel['pseudo']) ?></span>
-                        <div class="driverRating" style="padding-left: 0px;">
+                        <div class="textIcon" style="padding-left: 0px;">
                             <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
                             <span><?= htmlspecialchars($travel['driver_note']) ?> </span>
                         </div>
