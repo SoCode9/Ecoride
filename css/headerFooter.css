@@ -58,18 +58,19 @@ body {
 
 }
 
-/*Pied de page*/
-.piedPage {
+/*Footer*/
+
+.footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 20px;
     background-color: #987B4D;
     align-items: center;
-    font-size: 11px;
+    font-size: 13px;
     color: white;
 }
 
-.piedPage a {
+.footer a {
     color: white;
 }

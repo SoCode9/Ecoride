@@ -25,3 +25,5 @@ require_once '../back/carpoolDetailsBack.php';
     ?>
 
 </div>
+
+<?php include '../templates/footer.php'; ?>

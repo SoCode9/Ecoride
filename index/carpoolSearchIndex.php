@@ -27,3 +27,5 @@ $travel->searchTravels('2025-03-21', 'Saint-Julien', 'Lyon'); */
     ?>
 
 </div>
+
+<?php include '../templates/footer.php'; ?>
