@@ -55,7 +55,7 @@
 
                     ?>
                     </div>
-                    <div >
+                    <div>
                         <span class="criteriaEco"><?php
                         echo formatEco(htmlspecialchars($travel['car_electric'])) ?></span>
                     </div>
@@ -115,7 +115,12 @@
                         <div class="bold">Véhicule</div>
                         <div class="textIcon">
                             <img src="../icons/Voiture.png" class="imgFilter" alt="">
-                            <span>LEXUS RZ 450E - Vert foncé - Electrique</span>
+                            <span><?php
+                            echo $car->getBrand() . " " . $car->getModel() . " - " . $car->getColor();
+                            if ($car->getElectric() === true) {
+                                echo " - Electrique";
+                            }
+                            ?></span>
                         </div>
                     </div>
 

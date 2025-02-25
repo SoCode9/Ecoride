@@ -2,6 +2,7 @@
 
 require_once '../database.php';
 require_once "../class/Travel.php";
+require_once "../class/Car.php";
 
 ?>
 
@@ -27,3 +28,5 @@ $travel = $statement->fetch(PDO::FETCH_ASSOC);
 if (!$travel) {
     die("Ce trajet n'existe pas.");
 }
+
+$car = new Car($pdo, $travelId);
