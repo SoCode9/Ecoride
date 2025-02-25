@@ -65,7 +65,13 @@
             <div class="travelValidation">
                 <div class="nbPassengerCredit">
                     <div>1 passager</div>
-                    <div class="bold">10 crédits</div>
+                    <div class="bold"><?php $travelPrice = $travel['travel_price'];
+                    if ($travelPrice > 1) {
+                       echo htmlspecialchars($travelPrice) . " crédits";
+                    } else {
+                       echo htmlspecialchars($travelPrice) . " crédit";
+                    }
+                    ?> </div>
                 </div>
 
                 <button class="participateButton"> <!--Ajouter le bouton et le lien-->
