@@ -90,20 +90,26 @@
                 <div class="photoPseudoRating">
                     <img src="../icons/Femme1.jpg" class="photo" alt="photo de l'utilisateur">
                     <div class="pseudoRating">
-                        <span>Pseudo</span>
+                        <span><?= htmlspecialchars($travel['pseudo']) ?></span>
                         <div class="driverRating" style="padding-left: 0px;">
                             <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
-                            <span>4.5</span>
+                            <span><?= htmlspecialchars($travel['driver_note']) ?> </span>
                         </div>
                     </div>
                 </div>
 
                 <div class="carsDescriptionAndPreferences">
 
-                    <p class="removeMargins">
-                        Merci de privilégier les petits bagages. Mon coffre est très petit.
-                        Possibilité de vous déposer sur le trajet.
-                    </p>
+
+                    <?php $travelDescription = $travel['travel_description'];
+
+                    if ($travelDescription != null) {
+                        ?>
+                        <p class="removeMargins">
+                            <?= htmlspecialchars($travelDescription); ?>
+                        </p>
+                    <?php } ?>
+
 
                     <div class="preferencesBlock">
                         <div class="bold">Véhicule</div>
