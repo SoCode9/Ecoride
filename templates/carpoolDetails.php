@@ -67,9 +67,9 @@
                     <div>1 passager</div>
                     <div class="bold"><?php $travelPrice = $travel['travel_price'];
                     if ($travelPrice > 1) {
-                       echo htmlspecialchars($travelPrice) . " crédits";
+                        echo htmlspecialchars($travelPrice) . " crédits";
                     } else {
-                       echo htmlspecialchars($travelPrice) . " crédit";
+                        echo htmlspecialchars($travelPrice) . " crédit";
                     }
                     ?> </div>
                 </div>
@@ -81,5 +81,55 @@
             </div>
 
         </section>
+
+        <div class="thirdBlock">
+
+            <!--Driver's details-->
+
+            <section class="driversDescriptionPreferencesBlock">
+                <div class="photoPseudoRating">
+                    <img src="../icons/Femme1.jpg" class="photo" alt="photo de l'utilisateur">
+                    <div class="pseudoRating">
+                        <span>Pseudo</span>
+                        <div class="driverRating" style="padding-left: 0px;">
+                            <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
+                            <span>4.5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carsDescriptionAndPreferences">
+
+                    <p class="removeMargins">
+                        Merci de privilégier les petits bagages. Mon coffre est très petit.
+                        Possibilité de vous déposer sur le trajet.
+                    </p>
+
+                    <div class="preferencesBlock">
+                        <div class="bold">Véhicule</div>
+                        <div class="textIcon">
+                            <img src="../icons/Voiture.png" class="imgFilter" alt="">
+                            <span>LEXUS RZ 450E - Vert foncé - Electrique</span>
+                        </div>
+                    </div>
+
+                    <div class="preferencesBlock">
+                        <div class="bold">Préférences</div>
+                        <div class="textIcon">
+                            <img src="../icons/AnimauxOk.png" class="imgFilter" alt="">
+                            <span>J'aime la compagnie des animaux</span>
+                        </div>
+                        <div class="textIcon">
+                            <img src="../icons/FumerPasOk.png" class="imgFilter" alt="">
+                            <span>Je préfère ne pas voyager avec des fumeurs</span>
+                        </div>
+                        <div class="textIcon">
+                            <img src="../icons/Musique.png" class="imgFilter" alt="">
+                            <span>J'aime conduire en écoutant de la musique</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 </body>

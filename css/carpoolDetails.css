@@ -126,3 +126,71 @@
     width: 20px;
     cursor: pointer;
 }
+
+/*BLOC CHAUFFEUR/VEHICULE/PREFERANCES + AVIS CHAUFFEUR*/
+
+
+
+.thirdBlock {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+/*BLOC DETAIL TRAJET DU CHAUFFEUR*/
+
+
+
+.driversDescriptionPreferencesBlock {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    padding: 24px;
+    background-color: #EDEDED;
+    border-radius: 15px;
+    margin: 20px 0px;
+    width: 100%;
+    height: fit-content;
+}
+
+.photoPseudoRating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.pseudoRating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.carsDescriptionAndPreferences {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.preferencesBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.textIcon {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+}
