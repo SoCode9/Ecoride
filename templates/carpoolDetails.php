@@ -90,7 +90,7 @@
                 <div class="photoPseudoRating">
                     <img src="../icons/Femme1.jpg" class="photo" alt="photo de l'utilisateur">
                     <div class="pseudoRating">
-                        <span><?= htmlspecialchars( $driver-> getPseudo()) ?></span>
+                        <span><?= htmlspecialchars($driver->getPseudo()) ?></span>
                         <div class="textIcon" style="padding-left: 0px;">
                             <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
                             <span><?= htmlspecialchars($driver->getRating()) ?> </span>
@@ -102,9 +102,9 @@
 
 
                     <?php $travelDescription = $travel->getDescription();
-                ;
+                    ;
 
-                    if($travelDescription != null) {
+                    if ($travelDescription != null) {
                         ?>
                         <p class="removeMargins">
                             <?= htmlspecialchars($travelDescription); ?>
@@ -127,12 +127,13 @@
 
                     <div class="preferencesBlock">
                         <div class="bold">Préférences</div>
-                        <?= $driver->getPetPreference()?>
-                       <!--  <div class="textIcon">
-                            
-                            <img src="../icons/AnimauxOk.png" class="imgFilter" alt="">
-                            <span>J'aime la compagnie des animaux</span>
-                        </div> -->
+                        <?php
+                        $petPref = $driver->getPetPreference();
+                        if ($petPref !== null) {
+                            echo $petPref;
+                        }
+                        ?>
+
                         <div class="textIcon">
                             <img src="../icons/FumerPasOk.png" class="imgFilter" alt="">
                             <span>Je préfère ne pas voyager avec des fumeurs</span>

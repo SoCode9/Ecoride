@@ -29,7 +29,7 @@ class Driver extends User
         if ($driverData) {
             // special Driver information
             $this->rating = (float) $driverData['driver_note'];
-            $this->petPreference = (bool) $driverData['pets'];
+            $this->petPreference =  $driverData['pets'];
 
             // Informations inherited from User
             $this->pseudo = $driverData['pseudo'];
@@ -46,22 +46,24 @@ class Driver extends User
 
     public function getPetPreference()
     {
-       
-            $result = $this->petPreference;
-            if (isset($result)) {
 
-                if ($result == 1) {
-                    return "<div class='textIcon'>
-                 <img src='../icons/AnimauxOk.png' class='imgFilter' alt=''> 
-                 <span>J'aime la compagnie des animaux</span>
-                 </div>";
-                } elseif ($result == 0 && $result!=null) {
-                    return "<div class='textIcon'>
-                    <img src='../icons/AnimauxPasOk.png' class='imgFilter' alt=''>
-                    <span>Je préfère ne pas voyager avec des animaux</span>
-                    </div>"; 
-                } 
-            }
-        
+        $result = $this->petPreference;
+        if (is_null($result)) {
+            return null; 
+        }
+
+        if ($result === true) {
+            return "<div class='textIcon'>
+                        <img src='../icons/AnimauxOk.png' class='imgFilter' alt=''> 
+                        <span>J'aime la compagnie des animaux</span>
+                    </div>";
+        } elseif ($result === false) {
+            return "<div class='textIcon'>
+                        <img src='../icons/AnimauxPasOk.png' class='imgFilter' alt=''> 
+                        <span>Je préfère ne pas voyager avec des animaux</span>
+                    </div>";
+        }
     }
+
+
 }
