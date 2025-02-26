@@ -7,6 +7,8 @@ class Driver extends User
     protected int $id;
     private float $rating;
 
+    private bool|null $petPreference;
+
     public function __construct(PDO $pdo, int $driverId)
     {
         parent::__construct($pdo, $driverId); // Charge les données User
@@ -25,9 +27,11 @@ class Driver extends User
         $driverData = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($driverData) {
-             // Informations héritées de User
+            // special Driver information
             $this->rating = (float) $driverData['driver_note'];
-             // Informations héritées de User
+            $this->petPreference =  $driverData['pets'];
+
+            // Informations inherited from User
             $this->pseudo = $driverData['pseudo'];
             $this->mail = $driverData['mail'];
         } else {
@@ -39,4 +43,27 @@ class Driver extends User
     {
         return $this->rating;
     }
+
+    public function getPetPreference()
+    {
+
+        $result = $this->petPreference;
+        if (is_null($result)) {
+            return null; 
+        }
+
+        if ($result === true) {
+            return "<div class='textIcon'>
+                        <img src='../icons/AnimauxOk.png' class='imgFilter' alt=''> 
+                        <span>J'aime la compagnie des animaux</span>
+                    </div>";
+        } elseif ($result === false) {
+            return "<div class='textIcon'>
+                        <img src='../icons/AnimauxPasOk.png' class='imgFilter' alt=''> 
+                        <span>Je préfère ne pas voyager avec des animaux</span>
+                    </div>";
+        }
+    }
+
+
 }
