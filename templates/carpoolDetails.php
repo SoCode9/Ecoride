@@ -93,7 +93,12 @@
                         <span><?= htmlspecialchars($driver->getPseudo()) ?></span>
                         <div class="textIcon" style="padding-left: 0px;">
                             <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
-                            <span><?= htmlspecialchars($driver->getRating()) ?> </span>
+                            <span><?php $averageRating = $driver->getAverageRatings();
+                            if ($averageRating !== null) {
+                                echo htmlspecialchars($averageRating);
+                            } else {
+                                echo "(0 avis)";
+                            } ?> </span>
                         </div>
                     </div>
                 </div>
@@ -170,10 +175,16 @@
                     <span class="subtitle">Avis du chauffeur</span>
                     <div class="driverRating" style="padding-left: 0px;">
                         <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
-                        <span>4.5 / 5 </span>
+                        <span><?php $averageRating = $driver->getAverageRatings();
+                        if ($averageRating !== null) {
+                            echo htmlspecialchars($averageRating) . " / 5";
+                        } ?>
+
+                        </span>
                         <span style="font-size: calc(100% - 4px);">(4 avis)</span>
                     </div>
                 </div>
+
 
                 <!--ratings list-->
 
