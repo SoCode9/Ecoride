@@ -10,6 +10,7 @@ class Driver extends User
     private bool|null $petPreference;
     private bool|null $smokerPreference;
     private bool|null $musicPreference;
+    private bool|null $speakerPreference;
 
     public function __construct(PDO $pdo, int $driverId)
     {
@@ -34,6 +35,7 @@ class Driver extends User
             $this->petPreference =  $driverData['pets'];
             $this->smokerPreference = $driverData['smoker'];
             $this->musicPreference = $driverData['music'];
+            $this->speakerPreference = $driverData['speaker'];
             // Informations inherited from User
             $this->pseudo = $driverData['pseudo'];
             $this->mail = $driverData['mail'];
@@ -105,6 +107,26 @@ class Driver extends User
             return "<div class='textIcon'>
                         <img src='../icons/MusiquePasOk.png' class='imgFilter' alt=''> 
                         <span>Je préfère ne pas écouter de musique pendant que je conduis</span>
+                    </div>";
+        }
+    }
+    public function getSpeakerPreference()
+    {
+
+        $result = $this->speakerPreference;
+        if (is_null($result)) {
+            return null; 
+        }
+
+        if ($result === true) {
+            return "<div class='textIcon'>
+                        <img src='../icons/speakOk.png' class='imgFilter' alt=''> 
+                        <span>Je discute volontiers avec mes passagers</span>
+                    </div>";
+        } elseif ($result === false) {
+            return "<div class='textIcon'>
+                        <img src='../icons/speakNotOk.png' class='imgFilter' alt=''> 
+                        <span>Je préfère me concentrer sur la route</span>
                     </div>";
         }
     }

@@ -145,7 +145,12 @@
                             echo $musicPref;
                         }
                         ?>
-                        
+                        <?php
+                        $speakerPref = $driver->getSpeakerPreference();
+                        if ($speakerPref !== null) {
+                            echo $speakerPref;
+                        }
+                        ?>
                     </div>
                 </div>
             </section>
