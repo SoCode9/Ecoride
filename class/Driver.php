@@ -8,6 +8,7 @@ class Driver extends User
     private float $rating;
 
     private bool|null $petPreference;
+    Private bool|null $smokerPreference;
 
     public function __construct(PDO $pdo, int $driverId)
     {
@@ -30,6 +31,7 @@ class Driver extends User
             // special Driver information
             $this->rating = (float) $driverData['driver_note'];
             $this->petPreference =  $driverData['pets'];
+            $this->smokerPreference = $driverData['smoker'];
 
             // Informations inherited from User
             $this->pseudo = $driverData['pseudo'];
@@ -65,5 +67,25 @@ class Driver extends User
         }
     }
 
+    public function getSmokerPreference()
+    {
+
+        $result = $this->smokerPreference;
+        if (is_null($result)) {
+            return null; 
+        }
+
+        if ($result === true) {
+            return "<div class='textIcon'>
+                        <img src='../icons/FumerOk.png' class='imgFilter' alt=''> 
+                        <span>La fumée ne me dérange pas</span>
+                    </div>";
+        } elseif ($result === false) {
+            return "<div class='textIcon'>
+                        <img src='../icons/FumerPasOk.png' class='imgFilter' alt=''> 
+                        <span>Je préfère ne pas voyager avec des fumeurs</span>
+                    </div>";
+        }
+    }
 
 }
