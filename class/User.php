@@ -5,13 +5,18 @@ require_once "../database.php";
 //Classe User pour création de compte
 class User
 {
+    protected int $id;
+    protected string $pseudo;
+    protected string $mail;
+    protected string $password;
+    protected bool $chauffeur;
 
-    private string $pseudo;
-    private string $mail;
-    private string $password;
-    private bool $chauffeur;
-    private PDO $pdo; //stocke la connexion à la BDD
-    public function __construct(string $pseudo, string $mail, string $password, bool $chauffeur = false)
+    protected string $telephone;
+    protected string $adresse;
+    protected string $dateNaissance;
+
+    protected PDO $pdo; //stocke la connexion à la BDD
+    /* public function __construct(string $pseudo, string $mail, string $password, bool $chauffeur = false)
     {
         global $pdo;
         $this->pdo = $pdo;
@@ -19,8 +24,38 @@ class User
         $this->mail = $mail;
         $this->password =password_hash($password, PASSWORD_BCRYPT) ; //sécuriser le password -> dans BDD le mdp apparait :$2y$10$cWmperOc2rMsBT1CxDPFXedJZ1f9VFqaTl0AcQudpo4.. 
         $this->chauffeur = $chauffeur;
+    } */
+
+    public function __construct(PDO $pdo, int $userId)
+    {
+        $this->pdo = $pdo;
+        $this->id = $userId;
+        $this->loadUserFromDB();
     }
 
+    private function loadUserFromDB()
+    {
+        $sql = "SELECT * FROM users WHERE id=:user_id";
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':user_id', $this->id, PDO::PARAM_INT);
+        $statement->execute();
+
+        $userData = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($userData) {
+            $this->id = $userData['id'];
+            $this->pseudo = $userData['pseudo'];
+            $this->mail = $userData['mail'];
+            $this->password = $userData['password'];
+            $this->chauffeur = $userData['chauffeur'];
+            $this->telephone = $userData['telephone'];
+            $this->adresse = $userData['adresse'];
+            $this->dateNaissance = $userData['date_naissance'];
+        } else {
+            throw new Exception("Aucun utilisateur trouvé dans la BDD avec cet ID");
+        }
+    }
 
     public function saveUserToDatabase()
     {
@@ -76,6 +111,21 @@ class User
         return $this->chauffeur;
     }
 
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    public function getDateNaissance()
+    {
+        return $this->dateNaissance;
+    }
+
     public function setPseudo(string $newPseudo)
     {
         $this->pseudo = $newPseudo;
@@ -91,6 +141,18 @@ class User
     public function setChauffeur(bool $newChauffeurType)
     {
         $this->chauffeur = $newChauffeurType;
+    }
+    public function setTelephone(string $newTelephone)
+    {
+        $this->telephone = $newTelephone;
+    }
+    public function setAdresse(string $newAdresse)
+    {
+        $this->adresse = $newAdresse;
+    }
+    public function setDateNaissance(string $newDateNaissance)
+    {
+        $this->dateNaissance = $newDateNaissance;
     }
 
 }

@@ -45,7 +45,7 @@
 
         <div class="filterAndDetails">
 
-            <!--Filtres de recherche-->
+            <!--Search filters-->
 
             <div class="searchFilterBlock">
                 <h2 class="subtitle removeMargins">Filtres de recherche</h2>
@@ -102,7 +102,7 @@
                     <img src="../icons/Suivant.png" alt="suivant" class="imgFilter">
                 </div>
 
-                <!--BLOC RESULTATS DES TRAJETS-->
+                <!--TRAVELS' SEARCHED BLOCK-->
                 <div class="blocDetails">
 
                     <?php
@@ -131,7 +131,7 @@
 
                                 </span>
                                 <div class="criteriaEco">
-                                    <span><?= formatEco(htmlspecialchars($t['car_electric'])) ?> </span>
+                                    <span><?= formatEco(($t['car_electric'])) ?> </span>
                                 </div>
                                 <span class="travelPrice gras">
                                     <?php

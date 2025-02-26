@@ -2,14 +2,11 @@
 
 require_once '../common.php';
 
-//pour chaque trajet proposé
-
 class Travel
 {
     private PDO $pdo;
-
-    //faire lien avec le chauffeur qui poste le trajet
-    //private int $driver_id;
+    private int $id;
+    private int $driverId;
     private ?string $travelDate;
 
 
@@ -25,22 +22,79 @@ class Travel
     private ?int $placesOffered;
 
     private ?int $carId;
+    private int $availableSeats;
+    private ?string $travelDescription;
 
 
-    public function __construct(PDO $pdo, string $travelDate = null, string $travelDepartureCity = null, string $travelArrivalCity = null, $travelDepartureTime = null, $travelArrivalTime = null, int $travelPrice = null, int $placesOffered = null, int $carId = null)
+    public function __construct(PDO $pdo, ?int $travelId = null)
     {
-        //add id_driver ?
-        //global $pdo;
         $this->pdo = $pdo;
-        $this->travelDate = $travelDate;
-        $this->travelDepartureCity = $travelDepartureCity;
-        $this->travelArrivalCity = $travelArrivalCity;
-        $this->travelDepartureTime = $travelDepartureTime;
-        $this->travelArrivalTime = $travelArrivalTime;
-        $this->travelPrice = $travelPrice;
-        $this->placesOffered = $placesOffered;
-        $this->carId = $carId;
+        //for using the searching function (in carpoolSearch page)
+        if ($travelId != null) {
+            $this->id = $travelId;
+            $this->loadTravelFromDB();
+        }
 
+    }
+
+    private function loadTravelFromDB(): void
+    {
+        $sql = "SELECT * FROM travels WHERE id = :travel_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':travel_id', $this->id, PDO::PARAM_INT);
+        $stmt->execute();
+        $travelData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($travelData) {
+            $this->driverId = $travelData['driver_id'];
+            $this->travelDepartureCity = $travelData['travel_departure_city'];
+            $this->travelArrivalCity = $travelData['travel_arrival_city'];
+            $this->travelDepartureTime = $travelData['travel_departure_time'];
+            $this->travelArrivalTime = $travelData['travel_arrival_time'];
+            $this->travelPrice = $travelData['travel_price'];
+            $this->availableSeats = $travelData['places_offered'] - $travelData['places_allocated'];
+            $this->travelDescription = $travelData['travel_description'];
+        } else {
+            throw new Exception("Trajet introuvable.");
+        }
+    }
+
+    public function getDriverId()
+    {
+        return $this->driverId;
+    }
+
+    public function getDepartureCity()
+    {
+        return $this->travelDepartureCity;
+    }
+
+    public function getArrivalCity()
+    {
+        return $this->travelArrivalCity;
+    }
+
+    public function getDepartureTime()
+    {
+        return $this->travelDepartureTime;
+    }
+
+    public function getArrivalTime()
+    {
+        return $this->travelArrivalTime;
+    }
+    public function getPrice()
+    {
+        return $this->travelPrice;
+    }
+
+    public function getAvailableSeats()
+    {
+        return $this->availableSeats;
+    }
+    public function getDescription(): string|null
+    {
+        return $this->travelDescription;
     }
 
     public function saveTravelToDatabase()
@@ -64,13 +118,19 @@ class Travel
 
     }
 
-
+    /**
+     * To search for all travels that meet the criteria
+     * @param string $dateSearch //date searched
+     * @param string $departureCitySearch //departureCity searched
+     * @param string $arrivalCitySearch //arrivalCity searched
+     * @return array //return the array of all travels meeting the criteria
+     */
     public function searchTravels(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $noteDriver = null): array
     {
         if (!$this->pdo) {
             die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
         }
-        // Convertir la date de `dd.mm.yyyy` à `yyyy-mm-dd`
+        // Convert date from `dd.mm.yyyy` to `yyyy-mm-dd`
         $dateObject = DateTime::createFromFormat('d.m.Y', $dateSearch);
         if ($dateObject) {
             $dateSearch = $dateObject->format('Y-m-d'); // Format SQL
@@ -157,43 +217,7 @@ class Travel
     }
 
 
-    public function displayTravelsBrut(string $sql, string $column = null)
-    {
-        // Vérifier si la connexion à la base de données est bien établie
-        if (!$this->pdo) {
-            die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
-        }
 
-        // Récupérer les trajets
-        $statement = $this->pdo->prepare($sql);
-        if ($statement->execute()) {
-            $travels = $statement->fetchAll(PDO::FETCH_ASSOC);
-        } else {
-            echo "<p style='color: red;'>Erreur lors de l'exécution de la requête SQL.</p>";
-            exit();
-        }
-
-        // Si aucune colonne spécifique n'est demandée, afficher tout
-        if ($column === null) {
-            echo "<pre>";
-            print_r($travels);
-            echo "</pre>";
-            return;
-        }
-
-        //  Afficher seulement la colonne demandée
-        echo "<h2>Affichage de la colonne : $column</h2>";
-        echo "<ul>";
-        foreach ($travels as $t) {
-            if (isset($t[$column])) {
-                echo "<li>" . htmlspecialchars($t[$column]) . "</li>";
-            } else {
-                echo "<li style='color: red;'>Erreur : La colonne '$column' n'existe pas.</li>";
-            }
-        }
-        echo "</ul>";
-
-    }
 
     public function getDate(int $idTravel)
     {
@@ -207,62 +231,4 @@ class Travel
             return "Erreur lors de l'exécution de la requête.";
         }
     }
-
-
-    /**
-     * Ne sert pour l'instant à rien -> je l'intègre qqe part ?
-     * @return array return an array
-     */
-    public function allFuturesTravels(): array
-    {
-        if (!$this->pdo) {
-            die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
-        }
-        //request for all futures travels 
-        //#### ADD WHERE driver_id is not mine ####
-        $sql = "SELECT * FROM travels WHERE travel_date >= CURDATE() ";
-
-        $statement = $this->pdo->prepare($sql);
-        if ($statement->execute()) {
-            $travels = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-            //clean data with the right format
-            foreach ($travels as &$travel) {
-                $travel['travel_date'] = formatDate($travel['travel_date']);
-                $travel['travel_departure_time'] = formatTime($travel['travel_departure_time']);
-                $travel['travel_arrival_time'] = formatTime($travel['travel_arrival_time']);
-            }
-        } else {
-            echo "<p style='color: red;'>Erreur lors de l'exécution de la requête SQL.</p>";
-            exit();
-        }
-
-        /*  test pour afficher les voyages
-         echo "<pre>"; 
-         print_r($travels);
-         echo "</pre>"; */
-
-        return $travels;
-    }
-
-    /**
-     * To search for all travels that meet the criteria
-     * @param string $dateSearch //date searched
-     * @param string $departureCitySearch //departureCity searched
-     * @param string $arrivalCitySearch //arrivalCity searched
-     * @return array //return the array of all travels meeting the criteria
-     */
-
-    public function getDriverPseudo($driver_id, $pdo)
-    {
-        $sql = "SELECT users.pseudo FROM users JOIN travels ON users.id = travels.driver_id WHERE travels.driver_id = :driver_id LIMIT 1";
-        $statement = $pdo->prepare($sql);
-        $statement->bindValue(':driver_id', $driver_id, PDO::PARAM_INT);
-        $statement->execute();
-
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-        return $result ? $result['pseudo'] : null;
-    }
-
 }
