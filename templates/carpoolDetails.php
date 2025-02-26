@@ -133,11 +133,12 @@
                             echo $petPref;
                         }
                         ?>
-
-                        <div class="textIcon">
-                            <img src="../icons/FumerPasOk.png" class="imgFilter" alt="">
-                            <span>Je préfère ne pas voyager avec des fumeurs</span>
-                        </div>
+                        <?php
+                        $smokerPref = $driver->getSmokerPreference();
+                        if ($smokerPref !== null) {
+                            echo $smokerPref;
+                        }
+                        ?>
                         <div class="textIcon">
                             <img src="../icons/Musique.png" class="imgFilter" alt="">
                             <span>J'aime conduire en écoutant de la musique</span>
