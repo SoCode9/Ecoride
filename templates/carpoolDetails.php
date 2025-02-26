@@ -151,6 +151,12 @@
                             echo $speakerPref;
                         }
                         ?>
+                        <?php
+                        $foodPref = $driver->getFoodPreference();
+                        if ($foodPref !== null) {
+                            echo $foodPref;
+                        }
+                        ?>
                     </div>
                 </div>
             </section>
