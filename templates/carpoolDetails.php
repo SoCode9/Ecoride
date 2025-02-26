@@ -139,10 +139,13 @@
                             echo $smokerPref;
                         }
                         ?>
-                        <div class="textIcon">
-                            <img src="../icons/Musique.png" class="imgFilter" alt="">
-                            <span>J'aime conduire en écoutant de la musique</span>
-                        </div>
+                        <?php
+                        $musicPref = $driver->getMusicPreference();
+                        if ($musicPref !== null) {
+                            echo $musicPref;
+                        }
+                        ?>
+                        
                     </div>
                 </div>
             </section>
