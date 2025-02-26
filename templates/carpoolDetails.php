@@ -82,12 +82,12 @@
 
         </section>
 
-        <div class="thirdBlock">
+        <article class="thirdBlock">
 
             <!--Driver's details-->
 
             <section class="driversDescriptionPreferencesBlock">
-                <div class="photoPseudoRating">
+                <div class="infoDriver">
                     <img src="../icons/Femme1.jpg" class="photo" alt="photo de l'utilisateur">
                     <div class="pseudoRating">
                         <span><?= htmlspecialchars($driver->getPseudo()) ?></span>
@@ -160,6 +160,80 @@
                     </div>
                 </div>
             </section>
-        </div>
+
+            <!--RATING'S DRIVER BLOCK-->
+
+
+            <section class="driverRatingBlock">
+
+                <div class="driverRatingTitle">
+                    <span class="subtitle">Avis du chauffeur</span>
+                    <div class="driverRating" style="padding-left: 0px;">
+                        <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
+                        <span>4.5 / 5 </span>
+                        <span style="font-size: calc(100% - 4px);">(4 avis)</span>
+                    </div>
+                </div>
+
+                <!--ratings list-->
+
+                <div class="rating">
+                    <div class="photoPseudoRating">
+                        <div class="photoPseudo">
+                            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="userPhoto">
+                            <span class="userPseudo">Pseudo</span>
+                        </div>
+                        <div class="driverRating" style="padding-left: 0px;">
+                            <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
+                            <span>4</span>
+
+                        </div>
+                    </div>
+                    <p class="removeMargins">Ponctuelle, dynamique et souriante, merci !!</p>
+                    <span class="ratingDate">Août 2024</span>
+                    <div class="lineSplitter"></div>
+                </div>
+
+                <div class="rating">
+                    <div class="photoPseudoRating">
+                        <div class="photoPseudo">
+                            <img src="../icons/Man2.jpg" alt="Photo de l'utilisateur" class="userPhoto">
+                            <span class="userPseudo">Pseudo</span>
+                        </div>
+
+                        <div class="driverRating" style="padding-left: 0px;">
+                            <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
+                            <span>5</span>
+                        </div>
+                    </div>
+                    <p class="removeMargins">J'ai adoré le voyage, la discussion était fluide et
+                        agréable</p>
+                    <span class="ratingDate">Juillet 2024</span>
+                    <div class="lineSplitter"></div>
+                </div>
+
+                <div class="rating">
+                    <div class="photoPseudoRating">
+                        <div class="photoPseudo">
+                            <img src="../icons/Man1.jpg" alt="Photo de l'utilisateur" class="userPhoto">
+                            <span class="userPseudo">Pseudo</span>
+                        </div>
+
+                        <div class="driverRating" style="padding-left: 0px;">
+                            <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
+                            <span>5</span>
+                        </div>
+                    </div>
+
+                    <p class="removeMargins">J'ai adoré le voyage, la discussion était fluide et
+                        agréable</p>
+                    <span class="ratingDate">Juillet 2024</span>
+                    <div class="lineSplitter"></div>
+                </div>
+
+            </section>
+
+            </div>
+
     </main>
 </body>
