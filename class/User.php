@@ -2,7 +2,6 @@
 require_once "../database.php";
 
 
-//Classe User pour création de compte
 class User
 {
     protected int $id;

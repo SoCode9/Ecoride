@@ -127,10 +127,12 @@
 
                     <div class="preferencesBlock">
                         <div class="bold">Préférences</div>
-                        <div class="textIcon">
+                        <?= $driver->getPetPreference()?>
+                       <!--  <div class="textIcon">
+                            
                             <img src="../icons/AnimauxOk.png" class="imgFilter" alt="">
                             <span>J'aime la compagnie des animaux</span>
-                        </div>
+                        </div> -->
                         <div class="textIcon">
                             <img src="../icons/FumerPasOk.png" class="imgFilter" alt="">
                             <span>Je préfère ne pas voyager avec des fumeurs</span>
