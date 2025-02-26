@@ -20,8 +20,8 @@
 
                     <div class="timeLocationEllipse">
                         <div class="timeLocation">
-                            <span><?= formatTime(htmlspecialchars($travel['travel_departure_time'])) ?></span>
-                            <span><?= htmlspecialchars($travel['travel_departure_city']) ?></span>
+                            <span><?= formatTime(htmlspecialchars($travel->getDepartureTime())) ?></span>
+                            <span><?= htmlspecialchars($travel->getDepartureCity()) ?></span>
                         </div>
 
                         <div id="ellipse"></div>
@@ -29,7 +29,7 @@
 
                     <div class="durationLine">
                         <div class="travelDuration">
-                            <?= htmlspecialchars($travelInstance->travelDuration($travel['travel_departure_time'], $travel['travel_arrival_time'])) ?>
+                            <?= htmlspecialchars($travel->travelDuration($travel->getDepartureTime(), $travel->getArrivalTime())) ?>
                         </div>
                         <div class="line"></div>
                     </div>
@@ -37,8 +37,8 @@
                     <div class="timeLocationEllipse">
                         <div id="ellipse"></div>
                         <div class="timeLocation">
-                            <span><?= formatTime(htmlspecialchars($travel['travel_arrival_time'])) ?></span>
-                            <span><?= htmlspecialchars($travel['travel_arrival_city']) ?></span>
+                            <span><?= formatTime(htmlspecialchars($travel->getArrivalTime())) ?></span>
+                            <span><?= htmlspecialchars($travel->getArrivalCity()) ?></span>
                         </div>
 
                     </div>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="seatsAndEco">
-                    <div> <?php $placesAvailable = placesAvailable(placesOfferedNb: (int) $travel['places_offered'], placesAllocatedNb: (int) $travel['places_allocated']);
+                    <div> <?php $placesAvailable = $travel->getAvailableSeats();
                     if ($placesAvailable === 1) {
                         echo htmlspecialchars($placesAvailable) . " place restante";
                     } else {
@@ -57,7 +57,7 @@
                     </div>
                     <div>
                         <span class="criteriaEco"><?php
-                        echo formatEco(htmlspecialchars($travel['car_electric'])) ?></span>
+                        echo formatEco(($car->getElectric())) ?></span>
                     </div>
                 </div>
 
@@ -65,7 +65,7 @@
             <div class="travelValidation">
                 <div class="nbPassengerCredit">
                     <div>1 passager</div>
-                    <div class="bold"><?php $travelPrice = $travel['travel_price'];
+                    <div class="bold"><?php $travelPrice = $travel->getPrice();
                     if ($travelPrice > 1) {
                         echo htmlspecialchars($travelPrice) . " crédits";
                     } else {
@@ -90,10 +90,10 @@
                 <div class="photoPseudoRating">
                     <img src="../icons/Femme1.jpg" class="photo" alt="photo de l'utilisateur">
                     <div class="pseudoRating">
-                        <span><?= htmlspecialchars($travel['pseudo']) ?></span>
+                        <span><?= htmlspecialchars( $driver-> getPseudo()) ?></span>
                         <div class="textIcon" style="padding-left: 0px;">
                             <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
-                            <span><?= htmlspecialchars($travel['driver_note']) ?> </span>
+                            <span><?= htmlspecialchars($driver->getRating()) ?> </span>
                         </div>
                     </div>
                 </div>
@@ -101,9 +101,10 @@
                 <div class="carsDescriptionAndPreferences">
 
 
-                    <?php $travelDescription = $travel['travel_description'];
+                    <?php $travelDescription = $travel->getDescription();
+                ;
 
-                    if ($travelDescription != null) {
+                    if($travelDescription != null) {
                         ?>
                         <p class="removeMargins">
                             <?= htmlspecialchars($travelDescription); ?>
@@ -116,7 +117,7 @@
                         <div class="textIcon">
                             <img src="../icons/Voiture.png" class="imgFilter" alt="">
                             <span><?php
-                            echo $car->getBrand() . " " . $car->getModel() . " - " . $car->getColor();
+                            echo htmlspecialchars($car->getBrand() . " " . $car->getModel() . " - " . $car->getColor());
                             if ($car->getElectric() === true) {
                                 echo " - Electrique";
                             }

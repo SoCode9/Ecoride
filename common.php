@@ -73,7 +73,7 @@ function placesAvailable(int $placesOfferedNb, int $placesAllocatedNb): int
 }
 
 
-function formatEco(int $nbEco): string
+function formatEco(bool $nbEco): string
 {
     if ($nbEco == 1) {
         return '<img src="../icons/Arbre 1.png" alt="Arbre" width="20px">' . " Economique";

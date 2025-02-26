@@ -5,7 +5,6 @@ session_start();
 require_once "../database.php";
 require_once "../class/Travel.php";
 
-$travel = new Travel($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -35,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $noteDriver = $_SESSION["note-driver-list"] ?? null;
 
     try {
+        $travel = new Travel($pdo);
         if ($travel->searchTravels(dateSearch: $dateSearch, departureCitySearch: $departureCitySearch, arrivalCitySearch: $arrivalCitySearch, eco: $eco, maxPrice: $maxPrice, maxDuration: $maxDuration, noteDriver: $noteDriver)) {
             //echo 'la recherche a fonctionné !';
             $travelsSearched = $travel->searchTravels(dateSearch: $dateSearch, departureCitySearch: $departureCitySearch, arrivalCitySearch: $arrivalCitySearch, eco: $eco, maxPrice: $maxPrice, maxDuration: $maxDuration, noteDriver: $noteDriver);

@@ -10,7 +10,7 @@ class Car
     private $driverId;
     private $brand;
     private $model;
-    private $electric;
+    private bool $electric;
     private $color;
     public function __construct(PDO $pdo, int $travelId)
     {
@@ -20,8 +20,10 @@ class Car
 
     private function loadCarFromDB(int $travelId)
     {
-        $sql = "SELECT cars.*, travels.*, users.*, driver.*, brand.* FROM travels 
-        JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id JOIN cars ON cars.car_id = travels.car_id JOIN brand ON brand.id = cars.brand_id
+        $sql = "SELECT cars.*, brand.* FROM cars 
+        JOIN driver ON driver.user_id = cars.driver_id 
+        JOIN travels ON travels.car_id =cars.car_id  
+        JOIN brand ON brand.id = cars.brand_id
         WHERE travels.id LIKE :travel_id";
 
         $statement = $this->pdo->prepare($sql);
