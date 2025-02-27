@@ -181,7 +181,7 @@
                         } ?>
 
                         </span>
-                        <span style="font-size: calc(100% - 4px);">(4 avis)</span>
+                        <span style="font-size: calc(100% - 4px);"><?= "(". htmlspecialchars($driver->getNbRatings())." avis)"?></span>
                     </div>
                 </div>
 

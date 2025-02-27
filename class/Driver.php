@@ -47,7 +47,7 @@ class Driver extends User
         }
     }
 
-    public function loadDriversRatingsInformations()
+    private function loadDriversRatingsInformations()
     {
         $sql = "SELECT ratings.* FROM ratings JOIN driver ON driver.user_id = ratings.driver_id
         WHERE ratings.driver_id=:driver_id";
@@ -63,19 +63,18 @@ class Driver extends User
     public function getAverageRatings()
     {
         $allInfoRatings = $this->loadDriversRatingsInformations();
-        $sumRating = 0;
-        $nbRatings = 0;
-        if ($allInfoRatings) {
-            foreach ($allInfoRatings as $rating) {
-                $sumRating = $sumRating + $rating['rating'];
-                $nbRatings = $nbRatings + 1;
-            }
-            return $sumRating / $nbRatings;
-        }
-        if (empty($ratings)) {
-            return null; // Retourne null si aucune note n'existe
+        if (empty($allInfoRatings)) {
+            return null; // if the driver has no rating
         }
 
+        return array_sum(array_column($allInfoRatings, 'rating')) / count($allInfoRatings);
+
+    }
+
+    public function getNbRatings()
+    {
+        $allInfoRatings = $this->loadDriversRatingsInformations();
+        return $allInfoRatings ? count($allInfoRatings) : 0;
     }
 
     public function getRating()
