@@ -59,10 +59,7 @@ class Travel
         }
     }
 
-    public function getDriverId()
-    {
-        return $this->driverId;
-    }
+  
 
     public function getDepartureCity()
     {
@@ -125,7 +122,7 @@ class Travel
      * @param string $arrivalCitySearch //arrivalCity searched
      * @return array //return the array of all travels meeting the criteria
      */
-    public function searchTravels(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $noteDriver = null): array
+    public function searchTravels(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
     {
         if (!$this->pdo) {
             die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
@@ -136,9 +133,12 @@ class Travel
             $dateSearch = $dateObject->format('Y-m-d'); // Format SQL
         }
 
-        $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, driver.driver_note AS driver_note, cars.car_electric AS car_electric, TIMESTAMPDIFF(MINUTE, travel_departure_time, travel_arrival_time)/60 AS travel_duration 
+        $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, AVG(ratings.rating) AS driver_note, 
+        cars.car_electric AS car_electric, TIMESTAMPDIFF(MINUTE, travel_departure_time, travel_arrival_time)/60 AS travel_duration 
         FROM travels 
-        JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id JOIN cars ON cars.car_id = travels.car_id  
+        JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
+        JOIN cars ON cars.car_id = travels.car_id  
+        LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
         WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city)";
 
         if (isset($eco)) {
@@ -153,8 +153,10 @@ class Travel
             $sql .= " AND TIMESTAMPDIFF(MINUTE, travels.travel_departure_time, travels.travel_arrival_time)/60 <= :max_duration";
         }
 
-        if (!empty($noteDriver)) {
-            $sql .= " AND (driver_note >= :note_driver)";
+        if (!empty($driverRating)) {
+            $sql .= " GROUP BY travels.id HAVING AVG(ratings.rating) >= :note_driver";  // Ajout du filtre sur la moyenne
+        } else {
+            $sql .= " GROUP BY travels.id";  // On groupe toujours par trajet
         }
 
         $sql .= " ORDER BY travel_departure_time ASC";
@@ -172,8 +174,8 @@ class Travel
             $statement->bindParam(":max_duration", $maxDuration, PDO::PARAM_INT);
         }
 
-        if (!empty($noteDriver)) {
-            $statement->bindValue(":note_driver", number_format($noteDriver, 1, '.', ''), PDO::PARAM_STR);
+        if (!empty($driverRating)) {
+            $statement->bindValue(":note_driver", number_format($driverRating, 1, '.', ''), PDO::PARAM_STR);
         }
 
         if ($statement->execute()) {
@@ -197,7 +199,10 @@ class Travel
         echo "</pre>"; */
         return $travels;
     }
-
+    public function getDriverId()
+    {
+        return $this->driverId;
+    }
     /**
      * Calculate the difference between the departure time and the arrival time of the travel
      * @param string $travelDepartureTime
