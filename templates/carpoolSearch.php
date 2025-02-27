@@ -2,7 +2,7 @@
 
     <title>Covoiturages</title>
 
-    <script src="CovoituragesRecherche.js" defer></script> <!--ADD THE JS FILE (FOR CALENDAR)-->
+    <script src="../css/carpoolSearch.js" defer></script> 
 </head>
 
 <body>
@@ -133,8 +133,8 @@
                                     ?>
 
                                 </span>
-                                <div class="criteriaEco">
-                                    <span><?= formatEco(($t['car_electric'])) ?> </span>
+                                <div class="criteriaEcoDiv">
+                                    <span class = "criteriaEco"><?= formatEco(($t['car_electric'])) ?> </span>
                                 </div>
                                 <span class="travelPrice gras">
                                     <?php
