@@ -68,22 +68,22 @@
                         <label for="max-duration">h</label>
                     </div>
                     <div class="filter">
-                        <label for="note-driver-list">Note chauffeur (min) </label>
+                        <label for="driver-rating-list">Note chauffeur (min) </label>
 
-                        <select id="note-driver-list" name="note-driver-list" style="width: 50px;">
+                        <select id="driver-rating-list" name="driver-rating-list" style="width: 50px;">
                             <optgroup>
-                                <option value="none" <?= (isset($_SESSION['note-driver-list']) && strval($_SESSION['note-driver-list']) === "none") ? 'selected' : ''; ?>></option>
-                                <option value="5" <?= (isset($_SESSION['note-driver-list']) && strval($_SESSION['note-driver-list']) === "5") ? 'selected' : ''; ?>>5</option>
-                                <option value="4.5" <?= (isset($_SESSION['note-driver-list']) && strval($_SESSION['note-driver-list']) === "4.5") ? 'selected' : ''; ?>>4,5</option>
-                                <option value="4" <?= (isset($_SESSION['note-driver-list']) && strval($_SESSION['note-driver-list']) === "4") ? 'selected' : ''; ?>>4</option>
-                                <option value="3.5" <?= (isset($_SESSION['note-driver-list']) && strval($_SESSION['note-driver-list']) === "3.5") ? 'selected' : ''; ?>>3,5</option>
-                                <option value="3" <?= (isset($_SESSION['note-driver-list']) && strval($_SESSION['note-driver-list']) === "3") ? 'selected' : ''; ?>>3</option>
-                                <option value="2.5" <?= (isset($_SESSION['note-driver-list']) && strval($_SESSION['note-driver-list']) === "2.5") ? 'selected' : ''; ?>>2,5</option>
-                                <option value="2" <?= (isset($_SESSION['note-driver-list']) && strval($_SESSION['note-driver-list']) === "2") ? 'selected' : ''; ?>>2</option>
-                                <option value="1" <?= (isset($_SESSION['note-driver-list']) && strval($_SESSION['note-driver-list']) === "1") ? 'selected' : ''; ?>>1</option>
+                                <option value="none" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "none") ? 'selected' : ''; ?>></option>
+                                <option value="5" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "5") ? 'selected' : ''; ?>>5</option>
+                                <option value="4.5" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "4.5") ? 'selected' : ''; ?>>4.5</option>
+                                <option value="4" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "4") ? 'selected' : ''; ?>>4</option>
+                                <option value="3.5" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "3.5") ? 'selected' : ''; ?>>3.5</option>
+                                <option value="3" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "3") ? 'selected' : ''; ?>>3</option>
+                                <option value="2.5" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "2.5") ? 'selected' : ''; ?>>2.5</option>
+                                <option value="2" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "2") ? 'selected' : ''; ?>>2</option>
+                                <option value="1" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "1") ? 'selected' : ''; ?>>1</option>
                             </optgroup>
                         </select>
-                        <label for="note-driver-list"><img src="../icons/EtoileJaune.png" alt="EtoileJaune"
+                        <label for="driver-rating-list"><img src="../icons/EtoileJaune.png" alt="EtoileJaune"
                                 class="imgFilter"></label>
                     </div>
                     <div class="searchButton">
@@ -112,9 +112,12 @@
                             <div class="travel">
                                 <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photoUser">
                                 <span class="pseudoUser"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
-                                <div class="noteDriver">
+                                <div class="driverRating">
                                     <img src="../icons/EtoileJaune.png" alt="Etoile" class="imgFilter">
-                                    <span><?= htmlspecialchars($t['driver_note']) ?></span>
+                                    <span><?php
+                                    $driver = new Driver($pdo, $t['driver_id']);
+
+                                    echo htmlspecialchars($driver->getAverageRatings()) . " (" . htmlspecialchars($driver->getNbRatings()) . ")" ?></span>
                                 </div>
                                 <span class="dateTravel">Départ à <?= htmlspecialchars($t['travel_departure_time']) ?>
                                 </span>

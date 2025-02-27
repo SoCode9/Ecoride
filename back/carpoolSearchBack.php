@@ -4,6 +4,8 @@ session_start();
 
 require_once "../database.php";
 require_once "../class/Travel.php";
+require_once "../class/User.php";
+require_once "../class/Driver.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -21,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $_SESSION['max-price'] = isset($_POST["max-price"]) && $_POST["max-price"] !== "" ? (int) $_POST["max-price"] : null; //if not completed -> null. Elsif : convert in int(nb)
         $_SESSION['max-duration'] = isset($_POST["max-duration"]) && $_POST["max-duration"] !== "" ? (int) $_POST["max-duration"] : null; //if not completed -> null. Elsif : convert in int(nb)
 
-        $_SESSION['note-driver-list'] = isset($_POST["note-driver-list"]) ? floatval($_POST["note-driver-list"]) : null;
+        $_SESSION['driver-rating-list'] = isset($_POST["driver-rating-list"]) ? floatval($_POST["driver-rating-list"]) : null;
 
     }
 
@@ -31,13 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $eco = $_SESSION["eco"] ?? null;
     $maxPrice = $_SESSION["max-price"] ?? null;
     $maxDuration = $_SESSION["max-duration"] ?? null;
-    $noteDriver = $_SESSION["note-driver-list"] ?? null;
+    $driverRating = $_SESSION["driver-rating-list"] ?? null;
 
     try {
         $travel = new Travel($pdo);
-        if ($travel->searchTravels(dateSearch: $dateSearch, departureCitySearch: $departureCitySearch, arrivalCitySearch: $arrivalCitySearch, eco: $eco, maxPrice: $maxPrice, maxDuration: $maxDuration, noteDriver: $noteDriver)) {
+        if ($travel->searchTravels(dateSearch: $dateSearch, departureCitySearch: $departureCitySearch, arrivalCitySearch: $arrivalCitySearch, eco: $eco, maxPrice: $maxPrice, maxDuration: $maxDuration, driverRating: $driverRating)) {
             //echo 'la recherche a fonctionné !';
-            $travelsSearched = $travel->searchTravels(dateSearch: $dateSearch, departureCitySearch: $departureCitySearch, arrivalCitySearch: $arrivalCitySearch, eco: $eco, maxPrice: $maxPrice, maxDuration: $maxDuration, noteDriver: $noteDriver);
+            $travelsSearched = $travel->searchTravels(dateSearch: $dateSearch, departureCitySearch: $departureCitySearch, arrivalCitySearch: $arrivalCitySearch, eco: $eco, maxPrice: $maxPrice, maxDuration: $maxDuration, driverRating: $driverRating);
 
         } else {
             echo 'Erreur lors de la recherche';

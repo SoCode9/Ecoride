@@ -5,8 +5,6 @@ class Driver extends User
 {
 
     protected int $id;
-    private float $rating;
-    private string $ratingList; //A VALIDER
     private bool|null $petPreference;
     private bool|null $smokerPreference;
     private bool|null $musicPreference;
@@ -33,7 +31,6 @@ class Driver extends User
 
         if ($driverData) {
             // special Driver information
-            $this->rating = (float) $driverData['driver_note'];
             $this->petPreference = $driverData['pets'];
             $this->smokerPreference = $driverData['smoker'];
             $this->musicPreference = $driverData['music'];
