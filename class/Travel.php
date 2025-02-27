@@ -133,7 +133,7 @@ class Travel
             $dateSearch = $dateObject->format('Y-m-d'); // Format SQL
         }
 
-        $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, AVG(ratings.rating) AS driver_note, 
+        $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, AVG(ratings.rating) AS driver_rating, 
         cars.car_electric AS car_electric, TIMESTAMPDIFF(MINUTE, travel_departure_time, travel_arrival_time)/60 AS travel_duration 
         FROM travels 
         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
@@ -154,7 +154,7 @@ class Travel
         }
 
         if (!empty($driverRating)) {
-            $sql .= " GROUP BY travels.id HAVING AVG(ratings.rating) >= :note_driver";  // Ajout du filtre sur la moyenne
+            $sql .= " GROUP BY travels.id HAVING AVG(ratings.rating) >= :driver_rating";  // Ajout du filtre sur la moyenne
         } else {
             $sql .= " GROUP BY travels.id";  // On groupe toujours par trajet
         }
@@ -175,7 +175,7 @@ class Travel
         }
 
         if (!empty($driverRating)) {
-            $statement->bindValue(":note_driver", number_format($driverRating, 1, '.', ''), PDO::PARAM_STR);
+            $statement->bindValue(":driver_rating", number_format($driverRating, 1, '.', ''), PDO::PARAM_STR);
         }
 
         if ($statement->execute()) {
