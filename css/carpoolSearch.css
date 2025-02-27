@@ -1,614 +1,310 @@
 /*ESPACE DU CONTENU DE LA PAGE*/
 
-
-
 /*pour grands écrans*/
-
 @media (min-width:1024px) {
-
     main {
-
         width: 80%;
-
         margin: 0 auto;
-
         /*centre le contenu horizontalement*/
-
     }
-
 }
-
-
 
 /*Code commune à tout, général*/
 
-
-
 .bold {
-
     font-weight: bold;
-
 }
-
-
 
 .removeMargins {
-
     margin: 0;
-
     /* Supprime les marges par défaut du <p> */
-
 }
-
-
 
 /*BLOC RECHERCHER UN COVOITURAGE*/
 
-
-
 .blockFindCarpool,
-
 .searchFilterBlock {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 20px;
-
     margin: 20px 0px;
-
     padding: 20px;
-
     border-radius: 15px;
-
     background-color: #EDEDED;
-
 }
-
-
 
 .pageTitle {
-
     color: #4D9856;
-
     font-size: 18px;
-
 }
-
-
 
 .searchBar {
-
     display: flex;
-
     align-items: center;
-
     gap: 40px;
-
     font-size: 50px;
-
     /* Taille de la flèche */
-
     justify-content: center;
-
 }
-
-
 
 .searchField {
-
     display: flex;
-
     align-items: center;
-
     gap: 4px;
-
     padding: 5px 10px;
-
     border: #4D9856 solid 1.5px;
-
     border-radius: 15px;
-
 }
-
-
 
 .legendeFiltre {
-
     color: #666666;
-
     font-size: 15px;
 
-
-
 }
-
-
 
 .arrow {
-
     /*n'arrive pas à centrer la flèche verticalement*/
-
     display: flex;
 
-
-
 }
-
-
 
 .imgFilter {
-
     width: 20px;
-
 }
-
-
 
 .imgFilterDate {
-
     width: 20px;
-
     cursor: pointer;
-
 }
-
-
 
 .cityField {
-
     border: none;
-
     background: none;
-
     font-size: 15px;
-
     color: #666666;
-
     width: 100%;
-
     outline: none;
-
 }
-
-
 
 .dateField {
-
     appearance: none;
-
     /* Supprime l'icône par défaut (pour Chrome, Safari, etc.) */
-
     -webkit-appearance: none;
-
     /* Spécifique pour Safari */
-
     -moz-appearance: textfield;
-
     /* Spécifique pour Firefox */
-
     border: none;
-
     background: none;
-
     font-size: 15px;
-
     color: #666666;
-
     width: 100%;
-
     outline: none;
-
     cursor: pointer;
-
 }
-
-
 
 .dateField::-webkit-calendar-picker-indicator {
-
     display: none;
-
     /* Supprime l'icône natif (Chrome, Safari) */
-
 }
-
-
 
 .dateField::-moz-calendar-picker-indicator {
-
     display: none;
-
     /* Supprime l'icône natif (Firefox) */
-
 }
-
-
 
 .searchButton {
-
     display: flex;
-
     align-items: center;
-
     gap: 4px;
-
     padding: 5px 10px;
-
     background-color: #68C990;
-
     border-radius: 15px;
-
     justify-content: center;
-
 }
-
-
 
 .searchButton:hover {
-
     background-color: #65bf8b;
-
     cursor: pointer;
-
 }
-
-
 
 .searchButton:active {
-
     background-color: #569f74;
-
     cursor: pointer;
-
 }
-
-
 
 .legendSearch {
-
     border: none;
-
     background: none;
-
     color: black;
-
     font-size: 15px;
-
     cursor: pointer;
 
-
-
 }
-
-
 
 /*BLOC FILTRE DE RECHERCHE*/
 
-
-
 .subtitle {
-
     color: #4D9856;
-
     font-size: 16px;
-
 }
-
-
 
 /*blocFiltres Recherche mis plus haut avec blocRechercheCovoit*/
 
-
-
 .filtersList {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 20px;
-
 }
-
-
 
 .numberField {
-
     width: 40px;
-
 }
-
-
 
 
 .filter {
-
     display: flex;
-
     align-items: center;
-
     gap: 4px;
-
     border-radius: 15px;
-
 }
 
-
-
 .filterAndDetails {
-
     display: grid;
-
     grid-template-columns: 30% 70%;
 }
 
-
-
 .searchFilterBlock {
-
     grid-column: 1/2;
-
     grid-row: 1/2;
-
     height: fit-content;
-
 }
-
-
 
 /*JOUR SELECTIONNE*/
 
-
-
 .daySelectedAndDetails {
-
     display: grid;
-
     grid-template-rows: 50px 85%;
     grid-column: 2/3;
-
 }
-
-
 
 .daySelected {
-
     grid-row: 1/2;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 8px;
-
 }
-
-
 
 .daySelectedLegend {
-
     font-size: 18px;
-
 }
-
-
 
 /*BLOC DETAIL DES TRAJETS POSSIBLE*/
 
-
-
 .blocDetails {
-
     grid-row: 2/3;
-
     margin: 20px;
-
     display: flex;
-
     flex-direction: column;
-
     row-gap: 15px;
-
 }
-
-
 
 .travel {
-
     display: flex;
-
     align-items: center;
-
     display: grid;
-
     grid-template-columns: 10% 20% 30% 30% 10%;
-
     grid-template-rows: 20px 30px 30px 20px;
-
     padding: 15px;
-
     border-radius: 20px;
-
     background-color: white;
-
     box-sizing: border-box;
-
 }
-
-
 
 .travel:hover {
-
     background-color: #d6f0e0;
-
     /*vert très clair pour survolage des trajets*/
-
 }
-
-
 
 .photoUser {
-
     grid-row: 2/4;
-
     grid-column: 1/2;
-
     width: 100%;
-
     /* L'image prend toute la largeur du conteneur */
-
     height: 100%;
-
     /* L'image prend toute la hauteur du conteneur */
-
     object-fit: cover;
-
     /* Couvre le conteneur sans déformation, en cadrant l'image */
-
 }
-
-
 
 .pseudoUser {
-
     grid-column: 2/3;
-
     grid-row: 2/3;
-
     padding-left: 10px;
-
 }
-
-
 
 .driverRating {
-
     grid-column: 2/3;
-
     grid-row: 3/4;
-
     display: flex;
-
     align-items: center;
-
     padding-left: 10px;
-
     gap: 5px;
-
 }
-
-
 
 .dateTravel {
-
     grid-column: 3/4;
-
     grid-row: 2/3;
-
 }
-
-
 
 .hoursTravel {
-
     grid-column: 3/4;
-
     grid-row: 3/4;
-
 }
-
-
 
 .placesAvailable {
-
     grid-column: 4/5;
-
     grid-row: 2/3;
-
 }
 
-
-
 .criteriaEco {
-
     grid-column: 4/5;
-
     grid-row: 3/4;
-
     display: flex;
-
     gap: 5px;
-
     color: #4D9856;
     align-items: end;
 }
 
-
-
 .travelPrice {
-
     grid-column: 5/6;
-
     grid-row: 2/3;
-
     text-align: right;
-
     padding-right: 10px;
-
 }
-
-
 
 .seeDetailTrajet {
-
     grid-column: 5/6;
-
     grid-row: 3/5;
-
     display: flex;
-
     align-items: center;
-
     gap: 4px;
-
     padding: 5px 10px;
-
     background-color: #F2C674;
-
     border-radius: 15px;
-
     justify-content: center;
-
     cursor: pointer;
-
 }
-
-
 
 .travelDetailsLegend {
-
     color: black;
-
     font-size: 15px;
-
 }
-
-
 
 .voirDetailTrajet:hover {
-
     background-color: #e3bc73;
-
 }
 
-
-
 .voirDetailTrajet:active {
-
     background-color: #d3ae68;
-
 }
