@@ -47,10 +47,14 @@ class Driver extends User
         }
     }
 
-    private function loadDriversRatingsInformations()
+    /**
+     * Select all informations about the ratings table + user's pseudo
+     * @return array
+     */
+    public function loadDriversRatingsInformations()
     {
-        $sql = "SELECT ratings.* FROM ratings JOIN driver ON driver.user_id = ratings.driver_id
-        WHERE ratings.driver_id=:driver_id";
+        $sql = "SELECT ratings.*, users.pseudo FROM ratings JOIN driver ON driver.user_id = ratings.driver_id JOIN users ON users.id = ratings.user_id
+        WHERE ratings.driver_id=:driver_id ORDER BY created_at DESC";
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(':driver_id', $this->id, PDO::PARAM_INT);
         $statement->execute();
@@ -60,6 +64,10 @@ class Driver extends User
         return $ratingsData;
     }
 
+    /**
+     * To give ratings average (ex. 4.2)
+     * @return float|null //if average = 0 -> null
+     */
     public function getAverageRatings()
     {
         $allInfoRatings = $this->loadDriversRatingsInformations();
@@ -71,20 +79,16 @@ class Driver extends User
 
     }
 
+    /**
+     * To display the number of ratings for this driver (ex. 4)
+     * @return int
+     */
     public function getNbRatings()
     {
         $allInfoRatings = $this->loadDriversRatingsInformations();
         return $allInfoRatings ? count($allInfoRatings) : 0;
     }
 
-    public function getRating()
-    {
-        return $this->rating;
-    }
-    public function getRatingList()
-    {
-        return $this->ratingList;
-    }
 
     public function getPetPreference()
     {

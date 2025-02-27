@@ -181,70 +181,40 @@
                         } ?>
 
                         </span>
-                        <span style="font-size: calc(100% - 4px);"><?= "(". htmlspecialchars($driver->getNbRatings())." avis)"?></span>
+                        <span
+                            style="font-size: calc(100% - 4px);"><?= "(" . htmlspecialchars($driver->getNbRatings()) . " avis)" ?></span>
                     </div>
                 </div>
 
 
                 <!--ratings list-->
+                <?php $ratingsList = $driver->loadDriversRatingsInformations();
+                foreach ($ratingsList as $rating): ?>
 
-                <div class="rating">
-                    <div class="photoPseudoRating">
-                        <div class="photoPseudo">
-                            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="userPhoto">
-                            <span class="userPseudo">Pseudo</span>
-                        </div>
-                        <div class="driverRating" style="padding-left: 0px;">
-                            <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
-                            <span>4</span>
+                    <div class="rating">
+                        <div class="photoPseudoRating">
+                            <div class="photoPseudo">
+                                <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="userPhoto">
+                                <span class="userPseudo"><?= htmlspecialchars($rating['pseudo']) ?></span>
+                            </div>
+                            <div class="driverRating" style="padding-left: 0px;">
+                                <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
+                                <span><?= htmlspecialchars($rating['rating']) ?></span>
 
+                            </div>
                         </div>
+                        <p class="removeMargins"><?= htmlspecialchars(($rating['description'])) ?></p>
+                        <span
+                            class="ratingDate"><?= htmlspecialchars(formatDateMonthAndYear($rating['created_at'])) ?></span>
+                        <div class="lineSplitter"></div>
                     </div>
-                    <p class="removeMargins">Ponctuelle, dynamique et souriante, merci !!</p>
-                    <span class="ratingDate">Août 2024</span>
-                    <div class="lineSplitter"></div>
-                </div>
+                <?php endforeach ?>
 
-                <div class="rating">
-                    <div class="photoPseudoRating">
-                        <div class="photoPseudo">
-                            <img src="../icons/Man2.jpg" alt="Photo de l'utilisateur" class="userPhoto">
-                            <span class="userPseudo">Pseudo</span>
-                        </div>
 
-                        <div class="driverRating" style="padding-left: 0px;">
-                            <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
-                            <span>5</span>
-                        </div>
-                    </div>
-                    <p class="removeMargins">J'ai adoré le voyage, la discussion était fluide et
-                        agréable</p>
-                    <span class="ratingDate">Juillet 2024</span>
-                    <div class="lineSplitter"></div>
-                </div>
-
-                <div class="rating">
-                    <div class="photoPseudoRating">
-                        <div class="photoPseudo">
-                            <img src="../icons/Man1.jpg" alt="Photo de l'utilisateur" class="userPhoto">
-                            <span class="userPseudo">Pseudo</span>
-                        </div>
-
-                        <div class="driverRating" style="padding-left: 0px;">
-                            <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
-                            <span>5</span>
-                        </div>
-                    </div>
-
-                    <p class="removeMargins">J'ai adoré le voyage, la discussion était fluide et
-                        agréable</p>
-                    <span class="ratingDate">Juillet 2024</span>
-                    <div class="lineSplitter"></div>
-                </div>
 
             </section>
 
-            </div>
+        </article>
 
     </main>
 </body>
