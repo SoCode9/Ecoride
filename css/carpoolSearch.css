@@ -54,6 +54,8 @@
     padding: 5px 10px;
     border: #4D9856 solid 1.5px;
     border-radius: 15px;
+    position: relative; /* Assure un bon positionnement de la liste sans modifier l'apparence */
+    width: auto; /* Conserve la largeur originale du champ */
 }
 
 .legendeFiltre {
@@ -270,14 +272,15 @@
 .criteriaEcoDiv {
     grid-column: 4/5;
     grid-row: 3/4;
-    
+
 }
+
 .criteriaEco {
     display: flex;
-    align-items: center ;
+    align-items: center;
     gap: 5px;
     color: #4D9856;
-    
+
 }
 
 .travelPrice {
@@ -312,3 +315,54 @@
 .voirDetailTrajet:active {
     background-color: #d3ae68;
 }
+
+
+
+/* Conteneur des suggestions */
+.suggestions-list {
+    position: absolute;
+    /* Permet de placer la liste en-dessous du champ */
+    left: 0;
+    /* Alignement avec le champ de recherche */
+    top: 100%;
+    /* Place la liste juste sous le champ */
+    background: white;
+    /* Fond blanc pour la lisibilité */
+    border: 1px solid #ccc;
+    /* Bordure grise pour délimiter */
+    border-top: none;
+    /* Évite une double bordure avec le champ */
+    width: calc(100% - 2px);
+    /* Largeur égale à celle du champ */
+    max-height: 200px;
+    /* Évite que la liste soit trop longue */
+    overflow-y: auto;
+    /* Ajoute un défilement vertical si nécessaire */
+    z-index: 1000;
+    /* Place la liste au-dessus des autres éléments */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* Ajoute une légère ombre pour un effet visuel */
+    border-radius: 10px;
+    display: none; /* Caché par défaut */
+}
+
+/* Style des éléments individuels */
+.suggestion-item {
+    padding: 10px;
+    /* Espacement pour rendre le texte plus lisible */
+    cursor: pointer;
+    /* Change le curseur pour indiquer que c'est cliquable */
+    font-size: 16px;
+    /* Taille de texte lisible */
+    background: white;
+    /* Fond blanc */
+    border-bottom: 1px solid #eee;
+    /* Séparation entre les éléments */
+}
+
+/* Effet au survol */
+.suggestion-item:hover {
+    background: #f5f5f5;
+    /* Changement de couleur au survol */
+}
+
