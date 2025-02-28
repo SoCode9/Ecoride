@@ -2,7 +2,7 @@
 
     <title>Covoiturages</title>
 
-    <script src="../css/carpoolSearch.js" defer></script> 
+    <script src="../css/carpoolSearch.js" defer></script>
 </head>
 
 <body>
@@ -19,15 +19,15 @@
                     <input type="text" id="departure-city-search" name="departure-city-search" class="cityField"
                         placeholder="Ville de départ"
                         value="<?= htmlspecialchars($_SESSION['departure-city-search']) ?? '' ?>" required>
-
+                    <div id="departure-suggestions" class="suggestions-list"></div>
                 </div>
                 <span class="arrow">→</span>
                 <div class="searchField">
                     <img class="imgFilter" src="../icons/Localisation(2).png" alt="">
-                    <input type="text" id="departure-city-search" name="arrival-city-search" class="cityField"
+                    <input type="text" id="arrival-city-search" name="arrival-city-search" class="cityField"
                         placeholder="Ville d'arrivée"
                         value="<?= htmlspecialchars($_SESSION['arrival-city-search']) ?? '' ?>" required>
-
+                        <div id="arrival-suggestions" class="suggestions-list"></div>
                 </div>
                 <div class="searchField">
                     <img class="imgFilterDate" src="../icons/Calendrier2.png" alt="Calendrier">
@@ -41,6 +41,8 @@
                     <input type="submit" value="Rechercher" class="legendSearch bold">
                 </div>
             </form>
+
+
         </div>
 
         <div class="filterAndDetails">
@@ -134,7 +136,7 @@
 
                                 </span>
                                 <div class="criteriaEcoDiv">
-                                    <span class = "criteriaEco"><?= formatEco(($t['car_electric'])) ?> </span>
+                                    <span class="criteriaEco"><?= formatEco(($t['car_electric'])) ?> </span>
                                 </div>
                                 <span class="travelPrice gras">
                                     <?php
