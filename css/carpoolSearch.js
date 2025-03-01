@@ -15,7 +15,6 @@ document.querySelector('.imgFilterDate').addEventListener('click', () => {
 
 //API to search locations in France
 
-// API pour rechercher des villes en France
 async function searchLocation(nom) {
     const response = await fetch(`https://geo.api.gouv.fr/communes?nom=${nom}&fields=nom,departement&boost=population&limit=5`);
     if (!response.ok) {
@@ -37,15 +36,16 @@ function updateSuggestions(inputField, suggestionsContainer, data) {
     suggestionsContainer.style.display = "block"; // Affiche la liste
 
     data.forEach(ville => {
-        let villeFormattee = `${ville.nom} (${ville.departement.nom})`; // Format "Ville (Département)"
+        let villeAffichage = `${ville.nom} (${ville.departement.nom})`; // Affichage avec département
+        let villeSelection = ville.nom; // Stocke seulement la ville pour le champ
 
         let div = document.createElement("div");
         div.classList.add("suggestion-item");
-        div.textContent = villeFormattee;
+        div.textContent = villeAffichage;
 
-        // Remplir le champ avec la ville sélectionnée et cacher la liste
+        // Quand on clique sur une suggestion, seul le nom de la ville est inséré
         div.addEventListener("click", function() {
-            inputField.value = villeFormattee; // Met le format correct dans l'input
+            inputField.value = villeSelection; // Insère seulement le nom de la ville
             suggestionsContainer.innerHTML = ""; // Cache la liste après sélection
             suggestionsContainer.style.display = "none";
         });
