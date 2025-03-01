@@ -16,14 +16,20 @@ require_once '../back/carpoolDetailsBack.php';
     /*?? add a hover on login button ??*/
 </style>
 
+
+
+<head>
+
+    <title>Détail du covoiturage</title>
+
+</head>
+
+
+<body>
+
+    <?php include '../templates/carpoolDetails.php'; ?>
+    <?php include '../templates/footer.php'; ?>
+
+</body>
+
 </html>
-<?php
-
-?>
-<div>
-    <?php include '../templates/carpoolDetails.php';
-    ?>
-
-</div>
-
-<?php include '../templates/footer.php'; ?>
