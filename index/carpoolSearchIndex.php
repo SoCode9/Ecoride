@@ -15,17 +15,19 @@ require_once '../back/carpoolSearchBack.php';
     /*?? add a hover on login button ??*/
 </style>
 
+
+<head>
+
+    <title>Covoiturages</title>
+    <script src="../css/carpoolSearch.js" defer></script>
+    
+</head>
+
+<body>
+
+    <?php include '../templates/carpoolSearch.php'; ?>
+    <?php include '../templates/footer.php'; ?>
+
+</body>
+
 </html>
-<?php
-
-//####A ENLEVER, POUR TESTER L'AFFICHAGE DES TRAJETS DE LA RECHERCHE. FAUDRA LE METTRE SOUS "DéPART LE"
-/* $travel = new Travel($pdo);
-$travel->searchTravels('2025-03-21', 'Saint-Julien', 'Lyon'); */
-?>
-<div>
-    <?php include '../templates/carpoolSearch.php';
-    ?>
-
-</div>
-
-<?php include '../templates/footer.php'; ?>
