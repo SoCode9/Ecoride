@@ -139,7 +139,7 @@ class Travel
         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
         JOIN cars ON cars.car_id = travels.car_id  
         LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
-        WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city)";
+        WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) AND (travels.places_offered >travels.places_allocated)";
 
         if (isset($eco)) {
             $sql .= " AND (car_electric = 1)";
