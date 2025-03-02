@@ -118,13 +118,13 @@
                             <span class="dateTravel">Départ à <?= htmlspecialchars($t['travel_departure_time']) ?>
                             </span>
                             <span class="hoursTravel">Arrivée à <?= htmlspecialchars($t['travel_arrival_time']) ?></span>
-                            <span class="placesAvailable">Encore
+                            <span class="seatsAvailable">Encore
                                 <?php
-                                $placesAvailable = placesAvailable($t['places_offered'], $t['places_allocated']);
-                                if ($placesAvailable > 1) {
-                                    echo $placesAvailable . " places";
+                                $seatsAvailable = seatsAvailable($t['seats_offered'], $t['seats_allocated']);
+                                if ($seatsAvailable > 1) {
+                                    echo $seatsAvailable . " places";
                                 } else {
-                                    echo $placesAvailable . " place";
+                                    echo $seatsAvailable . " place";
                                 }
                                 ?>
 

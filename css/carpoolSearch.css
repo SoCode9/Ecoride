@@ -280,7 +280,7 @@
     grid-row: 3/4;
 }
 
-.placesAvailable {
+.seatsAvailable {
     grid-column: 4/5;
     grid-row: 2/3;
 }

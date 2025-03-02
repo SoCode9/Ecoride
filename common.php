@@ -87,15 +87,15 @@ function formatTime(string $timeToFormat): string
 }
 
 /**
- * calculation of placesAvailable with informations in DB
- * @param int $placesOfferedNb //field in DB
- * @param int $placesAllowedNb //field in DB
+ * calculation of seatsAvailable with informations in DB
+ * @param int $seatsOfferedNb //field in DB
+ * @param int $seatsAllowedNb //field in DB
  * @return int
  */
-function placesAvailable(int $placesOfferedNb, int $placesAllocatedNb): int
+function seatsAvailable(int $seatsOfferedNb, int $seatsAllocatedNb): int
 {
-    $placesAvailable = $placesOfferedNb - $placesAllocatedNb;
-    return $placesAvailable;
+    $seatsAvailable = $seatsOfferedNb - $seatsAllocatedNb;
+    return $seatsAvailable;
 }
 
 

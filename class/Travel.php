@@ -19,7 +19,7 @@ class Travel
 
     private ?int $travelPrice;
 
-    private ?int $placesOffered;
+    private ?int $seatsOffered;
 
     private ?int $carId;
     private int $availableSeats;
@@ -52,7 +52,7 @@ class Travel
             $this->travelDepartureTime = $travelData['travel_departure_time'];
             $this->travelArrivalTime = $travelData['travel_arrival_time'];
             $this->travelPrice = $travelData['travel_price'];
-            $this->availableSeats = $travelData['places_offered'] - $travelData['places_allocated'];
+            $this->availableSeats = $travelData['seats_offered'] - $travelData['seats_allocated'];
             $this->travelDescription = $travelData['travel_description'];
         } else {
             throw new Exception("Trajet introuvable.");
@@ -97,7 +97,7 @@ class Travel
     public function saveTravelToDatabase()
     {
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO travels (travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price,places_offered, car_id) VALUES (:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:places_offered ,:car_id)");
+            $stmt = $this->pdo->prepare("INSERT INTO travels (travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price,seats_offered, car_id) VALUES (:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:seats_offered ,:car_id)");
             return $stmt->execute([
                 ':travel_date' => $this->travelDate,
                 ':travel_departure_city' => $this->travelDepartureCity,
@@ -105,7 +105,7 @@ class Travel
                 ':travel_departure_time' => $this->travelDepartureTime,
                 ':travel_arrival_time' => $this->travelArrivalTime,
                 ':travel_price' => $this->travelPrice,
-                ':places_offered' => $this->placesOffered,
+                ':seats_offered' => $this->seatsOffered,
                 ':car_id' => $this->carId
             ]);
 
@@ -139,7 +139,7 @@ class Travel
         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
         JOIN cars ON cars.car_id = travels.car_id  
         LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
-        WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) AND (travels.places_offered >travels.places_allocated)";
+        WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) AND (travels.seats_offered >travels.seats_allocated)";
 
         if (isset($eco)) {
             $sql .= " AND (car_electric = 1)";
@@ -214,7 +214,7 @@ class Travel
         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
         JOIN cars ON cars.car_id = travels.car_id  
         LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
-        WHERE (travel_date > :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) AND (travels.places_offered >travels.places_allocated)";
+        WHERE (travel_date > :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) AND (travels.seats_offered >travels.seats_allocated)";
         if (isset($eco)) {
             $sql .= " AND (car_electric = 1)";
         }
