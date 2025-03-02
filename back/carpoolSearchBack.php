@@ -40,9 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($travel->searchTravels(dateSearch: $dateSearch, departureCitySearch: $departureCitySearch, arrivalCitySearch: $arrivalCitySearch, eco: $eco, maxPrice: $maxPrice, maxDuration: $maxDuration, driverRating: $driverRating)) {
             //echo 'la recherche a fonctionné !';
             $travelsSearched = $travel->searchTravels(dateSearch: $dateSearch, departureCitySearch: $departureCitySearch, arrivalCitySearch: $arrivalCitySearch, eco: $eco, maxPrice: $maxPrice, maxDuration: $maxDuration, driverRating: $driverRating);
-
         } else {
             echo 'Erreur lors de la recherche';
+            if ($travel->searchNextTravel(dateSearch: $dateSearch, departureCitySearch: $departureCitySearch, arrivalCitySearch: $arrivalCitySearch, eco: $eco, maxPrice: $maxPrice, maxDuration: $maxDuration, driverRating: $driverRating)) {
+                $nextTravel = $travel->searchNextTravel(dateSearch: $dateSearch, departureCitySearch: $departureCitySearch, arrivalCitySearch: $arrivalCitySearch, eco: $eco, maxPrice: $maxPrice, maxDuration: $maxDuration, driverRating: $driverRating);
+            }
         }
     } catch (PDOException $e) {
         echo "Erreur précise : " . $e->getMessage();

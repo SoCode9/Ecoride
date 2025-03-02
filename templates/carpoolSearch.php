@@ -151,6 +151,17 @@
                     <?php endforeach;
                 } else {
                     echo "Oups.. Aucun covoiturage n'est proposé pour cette recherche.";
+                    if (!empty($nextTravel)) {
+                        // take the first result (if many travels)
+                        $firstTravel = $nextTravel[0];
+
+                        echo "<br><br>"; ?>
+                        <div class="nextTravel"> Prochain itinéraire pour cette recherche le 
+                            <?= htmlspecialchars($firstTravel['travel_date']) ?>
+                        </div>
+                    <?php } else {
+                        echo "<br> <br>Aucun itinéraire futur ne correspond à cette recherche...";
+                    }
                 }
                 ?>
 
