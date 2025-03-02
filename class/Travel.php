@@ -59,7 +59,7 @@ class Travel
         }
     }
 
-  
+
 
     public function getDepartureCity()
     {
@@ -193,12 +193,79 @@ class Travel
             exit();
         }
 
-        // test pour afficher les voyages
-        /* echo "<pre>";
-        print_r($travels);
-        echo "</pre>"; */
         return $travels;
     }
+
+
+    /**
+     * if no travel is found with the date, return the next date matching the criteria. return nothing if it doesn't exist.
+     * @param string $dateSearch // calculate the next date from this one
+     * @param string $departureCitySearch
+     * @param string $arrivalCitySearch
+     * @param mixed $eco //if selected
+     * @param mixed $maxPrice //if selected
+     * @param mixed $maxDuration //if selected
+     * @param mixed $driverRating //if selected
+     * @return array //return only one date, the earliest
+     */
+    public function searchNextTravel(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
+    {
+        $sql = "SELECT * FROM travels 
+        JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
+        JOIN cars ON cars.car_id = travels.car_id  
+        LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
+        WHERE (travel_date > :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) AND (travels.places_offered >travels.places_allocated)";
+        if (isset($eco)) {
+            $sql .= " AND (car_electric = 1)";
+        }
+
+        if (!empty($maxPrice)) {
+            $sql .= " AND (travel_price <= :max_price)";
+        }
+
+        if (!empty($maxDuration)) {
+            $sql .= " AND TIMESTAMPDIFF(MINUTE, travels.travel_departure_time, travels.travel_arrival_time)/60 <= :max_duration";
+        }
+
+        if (!empty($driverRating)) {
+            $sql .= " GROUP BY travels.id HAVING AVG(ratings.rating) >= :driver_rating";  // Ajout du filtre sur la moyenne
+        } else {
+            $sql .= " GROUP BY travels.id";  // On groupe toujours par trajet
+        }
+
+        $sql .= " ORDER BY travel_date ASC LIMIT 1"; //return the first element (=the first date matching the criteria)
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(":travel_date", $dateSearch, PDO::PARAM_STR);
+        $statement->bindParam(":departure_city", $departureCitySearch, PDO::PARAM_STR);
+        $statement->bindParam(":arrival_city", $arrivalCitySearch, PDO::PARAM_STR);
+
+        if (!empty($maxPrice)) {
+            $statement->bindParam(":max_price", $maxPrice, PDO::PARAM_INT);
+        }
+
+        if (!empty($maxDuration)) {
+            $statement->bindParam(":max_duration", $maxDuration, PDO::PARAM_INT);
+        }
+
+        if (!empty($driverRating)) {
+            $statement->bindValue(":driver_rating", number_format($driverRating, 1, '.', ''), PDO::PARAM_STR);
+        }
+
+        if ($statement->execute()) {
+            $nextTravel = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+        } else {
+            echo "<p style='color: red;'>Erreur lors de l'exécution de la requête SQL.</p>";
+            exit();
+        }
+
+        return $nextTravel;
+    }
+
+
+
     public function getDriverId()
     {
         return $this->driverId;

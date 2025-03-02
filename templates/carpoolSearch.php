@@ -81,7 +81,10 @@
                 </div>
                 <div class="searchButton">
                     <input type="submit" value="Appliquer les filtres" class="legendSearch">
+
                 </div>
+                <button type="submit" name="action" value="reset_filters" class="resetButton">Réinitialiser les
+                    filtres</button>
             </form>
 
         </div>
@@ -89,7 +92,7 @@
             <div class="daySelected bold">
                 <img src="../icons/Precedentv3.png" alt="précédent" class="imgFilter">
                 <span class="daySelectedLegend">
-                    <?= isset($_SESSION['departure-date-search']) ? "Départ le " . formatDate(htmlspecialchars($_SESSION['departure-date-search'])) : 'Aucune date sélectionnée'; ?>
+                    <?= isset($_SESSION['departure-date-search']) ? "Départ le " . formatDateLong(htmlspecialchars($_SESSION['departure-date-search'])) : 'Aucune date sélectionnée'; ?>
                 </span>
                 <!-- remplacer par champ dynamique-->
                 <img src="../icons/Suivant.png" alt="suivant" class="imgFilter">
@@ -99,7 +102,7 @@
             <div class="blocDetails">
 
                 <?php
-                if (isset($travelsSearched)) {
+                if (!empty($travelsSearched)) {
                     foreach ($travelsSearched as $t): ?>
 
                         <div class="travel">
@@ -151,7 +154,32 @@
                     <?php endforeach;
                 } else {
                     echo "Oups.. Aucun covoiturage n'est proposé pour cette recherche.";
+
+
                 }
+                if (!empty($nextTravel)) {
+                    // Take the first travel found 
+                    $firstTravel = $nextTravel[0];
+
+                    echo "<br><br>"; ?>
+
+                    <!-- Form to restart search with new date -->
+                    <form method="POST" action="carpoolSearchIndex.php">
+                        <input type="hidden" name="action" value="search">
+                        <input type="hidden" name="departure-date-search"
+                            value="<?= htmlspecialchars($firstTravel['travel_date']) ?>">
+                        <input type="hidden" name="departure-city-search"
+                            value="<?= htmlspecialchars($departureCitySearch) ?>">
+                        <input type="hidden" name="arrival-city-search" value="<?= htmlspecialchars($arrivalCitySearch) ?>">
+                        <input type="hidden" name="eco" value="<?= htmlspecialchars($eco) ?>">
+                        <input type="hidden" name="max-price" value="<?= htmlspecialchars($maxPrice) ?>">
+                        <input type="hidden" name="max-duration" value="<?= htmlspecialchars($maxDuration) ?>">
+                        <input type="hidden" name="driver-rating-list" value="<?= htmlspecialchars($driverRating) ?>">
+
+                        <button type="submit" class="nextTravel">Prochain itinéraire pour cette recherche le
+                            <?= htmlspecialchars(formatDateLong($firstTravel['travel_date'])) ?></button>
+                    </form>
+                <?php }
                 ?>
 
             </div>
