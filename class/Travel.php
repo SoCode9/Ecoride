@@ -193,18 +193,26 @@ class Travel
             exit();
         }
 
-        // test pour afficher les voyages
-        /* echo "<pre>";
-        print_r($travels);
-        echo "</pre>"; */
         return $travels;
     }
 
+
+    /**
+     * if no travel is found with the date, return the next date matching the criteria. return nothing if it doesn't exist.
+     * @param string $dateSearch // calculate the next date from this one
+     * @param string $departureCitySearch
+     * @param string $arrivalCitySearch
+     * @param mixed $eco //if selected
+     * @param mixed $maxPrice //if selected
+     * @param mixed $maxDuration //if selected
+     * @param mixed $driverRating //if selected
+     * @return array //return only one date, the earliest
+     */
     public function searchNextTravel(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
     {
         $sql = "SELECT * FROM travels 
-         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
-      
+        JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
+        JOIN cars ON cars.car_id = travels.car_id  
         LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
         WHERE (travel_date > :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) AND (travels.places_offered >travels.places_allocated)";
         if (isset($eco)) {
@@ -225,7 +233,7 @@ class Travel
             $sql .= " GROUP BY travels.id";  // On groupe toujours par trajet
         }
 
-        $sql .= " ORDER BY travel_date ASC LIMIT 1";
+        $sql .= " ORDER BY travel_date ASC LIMIT 1"; //return the first element (=the first date matching the criteria)
 
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(":travel_date", $dateSearch, PDO::PARAM_STR);
@@ -247,14 +255,6 @@ class Travel
         if ($statement->execute()) {
             $nextTravel = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-            //clean data with the right format
-            // Vérifier si on a bien des résultats
-            if (!empty($nextTravel)) {
-                foreach ($nextTravel as &$travel) {
-                    $travel['travel_date'] = formatDate($travel['travel_date']);
-                }
-            }
-
 
         } else {
             echo "<p style='color: red;'>Erreur lors de l'exécution de la requête SQL.</p>";
@@ -263,6 +263,8 @@ class Travel
 
         return $nextTravel;
     }
+
+
 
     public function getDriverId()
     {

@@ -1,15 +1,15 @@
 /*ESPACE DU CONTENU DE LA PAGE*/
 
-/*pour grands écrans*/
+/*for large screens*/
 @media (min-width:1024px) {
     main {
         width: 80%;
         margin: 0 auto;
-        /*centre le contenu horizontalement*/
+        /*centers content horizontally*/
     }
 }
 
-/*Code commune à tout, général*/
+/*Code common to all, general*/
 
 .bold {
     font-weight: bold;
@@ -17,10 +17,10 @@
 
 .removeMargins {
     margin: 0;
-    /* Supprime les marges par défaut du <p> */
+    /* deletes default <p> margins  */
 }
 
-/*BLOC RECHERCHER UN COVOITURAGE*/
+/*SEARCH TRAVEL BLOCK */
 
 .blockFindCarpool,
 .searchFilterBlock {
@@ -183,6 +183,20 @@
     height: fit-content;
 }
 
+.resetButton {
+    all:unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 15px;
+    justify-content: center;
+    font-size: 15px;
+}
+.resetButton:hover {
+    background-color:#ccc;
+}
+
 /*JOUR SELECTIONNE*/
 
 .daySelectedAndDetails {
@@ -319,11 +333,14 @@
 }
 
 .nextTravel {
+    border: none;
+    font-size: 16px;
     text-align: center;
-    padding:10px 10px;
+    padding: 10px 10px;
     border-radius: 15px;
     background-color: #d6f0e0;
 }
+
 .nextTravel:hover {
     background-color: #b0f0c8;
     cursor: pointer;

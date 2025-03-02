@@ -1,6 +1,15 @@
 <?php
+session_start();
 
 require_once '../back/carpoolSearchBack.php';
+
+$travelsSearched = $_SESSION['travelsSearched'] ?? [];
+$nextTravel = $_SESSION['nextTravel'] ?? [];
+$error_message = $_SESSION['error_message'] ?? null;
+// Supprimer les variables de session après récupération
+unset($_SESSION['travelsSearched'], $_SESSION['nextTravel'], $_SESSION['error_message']);
+
+
 
 ?>
 
@@ -20,7 +29,7 @@ require_once '../back/carpoolSearchBack.php';
 
     <title>Covoiturages</title>
     <script src="../css/carpoolSearch.js" defer></script>
-    
+
 </head>
 
 <body>
