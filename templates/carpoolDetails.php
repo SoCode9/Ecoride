@@ -38,11 +38,11 @@
             </div>
 
             <div class="seatsAndEco">
-                <div> <?php $placesAvailable = $travel->getAvailableSeats();
-                if ($placesAvailable === 1) {
-                    echo htmlspecialchars($placesAvailable) . " place restante";
+                <div> <?php $seatsAvailable = $travel->getAvailableSeats();
+                if ($seatsAvailable === 1) {
+                    echo htmlspecialchars($seatsAvailable) . " place restante";
                 } else {
-                    echo htmlspecialchars($placesAvailable) . " places restantes";
+                    echo htmlspecialchars($seatsAvailable) . " places restantes";
                 }
 
                 ?>
