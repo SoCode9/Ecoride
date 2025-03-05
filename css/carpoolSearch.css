@@ -332,7 +332,7 @@
     background-color: #d3ae68;
 }
 
-.nextTravel {
+.nextTravelDate {
     border: none;
     font-size: 16px;
     text-align: center;
@@ -341,7 +341,7 @@
     background-color: #d6f0e0;
 }
 
-.nextTravel:hover {
+.nextTravelDate:hover {
     background-color: #b0f0c8;
     cursor: pointer;
 }

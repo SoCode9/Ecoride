@@ -208,9 +208,9 @@ class Travel
      * @param mixed $driverRating //if selected
      * @return array //return only one date, the earliest
      */
-    public function searchNextTravel(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
+    public function searchnextTravelDate(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
     {
-        $sql = "SELECT * FROM travels 
+        $sql = "SELECT travel_date FROM travels 
         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
         JOIN cars ON cars.car_id = travels.car_id  
         LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
@@ -253,7 +253,7 @@ class Travel
         }
 
         if ($statement->execute()) {
-            $nextTravel = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $nextTravelDate = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
         } else {
@@ -261,7 +261,7 @@ class Travel
             exit();
         }
 
-        return $nextTravel;
+        return $nextTravelDate;
     }
 
 

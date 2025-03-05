@@ -157,9 +157,9 @@
 
 
                 }
-                if (!empty($nextTravel)) {
+                if (!empty($nextTravelDate)) {
                     // Take the first travel found 
-                    $firstTravel = $nextTravel[0];
+                    $firstTravel = $nextTravelDate[0];
 
                     echo "<br><br>"; ?>
 
@@ -176,7 +176,7 @@
                         <input type="hidden" name="max-duration" value="<?= htmlspecialchars($maxDuration) ?>">
                         <input type="hidden" name="driver-rating-list" value="<?= htmlspecialchars($driverRating) ?>">
 
-                        <button type="submit" class="nextTravel">Prochain itinéraire pour cette recherche le
+                        <button type="submit" class="nextTravelDate">Prochain itinéraire pour cette recherche le
                             <?= htmlspecialchars(formatDateLong($firstTravel['travel_date'])) ?></button>
                     </form>
                 <?php }

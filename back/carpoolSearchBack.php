@@ -50,8 +50,8 @@ try {
     );
 
     if (!$travelsSearched) {
-        // if no travel is found, search for the next traval that matches the criteria
-        $nextTravel = $travel->searchNextTravel(
+        // if no travel is found, search for the next travel that matches the criteria
+        $nextTravelDate = $travel->searchnextTravelDate(
             dateSearch: $dateSearch,
             departureCitySearch: $departureCitySearch,
             arrivalCitySearch: $arrivalCitySearch,
@@ -64,7 +64,7 @@ try {
 
     // Save the result in the session to be retrieved by carpoolSearch.php
     $_SESSION['travelsSearched'] = $travelsSearched;
-    $_SESSION['nextTravel'] = $nextTravel ?? [];
+    $_SESSION['nextTravelDate'] = $nextTravelDate ?? [];
 
 } catch (PDOException $e) {
     $_SESSION['error_message'] = "Erreur : " . $e->getMessage();

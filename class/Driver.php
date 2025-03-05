@@ -21,7 +21,7 @@ class Driver extends User
     private function loadDriverFromDB()
     {
 
-        $sql = "SELECT driver.*,users.* FROM driver JOIN users ON driver.user_id = users.id 
+        $sql = "SELECT driver.*,users.pseudo FROM driver JOIN users ON driver.user_id = users.id 
         WHERE driver.user_id = :driver_id";
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(':driver_id', $this->id, PDO::PARAM_INT);
@@ -38,7 +38,7 @@ class Driver extends User
             $this->foodPreference = $driverData['food'];
             // Informations inherited from User
             $this->pseudo = $driverData['pseudo'];
-            $this->mail = $driverData['mail'];
+            
         } else {
             throw new Exception("Conducteur introuvable pour l'id {$this->id}.");
         }
