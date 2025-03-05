@@ -50,7 +50,7 @@ try {
     );
 
     if (!$travelsSearched) {
-        // if no travel is found, search for the next traval that matches the criteria
+        // if no travel is found, search for the next travel that matches the criteria
         $nextTravel = $travel->searchNextTravel(
             dateSearch: $dateSearch,
             departureCitySearch: $departureCitySearch,
