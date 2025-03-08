@@ -20,10 +20,10 @@ class Car
 
     private function loadCarFromDB(int $travelId)
     {
-        $sql = "SELECT cars.*, brand.* FROM cars 
+        $sql = "SELECT cars.*, brands.* FROM cars 
         JOIN driver ON driver.user_id = cars.driver_id 
         JOIN travels ON travels.car_id =cars.car_id  
-        JOIN brand ON brand.id = cars.brand_id
+        JOIN brands ON brands.id = cars.brand_id
         WHERE travels.id LIKE :travel_id";
 
         $statement = $this->pdo->prepare($sql);
