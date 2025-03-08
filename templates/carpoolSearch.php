@@ -9,7 +9,8 @@
                 <img class="imgFilter" src="../icons/Localisation(2).png" alt="lieu de départ">
                 <input type="text" id="departure-city-search" name="departure-city-search" class="cityField"
                     placeholder="Ville de départ"
-                    value="<?= htmlspecialchars($_SESSION['departure-city-search']) ?? '' ?>" required>
+                    value="<?= isset($_SESSION['departure-city-search']) ? htmlspecialchars($_SESSION['departure-city-search']) : '' ?>"
+                    required>
                 <div id="departure-suggestions" class="suggestions-list"></div>
             </div>
             <span class="arrow">→</span>
@@ -17,14 +18,14 @@
                 <img class="imgFilter" src="../icons/Localisation(2).png" alt="">
                 <input type="text" id="arrival-city-search" name="arrival-city-search" class="cityField"
                     placeholder="Ville d'arrivée"
-                    value="<?= htmlspecialchars($_SESSION['arrival-city-search']) ?? '' ?>" required>
+                    value="<?= isset($_SESSION['arrival-city-search']) ? htmlspecialchars($_SESSION['arrival-city-search']) : '' ?>" required>
                 <div id="arrival-suggestions" class="suggestions-list"></div>
             </div>
             <div class="searchField">
                 <img class="imgFilterDate" src="../icons/Calendrier2.png" alt="Calendrier">
                 <input type="date" id="departure-date-search" name="departure-date-search" class="dateField"
                     placeholder="Date du départ"
-                    value="<?= htmlspecialchars($_SESSION['departure-date-search']) ?? '' ?>" required>
+                    value="<?= isset($_SESSION['departure-date-search']) ? htmlspecialchars($_SESSION['departure-date-search']) : ''  ?>" required>
             </div>
 
             <div class="searchButton">
@@ -152,11 +153,10 @@
 
 
                     <?php endforeach;
-                } else {
+                } elseif (!session_status() === PHP_SESSION_NONE) { //if the session is not initialized
                     echo "Oups.. Aucun covoiturage n'est proposé pour cette recherche.";
-
-
                 }
+
                 if (!empty($nextTravelDate)) {
                     // Take the first travel found 
                     $firstTravel = $nextTravelDate[0];
