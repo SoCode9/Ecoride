@@ -122,7 +122,7 @@ class Travel
      * @param string $arrivalCitySearch //arrivalCity searched
      * @return array //return the array of all travels meeting the criteria
      */
-    public function searchTravels(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
+    public function searchTravels(?string $dateSearch=null, ?string $departureCitySearch=null, ?string $arrivalCitySearch=null, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
     {
         if (!$this->pdo) {
             die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
@@ -208,7 +208,7 @@ class Travel
      * @param mixed $driverRating //if selected
      * @return array //return only one date, the earliest
      */
-    public function searchnextTravelDate(string $dateSearch, string $departureCitySearch, string $arrivalCitySearch, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
+    public function searchnextTravelDate(?string $dateSearch=null, ?string $departureCitySearch=null, ?string $arrivalCitySearch=null, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
     {
         $sql = "SELECT travel_date FROM travels 
         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
