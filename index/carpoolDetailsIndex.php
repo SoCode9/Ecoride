@@ -22,7 +22,7 @@ require_once '../back/carpoolDetailsBack.php';
 
     <title>Détail du covoiturage</title>
     <script src="../css/carpoolDetails.js" defer></script>
-    
+
 </head>
 
 

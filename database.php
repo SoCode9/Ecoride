@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 //CONNECTION TO THE DATABASE
 
 $host = "localhost";
@@ -16,4 +19,15 @@ try {
     //gestion des erreurs de connexion
     die("Erreur de connexion à la base de données : " . $e->getMessage());
 }
+
+
+
+
+
+
+//A METTRE LORS DE LA CONNEXION
+    $_SESSION['user_id'] = (int) 3; //remplacer par $user['id'] quand ok
+//$_SESSION['user_pseudo'] = $user['pseudo'];
+
+
 ?>

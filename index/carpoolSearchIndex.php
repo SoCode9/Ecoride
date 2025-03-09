@@ -1,6 +1,9 @@
 <?php
-session_start();
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+/* session_start();
+ */
 require_once '../back/carpoolSearchBack.php';
 
 $travelsSearched = $_SESSION['travelsSearched'] ?? [];
