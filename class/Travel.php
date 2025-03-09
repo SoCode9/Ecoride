@@ -61,6 +61,10 @@ class Travel
 
 
 
+    public function getIdTravel()
+    {
+        return $this->id;
+    }
     public function getDepartureCity()
     {
         return $this->travelDepartureCity;

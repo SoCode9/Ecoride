@@ -66,7 +66,7 @@
                 ?> </div>
             </div>
 
-            <button class="participateButton"> <!--Ajouter le bouton et le lien-->
+            <button class="participateButton" data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>"> <!--Ajouter le bouton et le lien-->
                 <img src="../icons/Calendrier.png" class="imgFilterDate" alt="calendrier de réservation">
                 <span style="font-size: 16px;">Participer au covoiturage</span>
             </button>
