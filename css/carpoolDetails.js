@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         alert("Désolé, il n'y a plus de places disponibles.");
                         return;// On stoppe ici 
                     }
-                    // Vérifier si l'utilisateur a assez de crédits
+                    // Check if user has  credit enough
                     if (data.userCredits < data.travelPrice) {
                         alert("Vous n'avez pas assez de crédits pour réserver ce covoiturage.");
                         return; // On stoppe ici
@@ -25,6 +25,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     // #### si tout est bon -> ajouter la double confirmation à la place ! 
                     alert("Il reste " + data.availableSeats + " places disponibles !");
                     alert("Crédits OK, vous pouvez réserver !");
+
+
+                } 
+                
+                // If the user is not logged in, suggest he/she log in.
+                if (data.message.includes("Utilisateur non connecte")) {
+                    console.log("User non connecté, affichage du confirm()");
+
+                    let confirmLogin = confirm("Vous devez être connecté pour réserver. Cliquer sur \"OK\" pour créer un compte.");
+                    if (confirmLogin) {
+                        window.location.href = "../index/carpoolSearchIndex.php"; // CHANGER LA REDIRECTION VERS PAGE CONNEXION
+                    }
                 } else {
                     alert("Erreur : " + data.message);
                 }
