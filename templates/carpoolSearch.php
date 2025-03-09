@@ -153,7 +153,7 @@
 
 
                     <?php endforeach;
-                } elseif (!session_status() === PHP_SESSION_NONE) { //if the session is not initialized
+                } elseif (isset($_POST['action'])) { 
                     echo "Oups.. Aucun covoiturage n'est proposé pour cette recherche.";
                 }
 
