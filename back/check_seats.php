@@ -9,9 +9,29 @@ if (!isset($_POST['travel_id'])) {
 }
 
 $travelId = $_POST['travel_id'];
+$userId = $_SESSION['user_id'] ?? null;
+
+// Vérifier que l'utilisateur est bien connecté
+if(!$userId){
+    echo json_encode(["sucess" => false, "message" => "Utilisateur non connecté."]);
+    exit;
+}
+
+// Retrieve user's credits
+$stmt = $pdo->prepare("SELECT credit FROM users where id = ?");
+$stmt->execute([$userId]);
+$user = $stmt->fetch();
+
+if(!$user){
+    echo json_encode(["sucess" => false, "message" => "Utilisateur introuvable"]);
+    exit;
+}
+
+$userCredit = (int) $user['credit'];
+
 
 // SQL query to retrieve available seats in real time 
-$stmt = $pdo->prepare("SELECT seats_offered - seats_allocated AS availableSeats FROM travels WHERE id = ?");
+$stmt = $pdo->prepare("SELECT seats_offered - seats_allocated AS availableSeats, travel_price FROM travels WHERE id = ?"); // "?" => 'travel_id'
 $stmt->execute([$travelId]);
 $travel = $stmt->fetch();
 
@@ -21,6 +41,7 @@ if (!$travel) {
 }
 
 $availableSeats = (int) $travel['availableSeats'];
+$travelPrice = (int) $travel['travel_price'];
 
 // Return nb available seats in json
-echo json_encode(["success" => true, "availableSeats" => $availableSeats]);
+echo json_encode(["success" => true, "availableSeats" => $availableSeats, "userCredits" => $userCredit, "travelPrice" => $travelPrice ]);
