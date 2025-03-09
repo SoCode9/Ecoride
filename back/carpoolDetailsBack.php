@@ -20,7 +20,7 @@ try {
     $travel = new Travel($pdo, $travelId);
     $driver = new Driver($pdo, $travel->getDriverId());
     $car = new Car($pdo, $travelId);
-    $user = new User($pdo, $_SESSION['user_id']);
+    //$user = new User($pdo, $_SESSION['user_id']);
 
 } catch (Exception $e) {
     echo "Erreur : !!" . $e->getMessage();

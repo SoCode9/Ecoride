@@ -4,7 +4,7 @@ require_once "../database.php";
 
 // check if travel ID is sent
 if (!isset($_POST['travel_id'])) {
-    echo json_encode(["success" => false, "message" => "ID du covoiturage manquant."]);
+    echo json_encode(["success" => false, "message" => "ID du covoiturage manquant"]);
     exit;
 }
 
@@ -13,7 +13,7 @@ $userId = $_SESSION['user_id'] ?? null;
 
 // Vérifier que l'utilisateur est bien connecté
 if(!$userId){
-    echo json_encode(["sucess" => false, "message" => "Utilisateur non connecté."]);
+    echo json_encode(["success" => false, "message" => "Utilisateur non connecte"]);
     exit;
 }
 
@@ -23,7 +23,7 @@ $stmt->execute([$userId]);
 $user = $stmt->fetch();
 
 if(!$user){
-    echo json_encode(["sucess" => false, "message" => "Utilisateur introuvable"]);
+    echo json_encode(["success" => false, "message" => "Utilisateur introuvable"]);
     exit;
 }
 
