@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $host = "localhost";
 $dbname = "ecoride";
-$port = 3307;
+$port = 3308;
 $username = "root"; // Modifier selon ton environnement
 $password = ""; // Modifier si besoin
 
@@ -26,7 +26,7 @@ try {
 
 
 //A METTRE LORS DE LA CONNEXION
-    $_SESSION['user_id'] = /* (int) 3 */ null; //remplacer par $user['id'] quand ok
+    $_SESSION['user_id'] = (int) 3 /* null */; //remplacer par $user['id'] quand ok
 //$_SESSION['user_pseudo'] = $user['pseudo'];
 //$_SESSION['user_credit'] = 10; // Ajouter des crédits pour le test
 

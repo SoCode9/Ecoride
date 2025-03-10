@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let travelId = this.getAttribute("data-id"); // Retrieve travel id
 
         // Sent AJAX query to server to check available seats
-        fetch("../back/check_seats.php", {
+        fetch("../back/checkParticipation.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -26,9 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     alert("Il reste " + data.availableSeats + " places disponibles !");
                     alert("Crédits OK, vous pouvez réserver !");
 
+                    // double confirmation
+                    let confirmParticipation = confirm("Souhaitez-vous vraiment participer à ce covoiturage ?")
+                    if (confirmParticipation) {
+                        updateParticipation(travelId);
+                    }
+                }
 
-                } 
-                
                 // If the user is not logged in, suggest he/she log in.
                 if (data.message.includes("Utilisateur non connecte")) {
                     console.log("User non connecté, affichage du confirm()");
@@ -46,4 +50,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Une erreur est survenue. Veuillez réessayer plus tard.");
             });
     });
+
+    function updateParticipation(travelId) {
+        fetch("../back/updateParticipation.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "travel_id=" + travelId // sent travel id to server
+        })
+        .then(response=>response.json())
+        .then(data =>{
+            if (data.success) {
+                alert("Votre participation a été confirmée !");
+            }
+        })
+    }
 });
