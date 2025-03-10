@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $host = "localhost";
 $dbname = "ecoride";
-$port = 3307;
+$port = 3308;
 $username = "root"; // Modifier selon ton environnement
 $password = ""; // Modifier si besoin
 
