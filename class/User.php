@@ -33,12 +33,21 @@ class User
         $this->mail = $mail;
         $this->chauffeur = $chauffeur;
         if ($userId !== null) {
-            // Charger depuis la base de données si un ID est fourni
             $this->loadUserFromDB();
         } elseif ($pseudo !== null && $mail !== null && $password !== null) {
-            // Création d'un nouvel utilisateur avec les infos fournies
+            // New User created with informations given
+            if (strlen($password) < 8) {
+                throw new Exception("Le mot de passe est trop court (minimum 8 caractères)", 1);
+            }
+            if (
+                !preg_match('/[A-Z]/', $password) ||  // At least one capital letter
+                !preg_match('/[a-z]/', $password) ||  // At least one lower-case letter
+                !preg_match('/[0-9]/', $password) ||  // At least one number
+                !preg_match('/[\W]/', $password)  // At least one special character 
+            ) {
+                throw new Exception("Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial", 1);
+            }
             $this->password = password_hash($password, PASSWORD_BCRYPT);
-            $this->saveUserToDatabase();
         }
     }
 
@@ -101,6 +110,11 @@ class User
 
     //Getters et Setters
 
+    public function getId()
+    {
+        return $this->id;
+    }
+    
     public function getPseudo()
     {
         return $this->pseudo;

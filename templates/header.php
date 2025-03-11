@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/loginPage.css">
     <!-- add all the css files-->
 
+
 </head>
 
 <body>
@@ -20,10 +21,53 @@
             </div>
             <div class="navigation">
                 <a class="boutonNav" href="">Accueil</a> <!--manque-->
-                <a class="boutonNav" id="carpoolButton" href="carpoolSearchIndex.php">Covoiturages</a> <!--manque-->
+                <a class="boutonNav" id="carpoolButton" href="carpoolSearchIndex.php">Covoiturages</a>
                 <a class="boutonNav" href="">Contact</a> <!--manque-->
-                <a class="boutonNav" id="loginButton" href="formLoginIndex.php">Connexion</a> <!--manque-->
+                <?php
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+                if (isset($_SESSION['user_pseudo'])) {
+                    echo '<a class="boutonNav borderButton" id="userSpace" href="userSpace.php">Espace Utilisateur</a>'; // ✅ Correct
+                } else {
+                    echo '<a class="boutonNav borderButton" id="loginButton" href="loginPageIndex.php">Connexion</a>'; // ✅ Correct
+                }
+                ?>
             </div>
         </div>
     </header>
+
+    <!--display of error or success messages-->
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="message">
+            <?php
+            echo $_SESSION['success_message'];
+            unset($_SESSION['success_message']); // Deletes after display
+            ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div class="message" style="background-color: #f8d7da; color: #721c24;">
+            <?php
+            echo $_SESSION['error_message'];
+            unset($_SESSION['error_message']); // Deletes after display
+            ?>
+        </div>
+    <?php endif; ?>
+
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const message = document.querySelector(".message");
+        if (message) {
+            setTimeout(() => {
+                message.style.opacity = "0"; // Anime the disappearance
+                setTimeout(() => {
+                    message.style.display = "none"; // Completely hides
+                }, 500);
+            }, 4000); // 4 seconds before disappearance
+        }
+    });
+</script>
