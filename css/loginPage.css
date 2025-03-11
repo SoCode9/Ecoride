@@ -19,9 +19,7 @@
 }
 
 .creationAccountBlock {
-    background-color: rgba(150, 201, 171, 0.2);
-    /* 50% de transparence */
-
+    background-color: rgba(150, 201, 171, 0.2); /* 50% transparency */
 }
 
 .loginTitle {
@@ -47,7 +45,6 @@
     padding: 5px 10px;
     border-radius: 15px;
     position: relative;
-    /* Assure un bon positionnement de la liste sans modifier l'apparence */
     box-sizing: border-box;
     height: 35px;
 }
@@ -56,53 +53,4 @@
     height: 35px;
     color: white;
     font-size: 20px;
-}
-
-.driverQuestionBlock {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.driverQuestionLegend {
-    font-size: 18px;
-}
-
-.driverQuestionBox {
-    appearance: none;
-    /* Supprime le style par défaut */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 30px;
-    /* Taille de la checkbox */
-    height: 30px;
-    border: 3px solid #D9D9D9;
-    /* Bordure grise */
-    border-radius: 50%;
-    /* Rend la checkbox ronde */
-    background-color: white;
-    /* Fond blanc */
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-}
-
-/* Style quand la checkbox est cochée */
-.driverQuestionBox:checked {
-    background-color: #D9D9D9;
-    /* Fond gris lorsqu'elle est cochée */
-    border: 3px solid #D9D9D9;
-}
-
-/* Ajouter un "tick" à l'intérieur quand c'est coché */
-.driverQuestionBox:checked::after {
-    content: "✔";
-    /* Icône de validation */
-    font-size: 14px;
-    color: white;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: bold;
 }
