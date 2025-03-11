@@ -12,12 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pseudo = $_POST['pseudo'];
         $mail = $_POST['mail'];
         $password = $_POST['password'];
-        $chauffeur = isset($_POST['chauffeur']) ? 1 : 0;
 
-        // Création de l'utilisateur
+        // User creation
         $newUser = new User($pdo, null, $pseudo, $mail, $password, $chauffeur);
 
-        // Vérifie si l'utilisateur a bien été enregistré en base
+        // Check if user is created well
         if ($newUser->saveUserToDatabase()) {
             $_SESSION['success_message'] = 'Compte créé avec succès ! Vous avez été crédité de 20 crédits 🎉';
             $_SESSION['user_pseudo'] = $newUser ->getPseudo();
@@ -28,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } catch (Exception $e) {
         $_SESSION['error_message'] = $e->getMessage();
-        header('Location: loginPageIndex.php'); // Redirection vers la page de connexion
+        header('Location: loginPageIndex.php'); // Redirect to login page
         exit();
     }
 }
