@@ -1,4 +1,7 @@
 <?php
+    session_start();
+
+
 require_once "../database.php";
 require_once "../class/User.php";
 
@@ -17,8 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Vérifie si l'utilisateur a bien été enregistré en base
         if ($newUser->saveUserToDatabase()) {
             $_SESSION['success_message'] = 'Compte créé avec succès ! Vous avez été crédité de 20 crédits 🎉';
-
-            // Redirige vers la page de recherche de covoiturage
+            $_SESSION['user_pseudo'] = $newUser ->getPseudo();
             header('Location: carpoolSearchIndex.php');
             exit();
         } else {

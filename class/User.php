@@ -110,6 +110,11 @@ class User
 
     //Getters et Setters
 
+    public function getId()
+    {
+        return $this->id;
+    }
+    
     public function getPseudo()
     {
         return $this->pseudo;

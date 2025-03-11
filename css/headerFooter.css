@@ -51,18 +51,18 @@ a {
     color: #f0b74e;
 }
 
-#loginButton {
+.borderButton {
     padding: 5px 10px;
     border: white solid 1.5px;
     border-radius: 15px;
 }
 
-#loginButton:hover {
+.borderButton:hover {
     background-color: #BD9F66;
     color: rgb(255, 255, 255);
 }
 
-#loginButton:active {
+.borderButton:active {
     background-color: #bb9247;
 
 }
