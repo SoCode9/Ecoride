@@ -4,7 +4,7 @@ require_once "../database.php";
 class Driver extends User
 {
 
-    protected int $id;
+    protected ?int $id;
     private bool|null $petPreference;
     private bool|null $smokerPreference;
     private bool|null $musicPreference;
