@@ -4,17 +4,17 @@ require_once "../database.php";
 
 class User
 {
-    protected int $id;
-    protected string $pseudo;
-    protected string $mail;
-    protected string $password;
-    protected bool $chauffeur;
+    protected ?int $id;
+    protected ?string $pseudo;
+    protected ?string $mail;
+    protected ?string $password;
+    protected ?bool $chauffeur;
 
     protected string $telephone;
     protected string $adresse;
     protected string $dateNaissance;
 
-    protected PDO $pdo; //stocke la connexion à la BDD
+    protected ?PDO $pdo; //stocke la connexion à la BDD
     /* public function __construct(string $pseudo, string $mail, string $password, bool $chauffeur = false)
     {
         global $pdo;
@@ -25,11 +25,21 @@ class User
         $this->chauffeur = $chauffeur;
     } */
 
-    public function __construct(PDO $pdo, int $userId)
+    public function __construct(?PDO $pdo = null, ?int $userId = null, ?string $pseudo = null, ?string $mail = null, ?string $password = null, ?bool $chauffeur = false)
     {
         $this->pdo = $pdo;
         $this->id = $userId;
-        $this->loadUserFromDB();
+        $this->pseudo = $pseudo;
+        $this->mail = $mail;
+        $this->chauffeur = $chauffeur;
+        if ($userId !== null) {
+            // Charger depuis la base de données si un ID est fourni
+            $this->loadUserFromDB();
+        } elseif ($pseudo !== null && $mail !== null && $password !== null) {
+            // Création d'un nouvel utilisateur avec les infos fournies
+            $this->password = password_hash($password, PASSWORD_BCRYPT);
+            $this->saveUserToDatabase();
+        }
     }
 
     private function loadUserFromDB()

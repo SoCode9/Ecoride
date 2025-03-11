@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/headerFooter.css">
     <link rel="stylesheet" href="../css/carpoolSearch.css">
     <link rel="stylesheet" href="../css/carpoolDetails.css">
+    <link rel="stylesheet" href="../css/loginPage.css">
     <!-- add all the css files-->
 
 </head>

@@ -124,6 +124,7 @@
     background-color: #68C990;
     border-radius: 15px;
     justify-content: center;
+    border: none;
 }
 
 .searchButton:hover {
