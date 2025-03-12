@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../script/loginPage.js" defer></script>
     <link rel="stylesheet" href="../css/headerFooter.css">
     <link rel="stylesheet" href="../css/carpoolSearch.css">
     <link rel="stylesheet" href="../css/carpoolDetails.css">
@@ -28,9 +29,10 @@
                     session_start();
                 }
                 if (isset($_SESSION['user_id'])) {
-                    echo '<a class="boutonNav borderButton" id="userSpace" href="userSpace.php">Espace Utilisateur</a>'; // ✅ Correct
+                    echo '<a class="boutonNav borderButton" id="userSpace" href="userSpace.php">Espace Utilisateur</a>';
+                    echo '<a id="logoutButton" href="#"> <img src="../icons/Deconnexion.png" alt="logout button"  class="logoutButton"> </a>';
                 } else {
-                    echo '<a class="boutonNav borderButton" id="loginButton" href="loginPageIndex.php">Connexion</a>'; // ✅ Correct
+                    echo '<a class="boutonNav borderButton" id="loginButton" href="loginPageIndex.php">Connexion</a>';
                 }
                 ?>
             </div>
@@ -71,3 +73,4 @@
         }
     });
 </script>
+
