@@ -27,7 +27,7 @@
                 if (session_status() === PHP_SESSION_NONE) {
                     session_start();
                 }
-                if (isset($_SESSION['user_pseudo'])) {
+                if (isset($_SESSION['user_id'])) {
                     echo '<a class="boutonNav borderButton" id="userSpace" href="userSpace.php">Espace Utilisateur</a>'; // ✅ Correct
                 } else {
                     echo '<a class="boutonNav borderButton" id="loginButton" href="loginPageIndex.php">Connexion</a>'; // ✅ Correct

@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 
 
 require_once "../database.php";
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Check if user is created well
         if ($newUser->saveUserToDatabase()) {
             $_SESSION['success_message'] = 'Compte créé avec succès ! Vous avez été crédité de 20 crédits 🎉';
-            $_SESSION['user_pseudo'] = $newUser ->getPseudo();
+            $_SESSION['user_id'] = $newUser->getId();
             header('Location: carpoolSearchIndex.php');
             exit();
         } else {

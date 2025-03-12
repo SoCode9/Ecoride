@@ -79,13 +79,18 @@ class User
     {
         try {
             //Toujours utiliser les requêtes préparées avec prepare() et execute() pour éviter les injections SQL.
-            $stmt = $this->pdo->prepare("INSERT INTO users (pseudo, mail, password, chauffeur) VALUES (:pseudo, :mail, :password, :chauffeur)"); //prepare($sql) → Prépare la requête sans l’exécuter immédiatement.
-            return $stmt->execute([
+            $stmt = $this->pdo->prepare("INSERT INTO users (pseudo, mail, password) VALUES (:pseudo, :mail, :password)"); //prepare($sql) → Prépare la requête sans l’exécuter immédiatement.
+            $success = $stmt->execute([
                 ':pseudo' => $this->pseudo,
                 ':mail' => $this->mail,
                 ':password' => $this->password,
-                ':chauffeur' => $this->chauffeur
             ]);
+
+            if($success){
+                $this->id = $this->pdo->lastInsertId(); // Retrieves new user ID
+            }
+
+            return $success;
         } catch (PDOException $e) {
             die("Erreur lors de l'insertion : " . $e->getMessage());
         }
