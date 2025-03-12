@@ -8,31 +8,20 @@ class User
     protected ?string $pseudo;
     protected ?string $mail;
     protected ?string $password;
-    protected ?bool $chauffeur;
-
-    protected ?string $telephone;
-    protected ?string $adresse;
-    protected ?string $dateNaissance;
 
     protected ?string $credit;
-    protected ?PDO $pdo; //stocke la connexion à la BDD
-    /* public function __construct(string $pseudo, string $mail, string $password, bool $chauffeur = false)
-    {
-        global $pdo;
-        $this->pdo = $pdo;
-        $this->pseudo = $pseudo;
-        $this->mail = $mail;
-        $this->password =password_hash($password, PASSWORD_BCRYPT) ; //sécuriser le password -> dans BDD le mdp apparait :$2y$10$cWmperOc2rMsBT1CxDPFXedJZ1f9VFqaTl0AcQudpo4.. 
-        $this->chauffeur = $chauffeur;
-    } */
 
-    public function __construct(?PDO $pdo = null, ?int $userId = null, ?string $pseudo = null, ?string $mail = null, ?string $password = null, ?bool $chauffeur = false)
+    protected ?int $idRole;
+    protected ?PDO $pdo; //stocke la connexion à la BDD
+   
+
+    public function __construct(?PDO $pdo = null, ?int $userId = null, ?string $pseudo = null, ?string $mail = null, ?string $password = null)
     {
         $this->pdo = $pdo;
         $this->id = $userId;
         $this->pseudo = $pseudo;
         $this->mail = $mail;
-        $this->chauffeur = $chauffeur;
+      
         if ($userId !== null) {
             $this->loadUserFromDB();
         } elseif ($pseudo !== null && $mail !== null && $password !== null) {
@@ -89,10 +78,6 @@ class User
             $this->pseudo = $userData['pseudo'];
             $this->mail = $userData['mail'];
             $this->password = $userData['password'];
-            $this->chauffeur = $userData['chauffeur'];
-            $this->telephone = $userData['telephone'];
-            $this->adresse = $userData['adresse'];
-            $this->dateNaissance = $userData['date_naissance'];
             $this->credit = $userData['credit'];
         } else {
             throw new Exception("Aucun utilisateur trouvé dans la BDD avec cet ID");
@@ -142,26 +127,6 @@ class User
         return $this->password;
     }
 
-    public function getChauffeur()
-    {
-        return $this->chauffeur;
-    }
-
-    public function getTelephone()
-    {
-        return $this->telephone;
-    }
-
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
-
-    public function getDateNaissance()
-    {
-        return $this->dateNaissance;
-    }
-
     public function getCredit()
     {
         return $this->credit;
@@ -179,22 +144,6 @@ class User
     {
         $this->password = $newPassword;
     }
-    public function setChauffeur(bool $newChauffeurType)
-    {
-        $this->chauffeur = $newChauffeurType;
-    }
-    public function setTelephone(string $newTelephone)
-    {
-        $this->telephone = $newTelephone;
-    }
-    public function setAdresse(string $newAdresse)
-    {
-        $this->adresse = $newAdresse;
-    }
-    public function setDateNaissance(string $newDateNaissance)
-    {
-        $this->dateNaissance = $newDateNaissance;
-    }
 
     public function setCredit(int $newCredit)
     {
@@ -202,25 +151,5 @@ class User
     }
 
 }
-
-
-//TESTS
-
-/* $user1 = new User("Soso'w", "yoyo@aaa.com", "myPassword2024");
-
-echo $user1->getPseudo() . PHP_EOL;
-
-echo $user1->getChauffeur() . PHP_EOL;
-
-$user1->setPseudo("mon Nouveau Pseudo");
-echo $user1->getPseudo() . PHP_EOL;
-
-//$user1->setChauffeur(true);
-echo $user1->getChauffeur() . PHP_EOL;
-
-$info = $user1->infoUserInArray();
-var_dump($info); */
-
-//CREATION COMPTE - FORMULAIRE
 
 ?>
