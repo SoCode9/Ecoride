@@ -10,9 +10,9 @@ class User
     protected ?string $password;
     protected ?bool $chauffeur;
 
-    protected string $telephone;
-    protected string $adresse;
-    protected string $dateNaissance;
+    protected ?string $telephone;
+    protected ?string $adresse;
+    protected ?string $dateNaissance;
 
     protected ?PDO $pdo; //stocke la connexion à la BDD
     /* public function __construct(string $pseudo, string $mail, string $password, bool $chauffeur = false)
@@ -48,9 +48,31 @@ class User
                 throw new Exception("Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial", 1);
             }
             $this->password = password_hash($password, PASSWORD_BCRYPT);
-        }
+        } /* elseif ($mail !== null && $password !== null) {
+          $this->searchUserInDB($mail, $password);
+      } */
     }
 
+    public function searchUserInDB($mailTested, $passwordTested)
+    {
+        $sql = 'SELECT * FROM users WHERE (mail=:mailTested)';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':mailTested', $mailTested, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $foundUserInDB = $stmt->fetchObject('User');
+        if ($foundUserInDB === false) {
+            throw new Exception("Identifiants invalides");
+        } else {
+            if (password_verify($passwordTested, $foundUserInDB->getPassword()) === false) {
+                throw new Exception("Identifiants invalides");
+            } else {
+                $this->id = $this->pdo->lastInsertId();
+                return true;
+            }
+        }
+
+    }
     private function loadUserFromDB()
     {
         $sql = "SELECT * FROM users WHERE id=:user_id";
@@ -86,7 +108,7 @@ class User
                 ':password' => $this->password,
             ]);
 
-            if($success){
+            if ($success) {
                 $this->id = $this->pdo->lastInsertId(); // Retrieves new user ID
             }
 
@@ -119,7 +141,7 @@ class User
     {
         return $this->id;
     }
-    
+
     public function getPseudo()
     {
         return $this->pseudo;
