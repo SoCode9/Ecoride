@@ -14,6 +14,7 @@ class User
     protected ?string $adresse;
     protected ?string $dateNaissance;
 
+    protected ?string $credit;
     protected ?PDO $pdo; //stocke la connexion à la BDD
     /* public function __construct(string $pseudo, string $mail, string $password, bool $chauffeur = false)
     {
@@ -49,8 +50,8 @@ class User
             }
             $this->password = password_hash($password, PASSWORD_BCRYPT);
         } /* elseif ($mail !== null && $password !== null) {
-          $this->searchUserInDB($mail, $password);
-      } */
+       $this->searchUserInDB($mail, $password);
+   } */
     }
 
     public function searchUserInDB($mailTested, $passwordTested)
@@ -92,6 +93,7 @@ class User
             $this->telephone = $userData['telephone'];
             $this->adresse = $userData['adresse'];
             $this->dateNaissance = $userData['date_naissance'];
+            $this->credit = $userData['credit'];
         } else {
             throw new Exception("Aucun utilisateur trouvé dans la BDD avec cet ID");
         }
@@ -101,11 +103,12 @@ class User
     {
         try {
             //Toujours utiliser les requêtes préparées avec prepare() et execute() pour éviter les injections SQL.
-            $stmt = $this->pdo->prepare("INSERT INTO users (pseudo, mail, password) VALUES (:pseudo, :mail, :password)"); //prepare($sql) → Prépare la requête sans l’exécuter immédiatement.
+            $stmt = $this->pdo->prepare("INSERT INTO users (pseudo, mail, password, credit) VALUES (:pseudo, :mail, :password, :credit)"); //prepare($sql) → Prépare la requête sans l’exécuter immédiatement.
             $success = $stmt->execute([
                 ':pseudo' => $this->pseudo,
                 ':mail' => $this->mail,
                 ':password' => $this->password,
+                ':credit' => 20,
             ]);
 
             if ($success) {
@@ -117,23 +120,6 @@ class User
             die("Erreur lors de l'insertion : " . $e->getMessage());
         }
     }
-
-    /**
-     * Sert pour afficher en tableau toutes les informations de l'utilisateur
-     * @return array{Chauffeur ?: string, Mail: string, Password: string, Pseudo: string}
-     */
-    public function infoUserInArray(): array
-    {
-        return [
-            "Pseudo" => $this->pseudo,
-            "Mail" => $this->mail,
-            "Password" => $this->password,
-            "Chauffeur ?" => $this->chauffeur ? "Oui" : "Non"
-        ];
-
-
-    }
-
 
     //Getters et Setters
 
@@ -176,6 +162,11 @@ class User
         return $this->dateNaissance;
     }
 
+    public function getCredit()
+    {
+        return $this->credit;
+    }
+
     public function setPseudo(string $newPseudo)
     {
         $this->pseudo = $newPseudo;
@@ -203,6 +194,11 @@ class User
     public function setDateNaissance(string $newDateNaissance)
     {
         $this->dateNaissance = $newDateNaissance;
+    }
+
+    public function setCredit(int $newCredit)
+    {
+        $this->credit = $newCredit;
     }
 
 }
