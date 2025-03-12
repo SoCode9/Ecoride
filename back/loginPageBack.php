@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $password = $_POST['password'];
 
             // User creation
-            $newUser = new User($pdo, null, $pseudo, $mail, $password, $chauffeur);
+            $newUser = new User($pdo, null, $pseudo, $mail, $password);
 
             // Check if user is created well
             if ($newUser->saveUserToDatabase()) {
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail = $_POST['mail'];
             $password = $_POST['password'];
 
-            $searchUser = new User($pdo, null, null, $mail, $password, null);
+            $searchUser = new User($pdo, null, null, $mail, $password);
 
             if ($searchUser->searchUserInDB($mail, $password)) {
                 $_SESSION['success_message'] = 'Connexion réussie !';
