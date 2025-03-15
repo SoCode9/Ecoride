@@ -51,15 +51,29 @@
         <?php if ($connectedUser->getIdRole() !== 1): ?>
             <div class="subTitleAndContent greyBlock">
                 <h2 class="subTitleGreen">Voitures</h2>
+                <?php
+                $totalCars = count($cars);
+                $index = 0;
+                foreach ($cars as $car):
+                    $index++;
+                    ?>
 
-                <span>Plaque immatriculation : FQ-134-DF</span>
-                <span>Date première immatriculation : 14.02.2019</span>
-                <span>Marque : Audi</span>
-                <span>Modèle : A1</span>
-                <span>Electrique ? : non</span>
-                <span>Couleur : gris clair</span>
-                <span>Nombre de passagers possible : 3</span>
-
+                    <span>Plaque immatriculation : <?= htmlspecialchars($car['car_licence_plate']) ?></span>
+                    <span>Date première immatriculation :
+                        <?= formatDate(htmlspecialchars($car['car_first_registration_date'])) ?></span>
+                    <span>Marque : <?= htmlspecialchars($car['name']) ?></span>
+                    <span>Modèle : <?= htmlspecialchars($car['car_model']) ?></span>
+                    <span>Electrique ? : <?php
+                    $electric = (htmlspecialchars($car['car_electric']) === 1) ? 'Oui' : 'Non';
+                    echo $electric;
+                    ?>
+                    </span>
+                    <span>Couleur : <?= htmlspecialchars($car['car_color']) ?></span>
+                    <span>Nombre de passagers possible : <?= htmlspecialchars($car['car_seats_offered']) ?></span>
+                    <?php if ($index !== $totalCars):
+                        echo '<hr>' ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
             <!--... A COMPLETER AVEC PREFERENCES-->
 

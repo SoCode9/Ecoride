@@ -113,3 +113,10 @@ a {
 
     transition: opacity 0.5s ease-in-out;
 }
+
+/*COMMON*/
+
+hr {
+    border: 0.5px solid #4D9856;
+    margin: 10px 0;
+}

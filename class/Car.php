@@ -42,13 +42,13 @@ class Car
     {
         $sql = "SELECT cars.*, brands.* FROM cars 
         JOIN driver ON driver.user_id = cars.driver_id 
-        JOIN travels ON travels.car_id =cars.car_id  
-        JOIN brands ON brands.id = cars.brand_id";
+        JOIN brands ON brands.id = cars.brand_id";  
 
         $conditions = [];
         $params = [];
 
         if (!empty($travelId)) {
+            $sql.= "  JOIN travels ON travels.car_id =cars.car_id";
             $conditions[] = "travels.id = :travel_id";
             $params[':travel_id'] = $travelId;
 
@@ -101,6 +101,11 @@ class Car
                 throw new Exception("Aucune voiture trouvée pour ce chauffeur.");
             }
         }
+    }
+
+    public function getCars(): array
+    {
+        return $this->cars ?? [];
     }
 
     public function getBrand(): ?string

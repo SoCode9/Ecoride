@@ -260,12 +260,3 @@
 .ratingDate {
     font-size: calc(100% - 3px);
 }
-
-.lineSplitter {
-    margin: 10px 54px;
-    /* Longueur de la ligne */
-    height: 2px;
-    /* Épaisseur de la ligne */
-    background-color: #4D9856;
-    /* Couleur de la ligne */
-}

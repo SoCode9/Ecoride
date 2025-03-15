@@ -66,7 +66,8 @@
                 ?> </div>
             </div>
 
-            <button class="participateButton" data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>"> <!--Ajouter le bouton et le lien-->
+            <button class="participateButton" data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>">
+                <!--Ajouter le bouton et le lien-->
                 <img src="../icons/Calendrier.png" class="imgFilterDate" alt="calendrier de réservation">
                 <span style="font-size: 16px;">Participer au covoiturage</span>
             </button>
@@ -197,7 +198,7 @@
                     </div>
                     <p class="removeMargins"><?= htmlspecialchars(($rating['description'])) ?></p>
                     <span class="ratingDate"><?= htmlspecialchars(formatDateMonthAndYear($rating['created_at'])) ?></span>
-                    <div class="lineSplitter"></div>
+                    <hr>
                 </div>
             <?php endforeach ?>
 
