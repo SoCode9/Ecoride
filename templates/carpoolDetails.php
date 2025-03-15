@@ -127,34 +127,75 @@
                     <div class="bold">Préférences</div>
                     <?php
                     $petPref = $driver->getPetPreference();
-                    if ($petPref !== null) {
-                        echo $petPref;
-                    }
-                    ?>
+                    if ($petPref === true): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/AnimauxOk.png' class='imgFilter' alt=''>
+                            <span>J'aime la compagnie des animaux</span>
+                        </div>
+                    <?php elseif ($petPref === false): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/AnimauxPasOk.png' class='imgFilter' alt=''>
+                            <span>Je préfère ne pas voyager avec des animaux</span>
+                        </div>
+                    <?php endif; ?>
+
+
                     <?php
                     $smokerPref = $driver->getSmokerPreference();
-                    if ($smokerPref !== null) {
-                        echo $smokerPref;
-                    }
-                    ?>
+                    if ($smokerPref === true): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/FumerOk.png' class='imgFilter' alt=''>
+                            <span>La fumée ne me dérange pas</span>
+                        </div>
+                    <?PHP elseif ($smokerPref === false): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/FumerPasOk.png' class='imgFilter' alt=''>
+                            <span>Je préfère ne pas voyager avec des fumeurs</span>
+                        </div>
+                    <?php endif; ?>
+
                     <?php
                     $musicPref = $driver->getMusicPreference();
-                    if ($musicPref !== null) {
-                        echo $musicPref;
-                    }
-                    ?>
+                    if ($musicPref === true): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/MusiqueOk.png' class='imgFilter' alt=''>
+                            <span>J'aime conduire en écoutant de la musique</span>
+                        </div>
+                    <?PHP elseif ($musicPref === false): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/MusiquePasOk.png' class='imgFilter' alt=''>
+                            <span>Je préfère ne pas écouter de musique pendant que je conduis</span>
+                        </div>
+                    <?php endif; ?>
+
                     <?php
                     $speakerPref = $driver->getSpeakerPreference();
-                    if ($speakerPref !== null) {
-                        echo $speakerPref;
-                    }
-                    ?>
+                    if ($speakerPref === true): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/speakOk.png' class='imgFilter' alt=''>
+                            <span>Je discute volontiers avec mes passagers</span>
+                        </div>
+                    <?PHP elseif ($speakerPref === false): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/speakNotOk.png' class='imgFilter' alt=''>
+                            <span>Je préfère me concentrer sur la route</span>
+                        </div>
+                    <?php endif; ?>
+
                     <?php
                     $foodPref = $driver->getFoodPreference();
-                    if ($foodPref !== null) {
-                        echo $foodPref;
-                    }
-                    ?>
+                       if ($foodPref === true): ?>
+                        <div class='textIcon'>
+                        <img src='../icons/foodOk.png' class='imgFilter' alt=''> 
+                        <span>La nourriture est autorisée dans la voiture </span>
+                    </div>
+                    <?PHP elseif ($foodPref === false): ?>
+                        <div class='textIcon'>
+                        <img src='../icons/foodNotOk.png' class='imgFilter' alt=''> 
+                        <span>Pas de nourriture dans la voiture s'il vous plait</span>
+                    </div>
+                    <?php endif; ?>
+                    
                 </div>
             </div>
         </section>
