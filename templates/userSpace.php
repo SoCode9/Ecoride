@@ -198,6 +198,39 @@
     </section>
 
     <section class="carpoolsUserBlock">
+        <div class="headerUserInfo">
+            <h1 class="pageTitle removeMargins">Mes covoiturages</h1>
+            <button class="participateButton">Proposer un covoiturage</button>
+        </div>
+        <div class="filtersList">
+            <h2 class="subTitleGreen" style="color: black ;">Covoiturages terminés, en attente de validation</h2>
+            <div class="travel">
+
+                <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photoUser">
+                <span class="pseudoUser">Pseudo</span>
+                <div class="driverRating">
+                    <img src="../icons/EtoileJaune.png" alt="Etoile" class="imgFilter">
+                    <span>3.6</span>
+                </div>
+                <span class="dateTravel">09/02/2025 </span>
+                <span class="hoursTravel">De Annecy</span>
+                <span class="seatsAvailable">De 07h30 à 14h00</span>
+                <span class="criteriaEcoDiv">À Lyon</span>
+                <span class="travelPrice gras">20 crédits
+                    <?php
+                    /*  $trajetPrice = htmlspecialchars($t['travel_price']);
+                     if ($trajetPrice > 1) {
+                         echo $trajetPrice . " crédits";
+                     } else {
+                         echo $trajetPrice . " crédit";
+                     } */
+                    ?></span>
+                <div class="seeDetailTrajet">
+                    <a href="xx.php?id=" class="travelDetailsLegend">Valider</a>
+
+
+                </div>
+            </div>
 
     </section>
 </main>

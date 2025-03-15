@@ -2,6 +2,7 @@
 .userInfoAndCarpoolBlock {
     display: grid;
     grid-template-columns: 35% 65%;
+    gap: 20px;
 }
 
 .userInformationsBlock {
@@ -18,7 +19,13 @@
 
 .carpoolsUserBlock {
     grid-template-columns: 2/3;
-    border: black;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #EDEDED;
+    height: fit-content;
 }
 
 /**User's informations Block**/
@@ -82,7 +89,7 @@
     width: 30px;
 }
 
-/* Cache les boutons radio natifs */
+/* Hide native radio buttons */
 input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
@@ -101,7 +108,7 @@ input[type="checkbox"] {
     transition: all 0.2s ease-in-out;
 }
 
-/* Style quand le bouton est sélectionné */
+/* Style when button is selected */
 input[type="checkbox"]:checked {
     border-color: #D9D9D9;
     /* Bordure foncée */
@@ -118,9 +125,7 @@ input[type="checkbox"]:checked {
 
 .scrollable-container {
     max-height: 600px;
-    /* Hauteur maximale */
     overflow: auto;
-    /* Barre de défilement uniquement si nécessaire */
+    /* Scroll bar only if necessary  */
     padding: 10px;
-    /* Espacement interne */
 }
