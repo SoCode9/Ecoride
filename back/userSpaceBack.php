@@ -19,3 +19,5 @@ $usersReservations = new Reservation($pdo, $idUser);
 $carpoolListToValidate = $usersReservations->carpoolFinishedToValidate($pdo, $idUser);
 
 $carpoolListNotStarted = $usersReservations->carpoolNotStarted($pdo, $idUser);
+
+$carpoolListFinishedAndValidated = $usersReservations->carpoolFinishedAndValidated($pdo, $idUser);
