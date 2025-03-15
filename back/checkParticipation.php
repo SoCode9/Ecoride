@@ -2,6 +2,10 @@
 
 require_once "../database.php";
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // check if travel ID is sent
 if (!isset($_POST['travel_id'])) {
     echo json_encode(["success" => false, "message" => "ID du covoiturage manquant"]);
@@ -11,8 +15,8 @@ if (!isset($_POST['travel_id'])) {
 $travelId = $_POST['travel_id'];
 $userId = $_SESSION['user_id'] ?? null;
 
-// Vérifier que l'utilisateur est bien connecté
-if(!$userId){
+// Check that the user is logged in
+if (!isset($userId)) {
     echo json_encode(["success" => false, "message" => "Utilisateur non connecte"]);
     exit;
 }
@@ -22,7 +26,7 @@ $stmt = $pdo->prepare("SELECT credit FROM users where id = ?");
 $stmt->execute([$userId]);
 $user = $stmt->fetch();
 
-if(!$user){
+if (!$user) {
     echo json_encode(["success" => false, "message" => "Utilisateur introuvable"]);
     exit;
 }
@@ -44,4 +48,4 @@ $availableSeats = (int) $travel['availableSeats'];
 $travelPrice = (int) $travel['travel_price'];
 
 // Return nb available seats in json
-echo json_encode(["success" => true, "availableSeats" => $availableSeats, "userCredits" => $userCredit, "travelPrice" => $travelPrice ]);
+echo json_encode(["success" => true, "availableSeats" => $availableSeats, "userCredits" => $userCredit, "travelPrice" => $travelPrice]);

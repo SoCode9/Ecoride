@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then(response => response.json()) // We expect a JSON response
             .then(data => {
+                console.log("Réponse du serveur :", data);
                 if (data.success) {
                     if (data.availableSeats === 0) {
                         alert("Désolé, il n'y a plus de places disponibles.");
@@ -22,10 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         alert("Vous n'avez pas assez de crédits pour réserver ce covoiturage.");
                         return; // On stoppe ici
                     }
-                    // #### si tout est bon -> ajouter la double confirmation à la place ! 
-                    alert("Il reste " + data.availableSeats + " places disponibles !");
-                    alert("Crédits OK, vous pouvez réserver !");
-
+                    
                     // double confirmation
                     let confirmParticipation = confirm("Souhaitez-vous vraiment participer à ce covoiturage ?")
                     if (confirmParticipation) {
@@ -34,15 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 // If the user is not logged in, suggest he/she log in.
-                if (data.message.includes("Utilisateur non connecte")) {
+                if (data.message && typeof data.message === "string" && data.message.includes("Utilisateur non connecte")) {
                     console.log("User non connecté, affichage du confirm()");
 
                     let confirmLogin = confirm("Vous devez être connecté pour réserver. Cliquer sur \"OK\" pour créer un compte.");
                     if (confirmLogin) {
                         window.location.href = "../index/carpoolSearchIndex.php"; // CHANGER LA REDIRECTION VERS PAGE CONNEXION
                     }
-                } else {
-                    alert("Erreur : " + data.message);
                 }
             })
             .catch(error => {
@@ -59,11 +55,11 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: "travel_id=" + travelId // sent travel id to server
         })
-        .then(response=>response.json())
-        .then(data =>{
-            if (data.success) {
-                alert("Votre participation a été confirmée !");
-            }
-        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Votre participation a été confirmée !");
+                }
+            })
     }
 });

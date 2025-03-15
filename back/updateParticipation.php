@@ -1,6 +1,8 @@
 <?php
 require_once "../database.php";
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ### second check ###
 
 header('Content-Type: application/json');
@@ -18,7 +20,7 @@ if (!isset($_POST['travel_id'])) {
 $userId = $_SESSION['user_id'];
 $travelId = intval($_POST['travel_id']);
 
-// 🔎 Vérifier que le covoiturage existe et récupérer son prix
+// Check that carpooling exists and get the price
 $stmt = $pdo->prepare("SELECT seats_offered - seats_allocated AS availableSeats, travel_price FROM travels WHERE id = ?");
 $stmt->execute([$travelId]);
 $travel = $stmt->fetch();
@@ -36,7 +38,7 @@ if ($availableSeats <= 0) {
     exit;
 }
 
-// Vérifier que l'utilisateur a assez de crédits
+// Check that the user has enough credits 
 $stmt = $pdo->prepare("SELECT credit FROM users WHERE id = ?");
 $stmt->execute([$userId]);
 $user = $stmt->fetch();
@@ -70,7 +72,7 @@ try {
     $stmt->execute([$userId, $travelId]);
 
 
-    $pdo->commit(); //valide la transaction
+    $pdo->commit(); // validates the transaction
 
     echo json_encode(["success" => true, "message" => "Participation confirmée !"]);
 
