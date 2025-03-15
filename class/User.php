@@ -79,6 +79,7 @@ class User
             $this->mail = $userData['mail'];
             $this->password = $userData['password'];
             $this->credit = $userData['credit'];
+            $this->idRole = $userData['id_role'];
         } else {
             throw new Exception("Aucun utilisateur trouvé dans la BDD avec cet ID");
         }
@@ -88,12 +89,13 @@ class User
     {
         try {
             //Toujours utiliser les requêtes préparées avec prepare() et execute() pour éviter les injections SQL.
-            $stmt = $this->pdo->prepare("INSERT INTO users (pseudo, mail, password, credit) VALUES (:pseudo, :mail, :password, :credit)"); //prepare($sql) → Prépare la requête sans l’exécuter immédiatement.
+            $stmt = $this->pdo->prepare("INSERT INTO users (pseudo, mail, password, credit, id_role) VALUES (:pseudo, :mail, :password, :credit, :idRole)"); //prepare($sql) → Prépare la requête sans l’exécuter immédiatement.
             $success = $stmt->execute([
                 ':pseudo' => $this->pseudo,
                 ':mail' => $this->mail,
                 ':password' => $this->password,
                 ':credit' => 20,
+                'idRole' => 1,
             ]);
 
             if ($success) {
@@ -131,6 +133,12 @@ class User
     {
         return $this->credit;
     }
+
+    public function getIdRole()
+    {
+        return $this->idRole;
+    }
+
 
     public function setPseudo(string $newPseudo)
     {

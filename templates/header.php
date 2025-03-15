@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/carpoolSearch.css">
     <link rel="stylesheet" href="../css/carpoolDetails.css">
     <link rel="stylesheet" href="../css/loginPage.css">
+    <link rel="stylesheet" href="../css/userSpace.css">
     <!-- add all the css files-->
 
 
@@ -29,7 +30,7 @@
                     session_start();
                 }
                 if (isset($_SESSION['user_id'])) {
-                    echo '<a class="boutonNav borderButton" id="userSpace" href="userSpace.php">Espace Utilisateur</a>';
+                    echo '<a class="boutonNav borderButton" id="userSpace" href="userSpaceIndex.php">Espace Utilisateur</a>';
                     echo '<a id="logoutButton" href="#"> <img src="../icons/Deconnexion.png" alt="logout button"  class="logoutButton"> </a>';
                 } else {
                     echo '<a class="boutonNav borderButton" id="loginButton" href="loginPageIndex.php">Connexion</a>';
