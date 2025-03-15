@@ -48,18 +48,22 @@
             </div>
         </div>
         <!--Auto section-->
-        <div class="subTitleAndContent greyBlock">
-            <h2 class="subTitleGreen">Voitures</h2>
+        <?php if ($connectedUser->getIdRole() !== 1): ?>
+            <div class="subTitleAndContent greyBlock">
+                <h2 class="subTitleGreen">Voitures</h2>
 
-            <span>Plaque immatriculation : FQ-134-DF</span>
-            <span>Date première immatriculation : 14.02.2019</span>
-            <span>Marque : Audi</span>
-            <span>Modèle : A1</span>
-            <span>Couleur : gris clair</span>
-            <span>Nombre de passagers possible : 3</span>
+                <span>Plaque immatriculation : FQ-134-DF</span>
+                <span>Date première immatriculation : 14.02.2019</span>
+                <span>Marque : Audi</span>
+                <span>Modèle : A1</span>
+                <span>Electrique ? : non</span>
+                <span>Couleur : gris clair</span>
+                <span>Nombre de passagers possible : 3</span>
 
-        </div>
-        <!--... A COMPLETER AVEC PREFERENCES-->
+            </div>
+            <!--... A COMPLETER AVEC PREFERENCES-->
+
+        <?php endif; ?>
 
     </section>
 
