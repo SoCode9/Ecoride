@@ -232,7 +232,7 @@
     display: flex;
     align-items: center;
     display: grid;
-    grid-template-columns: 10% 25% 25% 25% 15%;
+    grid-template-columns: 10% 20% 27.5% 27.5% 15%;
     grid-template-rows: 10px 30px 30px 10px;
     padding: 15px;
     border-radius: 20px;
