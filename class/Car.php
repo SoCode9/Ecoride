@@ -15,12 +15,29 @@ class Car
     private int $seatsOffered;
     private bool $electric;
     private $color;
+
+    private ?array $car = null; //if the search is by travelID
+    private array $cars = []; //if the search is by driverId. A driver can have one or many cars
+
+    /**
+     * to initialize one or many car(s), one of the parameters must be null
+     * @param PDO $pdo
+     * @param mixed $driverId
+     * @param mixed $travelId
+     */
     public function __construct(PDO $pdo, ?int $driverId = null, ?int $travelId = null)
     {
         $this->pdo = $pdo;
         $this->loadCarFromDB($travelId, $driverId);
     }
 
+    /**
+     * function launched automatically when new Car is initialized
+     * @param mixed $travelId if the search is by travelId (only one car identifier found) -> you can use getters and setters
+     * @param mixed $driverId if search by driverId (can have several cars) --> can't use getters and setters but a foreach and ['field_db_name'].
+     * @throws \Exception
+     * @return void
+     */
     private function loadCarFromDB(?int $travelId = null, ?int $driverId = null)
     {
         $sql = "SELECT cars.*, brands.* FROM cars 
@@ -54,9 +71,18 @@ class Car
 
         $statement->execute();
 
-        $carData = $statement->fetch(PDO::FETCH_ASSOC);
+        if (!empty($travelId)) {
+            //if search by travelId (one car id founed) -> can use getters and setters
 
-        if ($carData) {
+            $carData = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if (!$carData) {
+                throw new Exception("Aucune voiture trouvée pour ce trajet.");
+            }
+
+            // Stock unique car
+            $this->car = $carData;
+
             $this->driverId = $carData['driver_id'];
             $this->brand = $carData['name'];
             $this->model = $carData['car_model'];
@@ -65,8 +91,15 @@ class Car
             $this->seatsOffered = $carData['car_seats_offered'];
             $this->electric = $carData['car_electric'];
             $this->color = $carData['car_color'];
-        } else {
-            throw new Exception("Aucune voiture trouvée pour ce trajet ou ce chauffeur");
+
+        } elseif (!empty($driverId)) {
+            // if search by driverId(can have many cars) --> cannot use getters and setters but a foreach and ['field_db_name']
+
+            $this->cars = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!$this->cars) {
+                throw new Exception("Aucune voiture trouvée pour ce chauffeur.");
+            }
         }
     }
 
