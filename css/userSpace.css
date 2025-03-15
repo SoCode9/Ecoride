@@ -1,7 +1,7 @@
 /*main blocks*/
 .userInfoAndCarpoolBlock {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 35% 65%;
 }
 
 .userInformationsBlock {
@@ -114,4 +114,13 @@ input[type="checkbox"]:checked {
 .greyBlock {
     background-color: #EDEDED;
     border-radius: 15px;
+}
+
+.scrollable-container {
+    max-height: 600px;
+    /* Hauteur maximale */
+    overflow: auto;
+    /* Barre de défilement uniquement si nécessaire */
+    padding: 10px;
+    /* Espacement interne */
 }

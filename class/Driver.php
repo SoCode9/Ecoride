@@ -38,7 +38,7 @@ class Driver extends User
             $this->foodPreference = $driverData['food'];
             // Informations inherited from User
             $this->pseudo = $driverData['pseudo'];
-            
+
         } else {
             throw new Exception("Conducteur introuvable pour l'id {$this->id}.");
         }
@@ -89,104 +89,24 @@ class Driver extends User
 
     public function getPetPreference()
     {
-
-        $result = $this->petPreference;
-        if (is_null($result)) {
-            return null;
-        }
-
-        if ($result === true) {
-            return "<div class='textIcon'>
-                        <img src='../icons/AnimauxOk.png' class='imgFilter' alt=''> 
-                        <span>J'aime la compagnie des animaux</span>
-                    </div>";
-        } elseif ($result === false) {
-            return "<div class='textIcon'>
-                        <img src='../icons/AnimauxPasOk.png' class='imgFilter' alt=''> 
-                        <span>Je préfère ne pas voyager avec des animaux</span>
-                    </div>";
-        }
+        return $this->petPreference;
     }
 
     public function getSmokerPreference()
     {
-
-        $result = $this->smokerPreference;
-        if (is_null($result)) {
-            return null;
-        }
-
-        if ($result === true) {
-            return "<div class='textIcon'>
-                        <img src='../icons/FumerOk.png' class='imgFilter' alt=''> 
-                        <span>La fumée ne me dérange pas</span>
-                    </div>";
-        } elseif ($result === false) {
-            return "<div class='textIcon'>
-                        <img src='../icons/FumerPasOk.png' class='imgFilter' alt=''> 
-                        <span>Je préfère ne pas voyager avec des fumeurs</span>
-                    </div>";
-        }
+        return $this->smokerPreference;
     }
     public function getMusicPreference()
     {
-
-        $result = $this->musicPreference;
-        if (is_null($result)) {
-            return null;
-        }
-
-        if ($result === true) {
-            return "<div class='textIcon'>
-                        <img src='../icons/MusiqueOk.png' class='imgFilter' alt=''> 
-                        <span>J'aime conduire en écoutant de la musique</span>
-                    </div>";
-        } elseif ($result === false) {
-            return "<div class='textIcon'>
-                        <img src='../icons/MusiquePasOk.png' class='imgFilter' alt=''> 
-                        <span>Je préfère ne pas écouter de musique pendant que je conduis</span>
-                    </div>";
-        }
+        return $this->musicPreference;
     }
     public function getSpeakerPreference()
     {
-
-        $result = $this->speakerPreference;
-        if (is_null($result)) {
-            return null;
-        }
-
-        if ($result === true) {
-            return "<div class='textIcon'>
-                        <img src='../icons/speakOk.png' class='imgFilter' alt=''> 
-                        <span>Je discute volontiers avec mes passagers</span>
-                    </div>";
-        } elseif ($result === false) {
-            return "<div class='textIcon'>
-                        <img src='../icons/speakNotOk.png' class='imgFilter' alt=''> 
-                        <span>Je préfère me concentrer sur la route</span>
-                    </div>";
-        }
+        return $this->speakerPreference;
     }
     public function getFoodPreference()
     {
-
-        $result = $this->foodPreference;
-        if (is_null($result)) {
-            return null;
-        }
-
-        if ($result === true) {
-            return "<div class='textIcon'>
-                        <img src='../icons/foodOk.png' class='imgFilter' alt=''> 
-                        <span>La nourriture est autorisée dans la voiture </span>
-                    </div>";
-        } elseif ($result === false) {
-            return "<div class='textIcon'>
-                        <img src='../icons/foodNotOk.png' class='imgFilter' alt=''> 
-                        <span>Pas de nourriture dans la voiture s'il vous plait</span>
-                    </div>";
-        }
+        return $this->foodPreference;
     }
 
 }

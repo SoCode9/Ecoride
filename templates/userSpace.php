@@ -47,19 +47,153 @@
                 </div>
             </div>
         </div>
-        <!--Auto section-->
-        <div class="subTitleAndContent greyBlock">
-            <h2 class="subTitleGreen">Voitures</h2>
+        <!--Cars section-->
+        <?php if ($connectedUser->getIdRole() !== 1): ?>
+            <div class="scrollable-container subTitleAndContent">
 
-            <span>Plaque immatriculation : FQ-134-DF</span>
-            <span>Date première immatriculation : 14.02.2019</span>
-            <span>Marque : Audi</span>
-            <span>Modèle : A1</span>
-            <span>Couleur : gris clair</span>
-            <span>Nombre de passagers possible : 3</span>
+                <div class="subTitleAndContent greyBlock">
+                    <h2 class="subTitleGreen">Voitures</h2>
+                    <?php
+                    $totalCars = count($cars);
+                    $index = 0;
+                    foreach ($cars as $car):
+                        $index++;
+                        ?>
 
-        </div>
-        <!--... A COMPLETER AVEC PREFERENCES-->
+                        <span>Plaque immatriculation : <?= htmlspecialchars($car['car_licence_plate']) ?></span>
+                        <span>Date première immatriculation :
+                            <?= formatDate(htmlspecialchars($car['car_first_registration_date'])) ?></span>
+                        <span>Marque : <?= htmlspecialchars($car['name']) ?></span>
+                        <span>Modèle : <?= htmlspecialchars($car['car_model']) ?></span>
+                        <span>Electrique ? : <?php
+                        $electric = (htmlspecialchars($car['car_electric']) === 1) ? 'Oui' : 'Non';
+                        echo $electric;
+                        ?>
+                        </span>
+                        <span>Couleur : <?= htmlspecialchars($car['car_color']) ?></span>
+                        <span>Nombre de passagers possible : <?= htmlspecialchars($car['car_seats_offered']) ?></span>
+                        <?php if ($index !== $totalCars):
+                            echo '<hr>' ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+
+                <!--preferences section-->
+                <div class="subTitleAndContent greyBlock">
+                    <h2 class="subTitleGreen">Préférences en tant que chauffeur</h2>
+
+                    <span>Voyager avec des fumeurs ne me dérange pas</span>
+                    <div class="treeRadioButton">
+                        <div class="filter">
+                            <label for="">Oui</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSmokerPreference() === true) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="">Non</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSmokerPreference() === false) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="">Pas de préférence</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSmokerPreference() === null) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                    </div>
+                    <hr>
+                    <span>J'aime la compagnie des animaux</span>
+                    <div class="treeRadioButton">
+                        <div class="filter">
+                            <label for="">Oui</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getPetPreference() === true) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="">Non</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getPetPreference() === false) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="">Pas de préférence</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getPetPreference() === null) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                    </div>
+                    <hr>
+                    <span>La nourriture est autorisée dans la voiture</span>
+                    <div class="treeRadioButton">
+                        <div class="filter">
+                            <label for="">Oui</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getFoodPreference() === true) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="">Non</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getFoodPreference() === false) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="">Pas de préférence</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getFoodPreference() === null) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                    </div>
+                    <hr>
+                    <span>Je discute volontiers avec mes passagers</span>
+                    <div class="treeRadioButton">
+                        <div class="filter">
+                            <label for="">Oui</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSpeakerPreference() === true) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="">Non</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSpeakerPreference() === false) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="">Pas de préférence</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSpeakerPreference() === null) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                    </div>
+                    <hr>
+                    <span>J'aime conduire en écoutant de la musique</span>
+                    <div class="treeRadioButton">
+                        <div class="filter">
+                            <label for="">Oui</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getMusicPreference() === true) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="">Non</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getMusicPreference() === false) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="">Pas de préférence</label>
+                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getMusicPreference() === null) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
 
     </section>
 
