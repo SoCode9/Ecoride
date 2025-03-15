@@ -17,3 +17,5 @@ if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)) 
 
 $usersReservations = new Reservation($pdo, $idUser);
 $carpoolListToValidate = $usersReservations->carpoolFinishedToValidate($pdo, $idUser);
+
+$carpoolListNotStarted = $usersReservations->carpoolNotStarted($pdo, $idUser);
