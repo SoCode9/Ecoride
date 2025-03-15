@@ -197,40 +197,54 @@
 
     </section>
 
+    <!-- User's carpool -->
+
     <section class="carpoolsUserBlock">
         <div class="headerUserInfo">
             <h1 class="pageTitle removeMargins">Mes covoiturages</h1>
             <button class="participateButton">Proposer un covoiturage</button>
         </div>
         <div class="filtersList">
-            <h2 class="subTitleGreen" style="color: black ;">Covoiturages terminés, en attente de validation</h2>
-            <div class="travel">
+            <?php if (!empty($carpoolListToValidate)): ?>
+                <h2 class="subTitleGreen" style="color: black ;">Covoiturages terminés, en attente de validation</h2>
+            <?php endif; ?>
+            <?php foreach ($carpoolListToValidate as $carpoolToValidate): ?>
+                <div class="travel">
 
-                <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photoUser">
-                <span class="pseudoUser">Pseudo</span>
-                <div class="driverRating">
-                    <img src="../icons/EtoileJaune.png" alt="Etoile" class="imgFilter">
-                    <span>3.6</span>
+                    <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photoUser">
+                    <span class="pseudoUser"><?= htmlspecialchars($carpoolToValidate['pseudo']) ?></span>
+                    <div class="driverRating">
+                        <img src="../icons/EtoileJaune.png" alt="Etoile" class="imgFilter">
+                        <span>
+                            <?php
+                            $driver = new driver($pdo, $carpoolToValidate['driver_id']);
+                            $rating = $driver->getAverageRatings();
+                            echo $rating;
+                            ?>
+                        </span>
+                    </div>
+                    <span class="dateTravel"><?= formatDate(htmlspecialchars($carpoolToValidate['travel_date'])) ?> </span>
+                    <span class="hoursTravel">De <?= htmlspecialchars($carpoolToValidate['travel_departure_city']) ?>
+                    </span>
+                    <span class="seatsAvailable">De
+                        <?= formatTime(htmlspecialchars($carpoolToValidate['travel_departure_time'])) ?> à
+                        <?= formatTime(htmlspecialchars($carpoolToValidate['travel_arrival_time'])) ?></span>
+                    <span class="criteriaEcoDiv">À <?= htmlspecialchars($carpoolToValidate['travel_arrival_city']) ?></span>
+                    <span class="travelPrice gras">
+                        <?php
+                        $trajetPrice = htmlspecialchars($carpoolToValidate['travel_price']);
+                        if ($trajetPrice > 1) {
+                            echo $trajetPrice . " crédits";
+                        } else {
+                            echo $trajetPrice . " crédit";
+                        }
+                        ?></span>
+                    <div class="seeDetailTrajet">
+                        <a href="xx.php?id=" class="travelDetailsLegend">Valider</a>
+
+
+                    </div>
                 </div>
-                <span class="dateTravel">09/02/2025 </span>
-                <span class="hoursTravel">De Annecy</span>
-                <span class="seatsAvailable">De 07h30 à 14h00</span>
-                <span class="criteriaEcoDiv">À Lyon</span>
-                <span class="travelPrice gras">20 crédits
-                    <?php
-                    /*  $trajetPrice = htmlspecialchars($t['travel_price']);
-                     if ($trajetPrice > 1) {
-                         echo $trajetPrice . " crédits";
-                     } else {
-                         echo $trajetPrice . " crédit";
-                     } */
-                    ?></span>
-                <div class="seeDetailTrajet">
-                    <a href="xx.php?id=" class="travelDetailsLegend">Valider</a>
-
-
-                </div>
-            </div>
-
+            <?php endforeach; ?>
     </section>
 </main>
