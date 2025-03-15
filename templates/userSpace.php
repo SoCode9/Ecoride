@@ -7,11 +7,14 @@
                 <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photoConnectedUser">
                 <div class="pseudoAndRating">
                     <span class="pseudoUser"><?php echo htmlspecialchars($connectedUser->getPseudo()) ?></span>
-                    <div class="driverRating">
-                        <img src="../icons/EtoileJaune.png" alt="Etoile" class="imgFilter">
-                        <span><?php
-                        echo htmlspecialchars($connectedDriver->getAverageRatings()) . " (" . htmlspecialchars($connectedDriver->getNbRatings()) . ")" ?></span>
-                    </div>
+                    <?php if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)): ?>
+                        <div class="driverRating">
+                            <img src="../icons/EtoileJaune.png" alt="Etoile" class="imgFilter">
+                            <span>
+                                <?= htmlspecialchars($connectedDriver->getAverageRatings()) . " (" . htmlspecialchars($connectedDriver->getNbRatings()) . ")" ?>
+                            </span>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
             <button class="seeDetailTrajet">Modifier le profil</button>

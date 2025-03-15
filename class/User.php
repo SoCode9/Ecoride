@@ -13,7 +13,7 @@ class User
 
     protected ?int $idRole;
     protected ?PDO $pdo; //stocke la connexion à la BDD
-   
+
 
     public function __construct(?PDO $pdo = null, ?int $userId = null, ?string $pseudo = null, ?string $mail = null, ?string $password = null)
     {
@@ -21,7 +21,7 @@ class User
         $this->id = $userId;
         $this->pseudo = $pseudo;
         $this->mail = $mail;
-      
+
         if ($userId !== null) {
             $this->loadUserFromDB();
         } elseif ($pseudo !== null && $mail !== null && $password !== null) {
@@ -39,8 +39,8 @@ class User
             }
             $this->password = password_hash($password, PASSWORD_BCRYPT);
         } /* elseif ($mail !== null && $password !== null) {
-       $this->searchUserInDB($mail, $password);
-   } */
+      $this->searchUserInDB($mail, $password);
+  } */
     }
 
     public function searchUserInDB($mailTested, $passwordTested)
@@ -50,15 +50,22 @@ class User
         $stmt->bindValue(':mailTested', $mailTested, PDO::PARAM_STR);
         $stmt->execute();
 
-        $foundUserInDB = $stmt->fetchObject('User');
+        $foundUserInDB = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($foundUserInDB === false) {
             throw new Exception("Identifiants invalides");
         } else {
-            if (password_verify($passwordTested, $foundUserInDB->getPassword()) === false) {
+            if (password_verify($passwordTested, $foundUserInDB['password']) === false) {
                 throw new Exception("Identifiants invalides");
             } else {
-                $this->id = $this->pdo->lastInsertId();
-                return true;
+                //$this->id = $this->pdo->lastInsertId();
+                //return true;
+                // Récupération de l'ID depuis l'objet trouvé
+                if (isset($foundUserInDB['id'])) {
+                    $this->id = $foundUserInDB['id'];
+                    return true;
+                } else {
+                    throw new Exception("Erreur : ID utilisateur non trouvé");
+                }
             }
         }
 
