@@ -1,0 +1,106 @@
+/*main blocks*/
+.userInfoAndCarpoolBlock {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.userInformationsBlock {
+    grid-template-columns: 1/2;
+    border: green;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    border: #D9D9D9 solid 3px;
+    height: fit-content;
+}
+
+.carpoolsUserBlock {
+    grid-template-columns: 2/3;
+    border: black;
+}
+
+/**User's informations Block**/
+
+/*header*/
+.headerUserInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.photoConnectedUser {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.photoPseudoRating {
+    display: flex;
+    align-items: center;
+}
+
+.pseudoAndRating {
+    display: flex;
+    flex-direction: column;
+}
+
+.mailAndCredits {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+/*User Type*/
+
+.subTitleAndContent {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 10px;
+}
+
+
+.subTitleGreen {
+    font-size: 20px;
+    color: #4D9856;
+    margin: 0px;
+}
+
+.treeRadioButton {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkboxNotEdit {
+    pointer-events: none;
+}
+
+.checkbox{
+    width: 30px;
+}
+
+/* Cache les boutons radio natifs */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc; /* Bordure grise */
+    border-radius: 50%; /* Cercle */
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    background-color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Style quand le bouton est sélectionné */
+input[type="checkbox"]:checked {
+    border-color: #D9D9D9; /* Bordure foncée */
+    background-color: #CBCBCB; /* Remplissage gris foncé */
+}
