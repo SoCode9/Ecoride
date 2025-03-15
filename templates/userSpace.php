@@ -30,7 +30,7 @@
                     <label for="">passager</label>
                     <input type="checkbox" <?php if ($connectedUser->getIdRole() === 1) {
                         echo 'checked';
-                    } ?> class="checkboxNotEdit">
+                    } ?>   class="checkboxNotEdit">
                 </div>
                 <div class="filter">
                     <label for="">chauffeur</label>
@@ -47,7 +47,20 @@
                 </div>
             </div>
         </div>
-        <!--... A COMPLETER AVEC VOITURES ET PREFERENCES-->
+        <!--Auto section-->
+        <div class="subTitleAndContent greyBlock">
+            <h2 class="subTitleGreen">Voitures</h2>
+
+            <span>Plaque immatriculation : FQ-134-DF</span>
+            <span>Date première immatriculation : 14.02.2019</span>
+            <span>Marque : Audi</span>
+            <span>Modèle : A1</span>
+            <span>Couleur : gris clair</span>
+            <span>Nombre de passagers possible : 3</span>
+
+        </div>
+        <!--... A COMPLETER AVEC PREFERENCES-->
+
     </section>
 
     <section class="carpoolsUserBlock">

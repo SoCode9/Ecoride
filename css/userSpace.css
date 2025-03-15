@@ -78,7 +78,7 @@
     pointer-events: none;
 }
 
-.checkbox{
+.checkbox {
     width: 30px;
 }
 
@@ -89,8 +89,10 @@ input[type="checkbox"] {
     -moz-appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid #ccc; /* Bordure grise */
-    border-radius: 50%; /* Cercle */
+    border: 2px solid #ccc;
+    /* Bordure grise */
+    border-radius: 50%;
+    /* Cercle */
     outline: none;
     cursor: pointer;
     display: inline-block;
@@ -101,6 +103,15 @@ input[type="checkbox"] {
 
 /* Style quand le bouton est sélectionné */
 input[type="checkbox"]:checked {
-    border-color: #D9D9D9; /* Bordure foncée */
-    background-color: #CBCBCB; /* Remplissage gris foncé */
+    border-color: #D9D9D9;
+    /* Bordure foncée */
+    background-color: #CBCBCB;
+    /* Remplissage gris foncé */
+}
+
+/*Auto and preferences sections*/
+
+.greyBlock {
+    background-color: #EDEDED;
+    border-radius: 15px;
 }
