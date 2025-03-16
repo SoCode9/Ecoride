@@ -164,7 +164,7 @@
                         </div>
                         <div class="filter">
                             <label for="speek_undefined">Pas de préférence</label>
-                            <input type="radio" class="radioNotEdit" name="speak_pref" id="speek_undefined" <?php if ($connectedDriver->getSpeakerPreference() === null) {
+                            <input type="radio" class="radioNotEdit" name="speak_pref" id="speak_undefined" <?php if ($connectedDriver->getSpeakerPreference() === null) {
                                 echo 'checked';
                             } ?>>
                         </div>
