@@ -17,8 +17,9 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <button class="seeDetailTrajet">Modifier le profil</button>
-        </div>
+            <button class="seeDetailTrajet button-content active" id="edit-button">Modifier le profil</button>
+            <button class="seeDetailTrajet button-content" id="save-button">Sauvegarder le profil</button>
+            </div>
         <div class="mailAndCredits">
             <span><?php echo htmlspecialchars($connectedUser->getMail()) ?></span>
             <span><?php echo htmlspecialchars($connectedUser->getCredit()) ?> crédits</span>
@@ -27,23 +28,23 @@
             <h2 class="subTitleGreen">Type d'utilisateur</h2>
             <div class="treeRadioButton">
                 <div class="filter">
-                    <label for="">passager</label>
-                    <input type="checkbox" <?php if ($connectedUser->getIdRole() === 1) {
+                    <label for="role_passager">passager</label>
+                    <input type="radio" name="user_role" id="role_passager" <?php if ($connectedUser->getIdRole() === 1) {
                         echo 'checked';
-                    } ?>   class="checkboxNotEdit">
+                    } ?>   class="radioNotEdit">
                 </div>
                 <div class="filter">
-                    <label for="">chauffeur</label>
-                    <input type="checkbox" <?php if ($connectedUser->getIdRole() === 2) {
+                    <label for="role_chauffeur">chauffeur</label>
+                    <input type="radio" name="user_role" id="role_chauffeur" <?php if ($connectedUser->getIdRole() === 2) {
                         echo 'checked';
-                    } ?>   class="checkboxNotEdit">
+                    } ?>   class="radioNotEdit">
                 </div>
                 <div class="filter">
-                    <label for="">les deux</label>
-                    <input type="checkbox" <?php if ($connectedUser->getIdRole() === 3) {
+                    <label for="role_les_deux">les deux</label>
+                    <input type="radio" name="user_role" id="role_les_deux"<?php if ($connectedUser->getIdRole() === 3) {
                         echo 'checked';
                     } ?>
-                        class="checkboxNotEdit">
+                        class="radioNotEdit">
                 </div>
             </div>
         </div>
@@ -85,20 +86,20 @@
                     <span>Voyager avec des fumeurs ne me dérange pas</span>
                     <div class="treeRadioButton">
                         <div class="filter">
-                            <label for="">Oui</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSmokerPreference() === true) {
+                            <label for="smoke_yes">Oui</label>
+                            <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_yes" <?php if ($connectedDriver->getSmokerPreference() === true) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
-                            <label for="">Non</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSmokerPreference() === false) {
+                            <label for="smoke_no">Non</label>
+                            <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_no" <?php if ($connectedDriver->getSmokerPreference() === false) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
-                            <label for="">Pas de préférence</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSmokerPreference() === null) {
+                            <label for="smoke_undefined">Pas de préférence</label>
+                            <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_undefined" <?php if ($connectedDriver->getSmokerPreference() === null) {
                                 echo 'checked';
                             } ?>>
                         </div>
@@ -107,20 +108,20 @@
                     <span>J'aime la compagnie des animaux</span>
                     <div class="treeRadioButton">
                         <div class="filter">
-                            <label for="">Oui</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getPetPreference() === true) {
+                            <label for="pet_yes">Oui</label>
+                            <input type="radio" class="radioNotEdit" name="pet_pref" id="pet_yes" <?php if ($connectedDriver->getPetPreference() === true) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
-                            <label for="">Non</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getPetPreference() === false) {
+                            <label for="pet_no">Non</label>
+                            <input type="radio" class="radioNotEdit" name="pet_pref" id="pet_no" <?php if ($connectedDriver->getPetPreference() === false) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
-                            <label for="">Pas de préférence</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getPetPreference() === null) {
+                            <label for="pet_undefined">Pas de préférence</label>
+                            <input type="radio" class="radioNotEdit" name="pet_pref" id="pet_undefined" <?php if ($connectedDriver->getPetPreference() === null) {
                                 echo 'checked';
                             } ?>>
                         </div>
@@ -129,20 +130,20 @@
                     <span>La nourriture est autorisée dans la voiture</span>
                     <div class="treeRadioButton">
                         <div class="filter">
-                            <label for="">Oui</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getFoodPreference() === true) {
+                            <label for="food_yes">Oui</label>
+                            <input type="radio" class="radioNotEdit" name="food_pref" id="food_yes" <?php if ($connectedDriver->getFoodPreference() === true) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
-                            <label for="">Non</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getFoodPreference() === false) {
+                            <label for="food_no">Non</label>
+                            <input type="radio" class="radioNotEdit" name="food_pref" id="food_no" <?php if ($connectedDriver->getFoodPreference() === false) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
-                            <label for="">Pas de préférence</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getFoodPreference() === null) {
+                            <label for="food_undefined">Pas de préférence</label>
+                            <input type="radio" class="radioNotEdit" name="food_pref" id="food_undefined" <?php if ($connectedDriver->getFoodPreference() === null) {
                                 echo 'checked';
                             } ?>>
                         </div>
@@ -151,20 +152,20 @@
                     <span>Je discute volontiers avec mes passagers</span>
                     <div class="treeRadioButton">
                         <div class="filter">
-                            <label for="">Oui</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSpeakerPreference() === true) {
+                            <label for="speak_yes">Oui</label>
+                            <input type="radio" class="radioNotEdit"name="food_pref" id="speak_yes"<?php if ($connectedDriver->getSpeakerPreference() === true) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
-                            <label for="">Non</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSpeakerPreference() === false) {
+                            <label for="speak_no">Non</label>
+                            <input type="radio" class="radioNotEdit" name="food_pref" id="speak_no" <?php if ($connectedDriver->getSpeakerPreference() === false) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
-                            <label for="">Pas de préférence</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getSpeakerPreference() === null) {
+                            <label for="speek_undefined">Pas de préférence</label>
+                            <input type="radio" class="radioNotEdit" name="food_pref" id="speek_undefined" <?php if ($connectedDriver->getSpeakerPreference() === null) {
                                 echo 'checked';
                             } ?>>
                         </div>
@@ -173,20 +174,20 @@
                     <span>J'aime conduire en écoutant de la musique</span>
                     <div class="treeRadioButton">
                         <div class="filter">
-                            <label for="">Oui</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getMusicPreference() === true) {
+                            <label for="music_yes">Oui</label>
+                            <input type="radio" class="radioNotEdit"name="music_pref" id="music_yes" <?php if ($connectedDriver->getMusicPreference() === true) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
-                            <label for="">Non</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getMusicPreference() === false) {
+                            <label for="music_no">Non</label>
+                            <input type="radio" class="radioNotEdit" name="music_pref" id="music_no"<?php if ($connectedDriver->getMusicPreference() === false) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
-                            <label for="">Pas de préférence</label>
-                            <input type="checkbox" class="checkboxNotEdit" <?php if ($connectedDriver->getMusicPreference() === null) {
+                            <label for="music_undefined">Pas de préférence</label>
+                            <input type="radio" class="radioNotEdit" name="music_pref" id="music_undefined" <?php if ($connectedDriver->getMusicPreference() === null) {
                                 echo 'checked';
                             } ?>>
                         </div>

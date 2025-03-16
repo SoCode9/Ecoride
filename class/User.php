@@ -39,8 +39,8 @@ class User
             }
             $this->password = password_hash($password, PASSWORD_BCRYPT);
         } /* elseif ($mail !== null && $password !== null) {
-      $this->searchUserInDB($mail, $password);
-  } */
+     $this->searchUserInDB($mail, $password);
+ } */
     }
 
     public function searchUserInDB($mailTested, $passwordTested)
@@ -163,6 +163,11 @@ class User
     public function setCredit(int $newCredit)
     {
         $this->credit = $newCredit;
+    }
+
+    public function setIdRole(int $newIdRole)
+    {
+        $this->idRole = $newIdRole;
     }
 
 }
