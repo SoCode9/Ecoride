@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let selectedPetPref = document.querySelector('input[name="pet_pref"]:checked').id;
         let selectedFoodPref = document.querySelector('input[name="food_pref"]:checked').id;
         let selectedSpeakPref = document.querySelector('input[name="speak_pref"]:checked').id;
+        let selectedMusicPref = document.querySelector('input[name="music_pref"]:checked').id;
 
         let roleId;
         if (selectedRole === "role_passenger") roleId = 1;
@@ -90,6 +91,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (selectedSpeakPref === "speak_no") speakPref = 0;
         if (selectedSpeakPref === "speak_undefined") speakPref = "NULL";
 
+        let musicPref;
+        if (selectedMusicPref === "music_yes") musicPref = 1;
+        if (selectedMusicPref === "music_no") musicPref = 0;
+        if (selectedMusicPref === "music_undefined") musicPref = "NULL";
+
         fetch('../back/updateUserRoleBack.php', {
             method: 'POST',
             headers: {
@@ -97,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: "role_id=" + encodeURIComponent(roleId) + "&smoke_pref=" + encodeURIComponent(smokePref)
                 + "&pet_pref=" + encodeURIComponent(petPref) + "&food_pref=" + encodeURIComponent(foodPref)
-                + "&speak_pref=" + encodeURIComponent(speakPref) //sent role id to server
+                + "&speak_pref=" + encodeURIComponent(speakPref) + "&music_pref=" + encodeURIComponent(musicPref) //sent to server
         },)
             .then(response => response.json())
             .then(data => {
