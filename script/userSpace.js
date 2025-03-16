@@ -8,6 +8,7 @@ document.querySelectorAll(".tabButton").forEach(button => {
     });
 });
 
+/*Enable radio button editing when I click on the Edit button*/
 const editButton = document.getElementById('edit-button');
 editButton.addEventListener('click', () => {
     document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
@@ -17,6 +18,7 @@ editButton.addEventListener('click', () => {
     document.getElementById("save-button").classList.add("active");
 });
 
+/*Disable radio button editing when I click the Save button */
 const saveButton = document.getElementById('save-button');
 saveButton.addEventListener('click', () => {
     document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
@@ -34,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleCarSection() {
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
 
-        if (selectedRole === "role_passager") {
+        if (selectedRole === "role_passenger") {
             carSection.style.display = "none"; // Hide the section
         } else {
             carSection.style.display = "block"; // Display the section
@@ -47,5 +49,41 @@ document.addEventListener("DOMContentLoaded", function () {
     // Check the condition when I change the selection
     roleRadios.forEach(radio => {
         radio.addEventListener("change", toggleCarSection);
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const editButton = document.getElementById("edit-button");
+    const saveButton = document.getElementById("save-button");
+    const roleRadios = document.querySelectorAll('input[name="user_role"]');
+
+    saveButton.addEventListener("click", function () {
+        let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
+        let roleId;
+
+        if (selectedRole === "role_passenger") roleId = 1;
+        if (selectedRole === "role_driver") roleId = 2;
+        if (selectedRole === "role_both") roleId = 3;
+        
+        fetch('../back/updateUserRoleBack.php', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded" //Indique au serveur que des données sont envoyées en POST
+            },
+            body: "role_id=" + encodeURIComponent(roleId) //sent role id to server
+        },)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Profil mis à jour !"); // A ENLEVER !
+                } else {
+                    alert("Erreur : " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Erreur Ajax :", error);
+                alert("Une erreur est survenue. Veuillez réessayer.");
+            });
     });
 });
