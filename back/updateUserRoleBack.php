@@ -37,6 +37,7 @@ $smokePref = processPreference($_POST['smoke_pref'] ?? null, "fumeur");
 $petPref = processPreference($_POST['pet_pref'] ?? null, "animaux");
 $foodPref = processPreference($_POST['food_pref'] ?? null, "nourriture");
 $speakPref = processPreference($_POST['speak_pref'] ?? null, "discussion");
+$musicPref = processPreference($_POST['music_pref'] ?? null, "musique");
 
 try {
     $user = new User($pdo, $userId);
@@ -46,6 +47,7 @@ try {
     $driver->setPetPreference($petPref);
     $driver->setFoodPreference($foodPref);
     $driver->setSpeakPreference($speakPref);
+    $driver->setMusicPreference($musicPref);
 
     echo json_encode(["success" => true, "message" => "Rôle et préférences mis à jour"]);
 } catch (Exception $e) {
