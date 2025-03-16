@@ -80,7 +80,7 @@ class Reservation
         $statement->bindParam(":user_connected_id", $userId, PDO::PARAM_INT);
         $statement->execute();
 
-        $carpoolListFinishedAndValidated = $statement->fetchAll();
+        $carpoolListFinishedAndValidated = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $carpoolListFinishedAndValidated;
     }
