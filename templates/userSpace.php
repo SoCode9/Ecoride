@@ -152,19 +152,19 @@
                     <div class="treeRadioButton">
                         <div class="filter">
                             <label for="speak_yes">Oui</label>
-                            <input type="radio" class="radioNotEdit" name="food_pref" id="speak_yes" <?php if ($connectedDriver->getSpeakerPreference() === true) {
+                            <input type="radio" class="radioNotEdit" name="speak_pref" id="speak_yes" <?php if ($connectedDriver->getSpeakerPreference() === true) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
                             <label for="speak_no">Non</label>
-                            <input type="radio" class="radioNotEdit" name="food_pref" id="speak_no" <?php if ($connectedDriver->getSpeakerPreference() === false) {
+                            <input type="radio" class="radioNotEdit" name="speak_pref" id="speak_no" <?php if ($connectedDriver->getSpeakerPreference() === false) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
                             <label for="speek_undefined">Pas de préférence</label>
-                            <input type="radio" class="radioNotEdit" name="food_pref" id="speek_undefined" <?php if ($connectedDriver->getSpeakerPreference() === null) {
+                            <input type="radio" class="radioNotEdit" name="speak_pref" id="speek_undefined" <?php if ($connectedDriver->getSpeakerPreference() === null) {
                                 echo 'checked';
                             } ?>>
                         </div>
