@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let selectedSmokePref = document.querySelector('input[name = "smoke_pref"]:checked').id;
         let selectedPetPref = document.querySelector('input[name="pet_pref"]:checked').id;
         let selectedFoodPref = document.querySelector('input[name="food_pref"]:checked').id;
+        let selectedSpeakPref = document.querySelector('input[name="speak_pref"]:checked').id;
 
         let roleId;
         if (selectedRole === "role_passenger") roleId = 1;
@@ -84,13 +85,19 @@ document.addEventListener("DOMContentLoaded", function () {
         if (selectedFoodPref === "food_no") foodPref = 0;
         if (selectedFoodPref === "food_undefined") foodPref = "NULL";
 
+        let speakPref;
+        if (selectedSpeakPref === "speak_yes") speakPref = 1;
+        if (selectedSpeakPref === "speak_no") speakPref = 0;
+        if (selectedSpeakPref === "speak_undefined") speakPref = "NULL";
+
         fetch('../back/updateUserRoleBack.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded" //Indique au serveur que des données sont envoyées en POST
             },
             body: "role_id=" + encodeURIComponent(roleId) + "&smoke_pref=" + encodeURIComponent(smokePref)
-                + "&pet_pref=" + encodeURIComponent(petPref) + "&food_pref=" + encodeURIComponent(foodPref) //sent role id to server
+                + "&pet_pref=" + encodeURIComponent(petPref) + "&food_pref=" + encodeURIComponent(foodPref)
+                + "&speak_pref=" + encodeURIComponent(speakPref) //sent role id to server
         },)
             .then(response => response.json())
             .then(data => {
