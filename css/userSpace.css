@@ -80,16 +80,16 @@
     justify-content: space-between;
 }
 
-.checkboxNotEdit {
+.radioNotEdit {
     pointer-events: none;
 }
 
-.checkbox {
+.radio {
     width: 30px;
 }
 
 /* Hide native radio buttons */
-input[type="checkbox"] {
+input[type="radio"] {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -108,7 +108,7 @@ input[type="checkbox"] {
 }
 
 /* Style when button is selected */
-input[type="checkbox"]:checked {
+input[type="radio"]:checked {
     border-color: #D9D9D9;
     /* Bordure foncée */
     background-color: #CBCBCB;
@@ -129,6 +129,15 @@ input[type="checkbox"]:checked {
     padding: 10px;
 }
 
+.button-content {
+    display: none;
+    /* Hide default button */
+}
+
+.button-content.active {
+    display: block;
+    /* Display only if button isn't clicked  */
+}
 
 /*carpool*/
 .tabs {

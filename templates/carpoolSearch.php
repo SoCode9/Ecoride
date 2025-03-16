@@ -47,7 +47,7 @@
                 <input type="hidden" name="action" value="filters"> <!--identify filters-->
 
                 <div class="filter">
-                    <input id="eco" name="eco" type="checkbox" <?= isset($_SESSION['eco']) ? 'checked' : '' ?>>
+                    <input id="eco" name="eco" type="radio" <?= isset($_SESSION['eco']) ? 'checked' : '' ?>>
                     <label for="eco">Voyage écologique</label>
                 </div>
                 <div class="filter">
