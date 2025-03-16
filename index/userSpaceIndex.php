@@ -19,14 +19,14 @@ require_once "../back/userSpaceBack.php";
 <head>
 
     <title>Espace utilisateur</title>
+    <script src="../script/userSpace.js" defer></script>
 
 </head>
 
 <body>
-    <?php include '../templates/userSpace.php'; //PENSER à CHANGER L'ID PSEUDO ETC AVEC CREATEpSEUDO CAR AURA BESOIN DE ID POUR FORMULAIRE DE CONNEXION
+    <?php include '../templates/userSpace.php'; 
     ?>
     <?php include '../templates/footer.php'; ?>
-    <!--MANQUE FORM LOGIN-->
 
 </body>
 

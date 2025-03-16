@@ -21,7 +21,6 @@
     grid-template-columns: 2/3;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     padding: 10px;
     border-radius: 15px;
     background-color: #EDEDED;
@@ -132,4 +131,34 @@ input[type="checkbox"]:checked {
 
 
 /*carpool*/
+.tabs {
+    display: flex;
+    gap: 10px;
+    padding: 15px 0px;
+}
 
+.tab-content {
+    display: none;
+    /* Hide default sections */
+}
+
+.tab-content.active {
+    display: block;
+    /* Display only the active tab  */
+}
+
+.tabButton {
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    color: black;
+}
+
+.tabButton.active {
+    background-color: #666666;
+    color: white;
+}
