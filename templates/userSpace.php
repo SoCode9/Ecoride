@@ -19,7 +19,7 @@
             </div>
             <button class="seeDetailTrajet button-content active" id="edit-button">Modifier le profil</button>
             <button class="seeDetailTrajet button-content" id="save-button">Sauvegarder le profil</button>
-            </div>
+        </div>
         <div class="mailAndCredits">
             <span><?php echo htmlspecialchars($connectedUser->getMail()) ?></span>
             <span><?php echo htmlspecialchars($connectedUser->getCredit()) ?> crédits</span>
@@ -31,27 +31,26 @@
                     <label for="role_passenger">passager</label>
                     <input type="radio" name="user_role" id="role_passenger" <?php if ($connectedUser->getIdRole() === 1) {
                         echo 'checked';
-                    } ?>   class="radioNotEdit">
+                    } ?> class="radioNotEdit">
                 </div>
                 <div class="filter">
                     <label for="role_driver">chauffeur</label>
                     <input type="radio" name="user_role" id="role_driver" <?php if ($connectedUser->getIdRole() === 2) {
                         echo 'checked';
-                    } ?>   class="radioNotEdit">
+                    } ?> class="radioNotEdit">
                 </div>
                 <div class="filter">
                     <label for="role_both">les deux</label>
-                    <input type="radio" name="user_role" id="role_both"<?php if ($connectedUser->getIdRole() === 3) {
+                    <input type="radio" name="user_role" id="role_both" <?php if ($connectedUser->getIdRole() === 3) {
                         echo 'checked';
-                    } ?>
-                        class="radioNotEdit">
+                    } ?> class="radioNotEdit">
                 </div>
             </div>
         </div>
-        <!--Cars section-->
+
         <?php if ($connectedUser->getIdRole() !== 1): ?>
             <div class="scrollable-container subTitleAndContent">
-
+                <!--Cars section-->
                 <div class="subTitleAndContent greyBlock">
                     <h2 class="subTitleGreen">Voitures</h2>
                     <?php
@@ -153,7 +152,7 @@
                     <div class="treeRadioButton">
                         <div class="filter">
                             <label for="speak_yes">Oui</label>
-                            <input type="radio" class="radioNotEdit"name="food_pref" id="speak_yes"<?php if ($connectedDriver->getSpeakerPreference() === true) {
+                            <input type="radio" class="radioNotEdit" name="food_pref" id="speak_yes" <?php if ($connectedDriver->getSpeakerPreference() === true) {
                                 echo 'checked';
                             } ?>>
                         </div>
@@ -175,13 +174,13 @@
                     <div class="treeRadioButton">
                         <div class="filter">
                             <label for="music_yes">Oui</label>
-                            <input type="radio" class="radioNotEdit"name="music_pref" id="music_yes" <?php if ($connectedDriver->getMusicPreference() === true) {
+                            <input type="radio" class="radioNotEdit" name="music_pref" id="music_yes" <?php if ($connectedDriver->getMusicPreference() === true) {
                                 echo 'checked';
                             } ?>>
                         </div>
                         <div class="filter">
                             <label for="music_no">Non</label>
-                            <input type="radio" class="radioNotEdit" name="music_pref" id="music_no"<?php if ($connectedDriver->getMusicPreference() === false) {
+                            <input type="radio" class="radioNotEdit" name="music_pref" id="music_no" <?php if ($connectedDriver->getMusicPreference() === false) {
                                 echo 'checked';
                             } ?>>
                         </div>
