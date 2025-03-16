@@ -109,4 +109,17 @@ class Driver extends User
         return $this->foodPreference;
     }
 
+    public function setSmokerPreference($preference)
+    {
+        $sql = "UPDATE driver SET smoker = :preference WHERE user_id = :userId";
+        $stmt = $this->pdo->prepare($sql);
+        if ($preference === null) {
+            $stmt->bindValue(':preference', null, PDO::PARAM_NULL); // Gérer NULL correctement
+        } else {
+            $stmt->bindValue(':preference', $preference, PDO::PARAM_INT);
+        }
+        $stmt->bindParam(':userId', $this->id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
 }

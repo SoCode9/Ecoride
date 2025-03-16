@@ -37,9 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
 
         if (selectedRole === "role_passenger") {
-            carSection.style.display = "none"; // Hide the section
+            carSection.classList.add("hidden"); // Hide the section
         } else {
-            carSection.style.display = "block"; // Display the section
+            carSection.classList.remove("hidden"); // Display the section
         }
     }
 
@@ -56,22 +56,28 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const editButton = document.getElementById("edit-button");
     const saveButton = document.getElementById("save-button");
-    const roleRadios = document.querySelectorAll('input[name="user_role"]');
+    const allRadios = document.querySelectorAll('.radioNotEdit');
 
     saveButton.addEventListener("click", function () {
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
-        let roleId;
+        let selectedSmokePref = document.querySelector('input[name = "smoke_pref"]:checked').id;
 
+        let roleId;
         if (selectedRole === "role_passenger") roleId = 1;
         if (selectedRole === "role_driver") roleId = 2;
         if (selectedRole === "role_both") roleId = 3;
-        
+
+        let smokePref;
+        if (selectedSmokePref === "smoke_yes") smokePref = 1;
+        if (selectedSmokePref === "smoke_no") smokePref = 0;
+        if (selectedSmokePref === "smoke_undefined") smokePref = "NULL";
+
         fetch('../back/updateUserRoleBack.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded" //Indique au serveur que des données sont envoyées en POST
             },
-            body: "role_id=" + encodeURIComponent(roleId) //sent role id to server
+            body: "role_id=" + encodeURIComponent(roleId) + "&smoke_pref=" + encodeURIComponent(smokePref) //sent role id to server
         },)
             .then(response => response.json())
             .then(data => {
