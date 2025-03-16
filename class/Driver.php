@@ -114,7 +114,20 @@ class Driver extends User
         $sql = "UPDATE driver SET smoker = :preference WHERE user_id = :userId";
         $stmt = $this->pdo->prepare($sql);
         if ($preference === null) {
-            $stmt->bindValue(':preference', null, PDO::PARAM_NULL); // Gérer NULL correctement
+            $stmt->bindValue(':preference', null, PDO::PARAM_NULL); 
+        } else {
+            $stmt->bindValue(':preference', $preference, PDO::PARAM_INT);
+        }
+        $stmt->bindParam(':userId', $this->id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    public function setPetPreference($preference)
+    {
+        $sql = "UPDATE driver SET pets = :preference WHERE user_id = :userId";
+        $stmt = $this->pdo->prepare($sql);
+        if ($preference === null) {
+            $stmt->bindValue(':preference', null, PDO::PARAM_NULL); 
         } else {
             $stmt->bindValue(':preference', $preference, PDO::PARAM_INT);
         }

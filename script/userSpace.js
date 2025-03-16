@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
     saveButton.addEventListener("click", function () {
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
         let selectedSmokePref = document.querySelector('input[name = "smoke_pref"]:checked').id;
+        let selectedPetPref = document.querySelector('input[name="pet_pref"]:checked').id;
 
         let roleId;
         if (selectedRole === "role_passenger") roleId = 1;
@@ -72,12 +73,17 @@ document.addEventListener("DOMContentLoaded", function () {
         if (selectedSmokePref === "smoke_no") smokePref = 0;
         if (selectedSmokePref === "smoke_undefined") smokePref = "NULL";
 
+        let petPref;
+        if (selectedPetPref === "pet_yes") petPref = 1;
+        if (selectedPetPref === "pet_no") petPref = 0;
+        if (selectedPetPref === "pet_undefined") petPref = "NULL";
+
         fetch('../back/updateUserRoleBack.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded" //Indique au serveur que des données sont envoyées en POST
             },
-            body: "role_id=" + encodeURIComponent(roleId) + "&smoke_pref=" + encodeURIComponent(smokePref) //sent role id to server
+            body: "role_id=" + encodeURIComponent(roleId) + "&smoke_pref=" + encodeURIComponent(smokePref) + "&pet_pref=" + encodeURIComponent(petPref)//sent role id to server
         },)
             .then(response => response.json())
             .then(data => {
