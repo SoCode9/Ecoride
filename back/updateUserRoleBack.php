@@ -14,31 +14,37 @@ if (!isset($_POST['role_id'])) {
     exit;
 }
 
-$roleId = isset($_POST['role_id']) ? (int) $_POST['role_id'] : null;
+
+$roleId = (int) $_POST['role_id'];
 $userId = $_SESSION['user_id'] ?? null;
-$smokePref = isset($_POST['smoke_pref']) ? $_POST['smoke_pref'] : null;
 
 if ($roleId === null || !in_array($roleId, [1, 2, 3])) {
     echo json_encode(["success" => false, "message" => "Rôle invalide"]);
     exit;
 }
-
-if ($smokePref === "NULL") {
-    $smokePrefValue = null; // Convertir en vrai NULL pour SQL
-} elseif ($smokePref === "0" || $smokePref === "1") {
-    $smokePrefValue = (int) $smokePref; // Convertir en entier
-} else {
-    echo json_encode(["success" => false, "message" => "Préférence fumeur invalide"]);
-    exit;
+function processPreference($preference, $preferenceName)
+{
+    if ($preference === "NULL") {
+        return null; // Convert “NULL” to true NULL for SQL
+    } elseif ($preference === "0" || $preference === "1") {
+        return (int) $preference; // Convert in int
+    } else {
+        echo json_encode(["success" => false, "message" => "Préférence $preferenceName invalide"]);
+        exit;
+    }
 }
+$smokePrefValue = processPreference($_POST['smoke_pref'] ?? null, "fumeur");
+$petPrefValue = processPreference($_POST['pet_pref'] ?? null, "animaux");
+
 
 try {
     $user = new User($pdo, $userId);
     $driver = new Driver($pdo, $userId);
     $user->setIdRole($roleId);
     $driver->setSmokerPreference($smokePrefValue);
+    $driver->setPetPreference($petPrefValue);
 
-    echo json_encode(["success" => true, "message" => "Rôle mis à jour"]);
+    echo json_encode(["success" => true, "message" => "Rôle et préférences mis à jour"]);
 } catch (Exception $e) {
     echo json_encode(["success" => false, "message" => "Erreur : " . $e->getMessage()]);
 }
