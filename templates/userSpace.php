@@ -28,20 +28,20 @@
             <h2 class="subTitleGreen">Type d'utilisateur</h2>
             <div class="treeRadioButton">
                 <div class="filter">
-                    <label for="role_passager">passager</label>
-                    <input type="radio" name="user_role" id="role_passager" <?php if ($connectedUser->getIdRole() === 1) {
+                    <label for="role_passenger">passager</label>
+                    <input type="radio" name="user_role" id="role_passenger" <?php if ($connectedUser->getIdRole() === 1) {
                         echo 'checked';
                     } ?>   class="radioNotEdit">
                 </div>
                 <div class="filter">
-                    <label for="role_chauffeur">chauffeur</label>
-                    <input type="radio" name="user_role" id="role_chauffeur" <?php if ($connectedUser->getIdRole() === 2) {
+                    <label for="role_driver">chauffeur</label>
+                    <input type="radio" name="user_role" id="role_driver" <?php if ($connectedUser->getIdRole() === 2) {
                         echo 'checked';
                     } ?>   class="radioNotEdit">
                 </div>
                 <div class="filter">
-                    <label for="role_les_deux">les deux</label>
-                    <input type="radio" name="user_role" id="role_les_deux"<?php if ($connectedUser->getIdRole() === 3) {
+                    <label for="role_both">les deux</label>
+                    <input type="radio" name="user_role" id="role_both"<?php if ($connectedUser->getIdRole() === 3) {
                         echo 'checked';
                     } ?>
                         class="radioNotEdit">

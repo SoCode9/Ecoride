@@ -39,8 +39,8 @@ class User
             }
             $this->password = password_hash($password, PASSWORD_BCRYPT);
         } /* elseif ($mail !== null && $password !== null) {
-     $this->searchUserInDB($mail, $password);
- } */
+    $this->searchUserInDB($mail, $password);
+} */
     }
 
     public function searchUserInDB($mailTested, $passwordTested)
@@ -115,6 +115,15 @@ class User
         }
     }
 
+    public function setIdRole($roleId)
+    {
+        $sql = "UPDATE users SET id_role = :roleId WHERE id = :userId";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':roleId', $roleId, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $this->id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
     //Getters et Setters
 
     public function getId()
@@ -163,11 +172,6 @@ class User
     public function setCredit(int $newCredit)
     {
         $this->credit = $newCredit;
-    }
-
-    public function setIdRole(int $newIdRole)
-    {
-        $this->idRole = $newIdRole;
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 require_once "../back/loginPageBack.php";
 require_once "../back/userSpaceBack.php";
+//require_once "../back/updateUserRoleBack.php";
 ?>
 
 <?php include '../templates/header.php'; ?>
@@ -24,7 +25,7 @@ require_once "../back/userSpaceBack.php";
 </head>
 
 <body>
-    <?php include '../templates/userSpace.php'; 
+    <?php include '../templates/userSpace.php';
     ?>
     <?php include '../templates/footer.php'; ?>
 
