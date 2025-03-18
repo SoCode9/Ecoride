@@ -79,6 +79,50 @@
                         <?php endif; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
+                <div class="carForm hidden">
+                    <hr>
+                    <form action="userSpaceIndex.php" method="POST" class="filtersList" style="gap: 10px;">
+                        <div class="filter">
+                            <label for="licence_plate">Plaque immatriculation : </label>
+                            <input type="text" id="licence_plate" class="textField" placeholder="AA-000-AA" required>
+                        </div>
+
+                        <div class="filter">
+                            <label for="first_registration_date">Date première immatriculation : </label>
+                            <input type="date" id="first_registration_date" class="textField" required>
+                        </div>
+                        <div class="filter">
+                            <label for="brand">Marque : </label>
+                            <input type="text" id="brand" class="textField" required>
+                        </div>
+                        <div class="filter">
+                            <label for="model">Modèle : </label>
+                            <input type="text" id="model" class="textField" required>
+                        </div>
+                        <div class="filter">
+                            <label for="electric">Electrique : </label>
+                            <input type="radio" name="electric" id="electric_yes" required>
+                            <label for="electric_yes">oui</label>
+
+                            <input type="radio" name="electric" id="electric_no" required>
+                            <label for="electric_no">non</label>
+
+                        </div>
+                        <div class="filter">
+                            <label for="color">Couleur : </label>
+                            <input type="text" id="color" class="textField" required>
+                        </div>
+                        <div class="filter">
+                            <label for="nb_passengers">Nombre de passagers possible : </label>
+                            <input type="number" id="nb_passengers" class="numberField textField" style="width: 40px;"
+                                required>
+                        </div>
+                        <input type="submit" value="Enregistrer" class="searchButton" style="width:100px; align-self:self-end;"></input>
+                    </form>
+                    <hr>
+                </div>
+                <button class="seeDetailTrajet" id="add_car_button">Ajouter une voiture</button>
+
             </div>
 
             <!--preferences section-->

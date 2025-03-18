@@ -114,7 +114,7 @@ class Driver extends User
         $sql = "UPDATE driver SET smoker = :preference WHERE user_id = :userId";
         $stmt = $this->pdo->prepare($sql);
         if ($preference === null) {
-            $stmt->bindValue(':preference', null, PDO::PARAM_NULL); 
+            $stmt->bindValue(':preference', null, PDO::PARAM_NULL);
         } else {
             $stmt->bindValue(':preference', $preference, PDO::PARAM_INT);
         }
@@ -127,7 +127,7 @@ class Driver extends User
         $sql = "UPDATE driver SET pets = :preference WHERE user_id = :userId";
         $stmt = $this->pdo->prepare($sql);
         if ($preference === null) {
-            $stmt->bindValue(':preference', null, PDO::PARAM_NULL); 
+            $stmt->bindValue(':preference', null, PDO::PARAM_NULL);
         } else {
             $stmt->bindValue(':preference', $preference, PDO::PARAM_INT);
         }
@@ -140,7 +140,7 @@ class Driver extends User
         $sql = "UPDATE driver SET food = :preference WHERE user_id = :userId";
         $stmt = $this->pdo->prepare($sql);
         if ($preference === null) {
-            $stmt->bindValue(':preference', null, PDO::PARAM_NULL); 
+            $stmt->bindValue(':preference', null, PDO::PARAM_NULL);
         } else {
             $stmt->bindValue(':preference', $preference, PDO::PARAM_INT);
         }
@@ -153,7 +153,7 @@ class Driver extends User
         $sql = "UPDATE driver SET speaker = :preference WHERE user_id = :userId";
         $stmt = $this->pdo->prepare($sql);
         if ($preference === null) {
-            $stmt->bindValue(':preference', null, PDO::PARAM_NULL); 
+            $stmt->bindValue(':preference', null, PDO::PARAM_NULL);
         } else {
             $stmt->bindValue(':preference', $preference, PDO::PARAM_INT);
         }
@@ -165,7 +165,7 @@ class Driver extends User
         $sql = "UPDATE driver SET music = :preference WHERE user_id = :userId";
         $stmt = $this->pdo->prepare($sql);
         if ($preference === null) {
-            $stmt->bindValue(':preference', null, PDO::PARAM_NULL); 
+            $stmt->bindValue(':preference', null, PDO::PARAM_NULL);
         } else {
             $stmt->bindValue(':preference', $preference, PDO::PARAM_INT);
         }
