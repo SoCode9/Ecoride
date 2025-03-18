@@ -28,7 +28,7 @@ saveButton.addEventListener('click', () => {
     document.getElementById("save-button").classList.remove("active");
 });
 
-/*if "passager" is selected-> the car and preference sections are displayed*/
+/*if "passager" is selected-> the car and preference sections are not displayed*/
 document.addEventListener("DOMContentLoaded", function () {
     const roleRadios = document.querySelectorAll('input[name="user_role"]');
     const carSection = document.querySelector(".scrollable-container");
@@ -54,9 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const editButton = document.getElementById("edit-button");
     const saveButton = document.getElementById("save-button");
-    const allRadios = document.querySelectorAll('.radioNotEdit');
 
     saveButton.addEventListener("click", function () {
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
