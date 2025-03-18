@@ -52,6 +52,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+const addCarButton = document.getElementById('add_car_button');
+addCarButton.addEventListener('click', () => {
+    const carForm = document.querySelector(".carForm");
+    carForm.classList.remove("hidden");
+})
 
 document.addEventListener("DOMContentLoaded", function () {
     const saveButton = document.getElementById("save-button");

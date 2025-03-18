@@ -144,6 +144,20 @@ input[type="radio"]:checked {
     /* Display only if button isn't clicked  */
 }
 
+.textField {
+    width: 100px;
+    appearance: none;
+    /* Supprime l'icône par défaut (pour Chrome, Safari, etc.) */
+    -webkit-appearance: none;
+    /* Spécifique pour Safari */
+    -moz-appearance: textfield;
+    /* Spécifique pour Firefox */
+    border: 1px solid #666666;
+    border-radius: 15px;
+    padding: 4px;
+    font-size: 15px;
+}
+
 /*carpool*/
 .tabs {
     display: flex;
