@@ -39,7 +39,7 @@ class User
             }
             $this->password = password_hash($password, PASSWORD_BCRYPT);
         } /* elseif ($mail !== null && $password !== null) {
-    $this->searchUserInDB($mail, $password);
+$this->searchUserInDB($mail, $password);
 } */
     }
 
@@ -113,6 +113,14 @@ class User
         } catch (PDOException $e) {
             die("Erreur lors de l'insertion : " . $e->getMessage());
         }
+    }
+
+    public function createDriver($pdo, $userId)
+    {
+        $sql = 'INSERT INTO driver (user_id) VALUES (:userId)';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->execute();
     }
 
     public function setIdRole($roleId)

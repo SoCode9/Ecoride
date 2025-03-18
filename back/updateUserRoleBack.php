@@ -41,7 +41,12 @@ $musicPref = processPreference($_POST['music_pref'] ?? null, "musique");
 
 try {
     $user = new User($pdo, $userId);
-    $driver = new Driver($pdo, $userId);
+    try {
+        $driver = new Driver($pdo, $userId);
+    } catch (Exception $e) {
+        $user->createDriver($pdo, $userId);
+        $driver = new Driver($pdo, $userId);
+    }
     $user->setIdRole($roleId);
     $driver->setSmokerPreference($smokePref);
     $driver->setPetPreference($petPref);
@@ -50,6 +55,7 @@ try {
     $driver->setMusicPreference($musicPref);
 
     echo json_encode(["success" => true, "message" => "Rôle et préférences mis à jour"]);
+    exit;
 } catch (Exception $e) {
     echo json_encode(["success" => false, "message" => "Erreur : " . $e->getMessage()]);
 }
