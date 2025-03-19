@@ -17,8 +17,10 @@
                     <?php endif; ?>
                 </div>
             </div>
+
             <button class="seeDetailTrajet button-content active" id="edit-button">Modifier le profil</button>
             <button class="seeDetailTrajet button-content" id="save-button">Sauvegarder le profil</button>
+
         </div>
         <div class="mailAndCredits">
             <span><?php echo htmlspecialchars($connectedUser->getMail()) ?></span>
@@ -48,48 +50,32 @@
             </div>
         </div>
 
-        <?php /* if ($connectedUser->getIdRole() !== 1): */ ?>
         <div class="scrollable-container subTitleAndContent">
             <!--Cars section-->
             <div class="subTitleAndContent greyBlock">
                 <h2 class="subTitleGreen">Voitures</h2>
-                <?php
-                if (isset($cars)):
-                    $totalCars = count($cars);
 
-                    $index = 0;
-                    foreach ($cars as $car):
-                        $index++;
-                        ?>
+                <div id="car-container" class="subTitleAndContent" style="padding:10px 0px">
+                    <?php include '../templates/load_cars.php'; ?>
+                </div>
 
-                        <span>Plaque immatriculation : <?= htmlspecialchars($car['car_licence_plate']) ?></span>
-                        <span>Date première immatriculation :
-                            <?= formatDate(htmlspecialchars($car['car_first_registration_date'])) ?></span>
-                        <span>Marque : <?= htmlspecialchars($car['name']) ?></span>
-                        <span>Modèle : <?= htmlspecialchars($car['car_model']) ?></span>
-                        <span>Electrique ? : <?php
-                        $electric = (htmlspecialchars($car['car_electric']) === 1) ? 'Oui' : 'Non';
-                        echo $electric;
-                        ?>
-                        </span>
-                        <span>Couleur : <?= htmlspecialchars($car['car_color']) ?></span>
-                        <span>Nombre de passagers possible : <?= htmlspecialchars($car['car_seats_offered']) ?></span>
-                        <?php if ($index !== $totalCars):
-                            echo '<hr>' ?>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+
                 <div class="carForm hidden">
                     <hr>
-                    <form action="userSpaceIndex.php" method="POST" class="filtersList" style="gap: 10px;">
+                    <form id="car-form" class="filtersList" style="gap: 10px;">
+                        <input type="hidden" name="action" value="formCar">
+                        <input type="hidden" name="mode" value="edit"> <!-- Champ caché -->
+
                         <div class="filter">
                             <label for="licence_plate">Plaque immatriculation : </label>
-                            <input type="text" id="licence_plate" class="textField" placeholder="AA-000-AA" required>
+                            <input type="text" id="licence_plate" name="licence_plate" class="textField"
+                                placeholder="AA-000-AA" required>
                         </div>
 
                         <div class="filter">
                             <label for="first_registration_date">Date première immatriculation : </label>
-                            <input type="date" id="first_registration_date" class="textField" required>
+                            <input type="date" id="first_registration_date" name="first_registration_date"
+                                class="textField" required>
                         </div>
                         <div class="filter">
                             <label for="brand">Marque : </label>
@@ -97,13 +83,14 @@
                                 <option value="">Sélectionner</option>
                                 <?php foreach ($brands as $brand): ?>
                                     <option value="<?= htmlspecialchars($brand['id']); ?>">
-                                        <?= htmlspecialchars($brand['name']); ?></option>
+                                        <?= htmlspecialchars($brand['name']); ?>
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="filter">
                             <label for="model">Modèle : </label>
-                            <input type="text" id="model" class="textField" required>
+                            <input type="text" id="model" name="model" class="textField" required>
                         </div>
                         <div class="filter">
                             <label for="electric">Electrique : </label>
@@ -116,19 +103,19 @@
                         </div>
                         <div class="filter">
                             <label for="color">Couleur : </label>
-                            <input type="text" id="color" class="textField" required>
+                            <input type="text" id="color" name="color" class="textField" required>
                         </div>
                         <div class="filter">
                             <label for="nb_passengers">Nombre de passagers possible : </label>
-                            <input type="number" id="nb_passengers" class="numberField textField" style="width: 40px;"
-                                required>
+                            <input type="number" id="nb_passengers" name="nb_passengers" class="numberField textField"
+                                style="width: 40px;" required>
                         </div>
                         <input type="submit" value="Enregistrer" class="searchButton"
                             style="width:100px; align-self:self-end;"></input>
                     </form>
                     <hr>
                 </div>
-                <button class="seeDetailTrajet" id="add_car_button">Ajouter une voiture</button>
+                <button class="seeDetailTrajet hidden" id="add_car_button">Ajouter une voiture</button>
 
             </div>
 

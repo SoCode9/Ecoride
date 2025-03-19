@@ -1,35 +1,63 @@
-document.querySelectorAll(".tabButton").forEach(button => {
-    button.addEventListener("click", function () {
-        document.querySelectorAll(".tabButton").forEach(btn => btn.classList.remove("active"));
-        document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
-
-        this.classList.add("active");
-        document.getElementById(this.dataset.target).classList.add("active");
-    });
-});
-
-/*Enable radio button editing when I click on the Edit button*/
-const editButton = document.getElementById('edit-button');
-editButton.addEventListener('click', () => {
-    document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
-        checkbox.classList.remove("radioNotEdit");
-    });
-    document.getElementById("edit-button").classList.remove("active");
-    document.getElementById("save-button").classList.add("active");
-});
-
-/*Disable radio button editing when I click the Save button */
-const saveButton = document.getElementById('save-button');
-saveButton.addEventListener('click', () => {
-    document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
-        checkbox.classList.add("radioNotEdit");
-    });
-    document.getElementById("edit-button").classList.add("active");
-    document.getElementById("save-button").classList.remove("active");
-});
-
-/*if "passager" is selected-> the car and preference sections are not displayed*/
 document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("submit", function (event) {
+        event.preventDefault();
+    }, true);
+
+    document.querySelectorAll(".tabButton").forEach(button => {
+        button.addEventListener("click", function () {
+            document.querySelectorAll(".tabButton").forEach(btn => btn.classList.remove("active"));
+            document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
+
+            this.classList.add("active");
+            document.getElementById(this.dataset.target).classList.add("active");
+        });
+    });
+
+    const editButton = document.getElementById('edit-button');
+    const saveButton = document.getElementById('save-button');
+    const addCarButton = document.getElementById("add_car_button");
+
+    if (editButton && saveButton) {
+        editButton.addEventListener('click', () => {
+            editButton.classList.remove("active");
+            saveButton.classList.add("active");
+
+            document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
+                checkbox.classList.remove("radioNotEdit");
+            });
+
+            if (addCarButton) {
+                addCarButton.classList.remove("hidden");
+            }
+
+            document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
+                checkbox.classList.remove("radioNotEdit");
+            });
+
+        });
+
+        saveButton.addEventListener('click', () => {
+            saveButton.classList.remove("active");
+            editButton.classList.add("active");
+
+
+            document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
+                checkbox.classList.add("radioNotEdit");
+            });
+
+            if (addCarButton) {
+                addCarButton.classList.add("hidden");
+            }
+
+            document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
+                checkbox.classList.add("radioNotEdit");
+            });
+
+        });
+    }
+
+
+    /*if "passager" is selected-> the car and preference sections are not displayed*/
     const roleRadios = document.querySelectorAll('input[name="user_role"]');
     const carSection = document.querySelector(".scrollable-container");
 
@@ -50,18 +78,21 @@ document.addEventListener("DOMContentLoaded", function () {
     roleRadios.forEach(radio => {
         radio.addEventListener("change", toggleCarSection);
     });
-});
 
-const addCarButton = document.getElementById('add_car_button');
-addCarButton.addEventListener('click', () => {
-    const carForm = document.querySelector(".carForm");
-    carForm.classList.remove("hidden");
-})
 
-document.addEventListener("DOMContentLoaded", function () {
-    const saveButton = document.getElementById("save-button");
+    /** Display form to add a new car **/
+    if (addCarButton) {
+        addCarButton.addEventListener('click', () => {
+            document.querySelector(".carForm").classList.remove("hidden");
+        });
+    }
 
     saveButton.addEventListener("click", function () {
+        addCarButton.classList.add("hidden");
+
+        const carForm = document.querySelector(".carForm");
+        carForm.classList.add("hidden");
+
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
         let selectedSmokePref = document.querySelector('input[name = "smoke_pref"]:checked').id;
         let selectedPetPref = document.querySelector('input[name="pet_pref"]:checked').id;
@@ -111,9 +142,9 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert("Profil mis à jour !"); // A ENLEVER !
+                    console.log("Profil mis à jour !");
                 } else {
-                    alert("Erreur : " + data.message);
+                    console.error("Erreur : " + data.message);
                 }
             })
             .catch(error => {
@@ -121,4 +152,52 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Une erreur est survenue. Veuillez réessayer.");
             });
     });
+
+    /** Refresh only Car's section (not full page) **/
+    function refreshCarList() {
+        fetch("../templates/load_cars.php")
+            .then(response => response.text())
+            .then(html => {
+                let carContainer = document.getElementById("car-container");
+                if (!carContainer) {
+                    console.error("Erreur : car-container introuvable dans le DOM !");
+                    return;
+                }
+
+                carContainer.innerHTML = html; // update car's section
+            })
+            .catch(error => {
+                console.error("Erreur de mise à jour :", error);
+            });
+    }
+    
+    /** Add a car **/
+    const carForm = document.getElementById("car-form");
+
+    if (carForm) {
+        carForm.addEventListener("submit", function (event) {
+            event.preventDefault(); // prevent page reload
+
+            let formData = new FormData(carForm);
+
+            fetch("../back/addCarBack.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log("Voiture ajoutée avec succès !");
+                        carForm.reset(); // Reset the form
+                        refreshCarList(); // refresh the cars' list
+                    } else {
+                        console.error("Erreur :", data.error);
+                        alert("Erreur : " + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error("Erreur AJAX :", error);
+                });
+        });
+    }
 });
