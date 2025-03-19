@@ -21,3 +21,7 @@ $carpoolListToValidate = $usersReservations->carpoolFinishedToValidate($pdo, $id
 $carpoolListNotStarted = $usersReservations->carpoolNotStarted($pdo, $idUser);
 
 $carpoolListFinishedAndValidated = $usersReservations->carpoolFinishedAndValidated($pdo, $idUser);
+
+// Request to retrieve car's brands 
+$stmt = $pdo->query("SELECT id, name FROM brands ORDER BY name ASC");
+$brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
