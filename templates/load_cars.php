@@ -2,6 +2,7 @@
 require_once "../database.php";
 require_once "../class/Car.php";
 
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -14,8 +15,8 @@ if (!$idUser) {
 $carsInDB = new Car($pdo, $idUser, null);
 
 // Verify if cars exist
-if (empty($carsInDB->cars)) { 
-    die("❌ Aucune voiture trouvée pour cet utilisateur.");
+if (empty($carsInDB->cars)) {
+    echo "Ajouter au moins une voiture";
 }
 
 $cars = $carsInDB->cars;
@@ -27,7 +28,6 @@ if (isset($cars)):
     foreach ($cars as $car):
         $index++;
         ?>
-
         <span>Plaque immatriculation : <?= htmlspecialchars($car['car_licence_plate']) ?></span>
         <span>Date première immatriculation :
             <?= formatDate(htmlspecialchars($car['car_first_registration_date'])) ?></span>

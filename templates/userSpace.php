@@ -17,17 +17,10 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <?php
-            $editMode = isset($_GET['mode']) && $_GET['mode'] === 'edit';
-            ?>
 
-            <button class="seeDetailTrajet button-content <?= !$editMode ? 'active' : 'hidden' ?>" id="edit-button">
-                Modifier le profil
-            </button>
+            <button class="seeDetailTrajet button-content active" id="edit-button">Modifier le profil</button>
+            <button class="seeDetailTrajet button-content" id="save-button">Sauvegarder le profil</button>
 
-            <button class="seeDetailTrajet button-content <?= $editMode ? 'active' : 'hidden' ?>" id="save-button">
-                Sauvegarder le profil
-            </button>
         </div>
         <div class="mailAndCredits">
             <span><?php echo htmlspecialchars($connectedUser->getMail()) ?></span>
@@ -57,14 +50,12 @@
             </div>
         </div>
 
-        <?php /* if ($connectedUser->getIdRole() !== 1): */ ?>
         <div class="scrollable-container subTitleAndContent">
             <!--Cars section-->
             <div class="subTitleAndContent greyBlock">
                 <h2 class="subTitleGreen">Voitures</h2>
 
-                <div id="car-container">
-                    <!-- 🚀 Cette section sera mise à jour avec AJAX -->
+                <div id="car-container" class="subTitleAndContent" style="padding:10px 0px">
                     <?php include '../templates/load_cars.php'; ?>
                 </div>
 
