@@ -122,119 +122,133 @@
             <!--preferences section-->
             <div class="subTitleAndContent greyBlock">
                 <h2 class="subTitleGreen">Préférences en tant que chauffeur</h2>
+                <div class="subTitleAndContent" style="padding:10px 0px">
+                    <span>Voyager avec des fumeurs ne me dérange pas</span>
+                    <div class="treeRadioButton">
+                        <div class="filter">
+                            <label for="smoke_yes">Oui</label>
+                            <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getSmokerPreference() === true)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="smoke_no">Non</label>
+                            <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_no" <?php if (isset($connectedDriver) && ($connectedDriver->getSmokerPreference() === false)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="smoke_undefined">Pas de préférence</label>
+                            <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getSmokerPreference() === null)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                    </div>
+                    <hr>
+                    <span>J'aime la compagnie des animaux</span>
+                    <div class="treeRadioButton">
+                        <div class="filter">
+                            <label for="pet_yes">Oui</label>
+                            <input type="radio" class="radioNotEdit" name="pet_pref" id="pet_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getPetPreference() === true)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="pet_no">Non</label>
+                            <input type="radio" class="radioNotEdit" name="pet_pref" id="pet_no" <?php if (isset($connectedDriver) && ($connectedDriver->getPetPreference() === false)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="pet_undefined">Pas de préférence</label>
+                            <input type="radio" class="radioNotEdit" name="pet_pref" id="pet_undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getPetPreference() === null)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                    </div>
+                    <hr>
+                    <span>La nourriture est autorisée dans la voiture</span>
+                    <div class="treeRadioButton">
+                        <div class="filter">
+                            <label for="food_yes">Oui</label>
+                            <input type="radio" class="radioNotEdit" name="food_pref" id="food_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getFoodPreference() === true)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="food_no">Non</label>
+                            <input type="radio" class="radioNotEdit" name="food_pref" id="food_no" <?php if (isset($connectedDriver) && ($connectedDriver->getFoodPreference() === false)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="food_undefined">Pas de préférence</label>
+                            <input type="radio" class="radioNotEdit" name="food_pref" id="food_undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getFoodPreference() === null)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                    </div>
+                    <hr>
+                    <span>Je discute volontiers avec mes passagers</span>
+                    <div class="treeRadioButton">
+                        <div class="filter">
+                            <label for="speak_yes">Oui</label>
+                            <input type="radio" class="radioNotEdit" name="speak_pref" id="speak_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getSpeakerPreference() === true)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="speak_no">Non</label>
+                            <input type="radio" class="radioNotEdit" name="speak_pref" id="speak_no" <?php if (isset($connectedDriver) && ($connectedDriver->getSpeakerPreference() === false)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="speek_undefined">Pas de préférence</label>
+                            <input type="radio" class="radioNotEdit" name="speak_pref" id="speak_undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getSpeakerPreference() === null)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                    </div>
+                    <hr>
+                    <span>J'aime conduire en écoutant de la musique</span>
+                    <div class="treeRadioButton">
+                        <div class="filter">
+                            <label for="music_yes">Oui</label>
+                            <input type="radio" class="radioNotEdit" name="music_pref" id="music_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getMusicPreference() === true)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="music_no">Non</label>
+                            <input type="radio" class="radioNotEdit" name="music_pref" id="music_no" <?php if (isset($connectedDriver) && ($connectedDriver->getMusicPreference() === false)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                        <div class="filter">
+                            <label for="music_undefined">Pas de préférence</label>
+                            <input type="radio" class="radioNotEdit" name="music_pref" id="music_undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getMusicPreference() === null)) {
+                                echo 'checked';
+                            } ?>>
+                        </div>
+                    </div>
+                </div>
 
-                <span>Voyager avec des fumeurs ne me dérange pas</span>
-                <div class="treeRadioButton">
-                    <div class="filter">
-                        <label for="smoke_yes">Oui</label>
-                        <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getSmokerPreference() === true)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                    <div class="filter">
-                        <label for="smoke_no">Non</label>
-                        <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_no" <?php if (isset($connectedDriver) && ($connectedDriver->getSmokerPreference() === false)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                    <div class="filter">
-                        <label for="smoke_undefined">Pas de préférence</label>
-                        <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getSmokerPreference() === null)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
+                <div class="prefForm hidden">
+                    <form action="" method="POST" id="pref-form" class="filtersList" style="gap: 10px;">
+                        <hr>
+                        <input type="text" placeholder="Entrez la préférence" name="newPref" id="new_pref"
+                            class="textField" style="width:auto" required>
+                        <input type="submit" value="Enregistrer" class="searchButton"
+                            style="width:100px; align-self:self-end;">
+                    </form>
+                    <hr>
                 </div>
-                <hr>
-                <span>J'aime la compagnie des animaux</span>
-                <div class="treeRadioButton">
-                    <div class="filter">
-                        <label for="pet_yes">Oui</label>
-                        <input type="radio" class="radioNotEdit" name="pet_pref" id="pet_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getPetPreference() === true)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                    <div class="filter">
-                        <label for="pet_no">Non</label>
-                        <input type="radio" class="radioNotEdit" name="pet_pref" id="pet_no" <?php if (isset($connectedDriver) && ($connectedDriver->getPetPreference() === false)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                    <div class="filter">
-                        <label for="pet_undefined">Pas de préférence</label>
-                        <input type="radio" class="radioNotEdit" name="pet_pref" id="pet_undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getPetPreference() === null)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                </div>
-                <hr>
-                <span>La nourriture est autorisée dans la voiture</span>
-                <div class="treeRadioButton">
-                    <div class="filter">
-                        <label for="food_yes">Oui</label>
-                        <input type="radio" class="radioNotEdit" name="food_pref" id="food_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getFoodPreference() === true)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                    <div class="filter">
-                        <label for="food_no">Non</label>
-                        <input type="radio" class="radioNotEdit" name="food_pref" id="food_no" <?php if (isset($connectedDriver) && ($connectedDriver->getFoodPreference() === false)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                    <div class="filter">
-                        <label for="food_undefined">Pas de préférence</label>
-                        <input type="radio" class="radioNotEdit" name="food_pref" id="food_undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getFoodPreference() === null)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                </div>
-                <hr>
-                <span>Je discute volontiers avec mes passagers</span>
-                <div class="treeRadioButton">
-                    <div class="filter">
-                        <label for="speak_yes">Oui</label>
-                        <input type="radio" class="radioNotEdit" name="speak_pref" id="speak_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getSpeakerPreference() === true)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                    <div class="filter">
-                        <label for="speak_no">Non</label>
-                        <input type="radio" class="radioNotEdit" name="speak_pref" id="speak_no" <?php if (isset($connectedDriver) && ($connectedDriver->getSpeakerPreference() === false)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                    <div class="filter">
-                        <label for="speek_undefined">Pas de préférence</label>
-                        <input type="radio" class="radioNotEdit" name="speak_pref" id="speak_undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getSpeakerPreference() === null)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                </div>
-                <hr>
-                <span>J'aime conduire en écoutant de la musique</span>
-                <div class="treeRadioButton">
-                    <div class="filter">
-                        <label for="music_yes">Oui</label>
-                        <input type="radio" class="radioNotEdit" name="music_pref" id="music_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getMusicPreference() === true)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                    <div class="filter">
-                        <label for="music_no">Non</label>
-                        <input type="radio" class="radioNotEdit" name="music_pref" id="music_no" <?php if (isset($connectedDriver) && ($connectedDriver->getMusicPreference() === false)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                    <div class="filter">
-                        <label for="music_undefined">Pas de préférence</label>
-                        <input type="radio" class="radioNotEdit" name="music_pref" id="music_undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getMusicPreference() === null)) {
-                            echo 'checked';
-                        } ?>>
-                    </div>
-                </div>
+                <button class="seeDetailTrajet hidden" id="add_pref_button">Ajouter une préférence</button>
+
             </div>
         </div>
-        <?php /* endif; */ ?>
+
 
     </section>
 

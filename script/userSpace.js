@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const editButton = document.getElementById('edit-button');
     const saveButton = document.getElementById('save-button');
     const addCarButton = document.getElementById("add_car_button");
+    const addPrefButton = document.getElementById("add_pref_button");
 
     if (editButton && saveButton) {
         editButton.addEventListener('click', () => {
@@ -28,6 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (addCarButton) {
                 addCarButton.classList.remove("hidden");
+            }
+
+            if (addPrefButton) {
+                addPrefButton.classList.remove("hidden");
             }
 
             document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
@@ -47,6 +52,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (addCarButton) {
                 addCarButton.classList.add("hidden");
+            }
+
+            if (addPrefButton) {
+                addPrefButton.classList.add("hidden");
             }
 
             document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
@@ -87,11 +96,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    /** Display form to add a new preference **/
+    if (addPrefButton) {
+        addPrefButton.addEventListener('click', () => {
+            document.querySelector(".prefForm").classList.remove("hidden");
+        });
+    }
+
     saveButton.addEventListener("click", function () {
         addCarButton.classList.add("hidden");
 
+        addPrefButton.classList.add("hidden");
+
         const carForm = document.querySelector(".carForm");
         carForm.classList.add("hidden");
+
+        const prefForm = document.querySelector(".prefForm");
+        prefForm.classList.add("hidden");
 
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
         let selectedSmokePref = document.querySelector('input[name = "smoke_pref"]:checked').id;
@@ -170,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error("Erreur de mise à jour :", error);
             });
     }
-    
+
     /** Add a car **/
     const carForm = document.getElementById("car-form");
 
