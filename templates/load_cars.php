@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 if (!$idUser) {
-    die("❌ Utilisateur non connecté.");
+    die("Utilisateur non connecté.");
 }
 
 $carsInDB = new Car($pdo, $idUser, null);
@@ -33,8 +33,8 @@ if (isset($cars)):
             <?= formatDate(htmlspecialchars($car['car_first_registration_date'])) ?></span>
         <span>Marque : <?= htmlspecialchars($car['name']) ?></span>
         <span>Modèle : <?= htmlspecialchars($car['car_model']) ?></span>
-        <span>Electrique ? : <?php
-        $electric = (htmlspecialchars($car['car_electric']) === 1) ? 'Oui' : 'Non';
+        <span>Electrique : <?php
+        $electric = (htmlspecialchars($car['car_electric']) == 1) ? 'Oui' : 'Non';
         echo $electric;
         ?>
         </span>
