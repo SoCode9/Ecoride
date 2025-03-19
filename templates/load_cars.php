@@ -8,15 +8,11 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-if (!$idUser) {
-    die("Utilisateur non connecté.");
-}
-
 $carsInDB = new Car($pdo, $idUser, null);
 
 // Verify if cars exist
 if (empty($carsInDB->cars)) {
-    echo "Ajouter au moins une voiture";
+    echo "<span style='color:red; font-style:italic;'>Ajouter au moins une voiture</span>";
 }
 
 $cars = $carsInDB->cars;

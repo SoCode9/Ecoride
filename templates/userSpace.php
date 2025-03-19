@@ -64,7 +64,7 @@
                     <hr>
                     <form id="car-form" class="filtersList" style="gap: 10px;">
                         <input type="hidden" name="action" value="formCar">
-                        <input type="hidden" name="mode" value="edit"> <!-- Champ caché -->
+                        <input type="hidden" name="mode" value="edit"> <!--À enlever ??-->
 
                         <div class="filter">
                             <label for="licence_plate">Plaque immatriculation : </label>
@@ -232,15 +232,21 @@
                             } ?>>
                         </div>
                     </div>
+                    <?php
+                    include "../templates/load_other_pref.php";
+                    ?>
                 </div>
 
                 <div class="prefForm hidden">
                     <form action="" method="POST" id="pref-form" class="filtersList" style="gap: 10px;">
+                        <input type="hidden" name="action" value="formPref">
+
                         <hr>
                         <input type="text" placeholder="Entrez la préférence" name="newPref" id="new_pref"
                             class="textField" style="width:auto" required>
                         <input type="submit" value="Enregistrer" class="searchButton"
                             style="width:100px; align-self:self-end;">
+
                     </form>
                     <hr>
                 </div>

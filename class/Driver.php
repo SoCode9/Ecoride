@@ -61,6 +61,23 @@ class Driver extends User
         return $ratingsData;
     }
 
+
+    /**
+     * To load all customized preferences of one user
+     * @param mixed $pdo
+     * @param mixed $driverId // = userId
+     */
+    public function loadCustomPreferences($pdo, $driverId)
+    {
+        $sql = 'SELECT add_pref_1, add_pref_2, add_pref_3 FROM driver WHERE user_id = :driver_id';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':driver_id', $driverId, PDO::PARAM_INT);
+        $statement->execute();
+
+        $customPreferences = $statement->fetch(PDO::FETCH_ASSOC);
+        return $customPreferences;
+    }
+
     /**
      * To give ratings average (ex. 4.2)
      * @return float|null //if average = 0 -> null
