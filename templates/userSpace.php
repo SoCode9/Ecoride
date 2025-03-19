@@ -93,7 +93,13 @@
                         </div>
                         <div class="filter">
                             <label for="brand">Marque : </label>
-                            <input type="text" id="brand" class="textField" required>
+                            <select id="brand" class="textField" name="brand" required>
+                                <option value="">Sélectionner</option>
+                                <?php foreach ($brands as $brand): ?>
+                                    <option value="<?= htmlspecialchars($brand['id']); ?>">
+                                        <?= htmlspecialchars($brand['name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="filter">
                             <label for="model">Modèle : </label>
@@ -117,7 +123,8 @@
                             <input type="number" id="nb_passengers" class="numberField textField" style="width: 40px;"
                                 required>
                         </div>
-                        <input type="submit" value="Enregistrer" class="searchButton" style="width:100px; align-self:self-end;"></input>
+                        <input type="submit" value="Enregistrer" class="searchButton"
+                            style="width:100px; align-self:self-end;"></input>
                     </form>
                     <hr>
                 </div>
