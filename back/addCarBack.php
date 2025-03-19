@@ -16,7 +16,12 @@ if (($_SERVER['REQUEST_METHOD'] === "POST" && $_POST['action'] === "formCar")) {
     $firstRegistrationDate = $_POST['first_registration_date'];
     $brand = $_POST['brand'];
     $model = $_POST['model'];
-    $electric = $_POST['electric'];
+    $electricValue = $_POST['electric'];
+    if ($electricValue === "yes") {
+        $electric = 1;
+    } elseif ($electricValue === "no") {
+        $electric = 0;
+    }
     $color = $_POST['color'];
     $seatOffered = $_POST['nb_passengers'];
     try {

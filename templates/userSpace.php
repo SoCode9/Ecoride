@@ -94,10 +94,10 @@
                         </div>
                         <div class="filter">
                             <label for="electric">Electrique : </label>
-                            <input type="radio" name="electric" id="electric_yes" required>
+                            <input type="radio" name="electric" value="yes" id="electric_yes" required>
                             <label for="electric_yes">oui</label>
 
-                            <input type="radio" name="electric" id="electric_no" required>
+                            <input type="radio" name="electric" value="no" id="electric_no" required>
                             <label for="electric_no">non</label>
 
                         </div>
