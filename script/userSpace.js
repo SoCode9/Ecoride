@@ -16,6 +16,10 @@ editButton.addEventListener('click', () => {
     });
     document.getElementById("edit-button").classList.remove("active");
     document.getElementById("save-button").classList.add("active");
+
+    const addCarButton = document.getElementById("add_car_button");
+    addCarButton.classList.remove("hidden");
+
 });
 
 /*Disable radio button editing when I click the Save button */
@@ -62,6 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const saveButton = document.getElementById("save-button");
 
     saveButton.addEventListener("click", function () {
+
+        const addCarButton = document.getElementById("add_car_button");
+        addCarButton.classList.add("hidden");
+
+        const carForm = document.querySelector(".carForm");
+        carForm.classList.add("hidden");
+
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
         let selectedSmokePref = document.querySelector('input[name = "smoke_pref"]:checked').id;
         let selectedPetPref = document.querySelector('input[name="pet_pref"]:checked').id;

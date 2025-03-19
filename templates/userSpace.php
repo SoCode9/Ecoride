@@ -81,15 +81,16 @@
                 <?php endif; ?>
                 <div class="carForm hidden">
                     <hr>
-                    <form action="userSpaceIndex.php" method="POST" class="filtersList" style="gap: 10px;">
+                    <form action="" method="POST" class="filtersList" style="gap: 10px;">
+                        <input type="hidden" name="action" value="formCar">
                         <div class="filter">
                             <label for="licence_plate">Plaque immatriculation : </label>
-                            <input type="text" id="licence_plate" class="textField" placeholder="AA-000-AA" required>
+                            <input type="text" id="licence_plate" name="licence_plate" class="textField" placeholder="AA-000-AA" required>
                         </div>
 
                         <div class="filter">
                             <label for="first_registration_date">Date première immatriculation : </label>
-                            <input type="date" id="first_registration_date" class="textField" required>
+                            <input type="date" id="first_registration_date" name="first_registration_date"class="textField" required>
                         </div>
                         <div class="filter">
                             <label for="brand">Marque : </label>
@@ -97,13 +98,14 @@
                                 <option value="">Sélectionner</option>
                                 <?php foreach ($brands as $brand): ?>
                                     <option value="<?= htmlspecialchars($brand['id']); ?>">
-                                        <?= htmlspecialchars($brand['name']); ?></option>
+                                        <?= htmlspecialchars($brand['name']); ?>
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="filter">
                             <label for="model">Modèle : </label>
-                            <input type="text" id="model" class="textField" required>
+                            <input type="text" id="model" name="model" class="textField" required>
                         </div>
                         <div class="filter">
                             <label for="electric">Electrique : </label>
@@ -116,11 +118,11 @@
                         </div>
                         <div class="filter">
                             <label for="color">Couleur : </label>
-                            <input type="text" id="color" class="textField" required>
+                            <input type="text" id="color" name="color" class="textField" required>
                         </div>
                         <div class="filter">
                             <label for="nb_passengers">Nombre de passagers possible : </label>
-                            <input type="number" id="nb_passengers" class="numberField textField" style="width: 40px;"
+                            <input type="number" id="nb_passengers" name="nb_passengers" class="numberField textField" style="width: 40px;"
                                 required>
                         </div>
                         <input type="submit" value="Enregistrer" class="searchButton"
@@ -128,7 +130,7 @@
                     </form>
                     <hr>
                 </div>
-                <button class="seeDetailTrajet" id="add_car_button">Ajouter une voiture</button>
+                <button class="seeDetailTrajet hidden" id="add_car_button">Ajouter une voiture</button>
 
             </div>
 

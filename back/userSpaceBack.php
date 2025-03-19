@@ -22,6 +22,24 @@ $carpoolListNotStarted = $usersReservations->carpoolNotStarted($pdo, $idUser);
 
 $carpoolListFinishedAndValidated = $usersReservations->carpoolFinishedAndValidated($pdo, $idUser);
 
+/*Cars' form*/
 // Request to retrieve car's brands 
 $stmt = $pdo->query("SELECT id, name FROM brands ORDER BY name ASC");
 $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+if (($_SERVER['REQUEST_METHOD'] === "POST" && $_POST['action'] === "formCar")) {
+    $licencePlate = $_POST['licence_plate'];
+    $firstRegistrationDate = $_POST['first_registration_date'];
+    $brand = $_POST['brand'];
+    $model = $_POST['model'];
+    $electric = $_POST['electric'];
+    $color = $_POST['color'];
+    $seatOffered = $_POST['nb_passengers'];
+    try {
+        $newCar = new Car($pdo, $idUser, null);
+        $newCar->createCar($pdo, $idUser, $brand, $model, $licencePlate, $firstRegistrationDate, $seatOffered, $electric, $color);
+
+    } catch (Exception $e) {
+        echo "Exception attrappée : " . $e->getMessage();
+    }
+}

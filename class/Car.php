@@ -28,7 +28,35 @@ class Car
     public function __construct(PDO $pdo, ?int $driverId = null, ?int $travelId = null)
     {
         $this->pdo = $pdo;
+
         $this->loadCarFromDB($travelId, $driverId);
+
+    }
+
+    public function createCar(PDO $pdo, int $driverId, string $brandId, string $model, string $licencePlate, string $firstRegistrationDate, int $seatsOffered, bool $electric, string $color)
+    {
+        /*  $sqlSearchBrand = 'SELECT id FROM brands WHERE name = :brandName';
+         $stmtSearchBrand = $pdo->prepare($sqlSearchBrand);
+         $stmtSearchBrand->bindValue(':brandName', $brand, PDO::PARAM_STR);
+         $stmtSearchBrand->execute();
+         $brandRow = $stmtSearchBrand->fetch(PDO::FETCH_ASSOC);
+         if (!$brandRow) {
+             throw new Exception("La marque '$brand' n'existe pas dans la base de données.");
+         }
+         $brandId = $brandRow['id']; */
+
+        $sql = 'INSERT INTO cars (brand_id,driver_id,car_licence_plate,car_first_registration_date, car_seats_offered,car_model,car_color,car_electric) 
+        VALUES (:brand_id, :driver_id, :car_licence_plate, :car_first_registration_date, :car_seats_offered, :car_model, :car_color, :car_electric)';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':brand_id', $brandId, PDO::PARAM_INT);
+        $statement->bindParam(':driver_id', $driverId, PDO::PARAM_INT);
+        $statement->bindParam(':car_licence_plate', $licencePlate, PDO::PARAM_STR);
+        $statement->bindParam(':car_first_registration_date', $firstRegistrationDate, PDO::PARAM_STR);
+        $statement->bindParam(':car_seats_offered', $seatsOffered, PDO::PARAM_INT);
+        $statement->bindParam(':car_model', $model, PDO::PARAM_STR);
+        $statement->bindParam(':car_color', $color, PDO::PARAM_STR);
+        $statement->bindParam(':car_electric', $electric, PDO::PARAM_BOOL);
+        $statement->execute();
     }
 
     /**
@@ -42,13 +70,13 @@ class Car
     {
         $sql = "SELECT cars.*, brands.* FROM cars 
         JOIN driver ON driver.user_id = cars.driver_id 
-        JOIN brands ON brands.id = cars.brand_id";  
+        JOIN brands ON brands.id = cars.brand_id";
 
         $conditions = [];
         $params = [];
 
         if (!empty($travelId)) {
-            $sql.= "  JOIN travels ON travels.car_id =cars.car_id";
+            $sql .= "  JOIN travels ON travels.car_id =cars.car_id";
             $conditions[] = "travels.id = :travel_id";
             $params[':travel_id'] = $travelId;
 
