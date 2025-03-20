@@ -1,5 +1,6 @@
 <?php
 require_once "../database.php";
+require_once "User.php";
 
 class Driver extends User
 {
@@ -61,6 +62,23 @@ class Driver extends User
         return $ratingsData;
     }
 
+    public function addCustomPreference($pdo, $driverId, $customPrefToAdd)
+    {
+        $customPreferencesInDB = $this->loadCustomPreferences($pdo, $driverId);
+        foreach ($customPreferencesInDB as $columnName => $value) {
+            if ($value === null) {
+                $sql = "UPDATE driver SET $columnName = :customPrefToAdd WHERE user_id = :driver_id";
+                $statement = $pdo->prepare($sql);
+                $statement->bindParam(':customPrefToAdd', $customPrefToAdd, PDO::PARAM_STR);
+                $statement->bindParam(':driver_id', $driverId, PDO::PARAM_INT);
+
+               $statement->execute();                   
+                return; // On sort de la fonction après la mise à jour
+            }
+
+        }
+    }
+
 
     /**
      * To load all customized preferences of one user
@@ -74,8 +92,8 @@ class Driver extends User
         $statement->bindParam(':driver_id', $driverId, PDO::PARAM_INT);
         $statement->execute();
 
-        $customPreferences = $statement->fetch(PDO::FETCH_ASSOC);
-        return $customPreferences;
+        $customPreferencesInDB = $statement->fetch(PDO::FETCH_ASSOC);
+        return $customPreferencesInDB;
     }
 
     /**

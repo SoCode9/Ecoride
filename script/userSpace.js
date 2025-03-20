@@ -188,8 +188,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 carContainer.innerHTML = html; // update car's section
             })
             .catch(error => {
-                console.error("Erreur de mise à jour :", error);
+                console.error("Erreur de mise à jour car-container :", error);
             });
+    }
+
+    /** Refresh only Preferences' section (not full page) **/
+
+    function refreshPrefList() {
+        fetch("../templates/load_other_pref.php")
+            .then(response => response.text())
+            .then(html => {
+                let prefContainer = document.getElementById("pref-container");
+                if (!prefContainer) {
+                    console.error("Erreur : pref-container introuvable dans le DOM !");
+                    return;
+                }
+
+                prefContainer.innerHTML = html; //update pref's section
+            })
+            .catch(error => {
+                console.error("Erreur de mise à jour pref-container: ", error);
+            })
     }
 
     /** Add a car **/
@@ -220,5 +239,37 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.error("Erreur AJAX :", error);
                 });
         });
+    }
+
+    /**Add a pref **/
+    const prefForm = document.getElementById("pref-form");
+    if (prefForm) {
+        prefForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // prevent page reload
+
+            let formData = new FormData(prefForm);
+            fetch("../back/addPrefBack.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                
+                .then(data => {
+                    console.log("Réponse JSON reçue :", data); // Vérification
+
+                    if (data.success) {
+                        console.log("Préférence ajoutée avec succès !");
+                        prefForm.reset(); // Reset the form
+                        refreshPrefList(); // refresh the preferences' list
+                    } else {
+                        console.error("Erreur :", data.error);
+                        alert("Erreur : " + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error("Erreur AJAX :", error);
+                });
+
+        })
     }
 });
