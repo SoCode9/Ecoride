@@ -231,10 +231,13 @@
                                 echo 'checked';
                             } ?>>
                         </div>
-                    </div>
-                    <?php
+                    </div >
+                    <div id="pref-container">
+                       <?php
                     include "../templates/load_other_pref.php";
-                    ?>
+                    ?> 
+                    </div>
+                    
                 </div>
 
                 <div class="prefForm hidden">
@@ -242,7 +245,7 @@
                         <input type="hidden" name="action" value="formPref">
 
                         <hr>
-                        <input type="text" placeholder="Entrez la préférence" name="newPref" id="new_pref"
+                        <input type="text" placeholder="Entrez la préférence" name="new_pref" id="new_pref"
                             class="textField" style="width:auto" required>
                         <input type="submit" value="Enregistrer" class="searchButton"
                             style="width:100px; align-self:self-end;">
