@@ -253,17 +253,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 body: formData
             })
                 .then(response => response.json())
-                
-                .then(data => {
-                    console.log("Réponse JSON reçue :", data); // Vérification
 
+                .then(data => {
                     if (data.success) {
                         console.log("Préférence ajoutée avec succès !");
                         prefForm.reset(); // Reset the form
                         refreshPrefList(); // refresh the preferences' list
                     } else {
                         console.error("Erreur :", data.error);
-                        alert("Erreur : " + data.error);
+                        alert(data.error);
+
                     }
                 })
                 .catch(error => {
