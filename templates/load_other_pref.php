@@ -15,6 +15,7 @@ $customPreferencesInDB = $driver->loadCustomPreferences($pdo, $idUser);
 foreach ($customPreferencesInDB as $preference) {
     if ($preference == !null) {
         echo '<hr>';
-        echo $preference;
+        echo "<span style='display:flex; gap:4px; align-items:center;'><a href='../back/delete_pref.php?action=delete_pref&id=" . urlencode($preference) . "'><img src='../icons/Supprimer.png' class='imgFilter'
+        style='cursor: pointer;'></a>$preference </span>";
     }
 }

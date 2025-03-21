@@ -10,7 +10,7 @@ $idCarToDelete = $_GET['id'];
 
 $idDriver = $_SESSION['user_id'];
 
-if ($_SERVER['REQUEST_METHOD'] === "GET") {
+if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'delete_car') {
     $sql = 'DELETE FROM cars WHERE car_id = :carId';
     $statement = $pdo->prepare($sql);
     $statement->bindParam(':carId', $idCarToDelete, PDO::PARAM_INT);
