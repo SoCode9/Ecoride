@@ -36,7 +36,7 @@ if (isset($cars)):
         </span>
         <span>Couleur : <?= htmlspecialchars($car['car_color']) ?></span>
         <span>Nombre de passagers possible : <?= htmlspecialchars($car['car_seats_offered']) ?></span>
-        <a href="../back/delete_car.php?id=<?=$car['car_id']?>"><img src="../icons/Supprimer.png" class="imgFilter"
+        <a href="../back/delete_car.php?action=delete_car&id=<?=$car['car_id']?>"><img src="../icons/Supprimer.png" class="imgFilter"
                 style="cursor: pointer;"></a>
         <?php if ($index !== $totalCars):
             echo '<hr>' ?>
