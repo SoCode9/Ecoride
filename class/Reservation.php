@@ -10,6 +10,7 @@ class Reservation
     private ?int $travelId;
 
     private ?bool $isValidated;
+    private ?int $creditSpent;
 
     public function __construct($pdo, $userId, ?int $travelId = null, ?bool $isValidated = null)
     {
@@ -83,5 +84,52 @@ class Reservation
         $carpoolListFinishedAndValidated = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $carpoolListFinishedAndValidated;
+    }
+
+    public function cancelCarpool($pdo, $userId, $travelId)
+    {
+        $creditSpentOnTheReservation = $this->getCreditSpent($pdo, $userId, $travelId);
+
+        $this->setCreditToUser($pdo, $userId, $creditSpentOnTheReservation);
+
+        $sql = 'DELETE FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+
+        } catch (Exception $e) {
+            echo "Erreur : " . $e->getMessage();
+        }
+    }
+
+    private function getCreditSpent($pdo, $userId, $travelId)
+    {
+        $sql = 'SELECT credits_spent FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+            $creditSpentOnTheReservation = $statement->fetch(PDO::FETCH_ASSOC);
+            return $creditSpentOnTheReservation['credits_spent'];
+        } catch (Exception $e) {
+            echo "Erreur : " . $e->getMessage();
+        }
+    }
+
+    private function setCreditToUser($pdo, $userId, $creditToSent)
+    {
+        $sql = 'UPDATE users SET credit=credit+:creditToSent WHERE id = :userId';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':creditToSent', $creditToSent, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+        } catch (Exception $e) {
+            echo "Erreur : " . $e->getMessage();
+        }
+
     }
 }

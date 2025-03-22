@@ -85,7 +85,7 @@
             </span>
             <?php if ($carpool['travel_status'] === 'not started'): ?>
                 <div class="seeDetailTrajet" style="background-color:#EDEDED;">
-                    <a href="xx.php?id=" class="travelDetailsLegend">Annuler</a>
+                    <a href="../back/userSpaceBack.php?action=cancel_carpool&id=<?= $carpool['id'] ?>" class="travelDetailsLegend">Annuler</a>
                 </div>
             <?php endif; ?>
 
