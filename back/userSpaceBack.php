@@ -6,6 +6,11 @@ require_once "../class/Driver.php";
 require_once "../class/Car.php";
 require_once "../class/Reservation.php";
 
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $idUser = $_SESSION['user_id'];
 
 $connectedUser = new User($pdo, $idUser, null, null, null);
@@ -26,3 +31,12 @@ $carpoolListFinishedAndValidated = $usersReservations->carpoolFinishedAndValidat
 // Request to retrieve car's brands 
 $stmt = $pdo->query("SELECT id, name FROM brands ORDER BY name ASC");
 $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+/*Cancel a carpool*/
+if (isset($_GET['action'])) {
+    if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'cancel_carpool') {
+        $idTravel = $_GET['id'];
+        $usersReservations->cancelCarpool($pdo, $idUser, $idTravel);
+        header('Location: ../index/userSpaceIndex.php');
+    }
+}
