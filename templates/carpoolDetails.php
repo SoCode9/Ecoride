@@ -38,8 +38,9 @@
             </div>
 
             <div class="seatsAndEco">
-                <div> <?php $seatsAvailable = $travel->getAvailableSeats();
-                if ($seatsAvailable === 1) {
+                <div> <?php $seatsAvailable = seatsAvailable($travel->getOfferedSeats(), ($reservation->nbPassengerInACarpool($pdo, $travel->getIdTravel())));
+
+                if ($seatsAvailable <= 1) {
                     echo htmlspecialchars($seatsAvailable) . " place restante";
                 } else {
                     echo htmlspecialchars($seatsAvailable) . " places restantes";

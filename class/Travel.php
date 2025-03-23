@@ -52,7 +52,8 @@ class Travel
             $this->travelDepartureTime = $travelData['travel_departure_time'];
             $this->travelArrivalTime = $travelData['travel_arrival_time'];
             $this->travelPrice = $travelData['travel_price'];
-            $this->availableSeats = $travelData['seats_offered'] - $travelData['seats_allocated'];
+            $this->seatsOffered = $travelData['seats_offered'];
+           // $this->availableSeats = $travelData['seats_offered'] - $travelData['seats_allocated'];
             $this->travelDescription = $travelData['travel_description'];
         } else {
             throw new Exception("Trajet introuvable.");
@@ -89,6 +90,10 @@ class Travel
         return $this->travelPrice;
     }
 
+    public function getOfferedSeats()
+    {
+        return $this->seatsOffered;
+    }
     public function getAvailableSeats()
     {
         return $this->availableSeats;
@@ -137,13 +142,13 @@ class Travel
             $dateSearch = $dateObject->format('Y-m-d'); // Format SQL
         }
 
-        $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, AVG(ratings.rating) AS driver_rating, 
+        $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, AVG(ratings.rating) AS driver_rating,
         cars.car_electric AS car_electric, TIMESTAMPDIFF(MINUTE, travel_departure_time, travel_arrival_time)/60 AS travel_duration 
         FROM travels 
         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
         JOIN cars ON cars.car_id = travels.car_id  
         LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
-        WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) AND (travels.seats_offered >travels.seats_allocated)";
+        WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) /* AND (travels.seats_offered >travels.seats_allocated) */";
 
         if (isset($eco)) {
             $sql .= " AND (car_electric = 1)";
@@ -218,7 +223,7 @@ class Travel
         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
         JOIN cars ON cars.car_id = travels.car_id  
         LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
-        WHERE (travel_date > :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) AND (travels.seats_offered >travels.seats_allocated)";
+        WHERE (travel_date > :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) /* AND (travels.seats_offered >travels.seats_allocated) */";
         if (isset($eco)) {
             $sql .= " AND (car_electric = 1)";
         }
