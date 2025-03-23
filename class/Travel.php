@@ -19,8 +19,6 @@ class Travel
 
     private ?int $travelPrice;
 
-    private ?int $seatsOffered;
-
     private ?int $carId;
     private int $availableSeats;
     private ?string $travelDescription;
@@ -52,9 +50,8 @@ class Travel
             $this->travelDepartureTime = $travelData['travel_departure_time'];
             $this->travelArrivalTime = $travelData['travel_arrival_time'];
             $this->travelPrice = $travelData['travel_price'];
-            $this->seatsOffered = $travelData['seats_offered'];
-           // $this->availableSeats = $travelData['seats_offered'] - $travelData['seats_allocated'];
             $this->travelDescription = $travelData['travel_description'];
+            $this->carId = $travelData['car_id'];
         } else {
             throw new Exception("Trajet introuvable.");
         }
@@ -66,6 +63,12 @@ class Travel
     {
         return $this->id;
     }
+
+    public function getCarId()
+    {
+        return $this->carId;
+    }
+
     public function getDepartureCity()
     {
         return $this->travelDepartureCity;
@@ -90,10 +93,6 @@ class Travel
         return $this->travelPrice;
     }
 
-    public function getOfferedSeats()
-    {
-        return $this->seatsOffered;
-    }
     public function getAvailableSeats()
     {
         return $this->availableSeats;
@@ -106,7 +105,7 @@ class Travel
     public function saveTravelToDatabase()
     {
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO travels (travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price,seats_offered, car_id) VALUES (:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:seats_offered ,:car_id)");
+            $stmt = $this->pdo->prepare("INSERT INTO travels (travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price, car_id) VALUES (:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:car_id)");
             return $stmt->execute([
                 ':travel_date' => $this->travelDate,
                 ':travel_departure_city' => $this->travelDepartureCity,
@@ -114,7 +113,6 @@ class Travel
                 ':travel_departure_time' => $this->travelDepartureTime,
                 ':travel_arrival_time' => $this->travelArrivalTime,
                 ':travel_price' => $this->travelPrice,
-                ':seats_offered' => $this->seatsOffered,
                 ':car_id' => $this->carId
             ]);
 
@@ -131,7 +129,7 @@ class Travel
      * @param string $arrivalCitySearch //arrivalCity searched
      * @return array //return the array of all travels meeting the criteria
      */
-    public function searchTravels(?string $dateSearch=null, ?string $departureCitySearch=null, ?string $arrivalCitySearch=null, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
+    public function searchTravels(?string $dateSearch = null, ?string $departureCitySearch = null, ?string $arrivalCitySearch = null, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
     {
         if (!$this->pdo) {
             die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
@@ -143,12 +141,12 @@ class Travel
         }
 
         $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, AVG(ratings.rating) AS driver_rating,
-        cars.car_electric AS car_electric, TIMESTAMPDIFF(MINUTE, travel_departure_time, travel_arrival_time)/60 AS travel_duration 
+        cars.car_electric AS car_electric, cars.car_seats_offered AS seats_offered, TIMESTAMPDIFF(MINUTE, travel_departure_time, travel_arrival_time)/60 AS travel_duration 
         FROM travels 
         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
         JOIN cars ON cars.car_id = travels.car_id  
         LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
-        WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) /* AND (travels.seats_offered >travels.seats_allocated) */";
+        WHERE (travel_date = :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) ";
 
         if (isset($eco)) {
             $sql .= " AND (car_electric = 1)";
@@ -217,13 +215,13 @@ class Travel
      * @param mixed $driverRating //if selected
      * @return array //return only one date, the earliest
      */
-    public function searchnextTravelDate(?string $dateSearch=null, ?string $departureCitySearch=null, ?string $arrivalCitySearch=null, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
+    public function searchnextTravelDate(?string $dateSearch = null, ?string $departureCitySearch = null, ?string $arrivalCitySearch = null, ?int $eco = null, ?int $maxPrice = null, ?int $maxDuration = null, ?float $driverRating = null): array
     {
         $sql = "SELECT travel_date FROM travels 
         JOIN users ON users.id = travels.driver_id JOIN driver ON driver.user_id = travels.driver_id 
         JOIN cars ON cars.car_id = travels.car_id  
         LEFT JOIN ratings ON ratings.driver_id = driver.user_id  -- Lier la table des notes
-        WHERE (travel_date > :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) /* AND (travels.seats_offered >travels.seats_allocated) */";
+        WHERE (travel_date > :travel_date) AND (travel_departure_city = :departure_city) AND (travel_arrival_city = :arrival_city) ";
         if (isset($eco)) {
             $sql .= " AND (car_electric = 1)";
         }

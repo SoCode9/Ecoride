@@ -123,7 +123,7 @@
                             <span class="hoursTravel">Arrivée à <?= htmlspecialchars($t['travel_arrival_time']) ?></span>
                             <span class="seatsAvailable">Encore
                                 <?php
-                                $seatsAvailable = seatsAvailable($t['seats_offered'], $reservation->nbPassengerInACarpool($pdo, $t['id']));
+                                $seatsAvailable = seatsAvailable($car->nbSeatsOfferedInACarpool($pdo, $t['car_id']), $reservation->nbPassengerInACarpool($pdo, $t['id']));
                                 if ($seatsAvailable > 1) {
                                     echo $seatsAvailable . " places";
                                 } else {

@@ -138,6 +138,16 @@ class Car
         }
     }
 
+    public function nbSeatsOfferedInACarpool($pdo, $carId)
+    {
+        $sql = "SELECT car_seats_offered AS 'seats_offered' FROM cars WHERE car_id = :carId";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':carId', $carId, PDO::PARAM_INT);
+        $statement->execute();
+        $nbSeatsOfferedInACarpool = $statement->fetch();
+        return $nbSeatsOfferedInACarpool['seats_offered'];
+    }
+
     public function getCars(): array
     {
         return $this->cars ?? [];

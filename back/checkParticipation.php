@@ -2,6 +2,8 @@
 
 require_once "../database.php";
 require_once "../class/Reservation.php";
+require_once "../class/Car.php";
+require_once "../class/Travel.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -37,8 +39,11 @@ $userCredit = (int) $user['credit'];
 
 // SQL query to retrieve available seats in real time 
 $reservation = new Reservation($pdo, $userId, $travelId);
+$car = new Car($pdo, null, $travelId);
+$travel = new Travel($pdo, $travelId);
 $seatsAllocated = $reservation->nbPassengerInACarpool($pdo, $travelId);
-$stmt = $pdo->prepare("SELECT seats_offered - $seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = ?"); // "?" => 'travel_id'
+$seatsOffered = $car->nbSeatsOfferedInACarpool($pdo, $travel->getCarId());
+$stmt = $pdo->prepare("SELECT $seatsOffered - $seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = ?"); // "?" => 'travel_id'
 $stmt->execute([$travelId]);
 $travel = $stmt->fetch();
 
