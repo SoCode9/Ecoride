@@ -18,14 +18,16 @@
                 <img class="imgFilter" src="../icons/Localisation(2).png" alt="">
                 <input type="text" id="arrival-city-search" name="arrival-city-search" class="cityField"
                     placeholder="Ville d'arrivée"
-                    value="<?= isset($_SESSION['arrival-city-search']) ? htmlspecialchars($_SESSION['arrival-city-search']) : '' ?>" required>
+                    value="<?= isset($_SESSION['arrival-city-search']) ? htmlspecialchars($_SESSION['arrival-city-search']) : '' ?>"
+                    required>
                 <div id="arrival-suggestions" class="suggestions-list"></div>
             </div>
             <div class="searchField">
                 <img class="imgFilterDate" src="../icons/Calendrier2.png" alt="Calendrier">
                 <input type="date" id="departure-date-search" name="departure-date-search" class="dateField"
                     placeholder="Date du départ"
-                    value="<?= isset($_SESSION['departure-date-search']) ? htmlspecialchars($_SESSION['departure-date-search']) : ''  ?>" required>
+                    value="<?= isset($_SESSION['departure-date-search']) ? htmlspecialchars($_SESSION['departure-date-search']) : '' ?>"
+                    required>
             </div>
 
             <div class="searchButton">
@@ -121,7 +123,7 @@
                             <span class="hoursTravel">Arrivée à <?= htmlspecialchars($t['travel_arrival_time']) ?></span>
                             <span class="seatsAvailable">Encore
                                 <?php
-                                $seatsAvailable = seatsAvailable($t['seats_offered'], $t['seats_allocated']);
+                                $seatsAvailable = seatsAvailable($t['seats_offered'], $reservation->nbPassengerInACarpool($pdo, $t['id']));
                                 if ($seatsAvailable > 1) {
                                     echo $seatsAvailable . " places";
                                 } else {
@@ -153,7 +155,7 @@
 
 
                     <?php endforeach;
-                } elseif (isset($_POST['action'])) { 
+                } elseif (isset($_POST['action'])) {
                     echo "Oups.. Aucun covoiturage n'est proposé pour cette recherche.";
                 }
 

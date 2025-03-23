@@ -21,7 +21,9 @@ $userId = $_SESSION['user_id'];
 $travelId = intval($_POST['travel_id']);
 
 // Check that carpooling exists and get the price
-$stmt = $pdo->prepare("SELECT seats_offered - seats_allocated AS availableSeats, travel_price FROM travels WHERE id = ?");
+$reservation = new Reservation ($pdo,$userId,$travelId);
+$seatsAllocated = $reservation->nbPassengerInACarpool($pdo,$travelId);
+$stmt = $pdo->prepare("SELECT seats_offered - $seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = ?");
 $stmt->execute([$travelId]);
 $travel = $stmt->fetch();
 
@@ -64,9 +66,9 @@ try {
     $stmt = $pdo->prepare("UPDATE users SET credit = credit - ? WHERE id = ?");
     $stmt->execute([$travelPrice, $userId]);
 
-    // Update nb seats_allocated
+    /* // Update nb seats_allocated
     $stmt = $pdo->prepare("UPDATE travels SET seats_allocated= seats_allocated +1 WHERE id = ?");
-    $stmt->execute([$travelId]);
+    $stmt->execute([$travelId]); */
 
     $stmt = $pdo->prepare("INSERT INTO reservations (user_id,travel_id) VALUES (?,?)");
     $stmt->execute([$userId, $travelId]);

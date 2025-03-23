@@ -6,18 +6,28 @@ class Reservation
 {
     private ?PDO $pdo;
     private int $reservationId;
-    private int $userId;
+    private ?int $userId;
     private ?int $travelId;
 
     private ?bool $isValidated;
     private ?int $creditSpent;
 
-    public function __construct($pdo, $userId, ?int $travelId = null, ?bool $isValidated = null)
+    public function __construct($pdo, ?int $userId = null, ?int $travelId = null, ?bool $isValidated = null)
     {
         $this->pdo = $pdo;
         $this->userId = $userId;
         $this->travelId = $travelId;
         $this->isValidated = $isValidated;
+    }
+
+    public function nbPassengerInACarpool($pdo, $travelId)
+    {
+        $sql = "SELECT COUNT(travel_id)AS 'seats_allocated' FROM reservations WHERE travel_id = :travelId";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        $statement->execute();
+        $nbPassengerInACarpool = $statement->fetch();
+        return $nbPassengerInACarpool['seats_allocated'];
     }
 
     public function carpoolFinishedToValidate($pdo, $userId)

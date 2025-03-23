@@ -9,7 +9,7 @@ require_once "../database.php";
 require_once "../class/Travel.php";
 require_once "../class/User.php";
 require_once "../class/Driver.php";
-
+require_once "../class/Reservation.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['action'])) {
 
@@ -48,6 +48,7 @@ try {
         maxDuration: $maxDuration,
         driverRating: $driverRating
     );
+    $reservation = new Reservation($pdo);
 
     if (!$travelsSearched) {
         // if no travel is found, search for the next travel that matches the criteria
