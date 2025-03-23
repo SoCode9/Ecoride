@@ -24,6 +24,16 @@ if (!isset($userId)) {
     exit;
 }
 
+$statement = $pdo->prepare('SELECT id FROM reservations WHERE user_id = :userId AND travel_id = :travelId');
+$statement-> bindParam(':userId', $userId, PDO::PARAM_INT);
+$statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+$statement->execute();
+$reservationAlreadyDone = $statement->fetch();
+if($reservationAlreadyDone){
+    echo json_encode(["success" => false, "message" => "Utilisateur déjà inscrit à ce covoiturage"]);
+    exit; 
+}
+
 // Retrieve user's credits
 $stmt = $pdo->prepare("SELECT credit FROM users where id = ?");
 $stmt->execute([$userId]);
