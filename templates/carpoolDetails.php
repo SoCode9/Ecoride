@@ -38,7 +38,7 @@
             </div>
 
             <div class="seatsAndEco">
-                <div> <?php $seatsAvailable = seatsAvailable($travel->getOfferedSeats(), ($reservation->nbPassengerInACarpool($pdo, $travel->getIdTravel())));
+                <div> <?php $seatsAvailable = seatsAvailable($car->nbSeatsOfferedInACarpool($pdo, $travel->getCarId()), ($reservation->nbPassengerInACarpool($pdo, $travel->getIdTravel())));
 
                 if ($seatsAvailable <= 1) {
                     echo htmlspecialchars($seatsAvailable) . " place restante";
@@ -185,18 +185,18 @@
 
                     <?php
                     $foodPref = $driver->getFoodPreference();
-                       if ($foodPref === true): ?>
+                    if ($foodPref === true): ?>
                         <div class='textIcon'>
-                        <img src='../icons/foodOk.png' class='imgFilter' alt=''> 
-                        <span>La nourriture est autorisée dans la voiture </span>
-                    </div>
+                            <img src='../icons/foodOk.png' class='imgFilter' alt=''>
+                            <span>La nourriture est autorisée dans la voiture </span>
+                        </div>
                     <?PHP elseif ($foodPref === false): ?>
                         <div class='textIcon'>
-                        <img src='../icons/foodNotOk.png' class='imgFilter' alt=''> 
-                        <span>Pas de nourriture dans la voiture s'il vous plait</span>
-                    </div>
+                            <img src='../icons/foodNotOk.png' class='imgFilter' alt=''>
+                            <span>Pas de nourriture dans la voiture s'il vous plait</span>
+                        </div>
                     <?php endif; ?>
-                    
+
                 </div>
             </div>
         </section>
