@@ -77,8 +77,8 @@ try {
     $stmt = $pdo->prepare("UPDATE travels SET seats_allocated= seats_allocated +1 WHERE id = ?");
     $stmt->execute([$travelId]); */
 
-    $stmt = $pdo->prepare("INSERT INTO reservations (user_id,travel_id) VALUES (?,?)");
-    $stmt->execute([$userId, $travelId]);
+    $stmt = $pdo->prepare("INSERT INTO reservations (user_id,travel_id, credits_spent) VALUES (?,?,?)");
+    $stmt->execute([$userId, $travelId, $travelPrice]);
 
 
     $pdo->commit(); // validates the transaction
