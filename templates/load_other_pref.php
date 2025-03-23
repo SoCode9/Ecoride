@@ -5,10 +5,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once "../database.php";
 require_once "../class/Driver.php";
+require_once "../back/userSpaceBack.php";
 
 $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-if (($idUser === 2) or ($idUser === 3)) {
+if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)) {
     $driver = new Driver($pdo, $idUser);
 
     $customPreferencesInDB = $driver->loadCustomPreferences($pdo, $idUser);
