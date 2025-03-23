@@ -40,6 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         window.location.href = "../index/carpoolSearchIndex.php"; // CHANGER LA REDIRECTION VERS PAGE CONNEXION
                     }
                 }
+
+                if(data.message && data.message.includes("Utilisateur déjà inscrit à ce covoiturage")){
+                    alert("Vous êtes déjà inscrit à ce covoiturage.")
+                }
             })
             .catch(error => {
                 console.error("Erreur AJAX :", error);
