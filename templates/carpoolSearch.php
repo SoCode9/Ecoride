@@ -109,6 +109,15 @@
                     foreach ($travelsSearched as $t): ?>
 
                         <div class="travel">
+                            <?php
+                            $seatsAvailable = seatsAvailable(
+                                $car->nbSeatsOfferedInACarpool($pdo, $t['car_id']),
+                                $reservation->nbPassengerInACarpool($pdo, $t['id'])
+                            );
+                            if ($seatsAvailable === 0): ?>
+                                <span class="watermark-complet">Complet</span>
+                            <?php endif; ?>
+
                             <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photoUser">
                             <span class="pseudoUser"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
                             <div class="driverRating">
@@ -123,7 +132,6 @@
                             <span class="hoursTravel">Arrivée à <?= htmlspecialchars($t['travel_arrival_time']) ?></span>
                             <span class="seatsAvailable">Encore
                                 <?php
-                                $seatsAvailable = seatsAvailable($car->nbSeatsOfferedInACarpool($pdo, $t['car_id']), $reservation->nbPassengerInACarpool($pdo, $t['id']));
                                 if ($seatsAvailable > 1) {
                                     echo $seatsAvailable . " places";
                                 } else {
