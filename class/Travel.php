@@ -22,6 +22,7 @@ class Travel
     private ?int $carId;
     private int $availableSeats;
     private ?string $travelDescription;
+    private ?string $travelStatus;
 
 
     public function __construct(PDO $pdo, ?int $travelId = null)
@@ -52,6 +53,7 @@ class Travel
             $this->travelPrice = $travelData['travel_price'];
             $this->travelDescription = $travelData['travel_description'];
             $this->carId = $travelData['car_id'];
+            $this->travelStatus = $travelData['travel_status'];
         } else {
             throw new Exception("Trajet introuvable.");
         }
@@ -62,6 +64,11 @@ class Travel
     public function getIdTravel()
     {
         return $this->id;
+    }
+
+    public function getIdDriver()
+    {
+        return $this->driverId;
     }
 
     public function getCarId()
@@ -100,6 +107,11 @@ class Travel
     public function getDescription(): string|null
     {
         return $this->travelDescription;
+    }
+
+    public function getStatus(): string|null
+    {
+        return $this->travelStatus;
     }
 
     public function saveTravelToDatabase()
@@ -271,7 +283,14 @@ class Travel
         return $nextTravelDate;
     }
 
-
+    public function setTravelStatus($newStatus, $travelId)
+    {
+        $sql = 'UPDATE travels SET travel_status = :newStatus WHERE id = :travelId';
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':newStatus', $newStatus, PDO::PARAM_STR);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        $statement->execute();
+    }
 
     public function getDriverId()
     {
