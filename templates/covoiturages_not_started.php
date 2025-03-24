@@ -7,7 +7,9 @@
         <h2 class="subTitleGreen" style="color: black ;">Covoiturages terminés, en attente de validation</h2>
     <?php endif; ?>
     <?php foreach ($carpoolListToValidate as $carpool): ?>
-        <div class="travel">
+        <div class="travel" <?php if (($carpool['driver_id'] === $_SESSION['user_id'])) {
+            echo "style='border:2px solid #4D9856;'";
+        } ?>>
 
             <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photoUser">
             <span class="pseudoUser"><?= htmlspecialchars($carpool['pseudo']) ?></span>
@@ -37,11 +39,12 @@
                     echo $trajetPrice . " crédit";
                 }
                 ?></span>
-            <div class="seeDetailTrajet">
-                <a href="xx.php?id=" class="travelDetailsLegend">Valider</a>
 
-
-            </div>
+            <?php if ($driver->getId() !== $idUser): ?>
+                <div class="seeDetailTrajet">
+                    <a href="xx.php?id=" class="travelDetailsLegend">Valider</a>
+                </div>
+            <?php endif; ?>
         </div>
     <?php endforeach; ?>
 
@@ -85,7 +88,8 @@
             </span>
             <?php if ($carpool['travel_status'] === 'not started'): ?>
                 <div class="seeDetailTrajet" style="background-color:#EDEDED;">
-                    <a href="../back/userSpaceBack.php?action=cancel_carpool&id=<?= $carpool['id'] ?>" class="travelDetailsLegend">Annuler</a>
+                    <a href="../back/userSpaceBack.php?action=cancel_carpool&id=<?= $carpool['id'] ?>"
+                        class="travelDetailsLegend">Annuler</a>
                 </div>
             <?php endif; ?>
 
@@ -95,12 +99,14 @@
 
             if (($carpool['travel_status'] === 'not started') && ($carpool['driver_id'] === $_SESSION['user_id']) && $departureDateTime !== false && $departureDateTime <= $now): ?>
                 <div class="seeDetailTrajet" style=" background-color: #68C990;">
-                    <a href="../back/userSpaceBack.php?action=start_carpool&id=<?= $carpool['id'] ?>" class="travelDetailsLegend">Démarrer</a>
+                    <a href="../back/userSpaceBack.php?action=start_carpool&id=<?= $carpool['id'] ?>"
+                        class="travelDetailsLegend">Démarrer</a>
                 </div>
             <?php endif; ?>
             <?php if (($carpool['travel_status'] === 'in progress') && ($carpool['driver_id'] === $_SESSION['user_id'])): ?>
                 <div class="seeDetailTrajet" style=" background-color: #68C990;">
-                    <a href="xx.php?id=" class="travelDetailsLegend">Terminer</a>
+                    <a href="../back/userSpaceBack.php?action=complete_carpool&id=<?= $carpool['id'] ?>"
+                        class="travelDetailsLegend">Terminer</a>
                 </div>
             <?php endif; ?>
         </div>

@@ -71,7 +71,35 @@ if (isset($_GET['action'])) {
     if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'start_carpool') {
         $idTravel = $_GET['id'];
         $travel = new Travel($pdo, $idTravel);
-        $travel->setTravelStatus('in progress',$idTravel);
+        $travel->setTravelStatus('in progress', $idTravel);
         header('Location: ../index/userSpaceIndex.php');
+    }
+
+    /*Complete a carpool*/
+    if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'complete_carpool') {
+        $idTravel = $_GET['id'];
+        $travel = new Travel($pdo, $idTravel);
+        $travel->setTravelStatus('in validation', $idTravel);
+        header('Location: ../index/userSpaceIndex.php');
+
+        //send an email to passengers
+        $reservation = new Reservation($pdo, null, $idTravel);
+
+        $passengersIdOfTheCarpool = $reservation->getPassengersOfTheCarpool($pdo, $idTravel);
+        $travelDate = formatDateLong($travel->getDate($idTravel));
+        $travelDeparture = $travel->getDepartureCity();
+        $travelArrival = $travel->getArrivalCity();
+        $message = "Le covoiturage du $travelDate de $travelDeparture à $travelArrival est terminé ! 
+        Merci de valider que tout s'est bien passé en vous rendant sur votre espace utilisateur. 
+        N'hésitez pas à soumettre un avis.";
+
+        foreach ($passengersIdOfTheCarpool as $passengerId) {
+            $passenger = new User($pdo, $passengerId['user_id']);
+            $passengerMail = $passenger->getMail();
+            mail($passengerMail, 'Validation du covoiturage', $message, 'FROM: test@ecoride.local');
+        }
+        $_SESSION['success_message'] = "Vos crédits seront mis à jour une fois que les passagers auront validé le covoiturage.";
+
+
     }
 }

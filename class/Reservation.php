@@ -38,7 +38,7 @@ class Reservation
         JOIN users ON users.id = travels.driver_id
         LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
         
-        WHERE (travel_status = 'in validation') AND (reservations.user_id =:userConnected_id)
+        WHERE (travel_status = 'in validation') AND ((reservations.user_id =:userConnected_id) OR (travels.driver_id =:userConnected_id))
         GROUP BY travels.id, users.pseudo
         ORDER BY travel_date ASC ";
 
