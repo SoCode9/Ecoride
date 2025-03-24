@@ -32,11 +32,13 @@ $carpoolListFinishedAndValidated = $usersReservations->carpoolFinishedAndValidat
 $stmt = $pdo->query("SELECT id, name FROM brands ORDER BY name ASC");
 $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-/*Cancel a carpool*/
+
 if (isset($_GET['action'])) {
+    /*Cancel a carpool*/
     if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'cancel_carpool') {
         $idTravel = $_GET['id'];
         $travel = new Travel($pdo, $idTravel);
+        /*If I'm the driver*/
         if ($travel->getDriverId() === $idUser) {
             $reservation = new Reservation($pdo, null, $idTravel);
 
@@ -57,11 +59,19 @@ if (isset($_GET['action'])) {
             header('Location: ../index/userSpaceIndex.php');
             $_SESSION['success_message'] = "Le covoiturage a été annulé. Les passagers ont reçu un mail leur en informant.";
 
-
+            /*If I'm only a passenger*/
         } elseif ($travel->getDriverId() !== $idUser) {
             $usersReservations->cancelCarpool($pdo, $idUser, $idTravel);
             header('Location: ../index/userSpaceIndex.php');
 
         }
+    }
+
+    /*Start a carpool*/
+    if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'start_carpool') {
+        $idTravel = $_GET['id'];
+        $travel = new Travel($pdo, $idTravel);
+        $travel->setTravelStatus('in progress',$idTravel);
+        header('Location: ../index/userSpaceIndex.php');
     }
 }

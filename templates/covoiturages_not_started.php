@@ -95,7 +95,7 @@
 
             if (($carpool['travel_status'] === 'not started') && ($carpool['driver_id'] === $_SESSION['user_id']) && $departureDateTime !== false && $departureDateTime <= $now): ?>
                 <div class="seeDetailTrajet" style=" background-color: #68C990;">
-                    <a href="xx.php?id=" class="travelDetailsLegend">Démarrer</a>
+                    <a href="../back/userSpaceBack.php?action=start_carpool&id=<?= $carpool['id'] ?>" class="travelDetailsLegend">Démarrer</a>
                 </div>
             <?php endif; ?>
             <?php if (($carpool['travel_status'] === 'in progress') && ($carpool['driver_id'] === $_SESSION['user_id'])): ?>
