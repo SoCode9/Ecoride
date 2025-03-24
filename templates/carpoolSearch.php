@@ -108,7 +108,9 @@
                 if (!empty($travelsSearched)) {
                     foreach ($travelsSearched as $t): ?>
 
-                        <div class="travel">
+                        <div class="travel" <?php if (($t['driver_id'] === $_SESSION['user_id'])) {
+                            echo "style='border:2px solid #4D9856;'";
+                        } ?>>
                             <?php
                             $seatsAvailable = seatsAvailable(
                                 $car->nbSeatsOfferedInACarpool($pdo, $t['car_id']),

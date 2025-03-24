@@ -44,6 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 if(data.message && data.message.includes("Utilisateur déjà inscrit à ce covoiturage")){
                     alert("Vous êtes déjà inscrit à ce covoiturage.")
                 }
+
+                if(data.message && data.message.includes("Le covoiturage est soit en cours, soit annulé, soit terminé.")){
+                    alert("Impossible de participer au covoiturage.")
+                }
             })
             .catch(error => {
                 console.error("Erreur AJAX :", error);
