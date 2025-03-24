@@ -25,13 +25,13 @@ if (!isset($userId)) {
 }
 
 $statement = $pdo->prepare('SELECT id FROM reservations WHERE user_id = :userId AND travel_id = :travelId');
-$statement-> bindParam(':userId', $userId, PDO::PARAM_INT);
+$statement->bindParam(':userId', $userId, PDO::PARAM_INT);
 $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
 $statement->execute();
 $reservationAlreadyDone = $statement->fetch();
-if($reservationAlreadyDone){
+if ($reservationAlreadyDone) {
     echo json_encode(["success" => false, "message" => "Utilisateur déjà inscrit à ce covoiturage"]);
-    exit; 
+    exit;
 }
 
 // Retrieve user's credits
@@ -50,15 +50,20 @@ $userCredit = (int) $user['credit'];
 // SQL query to retrieve available seats in real time 
 $reservation = new Reservation($pdo, $userId, $travelId);
 $car = new Car($pdo, null, $travelId);
-$travel = new Travel($pdo, $travelId);
+$newTravel = new Travel($pdo, $travelId);
 $seatsAllocated = $reservation->nbPassengerInACarpool($pdo, $travelId);
-$seatsOffered = $car->nbSeatsOfferedInACarpool($pdo, $travel->getCarId());
+$seatsOffered = $car->nbSeatsOfferedInACarpool($pdo, $newTravel->getCarId());
 $stmt = $pdo->prepare("SELECT $seatsOffered - $seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = ?"); // "?" => 'travel_id'
 $stmt->execute([$travelId]);
 $travel = $stmt->fetch();
 
 if (!$travel) {
     echo json_encode(["success" => false, "message" => "Covoiturage introuvable."]);
+    exit;
+}
+
+if ($newTravel->getStatus() !== 'not started') {
+    echo json_encode(["success" => false, "message" => "Le covoiturage est soit en cours, soit annulé, soit terminé."]);
     exit;
 }
 

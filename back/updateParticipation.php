@@ -27,9 +27,9 @@ $travelId = intval($_POST['travel_id']);
 // Check that carpooling exists and get the price
 $reservation = new Reservation($pdo, $userId, $travelId);
 $car = new Car($pdo, null, $travelId);
-$travel = new Travel($pdo, $travelId);
+$newTravel = new Travel($pdo, $travelId);
 $seatsAllocated = $reservation->nbPassengerInACarpool($pdo, $travelId);
-$seatsOffered = $car->nbSeatsOfferedInACarpool($pdo, $travel->getCarId());
+$seatsOffered = $car->nbSeatsOfferedInACarpool($pdo, $newTravel->getCarId());
 $stmt = $pdo->prepare("SELECT $seatsOffered - $seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = ?");
 $stmt->execute([$travelId]);
 $travel = $stmt->fetch();
@@ -44,6 +44,11 @@ $travelPrice = (int) $travel['travel_price'];
 
 if ($availableSeats <= 0) {
     echo json_encode(["success" => false, "message" => "Plus de places disponibles."]);
+    exit;
+}
+
+if($newTravel->getStatus() !== 'not started'){
+    echo json_encode(["success" => false, "message" => "Impossible de participer au covoiturage."]);
     exit;
 }
 
