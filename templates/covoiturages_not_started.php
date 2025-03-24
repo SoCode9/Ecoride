@@ -91,8 +91,9 @@
 
             <?php
             $now = new DateTime(); // current hour
-            $departureTime = DateTime::createFromFormat("H:i:s", $carpool['travel_departure_time']);
-            if (($carpool['travel_status'] === 'not started') && ($carpool['driver_id'] === $_SESSION['user_id']) && ($departureTime <= $now)): ?>
+            $departureDateTime = DateTime::createFromFormat("Y-m-d H:i:s", $carpool['travel_date'] . ' ' . $carpool['travel_departure_time']);
+
+            if (($carpool['travel_status'] === 'not started') && ($carpool['driver_id'] === $_SESSION['user_id']) && $departureDateTime !== false && $departureDateTime <= $now): ?>
                 <div class="seeDetailTrajet" style=" background-color: #68C990;">
                     <a href="xx.php?id=" class="travelDetailsLegend">Démarrer</a>
                 </div>

@@ -5,7 +5,7 @@ require_once "../class/User.php";
 require_once "../class/Driver.php";
 require_once "../class/Car.php";
 require_once "../class/Reservation.php";
-
+require_once "../class/Travel.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -36,7 +36,32 @@ $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (isset($_GET['action'])) {
     if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'cancel_carpool') {
         $idTravel = $_GET['id'];
-        $usersReservations->cancelCarpool($pdo, $idUser, $idTravel);
-        header('Location: ../index/userSpaceIndex.php');
+        $travel = new Travel($pdo, $idTravel);
+        if ($travel->getDriverId() === $idUser) {
+            $reservation = new Reservation($pdo, null, $idTravel);
+
+            $passengersIdOfTheCarpool = $reservation->getPassengersOfTheCarpool($pdo, $idTravel);
+            $travelDate = formatDateLong($travel->getDate($idTravel));
+            $travelDeparture = $travel->getDepartureCity();
+            $travelArrival = $travel->getArrivalCity();
+            $message = "Le covoiturage du $travelDate de $travelDeparture à $travelArrival a été annulé par le chauffeur.";
+
+            foreach ($passengersIdOfTheCarpool as $passengerId) {
+                $passenger = new User($pdo, $passengerId['user_id']);
+                $passengerMail = $passenger->getMail();
+                mail($passengerMail, 'Annulation du covoiturage', $message, 'FROM: test@ecoride.local');
+                $reservation->cancelCarpool($pdo, $passengerId['user_id'], $idTravel);
+            }
+            $travel->setTravelStatus('cancelled', $idTravel); //change travel's status
+
+            header('Location: ../index/userSpaceIndex.php');
+            $_SESSION['success_message'] = "Le covoiturage a été annulé. Les passagers ont reçu un mail leur en informant.";
+
+
+        } elseif ($travel->getDriverId() !== $idUser) {
+            $usersReservations->cancelCarpool($pdo, $idUser, $idTravel);
+            header('Location: ../index/userSpaceIndex.php');
+
+        }
     }
 }

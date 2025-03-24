@@ -8,6 +8,9 @@
         <div class="travel" <?php if (($carpool['driver_id'] === $_SESSION['user_id'])) {
             echo "style='border:2px solid #4D9856;'";
         } ?>>
+            <?php if ($carpool['travel_status'] === 'cancelled'): ?>
+                <span class="watermark-complet">Annulé</span>
+            <?php endif; ?>
 
             <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photoUser">
             <span class="pseudoUser"><?= htmlspecialchars($carpool['pseudo']) ?></span>

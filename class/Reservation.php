@@ -82,7 +82,7 @@ class Reservation
         JOIN users ON users.id = travels.driver_id
         LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
         
-        WHERE (travel_status = 'ended') AND ((reservations.user_id =:userConnected_id)OR (driver.user_id = :user_connected_id))
+        WHERE ((travel_status = 'ended')OR(travel_status = 'cancelled')) AND ((reservations.user_id =:userConnected_id)OR (driver.user_id = :user_connected_id))
         GROUP BY travels.id
         ORDER BY travel_date ASC ";
 
@@ -124,6 +124,20 @@ class Reservation
             $statement->execute();
             $creditSpentOnTheReservation = $statement->fetch(PDO::FETCH_ASSOC);
             return $creditSpentOnTheReservation['credits_spent'];
+        } catch (Exception $e) {
+            echo "Erreur : " . $e->getMessage();
+        }
+    }
+
+    public function getPassengersOfTheCarpool($pdo, $travelId)
+    {
+        $sql = 'SELECT user_id FROM reservations WHERE travel_id = :travelId';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+            $passengersOfTheCarpool = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $passengersOfTheCarpool;
         } catch (Exception $e) {
             echo "Erreur : " . $e->getMessage();
         }
