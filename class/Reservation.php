@@ -32,13 +32,14 @@ class Reservation
 
     public function carpoolFinishedToValidate($pdo, $userId)
     {
-        $sql = "SELECT travels.*, users.pseudo, ratings.rating FROM travels 
+        $sql = "SELECT travels.*, users.pseudo, ratings.rating, reservations.is_validated FROM travels 
         JOIN reservations ON reservations.travel_id = travels.id 
         JOIN driver ON driver.user_id = travels.driver_id 
         JOIN users ON users.id = travels.driver_id
         LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
         
         WHERE (travel_status = 'in validation') AND ((reservations.user_id =:userConnected_id) OR (travels.driver_id =:userConnected_id))
+        AND reservations.is_validated = 0
         GROUP BY travels.id, users.pseudo
         ORDER BY travel_date ASC ";
 
@@ -76,13 +77,13 @@ class Reservation
 
     public function carpoolFinishedAndValidated($pdo, $userId)
     {
-        $sql = "SELECT travels.*, users.pseudo, ratings.rating FROM travels 
+        $sql = "SELECT travels.*, users.pseudo, ratings.rating, reservations.is_validated FROM travels 
         LEFT JOIN reservations ON reservations.travel_id = travels.id 
         JOIN driver ON driver.user_id = travels.driver_id 
         JOIN users ON users.id = travels.driver_id
         LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
         
-        WHERE ((travel_status = 'ended')OR(travel_status = 'cancelled')) AND ((reservations.user_id =:userConnected_id)OR (driver.user_id = :user_connected_id))
+        WHERE ((travel_status = 'ended')OR(travel_status = 'cancelled'))OR(travel_status = 'in validation' AND reservations.is_validated = 1) AND ((reservations.user_id =:userConnected_id)OR (driver.user_id = :user_connected_id))
         GROUP BY travels.id
         ORDER BY travel_date ASC ";
 
@@ -111,6 +112,31 @@ class Reservation
 
         } catch (Exception $e) {
             echo "Erreur : " . $e->getMessage();
+        }
+    }
+
+    /**
+     * if the carpool is validated
+     * 1.get credit spent by the passenger (in reservations' table)
+     * 2. update credit of the driver
+     * 3. set the reservation as validated
+     * 4. if all the carpool's reservations are validated : put the carpool as "ended"
+     * @param mixed $pdo
+     * @param mixed $userId //the passenger id
+     * @param mixed $driverId
+     * @param mixed $travelId
+     * @return void
+     */
+    public function validateCarpool($pdo, $userId, $driverId, $travelId)
+    {
+        $creditSpentOnTheReservation = $this->getCreditSpent($pdo, $userId, $travelId);
+        $this->setCreditToUser($pdo, $driverId, $creditSpentOnTheReservation);
+        $this->setValidate($pdo, $userId, $travelId);
+        $reservationsNotValidatedOfTheCarpool = $this->getReservationsNotValidatedOfACarpool($pdo, $travelId);
+        if (is_null($reservationsNotValidatedOfTheCarpool)) {
+            require_once "../class/Travel.php";
+            $travel = new Travel($pdo, $travelId);
+            $travel->setTravelStatus('ended', $travelId);
         }
     }
 
@@ -143,6 +169,21 @@ class Reservation
         }
     }
 
+    public function getReservationsNotValidatedOfACarpool($pdo, $travelId)
+    {
+        $sql = 'SELECT * FROM reservations WHERE is_validated = 0 AND travel_id = :travelId';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam('travelId', $travelId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+            $reservationsNotValidated = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $reservationsNotValidated;
+        } catch (Exception $e) {
+            new Exception("Erreur lors du la récupération des covoiturages non validés : " . $e->getMessage());
+
+        }
+    }
+
     private function setCreditToUser($pdo, $userId, $creditToSent)
     {
         $sql = 'UPDATE users SET credit=credit+:creditToSent WHERE id = :userId';
@@ -155,5 +196,18 @@ class Reservation
             echo "Erreur : " . $e->getMessage();
         }
 
+    }
+
+    private function setValidate($pdo, $userId, $travelId)
+    {
+        $sql = 'UPDATE reservations SET is_validated = 1 WHERE (user_id = :userId AND travel_id = :travelId)';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        try {
+            return $statement->execute();
+        } catch (Exception $e) {
+            new Exception("Erreur lors de la validation :" . $e->getMessage());
+        }
     }
 }

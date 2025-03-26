@@ -7,6 +7,7 @@ require_once "../class/Car.php";
 require_once "../class/Reservation.php";
 require_once "../class/Travel.php";
 
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
