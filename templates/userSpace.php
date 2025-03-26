@@ -67,7 +67,7 @@
                         <input type="hidden" name="mode" value="edit"> <!--À enlever ??-->
 
                         <div class="filter">
-                            <label for="licence_plate" >Plaque immatriculation : </label>
+                            <label for="licence_plate">Plaque immatriculation : </label>
                             <input type="text" id="licence_plate" name="licence_plate" class="textField"
                                 placeholder="AA-000-AA" required>
                         </div>
@@ -124,7 +124,7 @@
                 <h2 class="subTitleGreen">Préférences en tant que chauffeur</h2>
                 <div class="subTitleAndContent" style="padding:10px 0px">
                     <span>Voyager avec des fumeurs ne me dérange pas</span>
-                    <div class="treeRadioButton" >
+                    <div class="treeRadioButton">
                         <div class="filter">
                             <label for="smoke_yes" class="radioNotEdit">Oui</label>
                             <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getSmokerPreference() === true)) {
@@ -231,13 +231,13 @@
                                 echo 'checked';
                             } ?>>
                         </div>
-                    </div >
-                    <div id="pref-container">
-                       <?php
-                    include "../templates/load_other_pref.php";
-                    ?> 
                     </div>
-                    
+                    <div id="pref-container">
+                        <?php
+                        include "../templates/load_other_pref.php";
+                        ?>
+                    </div>
+
                 </div>
 
                 <div class="prefForm hidden">

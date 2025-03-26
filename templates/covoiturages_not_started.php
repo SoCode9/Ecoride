@@ -41,7 +41,7 @@
                 ?></span>
             <?php if ($driver->getId() !== $idUser): ?>
                 <div class="seeDetailTrajet">
-                    <button class="travelDetailsLegend" data-id="<?= $carpool['id'] ?>" onclick="showPopup(event)"
+                    <button class="travelDetailsLegend" onclick="showPopup(event)" data-id="<?= $carpool['id'] ?>"
                         style="width: 100%;">Valider</button>
                 </div>
 
@@ -50,7 +50,6 @@
     <?php endforeach; ?>
 
     <?php include '../templates/carpoolToValidatePopUp.php'; ?>
-
     <!--carpool not started or in progress-->
     <?php if (!empty($carpoolListNotStarted)): ?>
         <h2 class="subTitleGreen" style="color: black ;">Covoiturages à venir</h2>
