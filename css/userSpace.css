@@ -194,3 +194,44 @@ input[type="radio"]:checked {
 .active {
     display: inline-block;
 }
+
+/*Popup validate carpool*/
+
+div.popup {
+    display: none;
+    background-color: #fff;
+    border: 2px solid #333;
+    padding: 15px;
+    width: 400px;
+    height: fit-content;
+    position: absolute;
+    align-self: anchor-center;
+    justify-self: anchor-center;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+
+}
+
+.popup h3 {
+    margin-top: 0;
+}
+
+.popup .close-btn {
+    margin-top: 15px;
+}
+
+.yesNoButton{
+    border:1.5px solid black  ;
+    border-radius: 15px;
+    padding: 5px 10px;
+}
+
+.yesNoButton:hover{
+    background-color: #ccc;
+}
+
+.buttonSelected{
+    background-color: #666666;
+    color: #fff;
+}

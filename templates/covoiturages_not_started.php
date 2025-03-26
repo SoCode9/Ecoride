@@ -39,14 +39,17 @@
                     echo $trajetPrice . " crédit";
                 }
                 ?></span>
-
             <?php if ($driver->getId() !== $idUser): ?>
                 <div class="seeDetailTrajet">
-                    <a href="xx.php?id=" class="travelDetailsLegend">Valider</a>
+                    <button class="travelDetailsLegend" data-id="<?= $carpool['id'] ?>" onclick="showPopup(event)"
+                        style="width: 100%;">Valider</button>
                 </div>
+
             <?php endif; ?>
         </div>
     <?php endforeach; ?>
+
+    <?php include '../templates/carpoolToValidatePopUp.php'; ?>
 
     <!--carpool not started or in progress-->
     <?php if (!empty($carpoolListNotStarted)): ?>
