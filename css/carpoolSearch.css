@@ -42,7 +42,6 @@
     display: flex;
     align-items: center;
     gap: 40px;
-    font-size: 50px;
     /* Taille de la flèche */
     justify-content: center;
 }
@@ -185,7 +184,7 @@
 }
 
 .resetButton {
-    all:unset;
+    all: unset;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -194,8 +193,9 @@
     justify-content: center;
     font-size: 15px;
 }
+
 .resetButton:hover {
-    background-color:#ccc;
+    background-color: #ccc;
 }
 
 /*JOUR SELECTIONNE*/
@@ -238,7 +238,8 @@
     border-radius: 20px;
     background-color: white;
     box-sizing: border-box;
-    position: relative; /* nécessaire pour positionner le watermark à l’intérieur */
+    position: relative;
+    /* nécessaire pour positionner le watermark à l’intérieur */
     overflow: hidden;
 }
 
