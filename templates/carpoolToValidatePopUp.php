@@ -65,11 +65,11 @@
         <div id="feedback-negative" style="display:none">
             <input type="hidden" name="idTravel" id="popup-idTravel-negative" value="">
 
-            <form class="filtersList" action="../back/validate_carpool.php" method="POST">
+            <form class="filtersList" action="/0-ECFEcoride/back/validate_carpool.php" method="POST"  onsubmit="console.log('Form submitted!')">
                 <label for="comment-negative">Décrivez le problème :</label>
-                <textarea name="comment-negative" id="comment-negative" required></textarea>
+                <textarea name="comment" id="comment-negative" required></textarea>
                 <div class="searchButton">
-                    <button class="legendSearch">Soumettre</button>
+                    <button type="submit" class="legendSearch" onclick="submitNegativeJS()">Soumettre</button>
                 </div>
             </form>
         </div>
@@ -151,4 +151,30 @@
             });
     }
 
+    function submitNegativeJS() {
+        const travelId = document.getElementById('popup-idTravel-negative').value;
+        const comment = document.getElementById('comment-negative').value;
+
+        fetch('/0-ECFEcoride/back/validate_carpool.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                idTravel: travelId,
+                action: 'negative',
+                comment: comment
+            })
+        })
+            .then(res => res.text())
+            .then(data => {
+                console.log("Réponse du backend :", data);
+                closePopup();
+                location.reload();
+            })
+            .catch(error => {
+                console.error("Erreur :", error);
+                alert("Une erreur s'est produite.");
+            });
+    }
 </script>

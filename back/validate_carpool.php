@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
     $idTravel = $_POST['idTravel'];
 
     $rating = $_POST['rating'] ?? null;
-    if ($rating === '') $rating = null;
+    if ($rating === '')
+        $rating = null;
 
     $comment = $_POST['comment'] ?? null;
-    var_dump($rating);
 
     $travel = new Travel($pdo, $idTravel);
     $idDriver = $travel->getDriverId();
@@ -33,8 +33,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
     }
     $reservation = new Reservation($pdo, $idPassenger, $idTravel);
     try {
-        $reservation->validateCarpool($pdo, $idPassenger, $idDriver, $idTravel);
+        $reservation->validateCarpoolYes($pdo, $idPassenger, $idDriver, $idTravel);
     } catch (Exception $e) {
-        echo "erreur dans la function validateCarpool : " . $e->getMessage();
+        echo "erreur dans la function validateCarpoolYes : " . $e->getMessage();
     }
+}
+
+//If the passenger has validated the carpool but not happy
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'negative') {
+    $idTravel = $_POST['idTravel'];
+    $comment = $_POST['comment'];
+
+    $reservation = new Reservation($pdo, $idPassenger, $idTravel, null, $comment);
+    try {
+        $reservation->validateCarpoolNo($pdo, $idPassenger, $idTravel, $comment);
+    } catch (Exception $e) {
+        echo "erreur dans la function validateCarpoolNo : " . $e->getMessage();
+    }
+
 }
