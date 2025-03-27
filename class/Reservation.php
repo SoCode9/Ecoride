@@ -11,13 +11,15 @@ class Reservation
 
     private ?bool $isValidated;
     private ?int $creditSpent;
+    private ?string $badComment;
 
-    public function __construct($pdo, ?int $userId = null, ?int $travelId = null, ?bool $isValidated = null)
+    public function __construct($pdo, ?int $userId = null, ?int $travelId = null, ?bool $isValidated = null, ?string $badComment = null)
     {
         $this->pdo = $pdo;
         $this->userId = $userId;
         $this->travelId = $travelId;
         $this->isValidated = $isValidated;
+        $this->badComment = $badComment;
     }
 
     public function nbPassengerInACarpool($pdo, $travelId)
@@ -113,7 +115,7 @@ class Reservation
     }
 
     /**
-     * if the carpool is validated
+     * if the carpool is validated (YES)
      * 1.get credit spent by the passenger (in reservations' table)
      * 2. update credit of the driver
      * 3. set the reservation as validated
@@ -124,7 +126,7 @@ class Reservation
      * @param mixed $travelId
      * @return void
      */
-    public function validateCarpool($pdo, $userId, $driverId, $travelId)
+    public function validateCarpoolYes($pdo, $userId, $driverId, $travelId)
     {
         $creditSpentOnTheReservation = $this->getCreditSpent($pdo, $userId, $travelId);
         $this->setCreditToUser($pdo, $driverId, $creditSpentOnTheReservation);
@@ -137,6 +139,22 @@ class Reservation
         }
     }
 
+    /**
+     * if the carpool is validated (NO)
+     * 1. add bad comment (in reservations' table)
+     * 2. set the reservation as validated
+     * @param mixed $pdo
+     * @param mixed $userId
+     * @param mixed $travelId
+     * @param mixed $badComment
+     * @return void
+     */
+    public function validateCarpoolNo($pdo, $userId, $travelId, $badComment)
+    {
+        $this->setBadComment($pdo, $userId, $travelId, $badComment);
+        $this->setValidate($pdo, $userId, $travelId);
+    }
+    
     private function getCreditSpent($pdo, $userId, $travelId)
     {
         $sql = 'SELECT credits_spent FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
@@ -206,5 +224,28 @@ class Reservation
         } catch (Exception $e) {
             new Exception("Erreur lors de la validation :" . $e->getMessage());
         }
+    }
+
+    /**
+     * If passenger put a bad comment on a carpool, it's added in database in reservations' table
+     * @param mixed $pdo
+     * @param mixed $userId
+     * @param mixed $travelId
+     * @param mixed $badComment
+     * @return void
+     */
+    private function setBadComment($pdo, $userId, $travelId, $badComment)
+    {
+        $sql = 'UPDATE reservations SET bad_comment =:badComment WHERE user_id = :userId AND travel_id = :travelId';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':badComment', $badComment, PDO::PARAM_STR);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+        } catch (Exception $e) {
+            echo "Erreur : " . $e->getMessage();
+        }
+
     }
 }
