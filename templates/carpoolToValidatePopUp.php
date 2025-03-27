@@ -34,7 +34,7 @@
                     <label for="driver-rating-list">Note laissée au chauffeur : </label>
                     <select id="driver-rating-list" name="driver-rating-list" style="width: 50px;">
                         <optgroup>
-                            <option value="none"></option>
+                            <option value=""></option>
                             <option value="5">5</option>
                             <option value="4.5">4.5</option>
                             <option value="4">4</option>
@@ -107,7 +107,7 @@
             document.getElementById('feedback-negative').style.display = 'none';
             document.getElementById('yesButton').classList.add('buttonSelected');
             document.getElementById('noButton').classList.remove('buttonSelected');
-            
+
             const commentNegative = document.getElementById('comment-negative') ?? null;
             commentNegative?.removeAttribute('required');
 
@@ -118,7 +118,7 @@
             document.getElementById('noButton').classList.add('buttonSelected');
 
             const commentNegative = document.getElementById('comment-negative') ?? null;
-            commentNegative?.setAttribute('required','');
+            commentNegative?.setAttribute('required', '');
         }
     }
 

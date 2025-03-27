@@ -13,11 +13,13 @@ $idPassenger = $_SESSION['user_id'];
 
 //If the passenger has validated the carpool (with or without a rating)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
-
     $idTravel = $_POST['idTravel'];
 
     $rating = $_POST['rating'] ?? null;
+    if ($rating === '') $rating = null;
+
     $comment = $_POST['comment'] ?? null;
+    var_dump($rating);
 
     $travel = new Travel($pdo, $idTravel);
     $idDriver = $travel->getDriverId();
