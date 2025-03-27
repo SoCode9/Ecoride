@@ -11,6 +11,10 @@ class Driver extends User
     private bool|null $musicPreference;
     private bool|null $speakerPreference;
     private bool|null $foodPreference;
+    private string|null $addPref1;
+    private string|null $addPref2;
+    private string|null $addPref3;
+
 
     public function __construct(PDO $pdo, int $driverId)
     {
@@ -19,6 +23,11 @@ class Driver extends User
         //$this->loadDriversRatings();
     }
 
+    /**
+     * Load all informations about the selected driver, in driver's table
+     * @throws \Exception if the driverId doesn't exist
+     * @return void
+     */
     private function loadDriverFromDB()
     {
 
@@ -37,6 +46,9 @@ class Driver extends User
             $this->musicPreference = $driverData['music'];
             $this->speakerPreference = $driverData['speaker'];
             $this->foodPreference = $driverData['food'];
+            $this->addPref1 = $driverData['add_pref_1'];
+            $this->addPref2 = $driverData['add_pref_2'];
+            $this->addPref3 = $driverData['add_pref_3'];
             // Informations inherited from User
             $this->pseudo = $driverData['pseudo'];
 
@@ -143,6 +155,24 @@ class Driver extends User
     {
         return $this->foodPreference;
     }
+
+    public function getAddPref1()
+    {
+        return $this->addPref1;
+    }
+
+
+    public function getAddPref2()
+    {
+        return $this->addPref2;
+    }
+
+
+    public function getAddPref3()
+    {
+        return $this->addPref3;
+    }
+
 
     public function setSmokerPreference($preference)
     {

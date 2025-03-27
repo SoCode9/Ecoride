@@ -1,9 +1,5 @@
 <?php
 
-/* file_put_contents("debug-form.txt", print_r($_POST, true));
-echo "REQUETE BIEN RECUE"; */
-
-
 require_once "../database.php";
 require_once "../class/Travel.php";
 require_once "../class/Reservation.php";
@@ -19,17 +15,12 @@ $idPassenger = $_SESSION['user_id'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
 
     $idTravel = $_POST['idTravel'];
-    echo "id travel : " . $idTravel;//A ENLEVER 
 
     $rating = $_POST['rating'] ?? null;
     $comment = $_POST['comment'] ?? null;
-    echo "note laissé : " . $rating;
-    echo "commentaire laissé : " . $comment;
 
     $travel = new Travel($pdo, $idTravel);
     $idDriver = $travel->getDriverId();
-
-    echo "id Driver : " . $idDriver;//A ENLEVER 
 
     if (isset($rating)) {
         $newRating = new Rating($pdo, $idPassenger, $idDriver, $rating, $comment);

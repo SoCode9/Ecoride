@@ -196,7 +196,31 @@
                             <span>Pas de nourriture dans la voiture s'il vous plait</span>
                         </div>
                     <?php endif; ?>
-
+                    <!--Others preferences-->
+                    <?php
+                    $addPref1 = $driver->getAddPref1();
+                    if (isset($addPref1)): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/addPref.png' class='imgFilter' alt=''>
+                            <span><?= $addPref1 ?></span>
+                        </div>
+                    <?php endif; ?>
+                    <?php
+                    $addPref2 = $driver->getAddPref2();
+                    if (isset($addPref2)): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/addPref.png' class='imgFilter' alt=''>
+                            <span><?= $addPref2 ?></span>
+                        </div>
+                    <?php endif; ?>
+                    <?php
+                    $addPref3 = $driver->getAddPref3();
+                    if (isset($addPref3)): ?>
+                        <div class='textIcon'>
+                            <img src='../icons/addPref.png' class='imgFilter' alt=''>
+                            <span><?= $addPref3 ?></span>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </section>
