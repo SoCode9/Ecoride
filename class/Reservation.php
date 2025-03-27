@@ -37,9 +37,7 @@ class Reservation
         JOIN driver ON driver.user_id = travels.driver_id 
         JOIN users ON users.id = travels.driver_id
         LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
-        
-        WHERE (travel_status = 'in validation') AND ((reservations.user_id =:userConnected_id) OR (travels.driver_id =:userConnected_id))
-        AND reservations.is_validated = 0
+        WHERE (travel_status = 'in validation') AND ((reservations.user_id =:userConnected_id AND reservations.is_validated = 0) OR (travels.driver_id =:userConnected_id))
         GROUP BY travels.id, users.pseudo
         ORDER BY travel_date ASC ";
 
@@ -82,8 +80,7 @@ class Reservation
         JOIN driver ON driver.user_id = travels.driver_id 
         JOIN users ON users.id = travels.driver_id
         LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
-        
-        WHERE ((travel_status = 'ended')OR(travel_status = 'cancelled'))OR(travel_status = 'in validation' AND reservations.is_validated = 1) AND ((reservations.user_id =:userConnected_id)OR (driver.user_id = :user_connected_id))
+        WHERE (reservations.user_id =:userConnected_id AND (travel_status = 'cancelled' OR reservations.is_validated = 1)) OR (driver.user_id = :user_connected_id AND (travel_status = 'cancelled' OR travel_status = 'ended'))
         GROUP BY travels.id
         ORDER BY travel_date ASC ";
 
