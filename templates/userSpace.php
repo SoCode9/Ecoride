@@ -266,7 +266,7 @@
     <section class="carpoolsUserBlock">
         <div class="headerUserInfo">
             <h1 class="pageTitle removeMargins">Mes covoiturages</h1>
-            <button class="participateButton">Proposer un covoiturage</button>
+            <a class="participateButton" href="../index/createCarpoolIndex.php">Proposer un covoiturage</a>
         </div>
 
         <div class="tabs">
