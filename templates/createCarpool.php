@@ -4,7 +4,7 @@
 
         <h1 class="pageTitle bold removeMargins">Proposer un covoiturage</h1>
 
-        <form action="" method="POST" class="filtersList" style="gap: 20px;">
+        <form action="../back/createCarpoolBack.php" method="POST" class="filtersList" style="gap: 20px;">
             <div class="filter">
                 <label for="departure-date-search">Date du départ</label>
                 <div class="filter"
@@ -47,18 +47,22 @@
             <div class="filter" style="gap:40px;">
                 <div class="filter">
                     <label for="travelPrice">Prix pour une personne : </label>
-                <input type="number" id="travelPrice" name="travelPrice" class="numberField" min="1" required>
-                <label for="travelPrice">crédits </label>
+                    <input type="number" id="travelPrice" name="travelPrice" class="numberField" min="1" required>
+                    <label for="travelPrice">crédits </label>
                 </div>
-                <div class="filter" >
+                <div class="filter">
                     <img src="../icons/addPref.png" class="imgFilter" alt="warningIcon">
-                    <span style="font-style: italic; font-size: 13px; color: #4D9856;">Rappel : 2 crédits sont pris par la plateforme EcoRide</span>
+                    <span style="font-style: italic; font-size: 13px; color: #4D9856;">Rappel : 2 crédits sont pris par
+                        la plateforme EcoRide</span>
                 </div>
             </div>
             <div class="filter">
-                <label for="carID">Voiture : </label>
-                <input type="text" id="carID" name="carID" class="textField"
-                    required><!--put a drop list with driver's cars-->
+                <label for="car">Voiture : </label>
+                <select id="car" name="car" class="textField" style="width:200px;" required>
+                    <?php foreach ($carsOfDriver as $car): ?>
+                        <option value="<?= $car['car_id'] ?>"><?= $car['name'] . " " . $car['car_model'] ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="filter">
                 <label for="comment">Ajouter un commentaire (facultatif) : </label>
