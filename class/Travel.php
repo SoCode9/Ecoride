@@ -114,19 +114,21 @@ class Travel
         return $this->travelStatus;
     }
 
-    public function saveTravelToDatabase()
+    public function saveTravelToDatabase($pdo, $driverId, $travelDate, $travelDepartureCity, $travelArrivalCity, $travelDepartureTime, $travelArrivalTime, $travelPrice, $carId, $travelComment)
     {
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO travels (travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price, car_id) VALUES (:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:car_id)");
-            return $stmt->execute([
-                ':travel_date' => $this->travelDate,
-                ':travel_departure_city' => $this->travelDepartureCity,
-                ':travel_arrival_city' => $this->travelArrivalCity,
-                ':travel_departure_time' => $this->travelDepartureTime,
-                ':travel_arrival_time' => $this->travelArrivalTime,
-                ':travel_price' => $this->travelPrice,
-                ':car_id' => $this->carId
-            ]);
+            $sql = "INSERT INTO travels (driver_id, travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price, car_id, travel_description) VALUES (:driverId,:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:car_id,:travelComment)";
+            $statement = $pdo->prepare($sql);
+            $statement->bindParam(':driverId', $driverId, PDO::PARAM_INT);
+            $statement->bindParam(':travel_date', $travelDate, PDO::PARAM_STR);
+            $statement->bindParam(':travel_departure_city', $travelDepartureCity, PDO::PARAM_STR);
+            $statement->bindParam(':travel_arrival_city', $travelArrivalCity, PDO::PARAM_STR);
+            $statement->bindParam(':travel_departure_time', $travelDepartureTime, PDO::PARAM_STR);
+            $statement->bindParam(':travel_arrival_time', $travelArrivalTime, PDO::PARAM_STR);
+            $statement->bindParam(':travel_price', $travelPrice, PDO::PARAM_INT);
+            $statement->bindParam(':car_id', $carId, PDO::PARAM_INT);
+            $statement->bindParam(':travelComment', $travelComment, PDO::PARAM_STR);
+            return $statement->execute();
 
         } catch (PDOException $e) {
             die("Erreur lors de l'insertion : " . $e->getMessage());

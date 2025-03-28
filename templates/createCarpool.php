@@ -57,8 +57,8 @@
                 </div>
             </div>
             <div class="filter">
-                <label for="car">Voiture : </label>
-                <select id="car" name="car" class="textField" style="width:200px;" required>
+                <label for="carSelected">Voiture : </label>
+                <select id="carSelected" name="carSelected" class="textField" style="width:200px;" required>
                     <?php foreach ($carsOfDriver as $car): ?>
                         <option value="<?= $car['car_id'] ?>"><?= $car['name'] . " " . $car['car_model'] ?></option>
                     <?php endforeach; ?>
