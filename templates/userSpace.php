@@ -266,7 +266,9 @@
     <section class="carpoolsUserBlock">
         <div class="headerUserInfo">
             <h1 class="pageTitle removeMargins">Mes covoiturages</h1>
-            <a class="participateButton" href="../index/createCarpoolIndex.php">Proposer un covoiturage</a>
+            <?php if (($connectedUser->getIdRole() === 2 || $connectedUser->getIdRole() === 3) && $cars == !null): ?>
+                <a class="participateButton" href="../index/createCarpoolIndex.php">Proposer un covoiturage</a>
+            <?php endif; ?>
         </div>
 
         <div class="tabs">
