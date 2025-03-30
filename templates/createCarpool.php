@@ -66,9 +66,8 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <button onclick="showPopup(event)" class="seeDetailTrajet" style="background-color:inherit; border: 1.5px solid black;">Autre voiture</button>
-                <?php include "../templates/new_car_popup.php";
-                ?>
+                <button type="button" onclick="showPopup(event)" class="seeDetailTrajet"
+                    style="background-color:inherit; border: 1.5px solid black;">Autre voiture</button>
             </div>
             <div class="filter">
                 <label for="comment">Ajouter un commentaire (facultatif) : </label>
@@ -80,5 +79,7 @@
                 <input type="submit" value="Proposer le trajet">
             </div>
         </form>
+        <?php include "../templates/new_car_popup.php";
+        ?>
     </section>
 </main>
