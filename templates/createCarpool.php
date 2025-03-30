@@ -56,13 +56,19 @@
                         la plateforme EcoRide</span>
                 </div>
             </div>
-            <div class="filter">
-                <label for="carSelected">Voiture : </label>
-                <select id="carSelected" name="carSelected" class="textField" style="width:200px;" required>
-                    <?php foreach ($carsOfDriver as $car): ?>
-                        <option value="<?= $car['car_id'] ?>"><?= $car['name'] . " " . $car['car_model'] ?></option>
-                    <?php endforeach; ?>
-                </select>
+            <div class="filter" style="gap:20px;">
+
+                <div class="filter">
+                    <label for="carSelected">Voiture : </label>
+                    <select id="carSelected" name="carSelected" class="textField" style="width:200px;" required>
+                        <?php foreach ($carsOfDriver as $car): ?>
+                            <option value="<?= $car['car_id'] ?>"><?= $car['name'] . " " . $car['car_model'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <button onclick="showPopup(event)" class="seeDetailTrajet" style="background-color:inherit; border: 1.5px solid black;">Autre voiture</button>
+                <?php include "../templates/new_car_popup.php";
+                ?>
             </div>
             <div class="filter">
                 <label for="comment">Ajouter un commentaire (facultatif) : </label>
