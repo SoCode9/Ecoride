@@ -221,17 +221,17 @@ div.popup {
     margin-top: 15px;
 }
 
-.yesNoButton{
-    border:1.5px solid black  ;
+.yesNoButton {
+    border: 1.5px solid black;
     border-radius: 15px;
     padding: 5px 10px;
 }
 
-.yesNoButton:hover{
+.yesNoButton:hover {
     background-color: #ccc;
 }
 
-.buttonSelected{
+.buttonSelected {
     background-color: #666666;
     color: #fff;
 }
