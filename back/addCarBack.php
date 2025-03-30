@@ -9,7 +9,7 @@ require_once "../class/Car.php";
 $pdo = isset($pdo) ? $pdo : null;
 $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-if (($_SERVER['REQUEST_METHOD'] === "POST" && $_POST['action'] === "formCar")) {
+if (($_SERVER['REQUEST_METHOD'] === "POST" /* && $_POST['action'] === "formCar" */)) {
     header('Content-Type: application/json');
 
     $licencePlate = $_POST['licence_plate'];

@@ -64,7 +64,6 @@
                     <hr>
                     <form id="car-form" class="filtersList" style="gap: 10px;">
                         <input type="hidden" name="action" value="formCar">
-                        <input type="hidden" name="mode" value="edit"> <!--À enlever ??-->
 
                         <div class="filter">
                             <label for="licence_plate">Plaque immatriculation : </label>
