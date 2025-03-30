@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch('../back/updateUserRoleBack.php', {
             method: 'POST',
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded" //Indique au serveur que des données sont envoyées en POST
+                "Content-Type": "application/x-www-form-urlencoded" //Indicates to the server that data is being sent via POST
             },
             body: "role_id=" + encodeURIComponent(roleId) + "&smoke_pref=" + encodeURIComponent(smokePref)
                 + "&pet_pref=" + encodeURIComponent(petPref) + "&food_pref=" + encodeURIComponent(foodPref)
@@ -164,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 if (data.success) {
                     console.log("Profil mis à jour !");
+                    location.reload();
                 } else {
                     console.error("Erreur : " + data.message);
                 }

@@ -9,9 +9,9 @@ require_once "../back/userSpaceBack.php";
 
 $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)) {
-    $driver = new Driver($pdo, $idUser);
+$driver = new Driver($pdo, $idUser);
 
+if (isset($driver)) {
     $customPreferencesInDB = $driver->loadCustomPreferences($pdo, $idUser);
 
     foreach ($customPreferencesInDB as $preference) {
