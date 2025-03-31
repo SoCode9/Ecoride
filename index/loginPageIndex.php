@@ -22,10 +22,9 @@ require_once "../back/loginPageBack.php";
 </head>
 
 <body>
-    <?php include '../templates/loginPage.php'; //PENSER à CHANGER L'ID PSEUDO ETC AVEC CREATEpSEUDO CAR AURA BESOIN DE ID POUR FORMULAIRE DE CONNEXION
+    <?php include '../templates/loginPage.php'; 
     ?>
     <?php include '../templates/footer.php'; ?>
-    <!--MANQUE FORM LOGIN-->
 
 </body>
 
