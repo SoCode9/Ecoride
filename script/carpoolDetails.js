@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         alert("Vous n'avez pas assez de crédits pour réserver ce covoiturage.");
                         return; // On stoppe ici
                     }
-                    
+
                     // double confirmation
                     let confirmParticipation = confirm("Souhaitez-vous vraiment participer à ce covoiturage ?")
                     if (confirmParticipation) {
@@ -37,15 +37,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     let confirmLogin = confirm("Vous devez être connecté pour réserver. Cliquer sur \"OK\" pour créer un compte.");
                     if (confirmLogin) {
-                        window.location.href = "../index/carpoolSearchIndex.php"; // CHANGER LA REDIRECTION VERS PAGE CONNEXION
+                        window.location.href = "../index/loginPageIndex.php";
                     }
                 }
 
-                if(data.message && data.message.includes("Utilisateur déjà inscrit à ce covoiturage")){
+                if (data.message && data.message.includes("Utilisateur déjà inscrit à ce covoiturage")) {
                     alert("Vous êtes déjà inscrit à ce covoiturage.")
                 }
 
-                if(data.message && data.message.includes("Le covoiturage est soit en cours, soit annulé, soit terminé.")){
+                if (data.message && data.message.includes("Le covoiturage est soit en cours, soit annulé, soit terminé.")) {
                     alert("Impossible de participer au covoiturage.")
                 }
             })

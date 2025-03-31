@@ -66,7 +66,8 @@
                 <div class="filter">
                     <label for="driver-rating-list">Note chauffeur (min) </label>
 
-                    <select id="driver-rating-list" name="driver-rating-list" style="width: 50px; border: 1px solid #666666;border-radius: 15px;padding: 4px;font-size: 15px;">
+                    <select id="driver-rating-list" name="driver-rating-list"
+                        style="width: 50px; border: 1px solid #666666;border-radius: 15px;padding: 4px;font-size: 15px;">
                         <optgroup>
                             <option value="none" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "none") ? 'selected' : ''; ?>></option>
                             <option value="5" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "5") ? 'selected' : ''; ?>>5</option>
@@ -108,7 +109,7 @@
                 if (!empty($travelsSearched)) {
                     foreach ($travelsSearched as $t): ?>
 
-                        <div class="travel" <?php if (($t['driver_id'] === $_SESSION['user_id'])) {
+                        <div class="travel" <?php if (isset($_SESSION['user_id']) && ($t['driver_id'] === $_SESSION['user_id'])) {
                             echo "style='border:2px solid #4D9856;'";
                         } ?>>
                             <?php
