@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin: 20px 0px;
     padding: 10px;
     border-radius: 15px;
     border: #D9D9D9 solid 3px;
@@ -21,6 +22,7 @@
     grid-template-columns: 2/3;
     display: flex;
     flex-direction: column;
+    margin: 20px 0px;
     padding: 10px;
     border-radius: 15px;
     background-color: #EDEDED;
