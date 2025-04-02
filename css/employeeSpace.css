@@ -53,7 +53,10 @@
 
 .flex-between {
     justify-content: space-between;
+}
 
+.flex-center{
+    justify-content: center;
 }
 
 /*COLORS*/
@@ -82,8 +85,12 @@
     font-size: calc(100% - 3px);
 }
 
-.text-bold{
+.text-bold {
     font-weight: bold;
+}
+
+a {
+    color: inherit;
 }
 
 /*### COMPONENTS ###*/
@@ -105,4 +112,24 @@
     border-radius: var(--border-radius);
     justify-content: center;
     border: none;
+}
+
+.tab-btn {
+    width: fit-content;
+    min-width: 150px;
+    padding: 0px 10px;
+    min-height: 30px;
+    text-align: center;
+    border-radius: var(--border-radius);
+    background-color: white;
+    color: black;
+}
+
+.tab-btn.active {
+    background-color: #666666;
+    color: white;
+}
+
+.active {
+    display: inline-block;
 }
