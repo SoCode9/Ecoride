@@ -38,9 +38,9 @@ class User
                 throw new Exception("Le mot de passe doit contenir au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial", 1);
             }
             $this->password = password_hash($password, PASSWORD_BCRYPT);
-        } /* elseif ($mail !== null && $password !== null) {
-$this->searchUserInDB($mail, $password);
-} */
+        } elseif ($mail !== null && $password !== null) {
+            $this->searchUserInDB($mail, $password);
+        }
     }
 
     public function searchUserInDB($mailTested, $passwordTested)
@@ -57,11 +57,10 @@ $this->searchUserInDB($mail, $password);
             if (password_verify($passwordTested, $foundUserInDB['password']) === false) {
                 throw new Exception("Identifiants invalides");
             } else {
-                //$this->id = $this->pdo->lastInsertId();
-                //return true;
                 // Récupération de l'ID depuis l'objet trouvé
                 if (isset($foundUserInDB['id'])) {
                     $this->id = $foundUserInDB['id'];
+                    $this->idRole = $foundUserInDB['id_role'];
                     return true;
                 } else {
                     throw new Exception("Erreur : ID utilisateur non trouvé");
@@ -102,7 +101,7 @@ $this->searchUserInDB($mail, $password);
                 ':mail' => $this->mail,
                 ':password' => $this->password,
                 ':credit' => 20,
-                'idRole' => 1,
+                ':idRole' => 1,
             ]);
 
             if ($success) {

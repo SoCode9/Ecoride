@@ -30,7 +30,11 @@
                     session_start();
                 }
                 if (isset($_SESSION['user_id'])) {
-                    echo '<a class="boutonNav borderButton" id="userSpace" href="userSpaceIndex.php">Espace Utilisateur</a>';
+                    if ($_SESSION['role_user'] == 1 || $_SESSION['role_user'] == 2 || $_SESSION['role_user'] == 3) { //if the user is a passenger or a driver or both
+                        echo '<a class="boutonNav borderButton" id="userSpace" href="userSpaceIndex.php">Espace Utilisateur</a>';
+                    } elseif ($_SESSION['role_user'] == 4) { //if the user is an employee
+                        echo '<a class="boutonNav borderButton" id="employeeSpace" href="employeeSpaceIndex.php">Espace Employé</a>';
+                    }
                     echo '<a id="logoutButton" href="#"> <img src="../icons/Deconnexion.png" alt="logout button"  class="logoutButton"> </a>';
                 } else {
                     echo '<a class="boutonNav borderButton" id="loginButton" href="loginPageIndex.php">Connexion</a>';
@@ -74,4 +78,3 @@
         }
     });
 </script>
-
