@@ -55,7 +55,7 @@
     justify-content: space-between;
 }
 
-.flex-center{
+.flex-center {
     justify-content: center;
 }
 
@@ -132,4 +132,24 @@ a {
 
 .active {
     display: inline-block;
+}
+
+.tabs {
+    display: flex;
+    gap: 12px;
+    padding: 15px 0px;
+}
+
+.tab-content {
+    display: none;
+    /* Hide default sections */
+}
+
+.tab-content.active {
+    display: block;
+    /* Display only the active tab  */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 8px;
 }

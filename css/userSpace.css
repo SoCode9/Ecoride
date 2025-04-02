@@ -160,22 +160,8 @@ input[type="radio"]:checked {
     font-size: 15px;
 }
 
-/*carpool*/
-.tabs {
-    display: flex;
-    gap: 10px;
-    padding: 15px 0px;
-}
 
-.tab-content {
-    display: none;
-    /* Hide default sections */
-}
 
-.tab-content.active {
-    display: block;
-    /* Display only the active tab  */
-}
 
 .tabButton {
     width: 150px;

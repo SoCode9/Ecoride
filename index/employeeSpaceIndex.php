@@ -22,6 +22,8 @@ require_once "../back/employeeSpaceBack.php";
 
 <head>
     <title>Espace Employé </title>
+    <script src="../script/employeeSpace.js" defer></script>
+
 </head>
 
 <body>

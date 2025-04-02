@@ -1,15 +1,15 @@
 <main>
     <div class="flex-row flex-between">
         <div class="flex-row gap-12 m-tb-12 m-8">
-            <span><?= htmlspecialchars($employee->getPseudo())?></span>
-            <span><?= htmlspecialchars($employee->getMail())?></span>
+            <span><?= htmlspecialchars($employee->getPseudo()) ?></span>
+            <span><?= htmlspecialchars($employee->getMail()) ?></span>
         </div>
         <nav class="tabs">
-            <button class="tab-btn active" data-target="validate">Valider les avis</button>
+            <button class="tab-btn active" data-target="validate-rating">Valider les avis</button>
             <button class="tab-btn" data-target="bad-carpool">Covoiturages mal passés</button>
         </nav>
     </div>
-    <section class="m-8  flex-column gap-12">
+    <section id="validate-rating" class="tab-content active">
         <h2 class="subTitleGreen">Valider les avis des participants (<?= $totalRatings ?>)</h2>
         <?php
         if (isset($ratingsInValidation)):
@@ -80,5 +80,9 @@
                 <?php endif; ?>
             </div>
         <?php endif; ?>
+    </section>
+
+    <section id="bad-carpool" class="tab-content">
+        <h2 class="subTitleGreen">Contrôler les covoiturages mal passés (<?= $totalRatings ?>)</h2>
     </section>
 </main>
