@@ -65,4 +65,17 @@ class Rating
         $statement->execute();
         return (int) $statement->fetchColumn();
     }
+
+    public function validateRating($pdo, $idRating, $newStatus)
+    {
+        $sql = "UPDATE ratings SET status = :newStatus WHERE id = :idRating";
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam('idRating', $idRating, PDO::PARAM_INT);
+        $statement->bindParam('newStatus', $newStatus, PDO::PARAM_STR);
+        try {
+            $statement->execute();
+        } catch (Exception $e) {
+            new Exception("Erreur lors du changement de statut de l'avis : " . $e);
+        }
+    }
 }

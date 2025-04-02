@@ -1,8 +1,8 @@
 <main>
     <div class="flex-row flex-between">
         <div class="flex-row gap-12 m-tb-12 m-8">
-            <span>Pseudo</span>
-            <span>mail@exemple.com</span>
+            <span><?= htmlspecialchars($employee->getPseudo())?></span>
+            <span><?= htmlspecialchars($employee->getMail())?></span>
         </div>
         <nav class="tabs">
             <button class="tab-btn active" data-target="validate">Valider les avis</button>
@@ -10,7 +10,7 @@
         </nav>
     </div>
     <section class="m-8  flex-column gap-12">
-        <h2 class="subTitleGreen">Valider les avis des participants</h2>
+        <h2 class="subTitleGreen">Valider les avis des participants (<?= $totalRatings ?>)</h2>
         <?php
         if (isset($ratingsInValidation)):
             $totalRatings = count($ratingsInValidation);
@@ -24,8 +24,10 @@
                     <div class="flex-row flex-between ">
                         <span><?= htmlspecialchars($rating['passenger_pseudo']) ?></span>
                         <div class="flex-row gap-8">
-                            <button class="btn bg-light-green">Valider</button>
-                            <button class="btn bg-light-red">Refuser</button>
+                            <a class="btn bg-light-green"
+                                href="../back/employeeSpaceBack.php?action=validate_rating&id=<?= $rating['id'] ?>">Valider</a>
+                            <a class="btn bg-light-red"
+                                href="../back/employeeSpaceBack.php?action=reject_rating&id=<?= $rating['id'] ?>">Refuser</a>
                         </div>
                     </div>
                     <div class="flex-row flex-between">
@@ -46,9 +48,14 @@
                             <img src="..\icons\Voiture.png" class="imgFilter" alt="Icone voiture">
                             <span><?= htmlspecialchars($rating['driver_pseudo']) ?></span>
                             <div class="flex-row font-size-very-small">
-                                <span>(</span>
-                                <img src="..\icons\EtoileJaune.png" class="imgFilter" alt="Icone étoile">
-                                <span><?= htmlspecialchars($driver->getAverageRatings()) ?>)</span>
+                                <?php $averageRating = $driver->getAverageRatings();
+                                if ($averageRating !== null) {
+                                    echo '<span>(</span>
+                                    <img src="..\icons\EtoileJaune.png" class="imgFilter" alt="Icone étoile">'
+                                        . htmlspecialchars($averageRating) . '<span> )</span>';
+                                } else {
+                                    echo "<span class = 'italic'>(0 avis)</span>";
+                                } ?>
                             </div>
                         </div>
                         <span

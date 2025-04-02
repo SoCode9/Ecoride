@@ -23,7 +23,7 @@
                     ?>
                 </span>
             </div>
-            <span class="dateTravel"><?= formatDate(htmlspecialchars($carpool['travel_date'])) ?> </span>
+            <span class="dateTravel" bold><?= formatDate(htmlspecialchars($carpool['travel_date'])) ?> </span>
             <span class="hoursTravel">De <?= htmlspecialchars($carpool['travel_departure_city']) ?>
             </span>
             <span class="seatsAvailable">De
