@@ -154,7 +154,7 @@ class Reservation
         $this->setBadComment($pdo, $userId, $travelId, $badComment);
         $this->setValidate($pdo, $userId, $travelId);
     }
-    
+
     private function getCreditSpent($pdo, $userId, $travelId)
     {
         $sql = 'SELECT credits_spent FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
@@ -199,6 +199,32 @@ class Reservation
         }
     }
 
+    public function getBadComments($limit = 5, $offset = 0)
+    {
+        $sql = 'SELECT reservations.*,passenger.pseudo AS pseudoPassenger, passenger.mail AS mailPassenger, driver.pseudo AS pseudoDriver, driver.mail AS mailDriver, driver.id AS idDriver, travels.travel_date, travels.travel_departure_city, travels.travel_arrival_city FROM reservations 
+        JOIN users AS passenger ON passenger.id = reservations.user_id
+        JOIN travels ON travels.id = reservations.travel_id
+        JOIN users AS driver ON driver.id = travels.driver_id
+        WHERE bad_comment IS NOT NULL AND bad_comment_validated =0
+        ORDER BY travels.travel_date ASC
+        LIMIT :limit OFFSET :offset';
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $statement->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $statement->execute();
+
+        $reservationsWithBadComment = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $reservationsWithBadComment;
+    }
+
+    public function countAllBadComments()
+    {
+        $sql = "SELECT COUNT(*) FROM reservations  WHERE bad_comment IS NOT NULL AND bad_comment_validated =0";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
+        return (int) $statement->fetchColumn();
+    }
+
     private function setCreditToUser($pdo, $userId, $creditToSent)
     {
         $sql = 'UPDATE users SET credit=credit+:creditToSent WHERE id = :userId';
@@ -236,7 +262,7 @@ class Reservation
      */
     private function setBadComment($pdo, $userId, $travelId, $badComment)
     {
-        $sql = 'UPDATE reservations SET bad_comment =:badComment WHERE user_id = :userId AND travel_id = :travelId';
+        $sql = 'UPDATE reservations SET bad_comment =:badComment, bad_comment_validated = 0  WHERE user_id = :userId AND travel_id = :travelId';
         $statement = $pdo->prepare($sql);
         $statement->bindParam(':badComment', $badComment, PDO::PARAM_STR);
         $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
