@@ -7,6 +7,7 @@ require_once "../database.php";
 
 require_once "../class/Rating.php";
 require_once "../class/Driver.php";
+require_once "../class/Reservation.php";
 
 $employee = new User($pdo, $_SESSION['user_id']);
 
@@ -34,3 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['action'])) {
     }
     header('Location: ../index/employeeSpaceIndex.php');
 }
+
+$reservation = new Reservation($pdo);
+
+$pageBadComments = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+$badCommentsPerPage = 5;
+$offsetBadComments = ($pageBadComments - 1) * $badCommentsPerPage;
+$badComments = $reservation->getBadComments($badCommentsPerPage, $offsetBadComments);
+
+$totalBadComments = $reservation->countAllBadComments();
+$totalPagesBadComments = ceil($totalBadComments / $badCommentsPerPage);

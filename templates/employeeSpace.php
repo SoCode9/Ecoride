@@ -83,55 +83,76 @@
     </section>
 
     <section id="bad-carpool" class="tab-content">
-        <h2 class="subTitleGreen">Contrôler les covoiturages mal passés (<?= $totalRatings ?>)</h2>
-
-        <div class="flex-column gap-12 block-light-grey">
-            <div class="grid-4-1">
-                <div class="flex-row gap-12" style="grid-column : 1,2">
-                    <span>Pseudo passager</span>
-                    <span>~</span>
-                    <span class="font-size-very-small" style="padding-right:15px;">mail@passager.com</span>
-                </div>
-                <a class="btn bg-light-green" 
-                    href="../back/employeeSpaceBack.php?action=XXX&id=<?= $rating['id'] ?>">Litige
-                    résolu</a>
-
-                <p class="text-bold" style="padding-right:15px;">"Je suis arrivé en retard à mon rendez-vous à cause des multiples arrêts faits par
-                    le
-                    chauffeur.
-                    J'ai tenté de lui expliquer ma situation mais il n'a rien voulu savoir"</p>
-                <div class="flex-column flex-center">
-                    <span>De Annecy </span>
-                    <span>À Grenoble</span>
-                </div>
-                <div class="flex-row gap-4">
-                    <img src="..\icons\Voiture.png" class="imgFilter" alt="Icone voiture">
-                    <div class="flex-row gap-12">
-                        <span>Pseudo chauffeur</span>
-                        <div style="padding-right:15px;">
-                            <?php $averageRating = $driver->getAverageRatings();
-                            if ($averageRating !== null) {
-                                echo '<span>(</span>
-                                    <img src="..\icons\EtoileJaune.png" class="imgFilter" alt="Icone étoile">'
-                                    . htmlspecialchars($averageRating) . '<span> )</span>';
-                            } else {
-                                echo "<span class = 'italic font-size-very-small'>(0 avis)</span>";
-                            } ?>
-                        </div>
+        <h2 class="subTitleGreen">Contrôler les covoiturages mal passés (<?= $totalBadComments ?>)</h2>
+        <?php $index = 0;
+        foreach ($badComments as $badComment):
+            $index++; ?>
+            <div class="flex-column gap-12 block-light-grey">
+                <div class="grid-4-1">
+                    <div class="flex-row gap-12" style="grid-column : 1,2">
+                        <span><?= htmlspecialchars($badComment['pseudoPassenger']) ?></span>
                         <span>~</span>
-                        <span class="font-size-very-small">mail@chauffeur.com</span>
+                        <span class="font-size-very-small"
+                            style="padding-right:15px;"><?= htmlspecialchars($badComment['mailPassenger']) ?></span>
                     </div>
+                    <a class="btn bg-light-green"
+                        href="../back/employeeSpaceBack.php?action=XXX&id=<?= $rating['id'] ?>">Litige
+                        résolu</a>
+
+                    <p class="text-bold" style="padding-right:15px;">"<?= htmlspecialchars($badComment['bad_comment']) ?>"
+                    </p>
+                    <div class="flex-column flex-center">
+                        <span>De <?= htmlspecialchars($badComment['travel_departure_city']) ?> </span>
+                        <span>À <?= htmlspecialchars($badComment['travel_arrival_city']) ?></span>
+                    </div>
+                    <div class="flex-row gap-4">
+                        <img src="..\icons\Voiture.png" class="imgFilter" alt="Icone voiture">
+                        <div class="flex-row gap-12">
+                            <span><?= htmlspecialchars($badComment['pseudoDriver']) ?></span>
+                            <div class="flex-row" style="padding-right:15px;">
+                                <?php $driverOfBadComment = new Driver($pdo, $badComment['idDriver']);
+                                $averageRating = $driverOfBadComment->getAverageRatings();
+                                if ($averageRating !== null) {
+                                    echo '<span>(</span>
+                                    <img src="..\icons\EtoileJaune.png" class="imgFilter" alt="Icone étoile">'
+                                        . htmlspecialchars($averageRating) . '<span> )</span>';
+                                } else {
+                                    echo "<span class = 'italic font-size-very-small'>(0 avis)</span>";
+                                } ?>
+                            </div>
+                            <span>~</span>
+                            <span class="font-size-very-small"><?= htmlspecialchars($badComment['mailDriver']) ?></span>
+                        </div>
+
+                    </div>
+                    <span> Date du trajet : <?= formatDate(htmlspecialchars($badComment['travel_date'])) ?></span>
 
                 </div>
-                <span> Date du trajet : 13/07/2025</span>
 
             </div>
+            </div>
+            <?php if ($index < $totalBadComments) {
+                echo '<hr>';
+            }
+            ?>
 
+        <?php endforeach; ?>
+        <div class="flex-row gap-12 flex-center m-8">
+            <?php if ($pageBadComments > 1): ?>
+                <a href="?page=<?= $pageBadComments - 1 ?>" class="btn">Page précédente</a>
+            <?php endif; ?>
 
+            <?php for ($i = 1; $i <= $totalPagesBadComments; $i++): ?>
+                <a href="?page=<?= $i ?>" class="btn <?= $i === $pageBadComments ? 'bg-light-green' : '' ?>"><?= $i ?></a>
+            <?php endfor; ?>
 
-
+            <?php if ($pageBadComments < $totalPagesBadComments): ?>
+                <a href="?page=<?= $pageBadComments + 1 ?>" class="btn">Page suivante</a>
+            <?php endif; ?>
         </div>
-        </div>
-        <hr>
+
+
+
+
     </section>
 </main>
