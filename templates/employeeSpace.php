@@ -84,5 +84,54 @@
 
     <section id="bad-carpool" class="tab-content">
         <h2 class="subTitleGreen">Contrôler les covoiturages mal passés (<?= $totalRatings ?>)</h2>
+
+        <div class="flex-column gap-12 block-light-grey">
+            <div class="grid-4-1">
+                <div class="flex-row gap-12" style="grid-column : 1,2">
+                    <span>Pseudo passager</span>
+                    <span>~</span>
+                    <span class="font-size-very-small" style="padding-right:15px;">mail@passager.com</span>
+                </div>
+                <a class="btn bg-light-green" 
+                    href="../back/employeeSpaceBack.php?action=XXX&id=<?= $rating['id'] ?>">Litige
+                    résolu</a>
+
+                <p class="text-bold" style="padding-right:15px;">"Je suis arrivé en retard à mon rendez-vous à cause des multiples arrêts faits par
+                    le
+                    chauffeur.
+                    J'ai tenté de lui expliquer ma situation mais il n'a rien voulu savoir"</p>
+                <div class="flex-column flex-center">
+                    <span>De Annecy </span>
+                    <span>À Grenoble</span>
+                </div>
+                <div class="flex-row gap-4">
+                    <img src="..\icons\Voiture.png" class="imgFilter" alt="Icone voiture">
+                    <div class="flex-row gap-12">
+                        <span>Pseudo chauffeur</span>
+                        <div style="padding-right:15px;">
+                            <?php $averageRating = $driver->getAverageRatings();
+                            if ($averageRating !== null) {
+                                echo '<span>(</span>
+                                    <img src="..\icons\EtoileJaune.png" class="imgFilter" alt="Icone étoile">'
+                                    . htmlspecialchars($averageRating) . '<span> )</span>';
+                            } else {
+                                echo "<span class = 'italic font-size-very-small'>(0 avis)</span>";
+                            } ?>
+                        </div>
+                        <span>~</span>
+                        <span class="font-size-very-small">mail@chauffeur.com</span>
+                    </div>
+
+                </div>
+                <span> Date du trajet : 13/07/2025</span>
+
+            </div>
+
+
+
+
+        </div>
+        </div>
+        <hr>
     </section>
 </main>

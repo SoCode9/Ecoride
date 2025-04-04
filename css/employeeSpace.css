@@ -27,6 +27,12 @@
     margin-bottom: 12px;
 }
 
+/*GRID*/
+.grid-4-1 {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
 /*FLEX*/
 .flex-row {
     display: flex;
