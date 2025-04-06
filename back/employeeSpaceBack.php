@@ -11,6 +11,7 @@ require_once "../class/Reservation.php";
 
 $employee = new User($pdo, $_SESSION['user_id']);
 
+//VERIFY RATINGS TAB
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $ratingsPerPage = 5;
 $offset = ($page - 1) * $ratingsPerPage;
@@ -22,26 +23,39 @@ $ratingsInValidation = $rating->loadRatingsInValidation($ratingsPerPage, $offset
 $totalRatings = $rating->countAllRatingsInValidation();
 $totalPages = ceil($totalRatings / $ratingsPerPage);
 
-if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['action'])) {
-    $idRating = $_GET['id'];
-    if ($_GET['action'] == 'validate_rating') {
-        $rating->validateRating($pdo, $idRating, 'validated');
 
-        $_SESSION['success_message'] = "Avis validé";
-    } elseif ($_GET['action'] == 'reject_rating') {
-        $rating->validateRating($pdo, $idRating, 'refused');
-
-        $_SESSION['success_message'] = "Avis rejeté";
-    }
-    header('Location: ../index/employeeSpaceIndex.php');
-}
-
+//BAD COMMENTS TAB
 $reservation = new Reservation($pdo);
 
 $pageBadComments = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $badCommentsPerPage = 5;
 $offsetBadComments = ($pageBadComments - 1) * $badCommentsPerPage;
 $badComments = $reservation->getBadComments($badCommentsPerPage, $offsetBadComments);
-
+// pagination
 $totalBadComments = $reservation->countAllBadComments();
 $totalPagesBadComments = ceil($totalBadComments / $badCommentsPerPage);
+
+
+if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['action'])) {
+
+    if ($_GET['action'] == 'validate_rating') {
+        $idRating = $_GET['id'];
+        $rating->validateRating($pdo, $idRating, 'validated');
+
+        $_SESSION['success_message'] = "Avis validé";
+        header('Location: ../index/employeeSpaceIndex.php');
+    } elseif ($_GET['action'] == 'reject_rating') {
+        $idRating = $_GET['id'];
+        $rating->validateRating($pdo, $idRating, 'refused');
+
+        $_SESSION['success_message'] = "Avis rejeté";
+        header('Location: ../index/employeeSpaceIndex.php');
+    } elseif ($_GET['action'] == 'resolved') {
+        $reservationId = $_GET['id'];
+        $reservation->resolveBadComment($pdo, $reservationId);
+
+        $_SESSION['success_message'] = "Litige résolu";
+        header('Location: ../index/employeeSpaceIndex.php?tab=bad-carpool'); 
+    }
+
+}

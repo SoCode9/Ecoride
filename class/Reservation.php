@@ -110,7 +110,7 @@ class Reservation
             $statement->execute();
 
         } catch (Exception $e) {
-            echo "Erreur : " . $e->getMessage();
+            new Exception("Erreur : " . $e->getMessage());
         }
     }
 
@@ -155,6 +155,60 @@ class Reservation
         $this->setValidate($pdo, $userId, $travelId);
     }
 
+    public function resolveBadComment($pdo, $reservationId)
+    {
+        try {
+            $this->setBadCommentValidated($pdo, $reservationId);
+            $this->setCreditToUser($pdo, $this->getDriverIdFromReservation($pdo, $reservationId), $this->getCreditSpent2($pdo, $reservationId));
+        } catch (Exception $e) {
+            new Exception("Erreur : " . $e->getMessage());
+        }
+    }
+
+    private function getDriverIdFromReservation($pdo, $reservationId)
+    {
+        $travelId = $this->loadReservationFromDB($pdo, $reservationId)['travel_id'];
+
+        $sql = 'SELECT driver_id FROM travels WHERE id = :travelId';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+            $driverId = $statement->fetch(PDO::FETCH_ASSOC);
+
+            return $driverId['driver_id'];
+        } catch (Exception $e) {
+            new Exception("Erreur lors de la récupération de l'id du chauffeur : " . $e->getMessage());
+        }
+    }
+
+    private function loadReservationFromDB($pdo, $reservationId)
+    {
+        $sql = 'SELECT * FROM reservations WHERE id = :reservationId ';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':reservationId', $reservationId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+            $reservationData = $statement->fetch(PDO::FETCH_ASSOC);
+            return $reservationData;
+        } catch (Exception $e) {
+            new Exception("Erreur lors du chargement des informations de la réservation : " . $e->getMessage());
+        }
+    }
+
+    private function getCreditSpent2($pdo, $reservationId)
+    {
+        $sql = 'SELECT credits_spent FROM reservations WHERE id = :reservationId';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':reservationId', $reservationId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+            $creditSpentOnTheReservation = $statement->fetch(PDO::FETCH_ASSOC);
+            return $creditSpentOnTheReservation['credits_spent'];
+        } catch (Exception $e) {
+            new Exception("Erreur lors de la récupération des crédits : " . $e->getMessage());
+        }
+    }
     private function getCreditSpent($pdo, $userId, $travelId)
     {
         $sql = 'SELECT credits_spent FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
@@ -166,7 +220,7 @@ class Reservation
             $creditSpentOnTheReservation = $statement->fetch(PDO::FETCH_ASSOC);
             return $creditSpentOnTheReservation['credits_spent'];
         } catch (Exception $e) {
-            echo "Erreur : " . $e->getMessage();
+            new Exception("Erreur : " . $e->getMessage());
         }
     }
 
@@ -180,7 +234,7 @@ class Reservation
             $passengersOfTheCarpool = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $passengersOfTheCarpool;
         } catch (Exception $e) {
-            echo "Erreur : " . $e->getMessage();
+            new Exception("Erreur : " . $e->getMessage());
         }
     }
 
@@ -234,7 +288,7 @@ class Reservation
         try {
             $statement->execute();
         } catch (Exception $e) {
-            echo "Erreur : " . $e->getMessage();
+            new Exception("Erreur lors de la mise à jour des crédits de l'utilisateur : " . $e->getMessage());
         }
 
     }
@@ -270,8 +324,20 @@ class Reservation
         try {
             $statement->execute();
         } catch (Exception $e) {
-            echo "Erreur : " . $e->getMessage();
+            new Exception("Erreur : " . $e->getMessage());
         }
 
+    }
+
+    private function setBadCommentValidated($pdo, $reservationId)
+    {
+        $sql = 'UPDATE reservations SET bad_comment_validated = 1  WHERE id = :idReservation';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':idReservation', $reservationId, PDO::PARAM_STR);
+        try {
+            $statement->execute();
+        } catch (Exception $e) {
+            new Exception("Erreur : " . $e->getMessage());
+        }
     }
 }
