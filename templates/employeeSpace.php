@@ -1,15 +1,21 @@
 <main>
+    <?php
+    $currentTab = $_GET['tab'] ?? 'validate-rating';
+    ?>
+
     <div class="flex-row flex-between">
         <div class="flex-row gap-12 m-tb-12 m-8">
             <span><?= htmlspecialchars($employee->getPseudo()) ?></span>
             <span><?= htmlspecialchars($employee->getMail()) ?></span>
         </div>
         <nav class="tabs">
-            <button class="tab-btn active" data-target="validate-rating">Valider les avis</button>
-            <button class="tab-btn" data-target="bad-carpool">Covoiturages mal passés</button>
+            <button class="tab-btn <?= $currentTab === 'validate-rating' ? 'active' : '' ?>"
+                data-target="validate-rating">Valider les avis</button>
+            <button class="tab-btn <?= $currentTab === 'bad-carpool' ? 'active' : '' ?>"
+                data-target="bad-carpool">Covoiturages mal passés</button>
         </nav>
     </div>
-    <section id="validate-rating" class="tab-content active">
+    <section id="validate-rating" class="tab-content <?= $currentTab === 'validate-rating' ? 'active' : '' ?>">
         <h2 class="subTitleGreen">Valider les avis des participants (<?= $totalRatings ?>)</h2>
         <?php
         if (isset($ratingsInValidation)):
@@ -67,22 +73,26 @@
                 <?php endif; ?>
             <?php endforeach; ?>
             <div class="flex-row gap-12 flex-center m-8">
-                <?php if ($page > 1): ?>
-                    <a href="?page=<?= $page - 1 ?>" class="btn">Page précédente</a>
+                <?php
+                $currentTab = $_GET['tab'] ?? 'validate-rating';
+
+                if ($page > 1): ?>
+                    <a href="?tab=<?= $currentTab ?>&page=<?= $page - 1 ?>" class="btn">Page précédente</a>
                 <?php endif; ?>
 
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <a href="?page=<?= $i ?>" class="btn <?= $i === $page ? 'bg-light-green' : '' ?>"><?= $i ?></a>
+                    <a href="?tab=<?= $currentTab ?>&page=<?= $i ?>"
+                        class="btn <?= $i === $page ? 'bg-light-green' : '' ?>"><?= $i ?></a>
                 <?php endfor; ?>
 
                 <?php if ($page < $totalPages): ?>
-                    <a href="?page=<?= $page + 1 ?>" class="btn">Page suivante</a>
+                    <a href="?tab=<?= $currentTab ?>&page=<?= $page + 1 ?>" class="btn">Page suivante</a>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
     </section>
 
-    <section id="bad-carpool" class="tab-content">
+    <section id="bad-carpool" class="tab-content <?= $currentTab === 'bad-carpool' ? 'active' : '' ?>">
         <h2 class="subTitleGreen">Contrôler les covoiturages mal passés (<?= $totalBadComments ?>)</h2>
         <?php $index = 0;
         foreach ($badComments as $badComment):
@@ -96,7 +106,7 @@
                             style="padding-right:15px;"><?= htmlspecialchars($badComment['mailPassenger']) ?></span>
                     </div>
                     <a class="btn bg-light-green"
-                        href="../back/employeeSpaceBack.php?action=XXX&id=<?= $rating['id'] ?>">Litige
+                        href="../back/employeeSpaceBack.php?action=XXX&id=<?= $badComment['id'] ?>">Litige
                         résolu</a>
 
                     <p class="text-bold" style="padding-right:15px;">"<?= htmlspecialchars($badComment['bad_comment']) ?>"
@@ -139,15 +149,16 @@
         <?php endforeach; ?>
         <div class="flex-row gap-12 flex-center m-8">
             <?php if ($pageBadComments > 1): ?>
-                <a href="?page=<?= $pageBadComments - 1 ?>" class="btn">Page précédente</a>
+                <a href="?tab=<?= $currentTab ?>&page=<?= $pageBadComments - 1 ?>" class="btn">Page précédente</a>
             <?php endif; ?>
 
             <?php for ($i = 1; $i <= $totalPagesBadComments; $i++): ?>
-                <a href="?page=<?= $i ?>" class="btn <?= $i === $pageBadComments ? 'bg-light-green' : '' ?>"><?= $i ?></a>
+                <a href="?tab=<?= $currentTab ?>&page=<?= $i ?>"
+                    class="btn <?= $i === $pageBadComments ? 'bg-light-green' : '' ?>"><?= $i ?></a>
             <?php endfor; ?>
 
             <?php if ($pageBadComments < $totalPagesBadComments): ?>
-                <a href="?page=<?= $pageBadComments + 1 ?>" class="btn">Page suivante</a>
+                <a href="?tab=<?= $currentTab ?>&page=<?= $pageBadComments + 1 ?>" class="btn">Page suivante</a>
             <?php endif; ?>
         </div>
 
