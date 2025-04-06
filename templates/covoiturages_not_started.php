@@ -41,7 +41,7 @@
                 ?></span>
             <?php if ($driver->getId() !== $idUser): ?>
                 <div class="seeDetailTrajet">
-                    <button class="travelDetailsLegend" onclick="showPopup(event)" data-id="<?= $carpool['id'] ?>"
+                    <button class="travelDetailsLegend" onclick="showPopup(event)" data-id="<?= $carpool['reservationId'] ?>"
                         style="width: 100%;">Valider</button>
                 </div>
 

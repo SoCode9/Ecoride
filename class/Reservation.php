@@ -34,7 +34,7 @@ class Reservation
 
     public function carpoolFinishedToValidate($pdo, $userId)
     {
-        $sql = "SELECT travels.*, users.pseudo, ratings.rating, reservations.is_validated FROM travels 
+        $sql = "SELECT travels.*, users.pseudo, ratings.rating, reservations.is_validated, reservations.id AS reservationId FROM travels 
         JOIN reservations ON reservations.travel_id = travels.id 
         JOIN driver ON driver.user_id = travels.driver_id 
         JOIN users ON users.id = travels.driver_id
@@ -121,18 +121,21 @@ class Reservation
      * 3. set the reservation as validated
      * 4. if all the carpool's reservations are validated : put the carpool as "ended"
      * @param mixed $pdo
-     * @param mixed $userId //the passenger id
-     * @param mixed $driverId
-     * @param mixed $travelId
+     * @param mixed $reservationId
      * @return void
      */
-    public function validateCarpoolYes($pdo, $userId, $driverId, $travelId)
+    public function validateCarpoolYes($pdo, $reservationId)
     {
-        $creditSpentOnTheReservation = $this->getCreditSpent($pdo, $userId, $travelId);
-        $this->setCreditToUser($pdo, $driverId, $creditSpentOnTheReservation);
-        $this->setValidate($pdo, $userId, $travelId);
+        $creditSpentOnTheReservation = $this->getCreditSpent2($pdo, $reservationId);
+
+        $this->setCreditToUser($pdo, $this->getDriverIdFromReservation($pdo, $reservationId), $creditSpentOnTheReservation);
+        $this->setValidate($pdo, $reservationId);
+
+        $travelId = $this->getTravelIdFromReservation($pdo, $reservationId);
+
         $reservationsNotValidatedOfTheCarpool = $this->getReservationsNotValidatedOfACarpool($pdo, $travelId);
-        if (is_null($reservationsNotValidatedOfTheCarpool)) {
+
+        if (empty($reservationsNotValidatedOfTheCarpool)) {
             require_once "../class/Travel.php";
             $travel = new Travel($pdo, $travelId);
             $travel->setTravelStatus('ended', $travelId);
@@ -144,30 +147,54 @@ class Reservation
      * 1. add bad comment (in reservations' table)
      * 2. set the reservation as validated
      * @param mixed $pdo
-     * @param mixed $userId
-     * @param mixed $travelId
+     * @param mixed $reservationId
      * @param mixed $badComment
      * @return void
      */
-    public function validateCarpoolNo($pdo, $userId, $travelId, $badComment)
+    public function validateCarpoolNo($pdo, $reservationId, $badComment)
     {
-        $this->setBadComment($pdo, $userId, $travelId, $badComment);
-        $this->setValidate($pdo, $userId, $travelId);
+        $this->setBadComment($pdo, $reservationId, $badComment);
+        $this->setValidate($pdo, $reservationId);
     }
 
+    /**
+     * When the employee has resolved a bad comment
+     * 1. set the bad comment as validated
+     * 2. the credits' driver are updated
+     * 3. if all the carpool's reservations are validated : put the carpool as "ended"
+     * @param mixed $pdo
+     * @param mixed $reservationId
+     * @return void
+     */
     public function resolveBadComment($pdo, $reservationId)
     {
         try {
             $this->setBadCommentValidated($pdo, $reservationId);
             $this->setCreditToUser($pdo, $this->getDriverIdFromReservation($pdo, $reservationId), $this->getCreditSpent2($pdo, $reservationId));
+
+            $travelId = $this->getTravelIdFromReservation($pdo, $reservationId);
+
+            $reservationsNotValidatedOfTheCarpool = $this->getReservationsNotValidatedOfACarpool($pdo, $travelId);
+
+            if (empty($reservationsNotValidatedOfTheCarpool)) {
+                require_once "../class/Travel.php";
+                $travel = new Travel($pdo, $travelId);
+                $travel->setTravelStatus('ended', $travelId);
+            }
+
         } catch (Exception $e) {
             new Exception("Erreur : " . $e->getMessage());
         }
     }
 
-    private function getDriverIdFromReservation($pdo, $reservationId)
+    /**
+     * Get the driver id of a reservation
+     * @param mixed $pdo
+     * @param mixed $reservationId
+     */
+    public function getDriverIdFromReservation($pdo, $reservationId)
     {
-        $travelId = $this->loadReservationFromDB($pdo, $reservationId)['travel_id'];
+        $travelId = $this->getTravelIdFromReservation($pdo, $reservationId);
 
         $sql = 'SELECT driver_id FROM travels WHERE id = :travelId';
         $statement = $pdo->prepare($sql);
@@ -182,15 +209,15 @@ class Reservation
         }
     }
 
-    private function loadReservationFromDB($pdo, $reservationId)
+    private function getTravelIdFromReservation($pdo, $reservationId)
     {
-        $sql = 'SELECT * FROM reservations WHERE id = :reservationId ';
+        $sql = 'SELECT travel_id FROM reservations WHERE id = :reservationId ';
         $statement = $pdo->prepare($sql);
         $statement->bindParam(':reservationId', $reservationId, PDO::PARAM_INT);
         try {
             $statement->execute();
-            $reservationData = $statement->fetch(PDO::FETCH_ASSOC);
-            return $reservationData;
+            $travelId = $statement->fetch(PDO::FETCH_ASSOC);
+            return $travelId['travel_id'];
         } catch (Exception $e) {
             new Exception("Erreur lors du chargement des informations de la réservation : " . $e->getMessage());
         }
@@ -240,7 +267,7 @@ class Reservation
 
     public function getReservationsNotValidatedOfACarpool($pdo, $travelId)
     {
-        $sql = 'SELECT * FROM reservations WHERE is_validated = 0 AND travel_id = :travelId';
+        $sql = 'SELECT * FROM reservations WHERE (is_validated = 0 OR bad_comment_validated = 0) AND travel_id = :travelId';
         $statement = $pdo->prepare($sql);
         $statement->bindParam('travelId', $travelId, PDO::PARAM_INT);
         try {
@@ -293,12 +320,11 @@ class Reservation
 
     }
 
-    private function setValidate($pdo, $userId, $travelId)
+    private function setValidate($pdo, $reservationId)
     {
-        $sql = 'UPDATE reservations SET is_validated = 1 WHERE (user_id = :userId AND travel_id = :travelId)';
+        $sql = 'UPDATE reservations SET is_validated = 1 WHERE id = :reservationId';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        $statement->bindParam(':reservationId', $reservationId, PDO::PARAM_INT);
         try {
             return $statement->execute();
         } catch (Exception $e) {
@@ -309,18 +335,16 @@ class Reservation
     /**
      * If passenger put a bad comment on a carpool, it's added in database in reservations' table
      * @param mixed $pdo
-     * @param mixed $userId
-     * @param mixed $travelId
+     * @param mixed $reservationId
      * @param mixed $badComment
      * @return void
      */
-    private function setBadComment($pdo, $userId, $travelId, $badComment)
+    private function setBadComment($pdo, $reservationId, $badComment)
     {
-        $sql = 'UPDATE reservations SET bad_comment =:badComment, bad_comment_validated = 0  WHERE user_id = :userId AND travel_id = :travelId';
+        $sql = 'UPDATE reservations SET bad_comment =:badComment, bad_comment_validated = 0  WHERE id = :reservationId';
         $statement = $pdo->prepare($sql);
         $statement->bindParam(':badComment', $badComment, PDO::PARAM_STR);
-        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        $statement->bindParam(':reservationId', $reservationId, PDO::PARAM_INT);
         try {
             $statement->execute();
         } catch (Exception $e) {
@@ -331,9 +355,9 @@ class Reservation
 
     private function setBadCommentValidated($pdo, $reservationId)
     {
-        $sql = 'UPDATE reservations SET bad_comment_validated = 1  WHERE id = :idReservation';
+        $sql = 'UPDATE reservations SET bad_comment_validated = 1  WHERE id = :reservationId';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':idReservation', $reservationId, PDO::PARAM_STR);
+        $statement->bindParam(':reservationId', $reservationId, PDO::PARAM_STR);
         try {
             $statement->execute();
         } catch (Exception $e) {

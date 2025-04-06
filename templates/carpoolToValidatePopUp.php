@@ -11,23 +11,10 @@
 
         <!-- Step 2A : If Yes -->
         <div id="feedback-positive" style="display:none">
-
-            <!-- <h3>Valider le trajet</h3>
-            <form action="/0-ECFEcoride/back/validate_carpool.php" method="POST">
-                <input type="hidden" name="idTravel" id="popup-idTravel-positive" value="">
-                <input type="hidden" name="action" value="positive">
-
-                <label for="comment">Laissez un commentaire :</label>
-                <textarea name="comment" id="popup-comment" required></textarea>
-
-                <button onclick="submitPositiveJS()">Valider</button>
-            </form> 
-            <button onclick="document.getElementById('popup-id').style.display = 'none'">Fermer</button>
--->
             <h4>Souhaitez-vous laisser un avis ?</h4>
             <form class="filtersList" action="/0-ECFEcoride/back/validate_carpool.php" method="POST"
                 onsubmit="console.log('Form submitted!')">
-                <input type="hidden" name="idTravel" id="popup-idTravel-positive" value="">
+                <input type="hidden" name="idReservation" id="popup-idReservation-positive" value="">
                 <input type="hidden" name="action" value="positive">
 
                 <div class="filter">
@@ -63,7 +50,7 @@
 
         <!-- Step 2B : If No -->
         <div id="feedback-negative" style="display:none">
-            <input type="hidden" name="idTravel" id="popup-idTravel-negative" value="">
+            <input type="hidden" name="idReservation" id="popup-idReservation-negative" value="">
 
             <form class="filtersList" action="/0-ECFEcoride/back/validate_carpool.php" method="POST"  onsubmit="console.log('Form submitted!')">
                 <label for="comment-negative">Décrivez le problème :</label>
@@ -83,9 +70,9 @@
 <script>
     function showPopup(event) {
         /* event.preventDefault(); */
-        const travelId = event.target.getAttribute('data-id');
-        document.getElementById('popup-idTravel-positive').value = travelId;
-        document.getElementById('popup-idTravel-negative').value = travelId;
+        const reservationId = event.target.getAttribute('data-id');
+        document.getElementById('popup-idReservation-positive').value = reservationId;
+        document.getElementById('popup-idReservation-negative').value = reservationId;
         document.getElementById('popup-id').style.display = 'block';
     }
 
@@ -123,7 +110,7 @@
     }
 
     function submitPositiveJS() {
-        const travelId = document.getElementById('popup-idTravel-positive').value;
+        const reservationId = document.getElementById('popup-idReservation-positive').value;
         const comment = document.getElementById('comment-positive').value;
         const rating = document.getElementById('driver-rating-list').value;
 
@@ -133,7 +120,7 @@
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: new URLSearchParams({
-                idTravel: travelId,
+                idReservation: reservationId,
                 action: 'positive',
                 rating: rating,
                 comment: comment
@@ -143,7 +130,7 @@
             .then(data => {
                 console.log("Réponse du backend :", data);
                 closePopup();
-                location.reload();
+                location.reload(); 
             })
             .catch(error => {
                 console.error("Erreur :", error);
@@ -152,7 +139,7 @@
     }
 
     function submitNegativeJS() {
-        const travelId = document.getElementById('popup-idTravel-negative').value;
+        const reservationId = document.getElementById('popup-idReservation-negative').value;
         const comment = document.getElementById('comment-negative').value;
 
         fetch('/0-ECFEcoride/back/validate_carpool.php', {
@@ -161,7 +148,7 @@
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: new URLSearchParams({
-                idTravel: travelId,
+                idReservation: reservationId,
                 action: 'negative',
                 comment: comment
             })
