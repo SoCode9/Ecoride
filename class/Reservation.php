@@ -96,9 +96,21 @@ class Reservation
         return $carpoolListFinishedAndValidated;
     }
 
+    /**
+     * When a user (passenger or driver) cancel a carpool
+     * 1. passengers get their credits back
+     * 2. reservations are removed from the reservations's table
+     * @param mixed $pdo
+     * @param mixed $userId
+     * @param mixed $travelId
+     * @return void
+     */
     public function cancelCarpool($pdo, $userId, $travelId)
     {
-        $creditSpentOnTheReservation = $this->getCreditSpent($pdo, $userId, $travelId);
+
+        $reservationId = $this->getReservationId($pdo, $userId, $travelId);
+
+        $creditSpentOnTheReservation = $this->getCreditSpent($pdo, $reservationId);
 
         $this->setCreditToUser($pdo, $userId, $creditSpentOnTheReservation);
 
@@ -126,7 +138,7 @@ class Reservation
      */
     public function validateCarpoolYes($pdo, $reservationId)
     {
-        $creditSpentOnTheReservation = $this->getCreditSpent2($pdo, $reservationId);
+        $creditSpentOnTheReservation = $this->getCreditSpent($pdo, $reservationId);
 
         $this->setCreditToUser($pdo, $this->getDriverIdFromReservation($pdo, $reservationId), $creditSpentOnTheReservation);
         $this->setValidate($pdo, $reservationId);
@@ -170,7 +182,7 @@ class Reservation
     {
         try {
             $this->setBadCommentValidated($pdo, $reservationId);
-            $this->setCreditToUser($pdo, $this->getDriverIdFromReservation($pdo, $reservationId), $this->getCreditSpent2($pdo, $reservationId));
+            $this->setCreditToUser($pdo, $this->getDriverIdFromReservation($pdo, $reservationId), $this->getCreditSpent($pdo, $reservationId));
 
             $travelId = $this->getTravelIdFromReservation($pdo, $reservationId);
 
@@ -209,6 +221,27 @@ class Reservation
         }
     }
 
+    /**
+     * Get the reservation id of a reservation
+     * @param mixed $pdo
+     * @param mixed $userId //give the passenger id
+     * @param mixed $travelId //give the travel id
+     */
+    private function getReservationId($pdo, $userId, $travelId)
+    {
+        $sql = 'SELECT id FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
+        $statement = $pdo->prepare($sql);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+            $reservationId = $statement->fetch(PDO::FETCH_ASSOC);
+            return $reservationId['id'];
+        } catch (Exception $e) {
+            new Exception("Erreur : " . $e->getMessage());
+        }
+    }
+
     private function getTravelIdFromReservation($pdo, $reservationId)
     {
         $sql = 'SELECT travel_id FROM reservations WHERE id = :reservationId ';
@@ -223,7 +256,7 @@ class Reservation
         }
     }
 
-    private function getCreditSpent2($pdo, $reservationId)
+    private function getCreditSpent($pdo, $reservationId)
     {
         $sql = 'SELECT credits_spent FROM reservations WHERE id = :reservationId';
         $statement = $pdo->prepare($sql);
@@ -234,20 +267,6 @@ class Reservation
             return $creditSpentOnTheReservation['credits_spent'];
         } catch (Exception $e) {
             new Exception("Erreur lors de la récupération des crédits : " . $e->getMessage());
-        }
-    }
-    private function getCreditSpent($pdo, $userId, $travelId)
-    {
-        $sql = 'SELECT credits_spent FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
-        $statement = $pdo->prepare($sql);
-        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
-        try {
-            $statement->execute();
-            $creditSpentOnTheReservation = $statement->fetch(PDO::FETCH_ASSOC);
-            return $creditSpentOnTheReservation['credits_spent'];
-        } catch (Exception $e) {
-            new Exception("Erreur : " . $e->getMessage());
         }
     }
 
