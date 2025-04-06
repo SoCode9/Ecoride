@@ -106,7 +106,7 @@
                             style="padding-right:15px;"><?= htmlspecialchars($badComment['mailPassenger']) ?></span>
                     </div>
                     <a class="btn bg-light-green"
-                        href="../back/employeeSpaceBack.php?action=XXX&id=<?= $badComment['id'] ?>">Litige
+                        href="../back/employeeSpaceBack.php?action=resolved&id=<?= $badComment['id'] ?>">Litige
                         résolu</a>
 
                     <p class="text-bold" style="padding-right:15px;">"<?= htmlspecialchars($badComment['bad_comment']) ?>"
