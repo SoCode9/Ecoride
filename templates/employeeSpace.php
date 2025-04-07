@@ -99,11 +99,14 @@
             $index++; ?>
             <div class="flex-column gap-12 block-light-grey">
                 <div class="grid-4-1">
-                    <div class="flex-row gap-12" style="grid-column : 1,2">
-                        <span><?= htmlspecialchars($badComment['pseudoPassenger']) ?></span>
-                        <span>~</span>
-                        <span class="font-size-very-small"
-                            style="padding-right:15px;"><?= htmlspecialchars($badComment['mailPassenger']) ?></span>
+                    <div class="flex-row flex-between" style="grid-column : 1,2">
+                        <div class="flex-row gap-12">
+                            <span><?= htmlspecialchars($badComment['pseudoPassenger']) ?></span>
+                            <span>~</span>
+                            <span class="font-size-very-small"
+                                style="padding-right:15px;"><?= htmlspecialchars($badComment['mailPassenger']) ?></span>
+                        </div>
+                        <span style="padding:0px 15px ">Id du covoiturage : <?= htmlspecialchars($badComment['travelId']) ?></span>
                     </div>
                     <a class="btn bg-light-green"
                         href="../back/employeeSpaceBack.php?action=resolved&id=<?= $badComment['id'] ?>">Litige
