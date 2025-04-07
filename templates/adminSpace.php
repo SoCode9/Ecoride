@@ -22,46 +22,28 @@
     <section id="employees-management"
         class="tab-content <?= $currentTab === 'employees-management' ? 'active' : '' ?>">
         <div class="flex-row flex-between">
-            <h2 class="subTitleGreen">Gérer les comptes des employés (nb employés)</h2>
+            <h2 class="subTitleGreen">Gérer les comptes des employés (<?= count($employeeList) ?>)</h2>
             <a class="participateButton" href="xxx">Créer un compte employé</a>
         </div>
         <div class="half-separation m-tb-12 gap-12">
-            <div class="block-light-grey">
-                <div class="flex-row flex-between">
-                    <div class="flex-column">
-                        <span class="text-bold">Pseudo employé</span>
-                        <span class="italic">Email employé</span>
+            <?php
+            foreach ($employeeList as $employee): ?>
+                <div class="block-light-grey">
+                    <div class="flex-row flex-between">
+                        <div class="flex-column">
+                            <span class="text-bold"><?= htmlspecialchars($employee['pseudo']) ?></span>
+                            <span class="italic"><?= htmlspecialchars($employee['mail']) ?></span>
+                        </div>
+                        <?php if ($employee['is_activated'] === 1): ?>
+                            <a class="btn bg-light-red"
+                                href="../back/adminSpaceBack.php?action=suspend-employee&id=<?= $employee['id'] ?>">Suspendre</a>
+                        <?php elseif ($employee['is_activated'] === 0): ?>
+                            <a class="btn bg-light-green"
+                                href="../back/adminSpaceBack.php?action=reactivate-employee&id=<?= $employee['id'] ?>">Réactiver</a>
+                        <?php endif; ?>
                     </div>
-                    <a class="btn bg-light-red" href="xxx">Suspendre</a>
                 </div>
-            </div>
-            <div class="block-light-grey">
-                <div class="flex-row flex-between">
-                    <div class="flex-column">
-                        <span class="text-bold">Pseudo employé2</span>
-                        <span class="italic">Email employé2</span>
-                    </div>
-                    <a class="btn bg-light-red" href="xxx">Suspendre</a>
-                </div>
-            </div>
-            <div class="block-light-grey">
-                <div class="flex-row flex-between">
-                    <div class="flex-column">
-                        <span class="text-bold">Pseudo employé3</span>
-                        <span class="italic"> Email employé3</span>
-                    </div>
-                    <a class="btn bg-light-red" href="xxx">Suspendre</a>
-                </div>
-            </div>
-            <div class="block-light-grey">
-                <div class="flex-row flex-between">
-                    <div class="flex-column">
-                        <span class="text-bold">Pseudo employé4</span>
-                        <span class="italic">Email employé4</span>
-                    </div>
-                    <a class="btn bg-light-red" href="xxx">Suspendre</a>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
 
 

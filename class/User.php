@@ -43,6 +43,13 @@ class User
         }
     }
 
+    /**
+     * Check that the e-mail address + password given are correct + check that the user is activated
+     * @param mixed $mailTested
+     * @param mixed $passwordTested
+     * @throws \Exception
+     * @return bool
+     */
     public function searchUserInDB($mailTested, $passwordTested)
     {
         $sql = 'SELECT * FROM users WHERE (mail=:mailTested)';
@@ -57,17 +64,20 @@ class User
             if (password_verify($passwordTested, $foundUserInDB['password']) === false) {
                 throw new Exception("Identifiants invalides");
             } else {
-                // Récupération de l'ID depuis l'objet trouvé
-                if (isset($foundUserInDB['id'])) {
-                    $this->id = $foundUserInDB['id'];
-                    $this->idRole = $foundUserInDB['id_role'];
-                    return true;
+                if ($foundUserInDB['is_activated'] === 0) {
+                    throw new Exception("Compte désactivé");
                 } else {
-                    throw new Exception("Erreur : ID utilisateur non trouvé");
+                    // Récupération de l'ID depuis l'objet trouvé
+                    if (isset($foundUserInDB['id'])) {
+                        $this->id = $foundUserInDB['id'];
+                        $this->idRole = $foundUserInDB['id_role'];
+                        return true;
+                    } else {
+                        throw new Exception("Erreur : ID utilisateur non trouvé");
+                    }
                 }
             }
         }
-
     }
     private function loadUserFromDB()
     {
@@ -122,13 +132,28 @@ class User
         $statement->execute();
     }
 
-    public function setIdRole($roleId)
+    /**
+     * load a list of a type user
+     * @param mixed $idRole //1 = passenger ; 2 = driver ; 3 = both ; 4 = employee ; 5 = administrator
+     * @throws \Exception
+     * @return mixed
+     */
+    public function loadListUsersFromDB($roleId)
     {
-        $sql = "UPDATE users SET id_role = :roleId WHERE id = :userId";
+
+        $sql = "SELECT * FROM users WHERE id_role=:role_id ORDER BY pseudo ASC";
+
         $statement = $this->pdo->prepare($sql);
-        $statement->bindParam(':roleId', $roleId, PDO::PARAM_INT);
-        $statement->bindParam(':userId', $this->id, PDO::PARAM_INT);
-        $statement->execute();
+        $statement->bindParam(':role_id', $roleId, PDO::PARAM_INT);
+        try {
+            $statement->execute();
+            $userData = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $userData;
+
+        } catch (Exception $e) {
+            new Exception("Aucun utilisateur trouvé dans la BDD avec ce role ID" . $e->getMessage());
+        }
     }
 
     //Getters et Setters
@@ -180,7 +205,29 @@ class User
     {
         $this->credit = $newCredit;
     }
+    public function setIdRole($roleId)
+    {
+        $sql = "UPDATE users SET id_role = :roleId WHERE id = :userId";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':roleId', $roleId, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $this->id, PDO::PARAM_INT);
+        $statement->execute();
+    }
 
+    /**
+     * Active or desactive the user 
+     * @param mixed $userId
+     * @param mixed $isActivated // 1 = activated ; 0 = desactivated
+     * @return void
+     */
+    public function setIsActivatedUser($userId, $isActivated)
+    {
+        $sql = "UPDATE users SET is_activated = :isActivated WHERE id = :userId";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':isActivated', $isActivated, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->execute();
+    }
 }
 
 ?>
