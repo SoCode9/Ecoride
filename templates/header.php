@@ -35,6 +35,8 @@
                         echo '<a class="boutonNav borderButton" id="userSpace" href="userSpaceIndex.php">Espace Utilisateur</a>';
                     } elseif ($_SESSION['role_user'] == 4) { //if the user is an employee
                         echo '<a class="boutonNav borderButton" id="employeeSpace" href="employeeSpaceIndex.php">Espace Employé</a>';
+                    } elseif ($_SESSION['role_user'] == 5) { //if the user is an administraor
+                        echo '<a class="boutonNav borderButton" id="adminSpace" href="adminSpaceIndex.php">Espace Administrateur</a>';
                     }
                     echo '<a id="logoutButton" href="#"> <img src="../icons/Deconnexion.png" alt="logout button"  class="logoutButton"> </a>';
                 } else {
