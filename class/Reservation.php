@@ -301,7 +301,7 @@ class Reservation
 
     public function getBadComments($limit = 5, $offset = 0)
     {
-        $sql = 'SELECT reservations.*,passenger.pseudo AS pseudoPassenger, passenger.mail AS mailPassenger, driver.pseudo AS pseudoDriver, driver.mail AS mailDriver, driver.id AS idDriver, travels.travel_date, travels.travel_departure_city, travels.travel_arrival_city FROM reservations 
+        $sql = 'SELECT reservations.*,passenger.pseudo AS pseudoPassenger, passenger.mail AS mailPassenger, driver.pseudo AS pseudoDriver, driver.mail AS mailDriver, driver.id AS idDriver, travels.travel_date, travels.travel_departure_city, travels.travel_arrival_city, travels.id AS travelId FROM reservations 
         JOIN users AS passenger ON passenger.id = reservations.user_id
         JOIN travels ON travels.id = reservations.travel_id
         JOIN users AS driver ON driver.id = travels.driver_id
