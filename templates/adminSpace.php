@@ -51,10 +51,13 @@
 
     <section id="users-management" class="tab-content <?= $currentTab === 'users-management' ? 'active' : '' ?>">
         <div class="flex-row flex-between">
-            <h2 class="subTitleGreen">Gérer les comptes des utilisateurs (<?= count($passengersList) +count($driversList)+count($passengersAndDriversList)?>)</h2>
+            <h2 class="subTitleGreen">Gérer les comptes des utilisateurs
+                (<?= count($passengersList) + count($driversList) + count($passengersAndDriversList) ?>)</h2>
 
         </div>
+        <h3 class="subTitleGreen" style="color: black ;">Passagers</h3>
         <div class="half-separation m-tb-12 gap-12">
+
             <?php
             foreach ($passengersList as $passenger): ?>
                 <div class="block-light-grey">
@@ -73,6 +76,9 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+        </div>
+        <h3 class="subTitleGreen" style="color: black ;">Chauffeurs</h3>
+        <div class="half-separation m-tb-12 gap-12">
 
             <?php foreach ($driversList as $driver): ?>
                 <div class="block-light-grey">
@@ -91,6 +97,9 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+        </div>
+        <h3 class="subTitleGreen" style="color: black ;">Passagers-Chauffeurs</h3>
+        <div class="half-separation m-tb-12 gap-12">
 
             <?php foreach ($passengersAndDriversList as $both): ?>
                 <div class="block-light-grey">
