@@ -5,18 +5,18 @@
             <input type="hidden" name="action" value="create-employee">
 
             <div class="flex-row gap-8">
-                <label for="pseudo_employee">Pseudo : </label>
-                <input type="text" id="pseudo_employee" name="pseudo_employee" class="textField" style="flex:1;"
+                <label for="pseudo-employee">Pseudo : </label>
+                <input type="text" id="pseudo-employee" name="pseudo-employee" class="textField" style="flex:1;"
                     required>
             </div>
             <div class="flex-row gap-8">
-                <label for="mail_employee">Email : </label>
-                <input type="text" id="mail_employee" name="mail_employee" class="textField" style="flex:1;" required>
+                <label for="mail-employee">Email : </label>
+                <input type="text" id="mail-employee" name="mail-employee" class="textField" style="flex:1;" required>
             </div>
             <div class="flex-column">
                 <div class="flex-row gap-8">
-                    <label for="password_employee">Mot de passe : </label>
-                    <input type="password" id="password_employee" name="password_employee" class="textField"
+                    <label for="password-employee">Mot de passe : </label>
+                    <input type="password" id="password-employee" name="password-employee" class="textField"
                         style="flex:1;" required>
                 </div>
                 <p>
