@@ -26,7 +26,7 @@
                     <p>
                         ✔ 8 caractères minimum <br>
                         ✔ 1 majuscule et 1 minuscule minimum<br>
-                        ✔ 1 nombre minimum<br>
+                        ✔ 1 chiffre minimum<br>
                         ✔ 1 caractère spécial minimum
                     </p>
                 </div>
