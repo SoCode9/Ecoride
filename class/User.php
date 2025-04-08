@@ -101,24 +101,31 @@ class User
         }
     }
 
-    public function saveUserToDatabase()
+    /**
+     * Create the user in DB. Can be a user or an employee
+     * @param mixed $idRole // id = 1 if the user register on the login page (passenger) / id = 4 if the user is an employee created by the administrator
+     * @return bool
+     */
+    public function saveUserToDatabase($idRole)
     {
         try {
-            //Toujours utiliser les requêtes préparées avec prepare() et execute() pour éviter les injections SQL.
-            $stmt = $this->pdo->prepare("INSERT INTO users (pseudo, mail, password, credit, id_role) VALUES (:pseudo, :mail, :password, :credit, :idRole)"); //prepare($sql) → Prépare la requête sans l’exécuter immédiatement.
+            $stmt = $this->pdo->prepare("INSERT INTO users (pseudo, mail, password, id_role) VALUES (:pseudo, :mail, :password, :idRole)");
             $success = $stmt->execute([
                 ':pseudo' => $this->pseudo,
                 ':mail' => $this->mail,
                 ':password' => $this->password,
-                ':credit' => 20,
-                ':idRole' => 1,
+                ':idRole' => $idRole,
             ]);
 
-            if ($success) {
-                $this->id = $this->pdo->lastInsertId(); // Retrieves new user ID
+            if ($idRole === 1) {
+                if ($success) {
+                    $this->id = $this->pdo->lastInsertId(); // Retrieves new user ID
+                    $this->setCredit(20);
+                    $this->idRole = $idRole;
+                }
             }
-
             return $success;
+
         } catch (PDOException $e) {
             die("Erreur lors de l'insertion : " . $e->getMessage());
         }
@@ -140,7 +147,6 @@ class User
      */
     public function loadListUsersFromDB($roleId)
     {
-
         $sql = "SELECT * FROM users WHERE id_role=:role_id ORDER BY pseudo ASC";
 
         $statement = $this->pdo->prepare($sql);
@@ -201,10 +207,20 @@ class User
         $this->password = $newPassword;
     }
 
-    public function setCredit(int $newCredit)
+    /**
+     * Update the user's credit in DB
+     * @param int $newCredit //default = 20 credits
+     * @return void
+     */
+    private function setCredit(int $newCredit)
     {
-        $this->credit = $newCredit;
+        $sql = 'UPDATE users SET credit = :newCredit WHERE id = :idUser';
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam('newCredit', $newCredit, PDO::PARAM_INT);
+        $statement->bindParam('idUser', $this->id, PDO::PARAM_INT);
+        $statement->execute();
     }
+
     public function setIdRole($roleId)
     {
         $sql = "UPDATE users SET id_role = :roleId WHERE id = :userId";

@@ -18,9 +18,10 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         $newUser = new User($pdo, null, $pseudo, $mail, $password);
 
         // Check if user is created well
-        if ($newUser->saveUserToDatabase()) {
+        if ($newUser->saveUserToDatabase(1)) {
             $_SESSION['success_message'] = 'Compte créé avec succès ! Vous avez été crédité de 20 crédits 🎉';
             $_SESSION['user_id'] = $newUser->getId();
+            $_SESSION['role_user'] = $newUser->getIdRole();
             header('Location: carpoolSearchIndex.php'); //METTRE LA PAGE D?ACCEUIL QUAND PRETTE
             exit();
         } else {
@@ -43,7 +44,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
             $_SESSION['success_message'] = 'Connexion réussie !';
             $_SESSION['user_id'] = $searchUser->getId();
             $_SESSION['role_user'] = $searchUser->getIdRole();
-            header('Location: carpoolSearchIndex.php'); // Redirect to login page
+            header('Location: carpoolSearchIndex.php'); ///METTRE LA PAGE D?ACCEUIL QUAND PRETTE
             exit();
         } else {
             throw new Exception("Erreur lors de la connexion de l'utilisateur");
