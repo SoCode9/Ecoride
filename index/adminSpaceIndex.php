@@ -11,7 +11,7 @@ require_once "../back/adminSpaceBack.php";
 
 <head>
     <title>Espace Administrateur</title>
-
+    <script src="../script/adminSpace.js" defer></script>
     <style>
         #adminSpace {
             background-color: #F2C674;

@@ -129,11 +129,14 @@ a {
     border-radius: var(--border-radius);
     background-color: white;
     color: black;
+    justify-content: center;
 }
 
 .tab-btn.active {
     background-color: #666666;
     color: white;
+    display: flex;
+    text-align: center;
 }
 
 .active {
