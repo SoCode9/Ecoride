@@ -9,9 +9,9 @@
             <span><?= htmlspecialchars($employee->getMail()) ?></span>
         </div>
         <nav class="tabs">
-            <button class="tab-btn <?= $currentTab === 'validate-rating' ? 'active' : '' ?>"
+            <button class="tab-btn <?= $currentTab === 'validate-rating' ? 'active' : '' ?> flex-row"
                 data-target="validate-rating">Valider les avis</button>
-            <button class="tab-btn <?= $currentTab === 'bad-carpool' ? 'active' : '' ?>"
+            <button class="tab-btn <?= $currentTab === 'bad-carpool' ? 'active' : '' ?> flex-row"
                 data-target="bad-carpool">Covoiturages mal passés</button>
         </nav>
     </div>
