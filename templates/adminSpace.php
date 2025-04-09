@@ -137,6 +137,11 @@
             </div>
         </div>
 
+        <!--CHART nombre de covoiturage par jour-->
+        <div class="block-light-grey flex-column gap-12 flex-center text-bold">
+            <span class="text-green">Evolution des covoiturages</span>
+            <canvas id="carpoolsPerDayChart" width="2500" height="2000"></canvas>
+        </div>
 
     </section>
 
