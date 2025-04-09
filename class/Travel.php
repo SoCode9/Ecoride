@@ -288,11 +288,25 @@ class Travel
 
     public function setTravelStatus($newStatus, $travelId)
     {
-        $sql = 'UPDATE travels SET travel_status = :newStatus WHERE id = :travelId';
+        $sql = "UPDATE travels SET travel_status = :newStatus ";
+        if ($newStatus === 'ended') {
+            $sql .= ", validated_at = :currentDate";
+        }
+        $sql .= " WHERE id = :travelId";
+
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(':newStatus', $newStatus, PDO::PARAM_STR);
         $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
-        $statement->execute();
+        if ($newStatus === 'ended') {
+            $today = date('Y-m-d H:i:s');
+            $statement->bindParam(':currentDate', $today, PDO::PARAM_STR);
+        }
+
+        try {
+            $statement->execute();
+        } catch (Exception $e) {
+            throw new Exception("Erreur lors de la mise à jour du statut du trajet : " . $e->getMessage());
+        }
     }
 
     public function getDriverId()
@@ -317,6 +331,16 @@ class Travel
         return $interval->format('%hh%I');
     }
 
+    public function getCreditsEarned()
+    {
+        $sql = 'SELECT count(validated_at) AS carpoolsValidated FROM travels';
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
+
+        $nbCarpoolsValidated = $statement->fetch(PDO::FETCH_ASSOC);
+        $creditsEarnedByPlateform = $nbCarpoolsValidated['carpoolsValidated'] * 2;
+        return $creditsEarnedByPlateform;
+    }
 
 
 
