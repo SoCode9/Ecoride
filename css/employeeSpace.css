@@ -91,6 +91,10 @@
     font-size: calc(100% - 3px);
 }
 
+.font-size-very-big {
+    font-size: calc(100% + 5px);
+}
+
 .text-bold {
     font-weight: bold;
 }

@@ -121,4 +121,23 @@
         </div>
     </section>
 
+
+    <section id="statistic" class="tab-content <?= $currentTab === 'statistic' ? 'active' : '' ?>">
+        <div class="flex-row flex-between">
+            <div class="block-light-grey flex-column gap-12 flex-center text-bold"
+                style="width:fit-content;  align-items: center;">
+                <span class="text-green">Crédits gagnés par la plateforme</span>
+                <span class="font-size-very-big "><?= $administrator->getCredit(); ?></span>
+            </div>
+            <div class="block-light-grey flex-column gap-12 flex-center text-bold"
+                style="width:fit-content;  align-items: center;">
+                <span class="text-green">Nombre d'utilisateurs</span>
+                <span
+                    class="font-size-very-big "><?= count($passengersList) + count($driversList) + count($passengersAndDriversList) ?></span>
+            </div>
+        </div>
+
+
+    </section>
+
 </main>
