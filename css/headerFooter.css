@@ -41,33 +41,16 @@ a {
     text-decoration: none;
 }
 
-
-
-.boutonNav:hover {
-    color: #F2C674;
+.nav-btn:hover {
+    color: var(--col-orange);
 }
 
-.boutonNav:active {
-    color: #f0b74e;
+.btn.border-white:hover {
+    color: var(--col-orange);
+    border-color: var(--col-orange);
 }
 
-.borderButton {
-    padding: 5px 10px;
-    border: white solid 1.5px;
-    border-radius: 15px;
-}
-
-.borderButton:hover {
-    background-color: #BD9F66;
-    color: rgb(255, 255, 255);
-}
-
-.borderButton:active {
-    background-color: #bb9247;
-
-}
-
-.logoutButton {
+.logout-btn {
     filter: brightness(0) saturate(100%) invert(72%) sepia(50%) saturate(462%) hue-rotate(3deg) brightness(97%) contrast(86%);
     width: 40px;
     height: 40px;

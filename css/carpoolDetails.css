@@ -110,20 +110,6 @@
     border-radius: 15px;
 }
 
-.participateButton {
-    display: flex;
-    flex-direction: row;
-    background-color: #F2C674;
-    border-radius: 15px;
-    border: none;
-    align-items: center;
-    gap: 10px;
-    padding: 8px;
-    justify-content: center;
-    cursor: pointer;
-    color: black;
-}
-
 .imgFilterDate {
     width: 20px;
     cursor: pointer;

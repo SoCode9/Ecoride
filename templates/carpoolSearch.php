@@ -30,7 +30,7 @@
                     required>
             </div>
 
-            <div class="searchButton">
+            <div class="btn bg-light-green">
                 <img class="imgFilter" src="../icons/LoupeRecherche.png" alt="">
                 <input type="submit" value="Rechercher" class="legendSearch bold">
             </div>
@@ -83,11 +83,11 @@
                     <label for="driver-rating-list"><img src="../icons/EtoileJaune.png" alt="EtoileJaune"
                             class="imgFilter"></label>
                 </div>
-                <div class="searchButton">
+                <div class="btn bg-light-green">
                     <input type="submit" value="Appliquer les filtres" class="legendSearch">
 
                 </div>
-                <button type="submit" name="action" value="reset_filters" class="resetButton">Réinitialiser les
+                <button type="submit" name="action" value="reset_filters" class="btn col-back-grey-btn">Réinitialiser les
                     filtres</button>
             </form>
 
@@ -155,7 +155,7 @@
                                     echo $trajetPrice . " crédit";
                                 }
                                 ?></span>
-                            <div class="seeDetailTrajet">
+                            <div class="btn action-btn" style="grid-column: 5/6;grid-row: 3/5">
                                 <img class="imgFilter" src="../icons/LoupeRecherche.png" alt="">
                                 <a href="carpoolDetailsIndex.php?id=<?= htmlspecialchars($t['id']) ?>"
                                     class="travelDetailsLegend">Détail</a>

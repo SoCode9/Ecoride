@@ -40,7 +40,7 @@
                 }
                 ?></span>
             <?php if ($driver->getId() !== $idUser): ?>
-                <div class="seeDetailTrajet">
+                <div class="btn action-btn"style="grid-column: 5/6; grid-row: 3/5;">
                     <button class="travelDetailsLegend" onclick="showPopup(event)" data-id="<?= $carpool['reservationId'] ?>"
                         style="width: 100%;">Valider</button>
                 </div>
@@ -89,7 +89,7 @@
                 ?>
             </span>
             <?php if ($carpool['travel_status'] === 'not started'): ?>
-                <div class="seeDetailTrajet" style="background-color:#EDEDED;">
+                <div class="btn action-btn" style="background-color:#EDEDED; grid-column: 5/6; grid-row: 3/5;">
                     <a href="../back/userSpaceBack.php?action=cancel_carpool&id=<?= $carpool['id'] ?>"
                         class="travelDetailsLegend">Annuler</a>
                 </div>
@@ -100,13 +100,13 @@
             $departureDateTime = DateTime::createFromFormat("Y-m-d H:i:s", $carpool['travel_date'] . ' ' . $carpool['travel_departure_time']);
 
             if (($carpool['travel_status'] === 'not started') && ($carpool['driver_id'] === $_SESSION['user_id']) && $departureDateTime !== false && $departureDateTime <= $now): ?>
-                <div class="seeDetailTrajet" style=" background-color: #68C990;">
+                <div class="btn action-btn" style=" background-color: #68C990; grid-column: 5/6; grid-row: 3/5;">
                     <a href="../back/userSpaceBack.php?action=start_carpool&id=<?= $carpool['id'] ?>"
                         class="travelDetailsLegend">Démarrer</a>
                 </div>
             <?php endif; ?>
             <?php if (($carpool['travel_status'] === 'in progress') && ($carpool['driver_id'] === $_SESSION['user_id'])): ?>
-                <div class="seeDetailTrajet" style=" background-color: #68C990;">
+                <div class="btn action-btn" style=" background-color: #68C990; grid-column: 5/6; grid-row: 3/5;">
                     <a href="../back/userSpaceBack.php?action=complete_carpool&id=<?= $carpool['id'] ?>"
                         class="travelDetailsLegend">Terminer</a>
                 </div>

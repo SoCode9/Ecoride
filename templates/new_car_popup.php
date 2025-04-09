@@ -49,12 +49,12 @@ require_once "../back/userSpaceBack.php";
                 <input type="number" id="nb_passengers" name="nb_passengers" class="numberField textField"
                     style="width: 40px;">
             </div>
-            <div class="searchButton">
+            <div class="btn bg-light-green">
                 <button type="submit" class="legendSearch">Enregistrer la voiture</button>
             </div>
         </form>
     </div>
-    <button type="button" class="close-btn resetButton" style="justify-self:right;"
+    <button type="button" class="col-back-grey-btn btn" style="justify-self:right;"
         onclick="closePopup()">Annuler</button>
 
 

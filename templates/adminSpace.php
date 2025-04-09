@@ -23,7 +23,7 @@
         class="tab-content <?= $currentTab === 'employees-management' ? 'active' : '' ?>">
         <div class="flex-row flex-between">
             <h2 class="subTitleGreen">Gérer les comptes des employés (<?= count($employeeList) ?>)</h2>
-            <a class="participateButton" onclick="showPopup(event)">Créer un compte employé</a>
+            <a class="btn action-btn" onclick="showPopup(event)">Créer un compte employé</a>
 
             <?php include "../templates/newEmployeePopup.php"; ?>
         </div>

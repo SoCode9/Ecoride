@@ -3,9 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
     }, true);
 
-    document.querySelectorAll(".tabButton").forEach(button => {
+    document.querySelectorAll(".tab-btn").forEach(button => {
         button.addEventListener("click", function () {
-            document.querySelectorAll(".tabButton").forEach(btn => btn.classList.remove("active"));
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
             document.querySelectorAll(".tab-content").forEach(content => content.classList.remove("active"));
 
             this.classList.add("active");

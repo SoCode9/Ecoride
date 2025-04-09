@@ -67,9 +67,9 @@
                 ?> </div>
             </div>
 
-            <button class="participateButton" data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>">
+            <button id="participate" class="btn action-btn" style="padding: 8px;"data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>">
                 <img src="../icons/Calendrier.png" class="imgFilterDate" alt="booking calendar icon">
-                <span style="font-size: 16px;">Participer au covoiturage</span>
+                <span style="font-size: 16px">Participer au covoiturage</span>
             </button>
         </div>
 

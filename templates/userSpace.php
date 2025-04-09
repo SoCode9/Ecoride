@@ -18,8 +18,8 @@
                 </div>
             </div>
 
-            <button class="seeDetailTrajet button-content active" id="edit-button">Modifier le profil</button>
-            <button class="seeDetailTrajet button-content" id="save-button">Sauvegarder le profil</button>
+            <button class="btn action-btn content-btn active" id="edit-button">Modifier le profil</button>
+            <button class="btn action-btn content-btn" id="save-button">Sauvegarder le profil</button>
 
         </div>
         <div class="mailAndCredits">
@@ -28,7 +28,7 @@
         </div>
         <div class="subTitleAndContent">
             <h2 class="subTitleGreen">Type d'utilisateur</h2>
-            <div class="treeRadioButton">
+            <div class="flex-row flex-between">
                 <div class="filter">
                     <label for="role_passenger" class="radioNotEdit">passager</label>
                     <input type="radio" name="user_role" id="role_passenger" <?php if ($connectedUser->getIdRole() === 1) {
@@ -109,12 +109,14 @@
                             <input type="number" id="nb_passengers" name="nb_passengers" class="numberField textField"
                                 style="width: 40px;" required>
                         </div>
-                        <input type="submit" value="Enregistrer" class="searchButton"
-                            style="width:100px; align-self:self-end;"></input>
+                        <div class="btn bg-light-green" style="width:100px; align-self:self-end;">
+                            <input type="submit" value="Enregistrer"></input>
+                        </div>
+
                     </form>
                     <hr>
                 </div>
-                <button class="seeDetailTrajet hidden" id="add_car_button">Ajouter une voiture</button>
+                <button class="btn action-btn hidden" id="add_car_button">Ajouter une voiture</button>
 
             </div>
 
@@ -123,7 +125,7 @@
                 <h2 class="subTitleGreen">Préférences en tant que chauffeur</h2>
                 <div class="subTitleAndContent" style="padding:10px 0px">
                     <span>Voyager avec des fumeurs ne me dérange pas</span>
-                    <div class="treeRadioButton">
+                    <div class="flex-row flex-between">
                         <div class="filter">
                             <label for="smoke_yes" class="radioNotEdit">Oui</label>
                             <input type="radio" class="radioNotEdit" name="smoke_pref" id="smoke_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getSmokerPreference() === true)) {
@@ -145,7 +147,7 @@
                     </div>
                     <hr>
                     <span>J'aime la compagnie des animaux</span>
-                    <div class="treeRadioButton">
+                    <div class="flex-row flex-between">
                         <div class="filter">
                             <label for="pet_yes" class="radioNotEdit">Oui</label>
                             <input type="radio" class="radioNotEdit" name="pet_pref" id="pet_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getPetPreference() === true)) {
@@ -167,7 +169,7 @@
                     </div>
                     <hr>
                     <span>La nourriture est autorisée dans la voiture</span>
-                    <div class="treeRadioButton">
+                    <div class="flex-row flex-between">
                         <div class="filter">
                             <label for="food_yes" class="radioNotEdit">Oui</label>
                             <input type="radio" class="radioNotEdit" name="food_pref" id="food_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getFoodPreference() === true)) {
@@ -189,7 +191,7 @@
                     </div>
                     <hr>
                     <span>Je discute volontiers avec mes passagers</span>
-                    <div class="treeRadioButton">
+                    <div class="flex-row flex-between">
                         <div class="filter">
                             <label for="speak_yes" class="radioNotEdit">Oui</label>
                             <input type="radio" class="radioNotEdit" name="speak_pref" id="speak_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getSpeakerPreference() === true)) {
@@ -211,7 +213,7 @@
                     </div>
                     <hr>
                     <span>J'aime conduire en écoutant de la musique</span>
-                    <div class="treeRadioButton">
+                    <div class="flex-row flex-between">
                         <div class="filter">
                             <label for="music_yes" class="radioNotEdit">Oui</label>
                             <input type="radio" class="radioNotEdit" name="music_pref" id="music_yes" <?php if (isset($connectedDriver) && ($connectedDriver->getMusicPreference() === true)) {
@@ -246,13 +248,14 @@
                         <hr>
                         <input type="text" placeholder="Entrez la préférence" name="new_pref" id="new_pref"
                             class="textField" style="width:auto" required>
-                        <input type="submit" value="Enregistrer" class="searchButton"
-                            style="width:100px; align-self:self-end;">
 
+                        <div class="btn bg-light-green" style="width:100px; align-self:self-end;">
+                            <input type="submit" value="Enregistrer">
+                        </div>
                     </form>
                     <hr>
                 </div>
-                <button class="seeDetailTrajet hidden" id="add_pref_button">Ajouter une préférence</button>
+                <button class="btn action-btn hidden" id="add_pref_button">Ajouter une préférence</button>
 
             </div>
         </div>
@@ -266,13 +269,14 @@
         <div class="headerUserInfo">
             <h1 class="pageTitle removeMargins">Mes covoiturages</h1>
             <?php if (($connectedUser->getIdRole() === 2 || $connectedUser->getIdRole() === 3) && $cars == !null): ?>
-                <a class="participateButton" href="../index/createCarpoolIndex.php">Proposer un covoiturage</a>
+                <a class="btn action-btn" style="padding: 8px;" href="../index/createCarpoolIndex.php">Proposer un
+                    covoiturage</a>
             <?php endif; ?>
         </div>
 
         <div class="tabs">
-            <button class="tabButton active" data-target="notStarted">En cours</button>
-            <button class="tabButton" data-target="completed">Terminés</button>
+            <button class="btn tab-btn active" data-target="notStarted">En cours</button>
+            <button class="btn tab-btn" data-target="completed">Terminés</button>
         </div>
 
         <div id="notStarted" class="tab-content active">

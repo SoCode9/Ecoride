@@ -114,27 +114,6 @@
     /* Removes the native icon (Firefox) */
 }
 
-.searchButton {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 5px 10px;
-    background-color: #68C990;
-    border-radius: 15px;
-    justify-content: center;
-    border: none;
-}
-
-.searchButton:hover {
-    background-color: #65bf8b;
-    cursor: pointer;
-}
-
-.searchButton:active {
-    background-color: #569f74;
-    cursor: pointer;
-}
-
 .legendSearch {
     border: none;
     background: none;
@@ -182,21 +161,6 @@
     grid-column: 1/2;
     grid-row: 1/2;
     height: fit-content;
-}
-
-.resetButton {
-    all: unset;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    border-radius: 15px;
-    justify-content: center;
-    font-size: 15px;
-}
-
-.resetButton:hover {
-    background-color: #ccc;
 }
 
 /*SELECTED DAY*/
@@ -321,31 +285,9 @@
     padding-right: 10px;
 }
 
-.seeDetailTrajet {
-    grid-column: 5/6;
-    grid-row: 3/5;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 5px 10px;
-    background-color: #F2C674;
-    border-radius: 15px;
-    justify-content: center;
-    cursor: pointer;
-    border: none;
-}
-
 .travelDetailsLegend {
     color: black;
     font-size: 15px;
-}
-
-.voirDetailTrajet:hover {
-    background-color: #e3bc73;
-}
-
-.voirDetailTrajet:active {
-    background-color: #d3ae68;
 }
 
 .nextTravelDate {

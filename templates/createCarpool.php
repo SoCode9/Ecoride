@@ -1,8 +1,12 @@
 <main>
     <section class="searchFilterBlock">
 
-
-        <h1 class="pageTitle bold removeMargins">Proposer un covoiturage</h1>
+        <div class="flex-row flex-between">
+            <h1 class="pageTitle bold removeMargins">Proposer un covoiturage</h1>
+            <a href="../index/userSpaceIndex.php" class="btn"
+                style="border: 2px solid #4D9856; background-color:var(--bg-light-grey);">Retourner à l'espace
+                utilisateur</a>
+        </div>
 
         <form action="../back/createCarpoolBack.php" method="POST" class="filtersList" style="gap: 20px;">
             <div class="filter">
@@ -66,7 +70,7 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <button type="button" onclick="showPopup(event)" class="seeDetailTrajet"
+                <button type="button" onclick="showPopup(event)" class="btn action-btn"
                     style="background-color:inherit; border: 1.5px solid black;">Autre voiture</button>
             </div>
             <div class="filter">
@@ -75,7 +79,7 @@
             <div>
                 <textarea id="comment" name="comment" class="textField" style="width: 400px; height:100px;"></textarea>
             </div>
-            <div class="searchButton" style="width: fit-content;">
+            <div class="btn bg-light-green" style="width: fit-content;">
                 <input type="submit" value="Proposer le trajet">
             </div>
         </form>

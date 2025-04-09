@@ -23,24 +23,24 @@
                 <img src="" alt="Logo">
             </div>
             <div class="navigation">
-                <a class="boutonNav" href="">Accueil</a> <!--manque-->
-                <a class="boutonNav" id="carpoolButton" href="carpoolSearchIndex.php">Covoiturages</a>
-                <a class="boutonNav" href="">Contact</a> <!--manque-->
+                <a class="nav-btn" href="">Accueil</a> <!--manque-->
+                <a class="nav-btn" id="carpoolButton" href="carpoolSearchIndex.php">Covoiturages</a>
+                <a class="nav-btn" href="">Contact</a> <!--manque-->
                 <?php
                 if (session_status() === PHP_SESSION_NONE) {
                     session_start();
                 }
                 if (isset($_SESSION['user_id'])) {
                     if ($_SESSION['role_user'] == 1 || $_SESSION['role_user'] == 2 || $_SESSION['role_user'] == 3) { //if the user is a passenger or a driver or both
-                        echo '<a class="boutonNav borderButton" id="userSpace" href="userSpaceIndex.php">Espace Utilisateur</a>';
+                        echo '<a class="btn border-white" id="userSpace" href="userSpaceIndex.php">Espace Utilisateur</a>';
                     } elseif ($_SESSION['role_user'] == 4) { //if the user is an employee
-                        echo '<a class="boutonNav borderButton" id="employeeSpace" href="employeeSpaceIndex.php">Espace Employé</a>';
+                        echo '<a class="btn border-white" id="employeeSpace" href="employeeSpaceIndex.php">Espace Employé</a>';
                     } elseif ($_SESSION['role_user'] == 5) { //if the user is an administraor
-                        echo '<a class="boutonNav borderButton" id="adminSpace" href="adminSpaceIndex.php">Espace Administrateur</a>';
+                        echo '<a class="btn border-white" id="adminSpace" href="adminSpaceIndex.php">Espace Administrateur</a>';
                     }
-                    echo '<a id="logoutButton" href="#"> <img src="../icons/Deconnexion.png" alt="logout button"  class="logoutButton"> </a>';
+                    echo '<a id="logoutButton" href="#"> <img src="../icons/Deconnexion.png" alt="logout button"  class="logout-btn"> </a>';
                 } else {
-                    echo '<a class="boutonNav borderButton" id="loginButton" href="loginPageIndex.php">Connexion</a>';
+                    echo '<a class="btn border-white" id="loginButton" href="loginPageIndex.php">Connexion</a>';
                 }
                 ?>
             </div>
