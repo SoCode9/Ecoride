@@ -338,8 +338,8 @@ class Travel
         $statement->execute();
 
         $nbCarpoolsValidated = $statement->fetch(PDO::FETCH_ASSOC);
-        $creditsEarnedByPlateform = $nbCarpoolsValidated['carpoolsValidated'] * 2;
-        return $creditsEarnedByPlateform;
+        $creditsEarnedByPlatform = $nbCarpoolsValidated['carpoolsValidated'] * 2;
+        return $creditsEarnedByPlatform;
     }
 
 
