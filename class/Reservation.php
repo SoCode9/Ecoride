@@ -131,7 +131,7 @@ class Reservation
      * 1.get credit spent by the passenger (in reservations' table)
      * 2. update credit of the driver
      * 3. set the reservation as validated
-     * 4. if all the carpool's reservations are validated : put the carpool as "ended"
+     * 4. if all the carpool's reservations are validated : put the carpool as "ended" + add 2 credits to the admin and substract 2 credits to the driver
      * @param mixed $pdo
      * @param mixed $reservationId
      * @return void
@@ -151,6 +151,10 @@ class Reservation
             require_once "../class/Travel.php";
             $travel = new Travel($pdo, $travelId);
             $travel->setTravelStatus('ended', $travelId);
+
+            //substract 2 credits to driver and and add 2 credits to admin
+            $this->setCreditToUser($pdo, $this->getDriverIdFromReservation($pdo, $reservationId), -2);
+            $this->setCreditToUser($pdo, $this->getIdAdmin($pdo), +2);
         }
     }
 
@@ -173,7 +177,7 @@ class Reservation
      * When the employee has resolved a bad comment
      * 1. set the bad comment as validated
      * 2. the credits' driver are updated
-     * 3. if all the carpool's reservations are validated : put the carpool as "ended"
+     * 3. if all the carpool's reservations are validated : put the carpool as "ended" + add 2 credits to the admin and substract 2 credits to the driver
      * @param mixed $pdo
      * @param mixed $reservationId
      * @return void
@@ -192,6 +196,10 @@ class Reservation
                 require_once "../class/Travel.php";
                 $travel = new Travel($pdo, $travelId);
                 $travel->setTravelStatus('ended', $travelId);
+
+                //substract 2 credits to driver and and add 2 credits to admin
+                $this->setCreditToUser($pdo, $this->getDriverIdFromReservation($pdo, $reservationId), -2);
+                $this->setCreditToUser($pdo, $this->getIdAdmin($pdo), +2);
             }
 
         } catch (Exception $e) {
@@ -323,6 +331,15 @@ class Reservation
         $statement = $this->pdo->prepare($sql);
         $statement->execute();
         return (int) $statement->fetchColumn();
+    }
+
+    private function getIdAdmin($pdo)
+    {
+        $sql = 'SELECT id FROM users WHERE id_role = 5';
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+        $roleIdAdmin = $statement->fetch(PDO::FETCH_ASSOC);
+        return (int) $roleIdAdmin['id'];
     }
 
     private function setCreditToUser($pdo, $userId, $creditToSent)
