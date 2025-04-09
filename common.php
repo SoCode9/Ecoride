@@ -71,6 +71,31 @@ function formatDateMonthAndYear(string $dateToFormat): string
 }
 
 /**
+ * To display dates for users (ex. Lundi 21/03)
+ * @param string $dateToFormat //give the date to format
+ * @return string //return the date with the right format (front)
+ */
+function formatDateWeekday(string $dateToFormat): string
+{
+    $date = DateTime::createFromFormat('Y-m-d', $dateToFormat);
+
+    if (!$date) {
+        return 'Erreur sur le format de la date initiale';
+    }
+
+    $formatter = new IntlDateFormatter(
+        'fr_FR',
+        IntlDateFormatter::FULL,
+        IntlDateFormatter::NONE,
+        'Europe/Paris',
+        IntlDateFormatter::GREGORIAN,
+        'EEEE dd/MM' 
+    );
+
+    return ucfirst($formatter->format($date));
+}
+
+/**
  * To display times for users (ex. 12:00)
  * @param string $timeToFormat //give the time to format
  * @return string //return the time with the right format (front)
