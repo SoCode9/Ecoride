@@ -1,41 +1,51 @@
-let chart = document.querySelector("#carpoolsPerDayChart");
+const carpoolsPerDayChart = document.querySelector("#carpoolsPerDayChart");
 
-new Chart(chart, {
-    type: "bar",
-    data: {
-        labels: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
-        datasets: [{
-            label: 'Nombre de covoiturages par jour',
-            data: [3, 1, 4, 12, 0, 20, 24], // CHIFFRES A AUTOMATISER
-            backgroundColor:'#68C990'
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: "Nombre de covoiturages"
-                }
-            },
-            x: {
-                title: {
-                    display: true,
-                    text: "Semaine en cours"
-                }
-            }
+fetch("../back/chartCarpoolsPerDayBack.php")
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        if (carpoolsPerDayChart) {
+            createChart(carpoolsPerDayChart, data, 'bar', 'Nombre de covoiturages sur les prochains jours', 'Nombre de covoiturages', 'Dix prochains jours', 'travelDate', 'nbCarpool')
+        } else {
+            console.warn("Élément #carpoolsPerDayChart introuvable.");
+        }
+    });
+
+function createChart(chartElement, chartData, type, label, yTitle, xTitle, labelKey, dataKey) {
+
+
+    new Chart(chartElement, {
+        type: type,
+        data: {
+            labels: chartData.map(row => row[labelKey]),
+            datasets: [{
+                label: label,
+                data: chartData.map(row => row[dataKey]),
+                backgroundColor: '#68C990'
+            }]
         },
-        /* plugins: {
-            title: {
-                display: true,
-                text: "Evolution des covoiturages"
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: yTitle
+                    },
+                    ticks: {
+                        stepSize: 1, // Integer intervals
+                        precision: 0 // Deletes decimals
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: xTitle
+                    }
+                }
             },
-            legend: {
-                display: true,
-                position: 'top'
-            }
-        } */
-    }
-})
+        }
+    })
+}
