@@ -127,7 +127,8 @@
             <div class="block-light-grey flex-column gap-12 flex-center text-bold"
                 style="width:fit-content;  align-items: center;">
                 <span class="text-green">Crédits gagnés par la plateforme</span>
-                <span class="font-size-very-big "><?= $administrator->getCredit(); ?></span>
+                <?php $travels = new Travel($pdo); ?>
+                <span class="font-size-very-big "><?= $travels->getCreditsEarned(); ?></span>
             </div>
             <div class="block-light-grey flex-column gap-12 flex-center text-bold"
                 style="width:fit-content;  align-items: center;">

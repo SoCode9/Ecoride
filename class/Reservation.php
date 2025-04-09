@@ -152,9 +152,8 @@ class Reservation
             $travel = new Travel($pdo, $travelId);
             $travel->setTravelStatus('ended', $travelId);
 
-            //substract 2 credits to driver and and add 2 credits to admin
+            //substract 2 credits to driver
             $this->setCreditToUser($pdo, $this->getDriverIdFromReservation($pdo, $reservationId), -2);
-            $this->setCreditToUser($pdo, $this->getIdAdmin($pdo), +2);
         }
     }
 
@@ -197,9 +196,8 @@ class Reservation
                 $travel = new Travel($pdo, $travelId);
                 $travel->setTravelStatus('ended', $travelId);
 
-                //substract 2 credits to driver and and add 2 credits to admin
+                //substract 2 credits to driver
                 $this->setCreditToUser($pdo, $this->getDriverIdFromReservation($pdo, $reservationId), -2);
-                $this->setCreditToUser($pdo, $this->getIdAdmin($pdo), +2);
             }
 
         } catch (Exception $e) {
@@ -333,15 +331,6 @@ class Reservation
         return (int) $statement->fetchColumn();
     }
 
-    private function getIdAdmin($pdo)
-    {
-        $sql = 'SELECT id FROM users WHERE id_role = 5';
-        $statement = $pdo->prepare($sql);
-        $statement->execute();
-        $roleIdAdmin = $statement->fetch(PDO::FETCH_ASSOC);
-        return (int) $roleIdAdmin['id'];
-    }
-
     private function setCreditToUser($pdo, $userId, $creditToSent)
     {
         $sql = 'UPDATE users SET credit=credit+:creditToSent WHERE id = :userId';
@@ -353,7 +342,6 @@ class Reservation
         } catch (Exception $e) {
             new Exception("Erreur lors de la mise à jour des crédits de l'utilisateur : " . $e->getMessage());
         }
-
     }
 
     private function setValidate($pdo, $reservationId)
