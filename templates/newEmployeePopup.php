@@ -26,12 +26,12 @@
                     ✔ 1 caractère spécial minimum
                 </p>
             </div>
-            <div class="searchButton">
+            <div class="btn bg-light-green">
                 <button type="submit" class="legendSearch">Enregistrer le compte employé</button>
             </div>
         </form>
     </div>
-    <button type="button" class="close-btn resetButton" style="justify-self:right;"
+    <button type="button" class="col-back-grey-btn btn" style="justify-self:right;"
         onclick="closePopup()">Annuler</button>
 
 </div>

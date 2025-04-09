@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector('.participateButton').addEventListener('click', function () {
+    document.getElementById('participate').addEventListener('click', function () {
         let travelId = this.getAttribute("data-id"); // Retrieve travel id
 
         // Sent AJAX query to server to check available seats

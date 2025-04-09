@@ -7,7 +7,8 @@
     /*for title pages, text*/
     --col-light-green: #68C990;
     /*for buttons*/
-
+    --col-orange: #F2C674;
+    /*for action's buttons*/
 }
 
 .half-separation {
@@ -78,6 +79,8 @@
     border: 2px solid var(--col-green);
 }
 
+
+
 .bg-light-red {
     background-color: #e08282;
 }
@@ -113,7 +116,7 @@ a {
     padding: 16px;
 }
 
-/*BUTTON*/
+/*BUTTONS*/
 .btn {
     display: flex;
     align-items: center;
@@ -122,6 +125,11 @@ a {
     border-radius: var(--border-radius);
     justify-content: center;
     border: none;
+    cursor: pointer;
+}
+
+.btn:hover, .tab-btn:hover {
+    filter: brightness(90%);
 }
 
 .tab-btn {
@@ -165,4 +173,22 @@ a {
     flex-direction: column;
     gap: 12px;
     margin: 8px;
+}
+
+.action-btn {
+    border-radius: var(--border-radius);
+    background-color: var(--col-orange);
+    gap: 10px;
+    cursor: pointer;
+}
+
+.border-white {
+    border: 2px solid white;
+}
+
+.border-black {
+    border: 2px solid black;
+}
+.col-back-grey-btn:hover{
+    background-color: #ccc;
 }

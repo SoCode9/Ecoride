@@ -3,10 +3,12 @@
         <div class="loginBlock">
             <h1 class="loginTitle">Se connecter</h1>
             <form action="" method="POST" class="formLogin">
-            <input type="hidden" name="action" value="formLogin"> <!--login form-->
+                <input type="hidden" name="action" value="formLogin"> <!--login form-->
                 <input type="email" id="mail" name="mail" placeholder="Email" class="fieldConnexion" required>
                 <input type="password" name="password" placeholder="Mot de passe" class="fieldConnexion" required>
-                <input type="submit" value="Connexion" class="searchButton validationButton">
+                <div class="btn bg-light-green font-size-very-big" style="height: 25px; color: white;">
+                    <input type="submit" value="Connexion">
+                </div>
             </form>
         </div>
         <div class="loginBlock creationAccountBlock">
@@ -30,7 +32,9 @@
                         ✔ 1 caractère spécial minimum
                     </p>
                 </div>
-                <input type="submit" value="Créer le compte" class="searchButton validationButton">
+                <div class="btn bg-light-green font-size-very-big" style="height: 25px; color: white;">
+                    <input type="submit" value="Créer le compte">
+                </div>
             </form>
         </div>
     </div>

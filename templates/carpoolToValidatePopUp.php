@@ -4,8 +4,8 @@
         <!-- Step 1 -->
         <span>Est-ce que tout s’est bien passé ?</span>
         <div style="gap:4px;">
-            <button id="yesButton" class="yesNoButton" onclick="handleValidation(true)">Oui</button>
-            <button id="noButton" class="yesNoButton" onclick="handleValidation(false)">Non</button>
+            <button id="yesButton" class="yes-no-btn" onclick="handleValidation(true)">Oui</button>
+            <button id="noButton" class="yes-no-btn" onclick="handleValidation(false)">Non</button>
         </div>
 
 
@@ -40,7 +40,7 @@
                 <label for="comment-positive">Laissez un commentaire :</label>
                 <textarea name="comment" id="comment-positive"></textarea>
 
-                <div class="searchButton">
+                <div class="btn bg-light-green">
                     <button type="submit" class="legendSearch" onclick="submitPositiveJS()"><strong>Valider le
                             covoiturage</strong><br>(avec ou sans avis)</button>
                 </div>
@@ -55,14 +55,14 @@
             <form class="filtersList" action="/0-ECFEcoride/back/validate_carpool.php" method="POST"  onsubmit="console.log('Form submitted!')">
                 <label for="comment-negative">Décrivez le problème :</label>
                 <textarea name="comment" id="comment-negative" required></textarea>
-                <div class="searchButton">
+                <div class="btn bg-light-green">
                     <button type="submit" class="legendSearch" onclick="submitNegativeJS()">Soumettre</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <button type="button" class="close-btn resetButton" style="justify-self:right;"
+    <button type="button" class="col-back-grey-btn btn" style="justify-self:right;"
         onclick="closePopup()">Annuler</button>
 
 </div>
@@ -80,8 +80,8 @@
         document.getElementById('popup-id').style.display = 'none';
         document.getElementById('feedback-positive').style.display = 'none';
         document.getElementById('feedback-negative').style.display = 'none';
-        document.getElementById('yesButton').classList.remove('buttonSelected');
-        document.getElementById('noButton').classList.remove('buttonSelected');
+        document.getElementById('yesButton').classList.remove('selected-btn');
+        document.getElementById('noButton').classList.remove('selected-btn');
 
         // reset forms
         document.querySelector('#feedback-positive form')?.reset();
@@ -92,8 +92,8 @@
         if ($bool == true) {
             document.getElementById('feedback-positive').style.display = 'block';
             document.getElementById('feedback-negative').style.display = 'none';
-            document.getElementById('yesButton').classList.add('buttonSelected');
-            document.getElementById('noButton').classList.remove('buttonSelected');
+            document.getElementById('yesButton').classList.add('selected-btn');
+            document.getElementById('noButton').classList.remove('selected-btn');
 
             const commentNegative = document.getElementById('comment-negative') ?? null;
             commentNegative?.removeAttribute('required');
@@ -101,8 +101,8 @@
         } else {
             document.getElementById('feedback-negative').style.display = 'block';
             document.getElementById('feedback-positive').style.display = 'none';
-            document.getElementById('yesButton').classList.remove('buttonSelected');
-            document.getElementById('noButton').classList.add('buttonSelected');
+            document.getElementById('yesButton').classList.remove('selected-btn');
+            document.getElementById('noButton').classList.add('selected-btn');
 
             const commentNegative = document.getElementById('comment-negative') ?? null;
             commentNegative?.setAttribute('required', '');
