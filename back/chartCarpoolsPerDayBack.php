@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once "../database.php";
-require_once "../common.php";
+require_once "../functions.php";
 
 $today = date('Y-m-d'); 
 

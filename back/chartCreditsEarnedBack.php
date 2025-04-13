@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once "../database.php";
-require_once "../common.php";
+require_once "../functions.php";
 
 
 $sql = 'SELECT validated_at AS validationCarpoolDate, count(validated_at) AS carpoolsValidated FROM travels WHERE validated_at IS NOT NULL GROUP BY validationCarpoolDate ORDER BY validationCarpoolDate ASC LIMIT 10';
