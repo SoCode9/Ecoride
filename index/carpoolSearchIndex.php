@@ -16,7 +16,7 @@ unset($_SESSION['travelsSearched'], $_SESSION['nextTravelDate'], $_SESSION['erro
 
 ?>
 
-<?php include '../templates/header.php'; ?>
+<?php include '../templates/components/header.php'; ?>
 <html>
 <style>
     /*Adapt Login button*/
@@ -37,8 +37,8 @@ unset($_SESSION['travelsSearched'], $_SESSION['nextTravelDate'], $_SESSION['erro
 
 <body>
 
-    <?php include '../templates/carpoolSearch.php'; ?>
-    <?php include '../templates/footer.php'; ?>
+    <?php include '../templates/pages/carpool_search.php'; ?>
+    <?php include '../templates/components/footer.php'; ?>
 
 </body>
 

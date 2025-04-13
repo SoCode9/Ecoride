@@ -8,7 +8,7 @@ require_once '../back/carpoolDetailsBack.php';
 
 ?>
 
-<?php include '../templates/header.php'; ?>
+<?php include '../templates/components/header.php'; ?>
 <html>
 <style>
     /*Adapt Login button*/
@@ -31,8 +31,8 @@ require_once '../back/carpoolDetailsBack.php';
 
 <body>
 
-    <?php include '../templates/carpoolDetails.php'; ?>
-    <?php include '../templates/footer.php'; ?>
+    <?php include '../templates/pages/carpool_details.php'; ?>
+    <?php include '../templates/components/footer.php'; ?>
 
 </body>
 

@@ -65,7 +65,7 @@ try {
         );
     }
 
-    // Save the result in the session to be retrieved by carpoolSearch.php
+    // Save the result in the session to be retrieved by carpool-search.php
     $_SESSION['travelsSearched'] = $travelsSearched;
     $_SESSION['nextTravelDate'] = $nextTravelDate ?? [];
 

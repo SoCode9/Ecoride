@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /** Refresh only Car's section (not full page) **/
     function refreshCarList() {
-        fetch("../templates/load_cars.php")
+        fetch("../templates/components/cars_list.php")
             .then(response => response.text())
             .then(html => {
                 let carContainer = document.getElementById("car-container");
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /** Refresh only Preferences' section (not full page) **/
 
     function refreshPrefList() {
-        fetch("../templates/load_other_pref.php")
+        fetch("../templates/components/other_pref_list.php")
             .then(response => response.text())
             .then(html => {
                 let prefContainer = document.getElementById("pref-container");

@@ -34,10 +34,10 @@ require_once "../back/adminSpaceBack.php";
 <body>
 
     <?php
-    include "../templates/header.php";
-    include "../templates/adminSpace.php";
+    include "../templates/components/header.php";
+    include "../templates/pages/admin_space.php";
 
-    include "../templates/footer.php";
+    include "../templates/components/footer.php";
     ?>
 
 </body>

@@ -8,7 +8,7 @@ require_once '../back/createCarpoolBack.php';
 
 ?>
 
-<?php include '../templates/header.php'; ?>
+<?php include '../templates/components/header.php'; ?>
 <html>
 <style>
     #userSpace {
@@ -30,8 +30,8 @@ require_once '../back/createCarpoolBack.php';
 
 <body>
 
-    <?php include '../templates/createCarpool.php'; ?>
-    <?php include '../templates/footer.php'; ?>
+    <?php include '../templates/pages/create_carpool.php'; ?>
+    <?php include '../templates/components/footer.php'; ?>
 
 </body>
 

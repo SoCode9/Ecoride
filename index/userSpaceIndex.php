@@ -5,7 +5,7 @@ require_once "../back/userSpaceBack.php";
 //require_once "../back/updateUserRoleBack.php";
 ?>
 
-<?php include '../templates/header.php'; ?>
+<?php include '../templates/components/header.php'; ?>
 <html>
 <style>
     /*Adapt Login button*/
@@ -26,9 +26,9 @@ require_once "../back/userSpaceBack.php";
 </head>
 
 <body>
-    <?php include '../templates/userSpace.php';
+    <?php include '../templates/pages/user_space.php';
     ?>
-    <?php include '../templates/footer.php'; ?>
+    <?php include '../templates/components/footer.php'; ?>
 
 </body>
 

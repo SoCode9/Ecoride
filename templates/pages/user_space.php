@@ -56,7 +56,7 @@
                 <h2 class="subTitleGreen">Voitures</h2>
 
                 <div id="car-container" class="subTitleAndContent" style="padding:10px 0px">
-                    <?php include '../templates/load_cars.php'; ?>
+                    <?php include '../templates/components/cars_list.php'; ?>
                 </div>
 
 
@@ -235,7 +235,7 @@
                     </div>
                     <div id="pref-container">
                         <?php
-                        include "../templates/load_other_pref.php";
+                        include "../templates/components/other_pref_list.php";
                         ?>
                     </div>
 
@@ -280,11 +280,11 @@
         </div>
 
         <div id="notStarted" class="tab-content active">
-            <?php include '../templates/covoiturages_not_started.php'; ?>
+            <?php include '../templates/components/carpools_not_started_list.php'; ?>
         </div>
 
         <div id="completed" class="tab-content">
-            <?php include '../templates/covoiturages_completed.php'; ?>
+            <?php include '../templates/components/carpools_completed_list.php'; ?>
         </div>
 
     </section>

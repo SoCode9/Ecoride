@@ -8,7 +8,7 @@ require_once "../back/employeeSpaceBack.php";
 
 ?>
 
-<?php include "../templates/header.php"; ?>
+<?php include "../templates/components/header.php"; ?>
 
 <html>
 
@@ -28,8 +28,8 @@ require_once "../back/employeeSpaceBack.php";
 
 <body>
     <?php
-    include "../templates/employeeSpace.php";
-    include "../templates/footer.php";
+    include "../templates/pages/employee_space.php";
+    include "../templates/components/footer.php";
     ?>
 </body>
 

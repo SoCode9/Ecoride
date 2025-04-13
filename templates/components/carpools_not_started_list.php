@@ -49,7 +49,7 @@
         </div>
     <?php endforeach; ?>
 
-    <?php include '../templates/carpoolToValidatePopUp.php'; ?>
+    <?php include '../templates/components/carpool_to_validate_popup.php'; ?>
     <!--carpool not started or in progress-->
     <?php if (!empty($carpoolListNotStarted)): ?>
         <h2 class="subTitleGreen" style="color: black ;">Covoiturages à venir</h2>
