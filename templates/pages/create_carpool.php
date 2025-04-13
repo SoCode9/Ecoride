@@ -3,7 +3,7 @@
 
         <div class="flex-row flex-between">
             <h1 class="pageTitle bold removeMargins">Proposer un covoiturage</h1>
-            <a href="../index/userSpaceIndex.php" class="btn"
+            <a href="../controllers/user_space.php" class="btn"
                 style="border: 2px solid #4D9856; background-color:var(--bg-light-grey);">Retourner à l'espace
                 utilisateur</a>
         </div>

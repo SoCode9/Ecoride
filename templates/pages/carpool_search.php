@@ -2,7 +2,7 @@
     <!-- Find a carpool -->
     <div class="blockFindCarpool">
         <h1 class="pageTitle bold removeMargins">Rechercher un covoiturage</h1>
-        <form class="searchBar" action="carpoolSearchIndex.php" method="POST">
+        <form class="searchBar" action="carpool_search.php" method="POST">
             <input type="hidden" name="action" value="search"> <!--identify request-->
 
             <div class="searchField">
@@ -45,7 +45,7 @@
 
         <div class="searchFilterBlock">
             <h2 class="subtitle removeMargins">Filtres de recherche</h2>
-            <form class="filtersList" action="carpoolSearchIndex.php" method="POST">
+            <form class="filtersList" action="carpool_search.php" method="POST">
                 <input type="hidden" name="action" value="filters"> <!--identify filters-->
 
                 <div class="filter">
@@ -157,7 +157,7 @@
                                 ?></span>
                             <div class="btn action-btn" style="grid-column: 5/6;grid-row: 3/5">
                                 <img class="imgFilter" src="../icons/LoupeRecherche.png" alt="">
-                                <a href="carpoolDetailsIndex.php?id=<?= htmlspecialchars($t['id']) ?>"
+                                <a href="carpool_details.php?id=<?= htmlspecialchars($t['id']) ?>"
                                     class="travelDetailsLegend">Détail</a>
 
                             </div>
@@ -177,7 +177,7 @@
                     echo "<br><br>"; ?>
 
                     <!-- Form to restart search with new date -->
-                    <form method="POST" action="carpoolSearchIndex.php">
+                    <form method="POST" action="carpool_search.php">
                         <input type="hidden" name="action" value="search">
                         <input type="hidden" name="departure-date-search"
                             value="<?= htmlspecialchars($firstTravel['travel_date']) ?>">

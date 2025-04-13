@@ -22,14 +22,14 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
             $_SESSION['success_message'] = 'Compte créé avec succès ! Vous avez été crédité de 20 crédits 🎉';
             $_SESSION['user_id'] = $newUser->getId();
             $_SESSION['role_user'] = $newUser->getIdRole();
-            header('Location: carpoolSearchIndex.php'); //METTRE LA PAGE D?ACCEUIL QUAND PRETTE
+            header('Location: carpool_search.php'); //METTRE LA PAGE D?ACCEUIL QUAND PRETTE
             exit();
         } else {
             throw new Exception("Erreur lors de l'enregistrement en base de données.");
         }
     } catch (Exception $e) {
         $_SESSION['error_message'] = $e->getMessage();
-        header('Location: loginPageIndex.php'); // Redirect to login page
+        header('Location: login.php'); // Redirect to login page
         exit();
     }
     //CONNECTION WITH DATABASE WHEN THE USER TRY TO CONNECT
@@ -44,14 +44,14 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
             $_SESSION['success_message'] = 'Connexion réussie !';
             $_SESSION['user_id'] = $searchUser->getId();
             $_SESSION['role_user'] = $searchUser->getIdRole();
-            header('Location: carpoolSearchIndex.php'); ///METTRE LA PAGE D?ACCEUIL QUAND PRETTE
+            header('Location: carpool_search.php'); ///METTRE LA PAGE D?ACCEUIL QUAND PRETTE
             exit();
         } else {
             throw new Exception("Erreur lors de la connexion de l'utilisateur");
         }
     } catch (Exception $e) {
         $_SESSION['error_message'] = $e->getMessage();
-        header('Location: loginPageIndex.php'); // Redirect to login page
+        header('Location: login.php'); // Redirect to login page
         exit();
     }
 }

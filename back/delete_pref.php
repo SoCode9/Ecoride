@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'delete_pref') {
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':driverId', $driverId, PDO::PARAM_INT);
             $statement->execute();
-            header('Location:../index/userSpaceIndex.php');
+            header('Location:../controllers/user_space.php');
             exit;
 
         }

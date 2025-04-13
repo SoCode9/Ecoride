@@ -43,19 +43,19 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['action'])) {
         $rating->validateRating($pdo, $idRating, 'validated');
 
         $_SESSION['success_message'] = "Avis validé";
-        header('Location: ../index/employeeSpaceIndex.php');
+        header('Location: ../controllers/employee_space.php');
     } elseif ($_GET['action'] == 'reject_rating') {
         $idRating = $_GET['id'];
         $rating->validateRating($pdo, $idRating, 'refused');
 
         $_SESSION['success_message'] = "Avis rejeté";
-        header('Location: ../index/employeeSpaceIndex.php');
+        header('Location: ../controllers/employee_space.php');
     } elseif ($_GET['action'] == 'resolved') {
         $reservationId = $_GET['id'];
         $reservation->resolveBadComment($pdo, $reservationId);
 
         $_SESSION['success_message'] = "Litige résolu";
-        header('Location: ../index/employeeSpaceIndex.php?tab=bad-carpool'); 
+        header('Location: ../controllers/employee_space.php?tab=bad-carpool'); 
     }
 
 }
