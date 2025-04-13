@@ -31,7 +31,7 @@ unset($_SESSION['travelsSearched'], $_SESSION['nextTravelDate'], $_SESSION['erro
 <head>
 
     <title>Covoiturages</title>
-    <script src="../script/carpoolSearch.js" defer></script>
+    <script src="../script/carpool_search.js" defer></script>
 
 </head>
 

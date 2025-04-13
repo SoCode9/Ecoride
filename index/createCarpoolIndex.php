@@ -23,7 +23,7 @@ require_once '../back/createCarpoolBack.php';
 <head>
 
     <title>Proposer un covoiturage</title>
-    <script src="../script/carpoolSearch.js" defer></script>
+    <script src="../script/carpool_search.js" defer></script>
 
 </head>
 

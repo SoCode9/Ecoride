@@ -21,7 +21,7 @@ require_once "../back/userSpaceBack.php";
 <head>
 
     <title>Espace utilisateur</title>
-    <script src="../script/userSpace.js" defer></script>
+    <script src="../script/user_space.js" defer></script>
 
 </head>
 

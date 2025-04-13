@@ -11,9 +11,9 @@ require_once "../back/adminSpaceBack.php";
 
 <head>
     <title>Espace Administrateur</title>
-    <script src="../script/adminSpace.js" defer></script>
+    <script src="../script/admin_space.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../script/chartCarpoolsPerDay.js" defer></script>
+    <script src="../script/chart_carpools_per_day.js" defer></script>
     <style>
         #adminSpace {
             background-color: #F2C674;
