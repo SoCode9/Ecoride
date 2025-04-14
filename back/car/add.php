@@ -1,12 +1,11 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
 
-require_once "../database.php";
-require_once "../class/Car.php";
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/Car.php";
 
-$pdo = isset($pdo) ? $pdo : null;
+//$pdo = isset($pdo) ? $pdo : null;
 $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 if (($_SERVER['REQUEST_METHOD'] === "POST" /* && $_POST['action'] === "formCar" */)) {

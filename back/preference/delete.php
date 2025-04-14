@@ -1,9 +1,9 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
-require_once "../database.php";
-require_once "../class/Driver.php";
+
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/Driver.php";
 
 $prefToDelete = $_GET['id'];
 $driverId = $_SESSION['user_id'];
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'delete_pref') {
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':driverId', $driverId, PDO::PARAM_INT);
             $statement->execute();
-            header('Location:../controllers/user_space.php');
+            header('Location:../../controllers/user_space.php');
             exit;
 
         }

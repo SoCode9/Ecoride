@@ -1,29 +1,21 @@
 <?php
-require_once "../database.php";
-require_once "../class/Car.php";
 
-
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
-$idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-$carsInDB = new Car($pdo, $idUser, null);
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/Car.php";
 
-// Verify if cars exist
-if (empty($carsInDB->cars)) {
-    echo "<span style='color:red; font-style:italic;'>Ajouter au moins une voiture</span>";
-}
+$idUser = $_SESSION['user_id'];
 
-$cars = $carsInDB->cars;
+$car = new Car($pdo, $idUser, null);
+$cars = $car->cars;
 
-if (isset($cars)):
-    $totalCars = count($cars);
-
-    $index = 0;
-    foreach ($cars as $car):
-        $index++;
-        ?>
+if (empty($cars)): ?>
+    <span style='color:red; font-style:italic;'>Ajouter au moins une voiture</span>
+<?php else: ?>
+    <?php $totalCars = count($cars); ?>
+    <?php foreach ($cars as $index => $car): ?>
         <span>Plaque immatriculation : <?= htmlspecialchars($car['car_licence_plate']) ?></span>
         <span>Date première immatriculation :
             <?= formatDate(htmlspecialchars($car['car_first_registration_date'])) ?></span>
@@ -36,10 +28,11 @@ if (isset($cars)):
         </span>
         <span>Couleur : <?= htmlspecialchars($car['car_color']) ?></span>
         <span>Nombre de passagers possible : <?= htmlspecialchars($car['car_seats_offered']) ?></span>
-        <a href="../back/delete_car.php?action=delete_car&id=<?=$car['car_id']?>"><img src="../icons/Supprimer.png" class="imgFilter"
-                style="cursor: pointer;"></a>
-        <?php if ($index !== $totalCars):
-            echo '<hr>' ?>
-        <?php endif; ?>
+        <a href="<?= BASE_URL ?>/back/car/delete.php?action=delete_car&id=<?= $car['car_id'] ?>">
+            <img src="../icons/Supprimer.png" class="imgFilter" style="cursor: pointer;">
+        </a>
+        <?php if ($index !== $totalCars - 1):
+            echo '<hr>';
+        endif; ?>
     <?php endforeach; ?>
 <?php endif; ?>

@@ -123,7 +123,7 @@ require_once "../back/userSpaceBack.php";
         const color = document.getElementById('color').value;
         const nbPassengers = document.getElementById('nb_passengers').value;
 
-        fetch('/0-ECFEcoride/back/addCarBack.php', {
+        fetch('/0-ECFEcoride/back/car/add.php', {
 
             method: 'POST',
             headers: {

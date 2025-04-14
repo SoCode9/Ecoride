@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let formData = new FormData(carForm);
 
-            fetch("../back/addCarBack.php", {
+            fetch("../back/car/add.php", {
                 method: "POST",
                 body: formData
             })
@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault(); // prevent page reload
 
             let formData = new FormData(prefForm);
-            fetch("../back/addPrefBack.php", {
+            fetch("../back/preference/add.php", {
                 method: "POST",
                 body: formData
             })

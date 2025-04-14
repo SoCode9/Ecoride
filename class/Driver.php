@@ -1,5 +1,5 @@
 <?php
-require_once "../database.php";
+
 require_once "User.php";
 
 class Driver extends User

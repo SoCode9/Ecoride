@@ -1,5 +1,9 @@
 <?php
 
+//CONFIG
+define('BASE_URL', '/0-ECFEcoride'); 
+
+
 //to store useful functions for all pages
 
 

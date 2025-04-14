@@ -1,11 +1,11 @@
 <?php
 
-require_once "../database.php";
-require_once "../class/User.php";
-require_once "../class/Driver.php";
-require_once "../class/Car.php";
-require_once "../class/Reservation.php";
-require_once "../class/Travel.php";
+require_once __DIR__ . "/../database.php";
+require_once __DIR__ . "/../class/User.php";
+require_once __DIR__ . "/../class/Driver.php";
+require_once __DIR__ . "/../class/Car.php";
+require_once __DIR__ . "/../class/Reservation.php";
+require_once __DIR__ . "/../class/Travel.php";
 
 
 if (session_status() === PHP_SESSION_NONE) {
