@@ -38,10 +38,10 @@
                         </div>
                         <?php if ($employee['is_activated'] === 1): ?>
                             <a class="btn bg-light-red"
-                                href="../back/adminSpaceBack.php?action=suspend-employee&id=<?= $employee['id'] ?>">Suspendre</a>
+                                href="../back/user/admin_space.php?action=suspend-employee&id=<?= $employee['id'] ?>">Suspendre</a>
                         <?php elseif ($employee['is_activated'] === 0): ?>
                             <a class="btn bg-light-green"
-                                href="../back/adminSpaceBack.php?action=reactivate-employee&id=<?= $employee['id'] ?>">Réactiver</a>
+                                href="../back/user/admin_space.php?action=reactivate-employee&id=<?= $employee['id'] ?>">Réactiver</a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -68,10 +68,10 @@
                         </div>
                         <?php if ($passenger['is_activated'] === 1): ?>
                             <a class="btn bg-light-red"
-                                href="../back/adminSpaceBack.php?action=suspend-user&id=<?= $passenger['id'] ?>">Suspendre</a>
+                                href="../back/user/admin_space.php?action=suspend-user&id=<?= $passenger['id'] ?>">Suspendre</a>
                         <?php elseif ($passenger['is_activated'] === 0): ?>
                             <a class="btn bg-light-green"
-                                href="../back/adminSpaceBack.php?action=reactivate-user&id=<?= $passenger['id'] ?>">Réactiver</a>
+                                href="../back/user/admin_space.php?action=reactivate-user&id=<?= $passenger['id'] ?>">Réactiver</a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -89,10 +89,10 @@
                         </div>
                         <?php if ($driver['is_activated'] === 1): ?>
                             <a class="btn bg-light-red"
-                                href="../back/adminSpaceBack.php?action=suspend-user&id=<?= $driver['id'] ?>">Suspendre</a>
+                                href="../back/user/admin_space.php?action=suspend-user&id=<?= $driver['id'] ?>">Suspendre</a>
                         <?php elseif ($driver['is_activated'] === 0): ?>
                             <a class="btn bg-light-green"
-                                href="../back/adminSpaceBack.php?action=reactivate-user&id=<?= $driver['id'] ?>">Réactiver</a>
+                                href="../back/user/admin_space.php?action=reactivate-user&id=<?= $driver['id'] ?>">Réactiver</a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -110,10 +110,10 @@
                         </div>
                         <?php if ($both['is_activated'] === 1): ?>
                             <a class="btn bg-light-red"
-                                href="../back/adminSpaceBack.php?action=suspend-user&id=<?= $both['id'] ?>">Suspendre</a>
+                                href="../back/user/admin_space.php?action=suspend-user&id=<?= $both['id'] ?>">Suspendre</a>
                         <?php elseif ($both['is_activated'] === 0): ?>
                             <a class="btn bg-light-green"
-                                href="../back/adminSpaceBack.php?action=reactivate-user&id=<?= $both['id'] ?>">Réactiver</a>
+                                href="../back/user/admin_space.php?action=reactivate-user&id=<?= $both['id'] ?>">Réactiver</a>
                         <?php endif; ?>
                     </div>
                 </div>

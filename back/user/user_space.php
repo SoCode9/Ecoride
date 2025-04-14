@@ -1,16 +1,13 @@
 <?php
-
-require_once __DIR__ . "/../database.php";
-require_once __DIR__ . "/../class/User.php";
-require_once __DIR__ . "/../class/Driver.php";
-require_once __DIR__ . "/../class/Car.php";
-require_once __DIR__ . "/../class/Reservation.php";
-require_once __DIR__ . "/../class/Travel.php";
-
-
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
+
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/User.php";
+require_once __DIR__ . "/../../class/Driver.php";
+require_once __DIR__ . "/../../class/Car.php";
+require_once __DIR__ . "/../../class/Reservation.php";
+require_once __DIR__ . "/../../class/Travel.php";
 
 $idUser = $_SESSION['user_id'];
 
@@ -57,14 +54,14 @@ if (isset($_GET['action'])) {
             }
             $travel->setTravelStatus('cancelled', $idTravel); //change travel's status
 
-            header('Location: ../controllers/user_space.php');
+            header('Location: ../../controllers/user_space.php');
             $_SESSION['success_message'] = "Le covoiturage a été annulé. Les passagers ont reçu un mail leur en informant.";
 
             /*If I'm only a passenger*/
         } elseif ($travel->getDriverId() !== $idUser) {
             $usersReservations->cancelCarpool($pdo, $idUser, $idTravel);
-            header('Location: ../controllers/user_space.php');
-
+            header('Location: ../../controllers/user_space.php');
+            $_SESSION['success_message'] = "Vous ne participez plus au covoiturage. Vos crédits ont été crédités.";
         }
     }
 
@@ -73,7 +70,8 @@ if (isset($_GET['action'])) {
         $idTravel = $_GET['id'];
         $travel = new Travel($pdo, $idTravel);
         $travel->setTravelStatus('in progress', $idTravel);
-        header('Location: ../controllers/user_space.php');
+        header('Location: ../../controllers/user_space.php');
+        $_SESSION['success_message'] = "Le covoiturage a débuté.";
     }
 
     /*Complete a carpool*/
@@ -81,7 +79,7 @@ if (isset($_GET['action'])) {
         $idTravel = $_GET['id'];
         $travel = new Travel($pdo, $idTravel);
         $travel->setTravelStatus('in validation', $idTravel);
-        header('Location: ../controllers/user_space.php');
+        header('Location: ../../controllers/user_space.php');
 
         //send an email to passengers
         $reservation = new Reservation($pdo, null, $idTravel);

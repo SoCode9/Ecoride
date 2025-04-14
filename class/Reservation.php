@@ -190,7 +190,7 @@ class Reservation
             $reservationsNotValidatedOfTheCarpool = $this->getReservationsNotValidatedOfACarpool($pdo, $travelId);
 
             if (empty($reservationsNotValidatedOfTheCarpool)) {
-                require_once "../class/Travel.php";
+                require_once "../../class/Travel.php";
                 $travel = new Travel($pdo, $travelId);
                 $travel->setTravelStatus('ended', $travelId);
 

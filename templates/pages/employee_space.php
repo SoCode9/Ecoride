@@ -31,9 +31,9 @@
                         <span><?= htmlspecialchars($rating['passenger_pseudo']) ?></span>
                         <div class="flex-row gap-8">
                             <a class="btn bg-light-green"
-                                href="../back/employeeSpaceBack.php?action=validate_rating&id=<?= $rating['id'] ?>">Valider</a>
+                                href="../back/user/employee_space.php?action=validate_rating&id=<?= $rating['id'] ?>">Valider</a>
                             <a class="btn bg-light-red"
-                                href="../back/employeeSpaceBack.php?action=reject_rating&id=<?= $rating['id'] ?>">Refuser</a>
+                                href="../back/user/employee_space.php?action=reject_rating&id=<?= $rating['id'] ?>">Refuser</a>
                         </div>
                     </div>
                     <div class="flex-row flex-between">
@@ -109,7 +109,7 @@
                         <span style="padding:0px 15px ">Id du covoiturage : <?= htmlspecialchars($badComment['travelId']) ?></span>
                     </div>
                     <a class="btn bg-light-green"
-                        href="../back/employeeSpaceBack.php?action=resolved&id=<?= $badComment['id'] ?>">Litige
+                        href="../back/user/employee_space.php?action=resolved&id=<?= $badComment['id'] ?>">Litige
                         résolu</a>
 
                     <p class="text-bold" style="padding-right:15px;">"<?= htmlspecialchars($badComment['bad_comment']) ?>"

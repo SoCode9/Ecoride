@@ -90,7 +90,7 @@
             </span>
             <?php if ($carpool['travel_status'] === 'not started'): ?>
                 <div class="btn action-btn" style="background-color:#EDEDED; grid-column: 5/6; grid-row: 3/5;">
-                    <a href="../back/userSpaceBack.php?action=cancel_carpool&id=<?= $carpool['id'] ?>"
+                    <a href="../back/user/user_space.php?action=cancel_carpool&id=<?= $carpool['id'] ?>"
                         class="travelDetailsLegend">Annuler</a>
                 </div>
             <?php endif; ?>
@@ -101,13 +101,13 @@
 
             if (($carpool['travel_status'] === 'not started') && ($carpool['driver_id'] === $_SESSION['user_id']) && $departureDateTime !== false && $departureDateTime <= $now): ?>
                 <div class="btn action-btn" style=" background-color: #68C990; grid-column: 5/6; grid-row: 3/5;">
-                    <a href="../back/userSpaceBack.php?action=start_carpool&id=<?= $carpool['id'] ?>"
+                    <a href="../back/user/user_space.php?action=start_carpool&id=<?= $carpool['id'] ?>"
                         class="travelDetailsLegend">Démarrer</a>
                 </div>
             <?php endif; ?>
             <?php if (($carpool['travel_status'] === 'in progress') && ($carpool['driver_id'] === $_SESSION['user_id'])): ?>
                 <div class="btn action-btn" style=" background-color: #68C990; grid-column: 5/6; grid-row: 3/5;">
-                    <a href="../back/userSpaceBack.php?action=complete_carpool&id=<?= $carpool['id'] ?>"
+                    <a href="../back/user/user_space.php?action=complete_carpool&id=<?= $carpool['id'] ?>"
                         class="travelDetailsLegend">Terminer</a>
                 </div>
             <?php endif; ?>

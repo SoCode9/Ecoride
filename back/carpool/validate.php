@@ -1,15 +1,14 @@
 <?php
 
-require_once "../database.php";
-require_once "../class/Travel.php";
-require_once "../class/Reservation.php";
-require_once "../class/Rating.php";
-
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
 
-$idPassenger = $_SESSION['user_id'];
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/Travel.php";
+require_once __DIR__ . "/../../class/Rating.php";
+require_once __DIR__ . "/../../class/Reservation.php";
+
+$passengerId = $_SESSION['user_id'];
 
 //If the passenger has validated the carpool (with or without a rating)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
@@ -20,17 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
         $rating = null;
 
     $comment = $_POST['comment'] ?? null;
-    /* 
-        $travel = new Travel($pdo, $idTravel);
-        $idDriver = $travel->getDriverId(); */
 
     $reservation = new Reservation($pdo);
     $driverId = $reservation->getDriverIdFromReservation($pdo, $reservationId);
- 
+
 
     if (isset($rating)) {
         $newRating = new Rating($pdo);
-        $newRating->saveRatingToDatabase($pdo, $idPassenger, $driverId, $rating, $comment);
+        $newRating->saveRatingToDatabase($pdo, $passengerId, $driverId, $rating, $comment);
         echo "note attribuée !"; // A ENLEVER ?
     } else {
         echo "pas de note attribuée.";// A ENLEVER ?

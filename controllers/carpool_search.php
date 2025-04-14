@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE)
     session_start();
 
 
-require_once '../back/carpoolSearchBack.php';
+require_once '../back/carpool/search.php';
 
 $travelsSearched = $_SESSION['travelsSearched'] ?? [];
 $nextTravelDate = $_SESSION['nextTravelDate'] ?? [];

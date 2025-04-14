@@ -1,12 +1,10 @@
 <?php
 session_start();
 
-
-require_once "../database.php";
-require_once "../class/User.php";
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/User.php";
 
 //CONNECTION WITH DATABASE WHEN AN ACCOUNT IS CREATE
-
 if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccount")) {
 
     try {
@@ -55,8 +53,3 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         exit();
     }
 }
-
-
-
-
-?>

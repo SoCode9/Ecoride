@@ -1,12 +1,11 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
 
-require_once "../database.php";
-require_once "../class/Travel.php";
-require_once "../class/Driver.php";
-require_once "../class/Car.php";
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/Driver.php";
+require_once __DIR__ . "/../../class/Car.php";
+require_once __DIR__ . "/../../class/Travel.php";
 
 /**To get all the driver's cars */
 
@@ -30,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $newTravel = new Travel($pdo);
     if ($newTravel->saveTravelToDatabase($pdo, $driverId, $travelDate, $travelDepartureCity, $travelArrivalCity, $travelDepartureTime, $travelArrivalTime, $travelPrice, $carSelectedId, $travelComment)) {
         $_SESSION['success_message'] = 'Le voyage a bien été publié';
-        header('Location:../controllers/user_space.php');
+        header('Location:../../controllers/user_space.php');
     } else {
         $_SESSION['error_message'] = 'Erreur lors de la création du voyage';
     }

@@ -1,12 +1,10 @@
 <?php
-
-require_once "../database.php";
-require_once "../class/User.php";
-require_once "../class/Driver.php";
-
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
+
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/User.php";
+require_once __DIR__ . "/../../class/Driver.php";
 
 // check if role ID is sent
 if (!isset($_POST['role_id'])) {

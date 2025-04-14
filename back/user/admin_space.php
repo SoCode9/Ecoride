@@ -1,10 +1,11 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
-require_once "../class/User.php";
-require_once "../class/Travel.php";
+
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/User.php";
+require_once __DIR__ . "/../../class/Travel.php";
 
 $administrator = new User($pdo, $_SESSION['user_id']);
 
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
         header('Location: ../controllers/admin_space.php?tab=employees-management');
         $_SESSION['success_message'] = "L'employé a été réactivé avec succès";
 
-    //activated and desactivated a user
+        //activated and desactivated a user
     } elseif ($_GET['action'] === 'suspend-user') {
         $idUser = $_GET['id'];
         $administrator->setIsActivatedUser($idUser, 0);

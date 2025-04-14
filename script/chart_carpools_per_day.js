@@ -1,6 +1,6 @@
 //chart carpools per day
 const carpoolsPerDayChart = document.querySelector("#carpoolsPerDayChart");
-fetch("../back/chartCarpoolsPerDayBack.php")
+fetch("../back/carpool/chart_per_day.php")
     .then((response) => {
         return response.json();
     })
@@ -14,7 +14,7 @@ fetch("../back/chartCarpoolsPerDayBack.php")
 
 //chart credits earned by the platform
 const creditsEarnedByPlatform = document.querySelector("#creditsEarnedByPlatform");
-fetch("../back/chartCreditsEarnedBack.php")
+fetch("../back/carpool/chart_credits_earned.php")
     .then((response) => {
         return response.json();
     })

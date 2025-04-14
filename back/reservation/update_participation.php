@@ -1,12 +1,13 @@
 <?php
-require_once "../database.php";
-require_once "../class/Reservation.php";
-require_once "../class/Car.php";
-require_once "../class/Travel.php";
 
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
+
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/Reservation.php";
+require_once __DIR__ . "/../../class/Car.php";
+require_once __DIR__ . "/../../class/Travel.php";
+
 ### second check ###
 
 header('Content-Type: application/json');
@@ -47,7 +48,7 @@ if ($availableSeats <= 0) {
     exit;
 }
 
-if($newTravel->getStatus() !== 'not started'){
+if ($newTravel->getStatus() !== 'not started') {
     echo json_encode(["success" => false, "message" => "Impossible de participer au covoiturage."]);
     exit;
 }
@@ -77,10 +78,6 @@ try {
     //debit the user
     $stmt = $pdo->prepare("UPDATE users SET credit = credit - ? WHERE id = ?");
     $stmt->execute([$travelPrice, $userId]);
-
-    /* // Update nb seats_allocated
-    $stmt = $pdo->prepare("UPDATE travels SET seats_allocated= seats_allocated +1 WHERE id = ?");
-    $stmt->execute([$travelId]); */
 
     $stmt = $pdo->prepare("INSERT INTO reservations (user_id,travel_id, credits_spent) VALUES (?,?,?)");
     $stmt->execute([$userId, $travelId, $travelPrice]);

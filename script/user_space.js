@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (selectedMusicPref === "music_no") musicPref = 0;
         if (selectedMusicPref === "music_undefined") musicPref = "NULL";
 
-        fetch('../back/updateUserRoleBack.php', {
+        fetch('../back/user/update_user_profile.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded" //Indicates to the server that data is being sent via POST

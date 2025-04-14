@@ -8,7 +8,7 @@
                 utilisateur</a>
         </div>
 
-        <form action="../back/createCarpoolBack.php" method="POST" class="filtersList" style="gap: 20px;">
+        <form action="../back/carpool/create.php" method="POST" class="filtersList" style="gap: 20px;">
             <div class="filter">
                 <label for="departure-date-search">Date du départ</label>
                 <div class="filter"

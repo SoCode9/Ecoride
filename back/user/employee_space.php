@@ -1,13 +1,11 @@
 <?php
+if (session_status() === PHP_SESSION_NONE)
+session_start();
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-require_once "../database.php";
-
-require_once "../class/Rating.php";
-require_once "../class/Driver.php";
-require_once "../class/Reservation.php";
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/Driver.php";
+require_once __DIR__ . "/../../class/Rating.php";
+require_once __DIR__ . "/../../class/Reservation.php";
 
 $employee = new User($pdo, $_SESSION['user_id']);
 
@@ -43,19 +41,19 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['action'])) {
         $rating->validateRating($pdo, $idRating, 'validated');
 
         $_SESSION['success_message'] = "Avis validé";
-        header('Location: ../controllers/employee_space.php');
+        header('Location: ../../controllers/employee_space.php');
     } elseif ($_GET['action'] == 'reject_rating') {
         $idRating = $_GET['id'];
         $rating->validateRating($pdo, $idRating, 'refused');
 
         $_SESSION['success_message'] = "Avis rejeté";
-        header('Location: ../controllers/employee_space.php');
+        header('Location: ../../controllers/employee_space.php');
     } elseif ($_GET['action'] == 'resolved') {
         $reservationId = $_GET['id'];
         $reservation->resolveBadComment($pdo, $reservationId);
 
         $_SESSION['success_message'] = "Litige résolu";
-        header('Location: ../controllers/employee_space.php?tab=bad-carpool'); 
+        header('Location: ../../controllers/employee_space.php?tab=bad-carpool'); 
     }
 
 }

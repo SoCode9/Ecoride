@@ -1,17 +1,12 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
 
-require_once '../database.php';
-require_once "../class/Travel.php";
-require_once "../class/Car.php";
-require_once "../class/User.php";
-require_once "../class/Driver.php";
-
-?>
-
-<?php
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/Car.php";
+require_once __DIR__ . "/../../class/Travel.php";
+require_once __DIR__ . "/../../class/User.php";
+require_once __DIR__ . "/../../class/Driver.php";
 
 try {
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {

@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let travelId = this.getAttribute("data-id"); // Retrieve travel id
 
         // Sent AJAX query to server to check available seats
-        fetch("../back/checkParticipation.php", {
+        fetch("../back/reservation/check_participation.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function updateParticipation(travelId) {
-        fetch("../back/updateParticipation.php", {
+        fetch("../back/reservation/update_participation.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"

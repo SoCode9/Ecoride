@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE)
     session_start();
 
-require_once "../back/adminSpaceBack.php";
+require_once "../back/user/admin_space.php";
 
 $pageTitle = "Espace Administrateur";
 $customScript = "admin_space.js";

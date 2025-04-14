@@ -1,13 +1,13 @@
 <?php
 
-require_once "../database.php";
-require_once "../class/Reservation.php";
-require_once "../class/Car.php";
-require_once "../class/Travel.php";
-
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE)
     session_start();
-}
+
+require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../class/Reservation.php";
+require_once __DIR__ . "/../../class/Car.php";
+require_once __DIR__ . "/../../class/Travel.php";
+
 
 // check if travel ID is sent
 if (!isset($_POST['travel_id'])) {

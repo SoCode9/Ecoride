@@ -12,7 +12,7 @@
         <!-- Step 2A : If Yes -->
         <div id="feedback-positive" style="display:none">
             <h4>Souhaitez-vous laisser un avis ?</h4>
-            <form class="filtersList" action="/0-ECFEcoride/back/validate_carpool.php" method="POST"
+            <form class="filtersList" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"
                 onsubmit="console.log('Form submitted!')">
                 <input type="hidden" name="idReservation" id="popup-idReservation-positive" value="">
                 <input type="hidden" name="action" value="positive">
@@ -52,7 +52,7 @@
         <div id="feedback-negative" style="display:none">
             <input type="hidden" name="idReservation" id="popup-idReservation-negative" value="">
 
-            <form class="filtersList" action="/0-ECFEcoride/back/validate_carpool.php" method="POST"  onsubmit="console.log('Form submitted!')">
+            <form class="filtersList" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"  onsubmit="console.log('Form submitted!')">
                 <label for="comment-negative">Décrivez le problème :</label>
                 <textarea name="comment" id="comment-negative" required></textarea>
                 <div class="btn bg-light-green">
@@ -69,7 +69,6 @@
 
 <script>
     function showPopup(event) {
-        /* event.preventDefault(); */
         const reservationId = event.target.getAttribute('data-id');
         document.getElementById('popup-idReservation-positive').value = reservationId;
         document.getElementById('popup-idReservation-negative').value = reservationId;
@@ -114,7 +113,7 @@
         const comment = document.getElementById('comment-positive').value;
         const rating = document.getElementById('driver-rating-list').value;
 
-        fetch('/0-ECFEcoride/back/validate_carpool.php', {
+        fetch('/0-ECFEcoride/back/carpool/validate.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -142,7 +141,7 @@
         const reservationId = document.getElementById('popup-idReservation-negative').value;
         const comment = document.getElementById('comment-negative').value;
 
-        fetch('/0-ECFEcoride/back/validate_carpool.php', {
+        fetch('/0-ECFEcoride/back/carpool/validate.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

@@ -52,8 +52,6 @@ class Driver extends User
             // Informations inherited from User
             $this->pseudo = $driverData['pseudo'];
 
-        } else {
-            throw new Exception("Conducteur introuvable pour l'id {$this->id}.");
         }
     }
 
