@@ -1,0 +1,43 @@
+/*GRID*/
+.half-separation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.grid-4-1 {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+/*FLEX*/
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.gap-4 {
+    gap: 4px;
+}
+
+.gap-8 {
+    gap: 8px;
+}
+
+.gap-12 {
+    gap: 12px;
+}
+
+.flex-between {
+    justify-content: space-between;
+}
+
+.flex-center {
+    justify-content: center;
+}

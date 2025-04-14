@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="../css/carpoolDetails.css">
     <link rel="stylesheet" href="../css/loginPage.css">
     <link rel="stylesheet" href="../css/userSpace.css">
-    <link rel="stylesheet" href="../css/employeeSpace.css">
-    <!-- add all the css files-->
+    <link rel="stylesheet" href="../css/style.css">
 
 
 </head>

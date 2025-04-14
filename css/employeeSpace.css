@@ -1,194 +1,27 @@
 /*VARIABLES*/
-:root {
-    --border-radius: 15px;
-    --bg-light-grey: #EDEDED;
-    --font-size-very-small: 12px;
-    --col-green: #4D9856;
-    /*for title pages, text*/
-    --col-light-green: #68C990;
-    /*for buttons*/
-    --col-orange: #F2C674;
-    /*for action's buttons*/
-}
 
-.half-separation {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
+
 
 /*### UTILS ###*/
 
 /*SPACING*/
-.m-8 {
-    margin: 8px;
-}
 
-.m-tb-12 {
-    margin-top: 12px;
-    margin-bottom: 12px;
-}
 
-/*GRID*/
-.grid-4-1 {
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-}
 
-/*FLEX*/
-.flex-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
 
-.flex-column {
-    display: flex;
-    flex-direction: column;
-}
 
-.gap-4 {
-    gap: 4px;
-}
-
-.gap-8 {
-    gap: 8px;
-}
-
-.gap-12 {
-    gap: 12px;
-}
-
-.flex-between {
-    justify-content: space-between;
-}
-
-.flex-center {
-    justify-content: center;
-}
 
 /*COLORS*/
-.bg-light-green {
-    background-color: var(--col-light-green);
-}
 
-.text-green {
-    color: var(--col-green);
-}
-
-.border-green {
-    border: 2px solid var(--col-green);
-}
-
-
-
-.bg-light-red {
-    background-color: #e08282;
-}
 
 /*TYPOGRAPHY*/
-.italic {
-    font-style: italic;
-}
 
-.font-size-very-small {
-    font-size: calc(100% - 3px);
-}
-
-.font-size-very-big {
-    font-size: calc(100% + 5px);
-}
-
-.text-bold {
-    font-weight: bold;
-}
-
-a {
-    color: inherit;
-}
 
 /*### COMPONENTS ###*/
 
 /*BLOCKS*/
 
-.block-light-grey {
-    background-color: var(--bg-light-grey);
-    border-radius: var(--border-radius);
-    padding: 16px;
-}
+
 
 /*BUTTONS*/
-.btn {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 5px 10px;
-    border-radius: var(--border-radius);
-    justify-content: center;
-    border: none;
-    cursor: pointer;
-}
 
-.btn:hover, .tab-btn:hover {
-    filter: brightness(90%);
-}
-
-.tab-btn {
-    width: fit-content;
-    min-width: 150px;
-    padding: 0px 10px;
-    min-height: 30px;
-    text-align: center;
-    border-radius: var(--border-radius);
-    background-color: white;
-    color: black;
-    justify-content: center;
-}
-
-.tab-btn.active {
-    background-color: #666666;
-    color: white;
-    display: flex;
-    text-align: center;
-}
-
-.active {
-    display: inline-block;
-}
-
-.tabs {
-    display: flex;
-    gap: 12px;
-    padding: 15px 0px;
-}
-
-.tab-content {
-    display: none;
-    /* Hide default sections */
-}
-
-.tab-content.active {
-    display: block;
-    /* Display only the active tab  */
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 8px;
-}
-
-.action-btn {
-    border-radius: var(--border-radius);
-    background-color: var(--col-orange);
-    gap: 10px;
-    cursor: pointer;
-}
-
-.border-white {
-    border: 2px solid white;
-}
-
-.border-black {
-    border: 2px solid black;
-}
-.col-back-grey-btn:hover{
-    background-color: #ccc;
-}
