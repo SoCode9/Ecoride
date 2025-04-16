@@ -1,6 +1,6 @@
 <div class="popup" id="popup-new-employee">
     <h3>Ajouter un compte employé</h3>
-    <div class="filtersList">
+    <div class="block-column-g20">
         <form action="../back/user/admin_space.php" method="POST" class="flex-column gap-12">
             <input type="hidden" name="action" value="create-employee">
 
@@ -27,7 +27,7 @@
                 </p>
             </div>
             <div class="btn bg-light-green">
-                <button type="submit" class="legendSearch">Enregistrer le compte employé</button>
+                <button type="submit">Enregistrer le compte employé</button>
             </div>
         </form>
     </div>

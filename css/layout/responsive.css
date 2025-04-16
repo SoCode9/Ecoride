@@ -1,0 +1,31 @@
+/*for large screens*/
+@media (min-width:1024px) {
+    main {
+        width: 80%;
+        margin: 0 auto; 
+        margin-top: 10px;
+        /*centers content horizontally*/
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+}
+
+/*for small screens*/
+@media (max-width:1024px) {
+    main {
+        margin: 4px;
+    }
+}
+
+
+@media(max-width:767px) {
+    .flex-row-wrap {
+        flex-wrap: wrap;
+    }
+
+    main {
+        margin: 10px;
+        box-sizing:border-box;
+    }
+}

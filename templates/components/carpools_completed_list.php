@@ -1,4 +1,4 @@
-<div class="filtersList">
+<div class="block-column-g20">
 
     <!--carpool finished and validated-->
     <?php if (!empty($carpoolListFinishedAndValidated)): ?>
@@ -12,10 +12,10 @@
                 <span class="watermark-complet">Annulé</span>
             <?php endif; ?>
 
-            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photoUser">
-            <span class="pseudoUser"><?= htmlspecialchars($carpool['pseudo']) ?></span>
+            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo-user">
+            <span class="pseudo-user"><?= htmlspecialchars($carpool['pseudo']) ?></span>
             <div class="driverRating">
-                <img src="../icons/EtoileJaune.png" alt="Etoile" class="imgFilter">
+                <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
                 <span>
                     <?php
                     $driver = new driver($pdo, $carpool['driver_id']);
@@ -24,14 +24,14 @@
                     ?>
                 </span>
             </div>
-            <span class="dateTravel"><?= formatDate(htmlspecialchars($carpool['travel_date'])) ?> </span>
-            <span class="hoursTravel">De <?= htmlspecialchars($carpool['travel_departure_city']) ?>
+            <span class="date-travel"><?= formatDate(htmlspecialchars($carpool['travel_date'])) ?> </span>
+            <span class="hours-travel">De <?= htmlspecialchars($carpool['travel_departure_city']) ?>
             </span>
-            <span class="seatsAvailable">De
+            <span class="seats-available">De
                 <?= formatTime(htmlspecialchars($carpool['travel_departure_time'])) ?> à
                 <?= formatTime(htmlspecialchars($carpool['travel_arrival_time'])) ?></span>
-            <span class="criteriaEcoDiv">À <?= htmlspecialchars($carpool['travel_arrival_city']) ?></span>
-            <span class="travelPrice gras">
+            <span class="criteria-eco-div">À <?= htmlspecialchars($carpool['travel_arrival_city']) ?></span>
+            <span class="travel-price gras">
                 <?php
                 $trajetPrice = htmlspecialchars($carpool['travel_price']);
                 if ($trajetPrice > 1) {

@@ -1,6 +1,6 @@
 :root {
     --border-radius: 15px;
-    --bg-light-grey: #EDEDED;
+    --col-light-grey: #EDEDED;
     --font-size-very-small: 12px;
     --col-green: #4D9856;
     /*for title pages, text*/
@@ -8,4 +8,8 @@
     /*for buttons*/
     --col-orange: #F2C674;
     /*for action's buttons*/
+    --col-dark-grey: #666666;
+    /*for legend's filters and selected tabs*/
+    --col-very-light-green: #d6f0e0;
+    /*for block hovering*/
 }

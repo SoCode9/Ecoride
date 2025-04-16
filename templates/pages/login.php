@@ -1,30 +1,31 @@
-<main class="blockAlign">
-    <div class="loginAndCreationAccountBlock">
-        <div class="loginBlock">
-            <h1 class="loginTitle">Se connecter</h1>
-            <form action="" method="POST" class="formLogin">
+<main class="content-center">
+    <div class="login-blocks flex-row-wrap ">
+        <div class="login-block">
+            <h1 class="text-green">Se connecter</h1>
+            <form action="" method="POST" class="login-form">
                 <input type="hidden" name="action" value="formLogin"> <!--login form-->
-                <input type="email" id="mail" name="mail" placeholder="Email" class="fieldConnexion" required>
-                <input type="password" name="password" placeholder="Mot de passe" class="fieldConnexion" required>
-                <div class="btn bg-light-green font-size-very-big" style="height: 25px; color: white;">
+                <input type="email" id="mail" name="mail" placeholder="Email" class="field-connexion" required>
+                <input type="password" name="password" placeholder="Mot de passe" class="field-connexion" required>
+                <div class="btn bg-light-green font-size-very-big" style="color: white;">
                     <input type="submit" value="Connexion">
                 </div>
             </form>
         </div>
-        <div class="loginBlock creationAccountBlock">
-            <h1 class="loginTitle">Créer un compte</h1>
-            <form action="" method="POST" class="formLogin">
-                <input type="hidden" name="action" value="createAccount"> <!--create an account form-->
+        <div class="login-block" style=" background-color: rgba(150, 201, 171, 0.2);">
+            <h1 class="text-green">Créer un compte</h1>
+            <form action="" method="POST" class="login-form">
+                <input type="hidden" name="action" value="createAccount">
                 <div>
-                    <input type="text" id="pseudo" name="pseudo" placeholder="Pseudo" class="fieldConnexion" required>
-                    <span style="color: #4D9856;font-size:15px; font-style:italic;">Votre pseudo sera visible par les
+                    <input type="text" id="pseudo" name="pseudo" placeholder="Pseudo" class="field-connexion" required>
+                    <span class="font-size-very-small italic text-green">Votre pseudo
+                        sera visible par les
                         autres utilisateurs</span>
                 </div>
 
-                <input type="email" id="mail" name="mail" placeholder="Email" class="fieldConnexion" required>
+                <input type="email" id="mail" name="mail" placeholder="Email" class="field-connexion" required>
                 <div>
                     <input type="password" id="password" name="password" placeholder="Mot de passe"
-                        class="fieldConnexion" required>
+                        class="field-connexion" required>
                     <p>
                         ✔ 8 caractères minimum <br>
                         ✔ 1 majuscule et 1 minuscule minimum<br>
@@ -32,7 +33,7 @@
                         ✔ 1 caractère spécial minimum
                     </p>
                 </div>
-                <div class="btn bg-light-green font-size-very-big" style="height: 25px; color: white;">
+                <div class="btn bg-light-green font-size-very-big" style="color: white;">
                     <input type="submit" value="Créer le compte">
                 </div>
             </form>

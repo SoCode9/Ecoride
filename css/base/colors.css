@@ -10,8 +10,10 @@
     border: 2px solid var(--col-green);
 }
 
-
-
 .bg-light-red {
     background-color: #e08282;
+}
+
+.bg-very-light-green {
+    background-color: var(--col-very-light-green);
 }

@@ -51,7 +51,7 @@ a {
 }
 
 .logout-btn {
-    filter: brightness(0) saturate(100%) invert(72%) sepia(50%) saturate(462%) hue-rotate(3deg) brightness(97%) contrast(86%);
+    flex-row: brightness(0) saturate(100%) invert(72%) sepia(50%) saturate(462%) hue-rotate(3deg) brightness(97%) contrast(86%);
     width: 40px;
     height: 40px;
     cursor: pointer;

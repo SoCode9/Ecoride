@@ -29,7 +29,7 @@ if (empty($cars)): ?>
         <span>Couleur : <?= htmlspecialchars($car['car_color']) ?></span>
         <span>Nombre de passagers possible : <?= htmlspecialchars($car['car_seats_offered']) ?></span>
         <a href="<?= BASE_URL ?>/back/car/delete.php?action=delete_car&id=<?= $car['car_id'] ?>">
-            <img src="../icons/Supprimer.png" class="imgFilter" style="cursor: pointer;">
+            <img src="../icons/Supprimer.png" class="img-width-20" style="cursor: pointer;">
         </a>
         <?php if ($index !== $totalCars - 1):
             echo '<hr>';
