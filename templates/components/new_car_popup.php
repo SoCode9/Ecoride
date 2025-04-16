@@ -3,22 +3,22 @@ require_once "../back/user/user_space.php";
 ?>
 <div class="popup" id="popup-new-car">
 
-    <h3>Ajouter une voiture</h3>
-    <div class="filtersList">
-        <form id="car-form-id" class="filtersList" style="gap: 10px;">
+    <h3 class="m-tb-12">Ajouter une voiture</h3>
+    <div class="block-column-g20">
+        <form id="car-form-id" class="block-column-g20" style="gap: 10px;">
 
-            <div class="filter">
+            <div class="flex-row">
                 <label for="licence_plate">Plaque immatriculation : </label>
-                <input type="text" id="licence_plate" name="licence_plate" class="textField" placeholder="AA-000-AA">
+                <input type="text" id="licence_plate" name="licence_plate" class="text-field" placeholder="AA-000-AA">
             </div>
 
-            <div class="filter">
+            <div class="flex-row">
                 <label for="first_registration_date">Date première immatriculation : </label>
-                <input type="date" id="first_registration_date" name="first_registration_date" class="textField">
+                <input type="date" id="first_registration_date" name="first_registration_date" class="text-field">
             </div>
-            <div class="filter">
+            <div class="flex-row">
                 <label for="brand">Marque : </label>
-                <select id="brand" class="textField" name="brand">
+                <select id="brand" class="text-field" name="brand">
                     <option value="">Sélectionner</option>
                     <?php foreach ($brands as $brand): ?>
                         <option value="<?= htmlspecialchars($brand['id']); ?>">
@@ -27,11 +27,11 @@ require_once "../back/user/user_space.php";
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="filter">
+            <div class="flex-row">
                 <label for="model">Modèle : </label>
-                <input type="text" id="model" name="model" class="textField">
+                <input type="text" id="model" name="model" class="text-field">
             </div>
-            <div class="filter">
+            <div class="flex-row">
                 <label for="electric">Electrique : </label>
                 <input type="radio" name="electric" value="yes" id="electric_yes">
                 <label for="electric_yes">oui</label>
@@ -40,17 +40,17 @@ require_once "../back/user/user_space.php";
                 <label for="electric_no">non</label>
 
             </div>
-            <div class="filter">
+            <div class="flex-row">
                 <label for="color">Couleur : </label>
-                <input type="text" id="color" name="color" class="textField">
+                <input type="text" id="color" name="color" class="text-field">
             </div>
-            <div class="filter">
+            <div class="flex-row">
                 <label for="nb_passengers">Nombre de passagers possible : </label>
-                <input type="number" id="nb_passengers" name="nb_passengers" class="numberField textField"
+                <input type="number" id="nb_passengers" name="nb_passengers" class="numberField text-field"
                     style="width: 40px;">
             </div>
             <div class="btn bg-light-green">
-                <button type="submit" class="legendSearch">Enregistrer la voiture</button>
+                <button type="submit">Enregistrer la voiture</button>
             </div>
         </form>
     </div>

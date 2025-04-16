@@ -1,0 +1,62 @@
+/*main blocks*/
+.user-info-carpools-block {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    gap: 20px;
+}
+
+.radio-not-edit {
+    pointer-events: none;
+}
+
+
+
+/*Auto and preferences sections*/
+
+.hidden {
+    display: none !important;
+}
+
+.scrollable-container {
+    max-height: 600px;
+    overflow: auto;
+    /* Scroll bar only if necessary  */
+}
+
+.btn.action-btn.content-btn {
+    display: none;
+    /* Hide default button */
+}
+
+.btn.action-btn.content-btn.active {
+    display: block;
+    /* Display only if button isn't clicked  */
+}
+
+
+
+.active {
+    display: inline-flex;
+}
+
+
+/*Popup validate carpool*/
+
+.popup .col-back-grey-btn {
+    margin-top: 15px;
+}
+
+.yes-no-btn {
+    border: 1.5px solid black;
+    border-radius: var(--border-radius);
+    padding: 5px 10px;
+}
+
+.yes-no-btn:hover {
+    background-color: #ccc;
+}
+
+.selected-btn {
+    background-color: var(--col-dark-grey);
+    color: #fff;
+}

@@ -2,16 +2,17 @@
 
     <!--Travel's details and booking block-->
 
-    <h1 class="pageTitle gras"><?= formatDateLong(htmlspecialchars($_SESSION['departure-date-search'])) ?? '' ?>
-    </h1>
+    <h2 class="text-green text-bold">
+        <?= formatDateLong(htmlspecialchars($_SESSION['departure-date-search'])) ?? '' ?>
+    </h2>
 
-    <section class="travelDetailsBookingBlock">
-        <div class="travelDetailsBlock">
+    <section class="flex-row flex-between block-light-grey">
+        <div class="flex-row flex-between block-white" style="width:65%;box-sizing: border-box;">
 
-            <div class="locationAndTimeTravel">
+            <div class="course">
 
-                <div class="timeLocationEllipse">
-                    <div class="timeLocation">
+                <div class="time-location-ellipse">
+                    <div class="flex-column gap-8 time-location">
                         <span><?= formatTime(htmlspecialchars($travel->getDepartureTime())) ?></span>
                         <span><?= htmlspecialchars($travel->getDepartureCity()) ?></span>
                     </div>
@@ -19,16 +20,16 @@
                     <div id="ellipse"></div>
                 </div>
 
-                <div class="durationLine">
-                    <div class="travelDuration">
+                <div class="duration-line">
+                    <div class="text-green">
                         <?= htmlspecialchars($travel->travelDuration($travel->getDepartureTime(), $travel->getArrivalTime())) ?>
                     </div>
                     <div class="line"></div>
                 </div>
 
-                <div class="timeLocationEllipse">
+                <div class="time-location-ellipse">
                     <div id="ellipse"></div>
-                    <div class="timeLocation">
+                    <div class="flex-column gap-8 time-location">
                         <span><?= formatTime(htmlspecialchars($travel->getArrivalTime())) ?></span>
                         <span><?= htmlspecialchars($travel->getArrivalCity()) ?></span>
                     </div>
@@ -37,7 +38,7 @@
 
             </div>
 
-            <div class="seatsAndEco">
+            <div class="flex-column gap-8" style="align-items: end;">
                 <div> <?php $seatsAvailable = seatsAvailable($car->nbSeatsOfferedInACarpool($pdo, $travel->getCarId()), ($reservation->nbPassengerInACarpool($pdo, $travel->getIdTravel())));
 
                 if ($seatsAvailable <= 1) {
@@ -49,14 +50,14 @@
                 ?>
                 </div>
                 <div>
-                    <span class="criteriaEco"><?php
+                    <span class="criteria-eco"><?php
                     echo formatEco(($car->getElectric())) ?></span>
                 </div>
             </div>
 
         </div>
-        <div class="travelValidation">
-            <div class="nbPassengerCredit">
+        <div class="flex-column gap-12" style="width: 30%;">
+            <div class="flex-row flex-between block-white">
                 <div>1 passager</div>
                 <div class="bold"><?php $travelPrice = $travel->getPrice();
                 if ($travelPrice > 1) {
@@ -67,25 +68,26 @@
                 ?> </div>
             </div>
 
-            <button id="participate" class="btn action-btn" style="padding: 8px;"data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>">
-                <img src="../icons/Calendrier.png" class="imgFilterDate" alt="booking calendar icon">
-                <span style="font-size: 16px">Participer au covoiturage</span>
+            <button id="participate" class="btn action-btn" style="padding: 8px;"
+                data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>">
+                <img src="../icons/Calendrier.png" class="img-pointer" alt="booking calendar icon">
+                <span>Participer au covoiturage</span>
             </button>
         </div>
 
     </section>
 
-    <article class="thirdBlock">
+    <div style="display: flex; justify-content: space-between;" class="gap-24">
 
         <!--Driver's details-->
 
-        <section class="driversDescriptionPreferencesBlock">
-            <div class="infoDriver">
+        <section class="block-driver-info block-light-grey">
+            <div class="flex-column gap-24">
                 <img src="../icons/Femme1.jpg" class="photo" alt="photo de l'utilisateur">
-                <div class="pseudoRating">
+                <div class="flex-column gap-12 flex-center item-center">
                     <span><?= htmlspecialchars($driver->getPseudo()) ?></span>
-                    <div class="textIcon" style="padding-left: 0px;">
-                        <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
+                    <div class="text-icon" style="padding-left: 0px;">
+                        <img src="../icons/EtoileJaune.png" class="img-width-20" alt="">
                         <span><?php $averageRating = $driver->getAverageRatings();
                         if ($averageRating !== null) {
                             echo htmlspecialchars($averageRating);
@@ -96,7 +98,7 @@
                 </div>
             </div>
 
-            <div class="carsDescriptionAndPreferences">
+            <div class="flex-column gap-24">
 
 
                 <?php $travelDescription = $travel->getDescription();
@@ -104,16 +106,16 @@
 
                 if ($travelDescription != null) {
                     ?>
-                    <p class="removeMargins">
+                    <p>
                         <?= htmlspecialchars($travelDescription); ?>
                     </p>
                 <?php } ?>
 
 
-                <div class="preferencesBlock">
-                    <div class="bold">Véhicule</div>
-                    <div class="textIcon">
-                        <img src="../icons/Voiture.png" class="imgFilter" alt="">
+                <div class="flex-column gap-12">
+                    <div class="text-bold">Véhicule</div>
+                    <div class="text-icon">
+                        <img src="../icons/Voiture.png" class="img-width-20" alt="">
                         <span><?php
                         echo htmlspecialchars($car->getBrand() . " " . $car->getModel() . " - " . $car->getColor());
                         if ($car->getElectric() === true) {
@@ -123,18 +125,18 @@
                     </div>
                 </div>
 
-                <div class="preferencesBlock">
-                    <div class="bold">Préférences</div>
+                <div class="flex-column gap-12">
+                    <div class="text-bold">Préférences</div>
                     <?php
                     $petPref = $driver->getPetPreference();
                     if ($petPref === true): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/AnimauxOk.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/AnimauxOk.png' class='img-width-20' alt=''>
                             <span>J'aime la compagnie des animaux</span>
                         </div>
                     <?php elseif ($petPref === false): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/AnimauxPasOk.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/AnimauxPasOk.png' class='img-width-20' alt=''>
                             <span>Je préfère ne pas voyager avec des animaux</span>
                         </div>
                     <?php endif; ?>
@@ -143,13 +145,13 @@
                     <?php
                     $smokerPref = $driver->getSmokerPreference();
                     if ($smokerPref === true): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/FumerOk.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/FumerOk.png' class='img-width-20' alt=''>
                             <span>La fumée ne me dérange pas</span>
                         </div>
                     <?PHP elseif ($smokerPref === false): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/FumerPasOk.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/FumerPasOk.png' class='img-width-20' alt=''>
                             <span>Je préfère ne pas voyager avec des fumeurs</span>
                         </div>
                     <?php endif; ?>
@@ -157,13 +159,13 @@
                     <?php
                     $musicPref = $driver->getMusicPreference();
                     if ($musicPref === true): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/MusiqueOk.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/MusiqueOk.png' class='img-width-20' alt=''>
                             <span>J'aime conduire en écoutant de la musique</span>
                         </div>
                     <?PHP elseif ($musicPref === false): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/MusiquePasOk.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/MusiquePasOk.png' class='img-width-20' alt=''>
                             <span>Je préfère ne pas écouter de musique pendant que je conduis</span>
                         </div>
                     <?php endif; ?>
@@ -171,13 +173,13 @@
                     <?php
                     $speakerPref = $driver->getSpeakerPreference();
                     if ($speakerPref === true): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/speakOk.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/speakOk.png' class='img-width-20' alt=''>
                             <span>Je discute volontiers avec mes passagers</span>
                         </div>
                     <?PHP elseif ($speakerPref === false): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/speakNotOk.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/speakNotOk.png' class='img-width-20' alt=''>
                             <span>Je préfère me concentrer sur la route</span>
                         </div>
                     <?php endif; ?>
@@ -185,13 +187,13 @@
                     <?php
                     $foodPref = $driver->getFoodPreference();
                     if ($foodPref === true): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/foodOk.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/foodOk.png' class='img-width-20' alt=''>
                             <span>La nourriture est autorisée dans la voiture </span>
                         </div>
                     <?PHP elseif ($foodPref === false): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/foodNotOk.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/foodNotOk.png' class='img-width-20' alt=''>
                             <span>Pas de nourriture dans la voiture s'il vous plait</span>
                         </div>
                     <?php endif; ?>
@@ -199,24 +201,24 @@
                     <?php
                     $addPref1 = $driver->getAddPref1();
                     if (isset($addPref1)): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/addPref.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/addPref.png' class='img-width-20' alt=''>
                             <span><?= $addPref1 ?></span>
                         </div>
                     <?php endif; ?>
                     <?php
                     $addPref2 = $driver->getAddPref2();
                     if (isset($addPref2)): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/addPref.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/addPref.png' class='img-width-20' alt=''>
                             <span><?= $addPref2 ?></span>
                         </div>
                     <?php endif; ?>
                     <?php
                     $addPref3 = $driver->getAddPref3();
                     if (isset($addPref3)): ?>
-                        <div class='textIcon'>
-                            <img src='../icons/addPref.png' class='imgFilter' alt=''>
+                        <div class="text-icon">
+                            <img src='../icons/addPref.png' class='img-width-20' alt=''>
                             <span><?= $addPref3 ?></span>
                         </div>
                     <?php endif; ?>
@@ -227,20 +229,19 @@
         <!--RATING'S DRIVER BLOCK-->
 
 
-        <section class="driverRatingBlock">
+        <section class="flex-column block-light-grey gap-12 block-driver-ratings">
 
-            <div class="driverRatingTitle">
-                <span class="subtitle">Avis du chauffeur</span>
-                <div class="driverRating" style="padding-left: 0px;">
-                    <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
+            <div class="flex-column gap-8 item-center">
+                <h3 class="text-green">Avis du chauffeur</h3>
+                <div class="flex-row item-center gap-4" style="padding-left: 0px;">
+                    <img src="../icons/EtoileJaune.png" class="img-width-20" alt="">
                     <span><?php $averageRating = $driver->getAverageRatings();
                     if ($averageRating !== null) {
                         echo htmlspecialchars($averageRating) . " / 5";
                     } ?>
 
                     </span>
-                    <span
-                        style="font-size: calc(100% - 4px);"><?= "(" . htmlspecialchars($driver->getNbRatings()) . " avis)" ?></span>
+                    <span class="font-size-very-small"><?= "(" . htmlspecialchars($driver->getNbRatings()) . " avis)" ?></span>
                 </div>
             </div>
 
@@ -249,20 +250,20 @@
             <?php $ratingsList = $driver->loadDriversRatingsInformations();
             foreach ($ratingsList as $rating): ?>
 
-                <div class="rating">
-                    <div class="photoPseudoRating">
-                        <div class="photoPseudo">
-                            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="userPhoto">
-                            <span class="userPseudo"><?= htmlspecialchars($rating['pseudo']) ?></span>
+                <div class="flex-column gap-8">
+                    <div class="flex-row flex-between">
+                        <div class="flex-row item-center gap-4">
+                            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="user-photo">
+                            <span><?= htmlspecialchars($rating['pseudo']) ?></span>
                         </div>
-                        <div class="driverRating" style="padding-left: 0px;">
-                            <img src="../icons/EtoileJaune.png" class="imgFilter" alt="">
+                        <div style="padding-left: 0px;">
+                            <img src="../icons/EtoileJaune.png" class="img-width-20" alt="">
                             <span><?= htmlspecialchars($rating['rating']) ?></span>
 
                         </div>
                     </div>
-                    <p class="removeMargins"><?= htmlspecialchars(($rating['description'])) ?></p>
-                    <span class="ratingDate"><?= htmlspecialchars(formatDateMonthAndYear($rating['created_at'])) ?></span>
+                    <p><?= htmlspecialchars(($rating['description'])) ?></p>
+                    <span class="font-size-very-small italic"><?= htmlspecialchars(formatDateMonthAndYear($rating['created_at'])) ?></span>
                     <hr>
                 </div>
             <?php endforeach ?>
@@ -271,7 +272,6 @@
 
         </section>
 
-    </article>
+    </div>
 
 </main>
-</body>

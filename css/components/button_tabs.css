@@ -71,6 +71,31 @@
 .border-black {
     border: 2px solid black;
 }
-.col-back-grey-btn:hover{
+
+.col-back-grey-btn:hover {
     background-color: #ccc;
+}
+
+
+/* Hide native radio buttons */
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    background-color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Style when button is selected */
+input[type="radio"]:checked {
+    border-color: #D9D9D9;
+    background-color: #CBCBCB;
 }

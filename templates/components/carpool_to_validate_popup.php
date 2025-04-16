@@ -1,9 +1,9 @@
 <div class="popup" id="popup-id">
-    <h3>Valider le trajet</h3>
-    <div class="filtersList">
+    <h3 class="m-tb-12">Valider le trajet</h3>
+    <div class="block-column-g20">
         <!-- Step 1 -->
         <span>Est-ce que tout s’est bien passé ?</span>
-        <div style="gap:4px;">
+        <div class="gap-4">
             <button id="yesButton" class="yes-no-btn" onclick="handleValidation(true)">Oui</button>
             <button id="noButton" class="yes-no-btn" onclick="handleValidation(false)">Non</button>
         </div>
@@ -11,15 +11,15 @@
 
         <!-- Step 2A : If Yes -->
         <div id="feedback-positive" style="display:none">
-            <h4>Souhaitez-vous laisser un avis ?</h4>
-            <form class="filtersList" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"
+            <h4 class="m-tb-12">Souhaitez-vous laisser un avis ?</h4>
+            <form class="block-column-g20" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"
                 onsubmit="console.log('Form submitted!')">
                 <input type="hidden" name="idReservation" id="popup-idReservation-positive" value="">
                 <input type="hidden" name="action" value="positive">
 
-                <div class="filter">
+                <div class="flex-row">
                     <label for="driver-rating-list">Note laissée au chauffeur : </label>
-                    <select id="driver-rating-list" name="driver-rating-list" style="width: 50px;">
+                    <select id="driver-rating-list" name="driver-rating-list" class="short-field">
                         <optgroup>
                             <option value=""></option>
                             <option value="5">5</option>
@@ -34,14 +34,14 @@
                         </optgroup>
                     </select>
                     <label for="driver-rating-list"><img src="../icons/EtoileJaune.png" alt="EtoileJaune"
-                            class="imgFilter"></label>
+                            class="img-width-20"></label>
                 </div>
 
                 <label for="comment-positive">Laissez un commentaire :</label>
                 <textarea name="comment" id="comment-positive"></textarea>
 
                 <div class="btn bg-light-green">
-                    <button type="submit" class="legendSearch" onclick="submitPositiveJS()"><strong>Valider le
+                    <button type="submit" onclick="submitPositiveJS()"><strong>Valider le
                             covoiturage</strong><br>(avec ou sans avis)</button>
                 </div>
             </form>
@@ -52,11 +52,11 @@
         <div id="feedback-negative" style="display:none">
             <input type="hidden" name="idReservation" id="popup-idReservation-negative" value="">
 
-            <form class="filtersList" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"  onsubmit="console.log('Form submitted!')">
+            <form class="block-column-g20" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"  onsubmit="console.log('Form submitted!')">
                 <label for="comment-negative">Décrivez le problème :</label>
                 <textarea name="comment" id="comment-negative" required></textarea>
                 <div class="btn bg-light-green">
-                    <button type="submit" class="legendSearch" onclick="submitNegativeJS()">Soumettre</button>
+                    <button type="submit" onclick="submitNegativeJS()">Soumettre</button>
                 </div>
             </form>
         </div>

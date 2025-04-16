@@ -1,22 +1,22 @@
 <div class="popup" id="popup-new-employee">
     <h3>Ajouter un compte employé</h3>
-    <div class="filtersList">
+    <div class="block-column-g20">
         <form action="../back/user/admin_space.php" method="POST" class="flex-column gap-12">
             <input type="hidden" name="action" value="create-employee">
 
             <div class="flex-row gap-8">
                 <label for="pseudo-employee">Pseudo : </label>
-                <input type="text" id="pseudo-employee" name="pseudo-employee" class="textField" style="flex:1;"
+                <input type="text" id="pseudo-employee" name="pseudo-employee" class="text-field" style="flex:1;"
                     required>
             </div>
             <div class="flex-row gap-8">
                 <label for="mail-employee">Email : </label>
-                <input type="text" id="mail-employee" name="mail-employee" class="textField" style="flex:1;" required>
+                <input type="text" id="mail-employee" name="mail-employee" class="text-field" style="flex:1;" required>
             </div>
             <div class="flex-column">
                 <div class="flex-row gap-8">
                     <label for="password-employee">Mot de passe : </label>
-                    <input type="password" id="password-employee" name="password-employee" class="textField"
+                    <input type="password" id="password-employee" name="password-employee" class="text-field"
                         style="flex:1;" required>
                 </div>
                 <p>
@@ -27,7 +27,7 @@
                 </p>
             </div>
             <div class="btn bg-light-green">
-                <button type="submit" class="legendSearch">Enregistrer le compte employé</button>
+                <button type="submit">Enregistrer le compte employé</button>
             </div>
         </form>
     </div>

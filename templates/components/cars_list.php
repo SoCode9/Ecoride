@@ -12,7 +12,7 @@ $car = new Car($pdo, $idUser, null);
 $cars = $car->cars;
 
 if (empty($cars)): ?>
-    <span style='color:red; font-style:italic;'>Ajouter au moins une voiture</span>
+    <span class="italic" style='color:red;'>Ajouter au moins une voiture</span>
 <?php else: ?>
     <?php $totalCars = count($cars); ?>
     <?php foreach ($cars as $index => $car): ?>
@@ -29,7 +29,7 @@ if (empty($cars)): ?>
         <span>Couleur : <?= htmlspecialchars($car['car_color']) ?></span>
         <span>Nombre de passagers possible : <?= htmlspecialchars($car['car_seats_offered']) ?></span>
         <a href="<?= BASE_URL ?>/back/car/delete.php?action=delete_car&id=<?= $car['car_id'] ?>">
-            <img src="../icons/Supprimer.png" class="imgFilter" style="cursor: pointer;">
+            <img src="../icons/Supprimer.png" class="img-width-20" style="cursor: pointer;">
         </a>
         <?php if ($index !== $totalCars - 1):
             echo '<hr>';

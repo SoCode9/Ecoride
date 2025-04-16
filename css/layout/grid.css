@@ -15,6 +15,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 4px;
+    border-radius: var(--border-radius);
 }
 
 .flex-column {
@@ -34,10 +36,33 @@
     gap: 12px;
 }
 
+.gap-24 {
+    gap: 24px;
+}
+
 .flex-between {
     justify-content: space-between;
 }
 
 .flex-center {
     justify-content: center;
+}
+
+.content-center {
+    align-content: center;
+}
+
+.item-center {
+    align-items: center;
+}
+
+/*SIZES*/
+
+.img-width-20 {
+    width: 20px;
+}
+
+.img-pointer {
+    width: 20px;
+    cursor: pointer;
 }

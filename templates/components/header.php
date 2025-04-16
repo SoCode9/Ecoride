@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../script/login.js" defer></script>
     <link rel="stylesheet" href="../css/headerFooter.css">
-    <link rel="stylesheet" href="../css/carpoolSearch.css">
-    <link rel="stylesheet" href="../css/carpoolDetails.css">
-    <link rel="stylesheet" href="../css/loginPage.css">
-    <link rel="stylesheet" href="../css/userSpace.css">
     <link rel="stylesheet" href="../css/style.css">
 
 

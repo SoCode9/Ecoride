@@ -1,73 +1,72 @@
 <main>
     <!-- Find a carpool -->
-    <div class="blockFindCarpool">
-        <h1 class="pageTitle bold removeMargins">Rechercher un covoiturage</h1>
-        <form class="searchBar" action="carpool_search.php" method="POST">
+    <div class="flex-column gap-24 block-light-grey">
+        <h2 class="text-green text-bold">Rechercher un covoiturage</h2>
+        <form class="block-search" action="carpool_search.php" method="POST">
             <input type="hidden" name="action" value="search"> <!--identify request-->
 
-            <div class="searchField">
-                <img class="imgFilter" src="../icons/Localisation(2).png" alt="lieu de départ">
-                <input type="text" id="departure-city-search" name="departure-city-search" class="cityField"
-                    placeholder="Ville de départ"
+            <div class="flex-row gap-4 search-field">
+                <img class="img-width-20" src="../icons/Localisation(2).png" alt="lieu de départ">
+                <input type="text" id="departure-city-search" name="departure-city-search" class="font-size-small"
+                    style="color: var(--col-dark-grey);" placeholder="Ville de départ"
                     value="<?= isset($_SESSION['departure-city-search']) ? htmlspecialchars($_SESSION['departure-city-search']) : '' ?>"
                     required>
                 <div id="departure-suggestions" class="suggestions-list"></div>
             </div>
-            <span class="arrow">→</span>
-            <div class="searchField">
-                <img class="imgFilter" src="../icons/Localisation(2).png" alt="">
-                <input type="text" id="arrival-city-search" name="arrival-city-search" class="cityField"
-                    placeholder="Ville d'arrivée"
+            <span class="flex-row">→</span>
+            <div class="flex-row gap-4 search-field">
+                <img class="img-width-20" src="../icons/Localisation(2).png" alt="">
+                <input type="text" id="arrival-city-search" name="arrival-city-search" class="font-size-small"
+                    style="color: var(--col-dark-grey);" placeholder="Ville d'arrivée"
                     value="<?= isset($_SESSION['arrival-city-search']) ? htmlspecialchars($_SESSION['arrival-city-search']) : '' ?>"
                     required>
                 <div id="arrival-suggestions" class="suggestions-list"></div>
             </div>
-            <div class="searchField">
-                <img class="imgFilterDate" src="../icons/Calendrier2.png" alt="Calendrier">
-                <input type="date" id="departure-date-search" name="departure-date-search" class="dateField"
-                    placeholder="Date du départ"
+            <div class="flex-row gap-4 search-field">
+                <img class="img-pointer" src="../icons/Calendrier2.png" alt="Calendrier">
+                <input type="date" id="departure-date-search" name="departure-date-search"
+                    class="date-field font-size-small" placeholder="Date du départ"
                     value="<?= isset($_SESSION['departure-date-search']) ? htmlspecialchars($_SESSION['departure-date-search']) : '' ?>"
                     required>
             </div>
 
             <div class="btn bg-light-green">
-                <img class="imgFilter" src="../icons/LoupeRecherche.png" alt="">
-                <input type="submit" value="Rechercher" class="legendSearch bold">
+                <img class="img-width-20" src="../icons/LoupeRecherche.png" alt="">
+                <input type="submit" value="Rechercher">
             </div>
         </form>
 
 
     </div>
 
-    <div class="filterAndDetails">
+    <div class="block-filter-details">
 
         <!--Search filters-->
 
-        <div class="searchFilterBlock">
-            <h2 class="subtitle removeMargins">Filtres de recherche</h2>
-            <form class="filtersList" action="carpool_search.php" method="POST">
+        <div class="flex-column gap-24 block-light-grey">
+            <h3 class="text-green">Filtres de recherche</h3>
+            <form class="block-column-g20" action="carpool_search.php" method="POST">
                 <input type="hidden" name="action" value="filters"> <!--identify filters-->
 
-                <div class="filter">
+                <div class="flex-row">
                     <input id="eco" name="eco" type="radio" <?= isset($_SESSION['eco']) ? 'checked' : '' ?>>
                     <label for="eco">Voyage écologique</label>
                 </div>
-                <div class="filter">
+                <div class="flex-row">
                     <label for="max-price">Prix (max)</label>
-                    <input type="number" id="max-price" name="max-price" class="numberField" min="1"
+                    <input type="number" id="max-price" name="max-price" class="short-field" min="1"
                         value="<?= isset($_SESSION['max-price']) ? htmlspecialchars($_SESSION['max-price']) : ''; ?>">
                 </div>
-                <div class="filter">
+                <div class="flex-row">
                     <label for="max-duration">Durée (max)</label>
-                    <input type="number" id="max-duration" name="max-duration" class="numberField" min="1"
+                    <input type="number" id="max-duration" name="max-duration" class="short-field" min="1"
                         value="<?= isset($_SESSION['max-duration']) ? htmlspecialchars($_SESSION['max-duration']) : ''; ?>">
                     <label for="max-duration">h</label>
                 </div>
-                <div class="filter">
+                <div class="flex-row">
                     <label for="driver-rating-list">Note chauffeur (min) </label>
 
-                    <select id="driver-rating-list" name="driver-rating-list"
-                        style="width: 50px; border: 1px solid #666666;border-radius: 15px;padding: 4px;font-size: 15px;">
+                    <select id="driver-rating-list" name="driver-rating-list" class="short-field">
                         <optgroup>
                             <option value="none" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "none") ? 'selected' : ''; ?>></option>
                             <option value="5" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "5") ? 'selected' : ''; ?>>5</option>
@@ -81,29 +80,25 @@
                         </optgroup>
                     </select>
                     <label for="driver-rating-list"><img src="../icons/EtoileJaune.png" alt="EtoileJaune"
-                            class="imgFilter"></label>
+                            class="img-width-20"></label>
                 </div>
                 <div class="btn bg-light-green">
-                    <input type="submit" value="Appliquer les filtres" class="legendSearch">
+                    <input type="submit" value="Appliquer les filtres">
 
                 </div>
-                <button type="submit" name="action" value="reset_filters" class="btn col-back-grey-btn">Réinitialiser les
+                <button type="submit" name="action" value="reset_filters" class="btn col-back-grey-btn">Réinitialiser
+                    les
                     filtres</button>
             </form>
 
         </div>
-        <div class="daySelectedAndDetails">
-            <div class="daySelected bold">
-                <img src="../icons/Precedentv3.png" alt="précédent" class="imgFilter">
-                <span class="daySelectedLegend">
-                    <?= isset($_SESSION['departure-date-search']) ? "Départ le " . formatDateLong(htmlspecialchars($_SESSION['departure-date-search'])) : 'Aucune date sélectionnée'; ?>
-                </span>
-                <!-- remplacer par champ dynamique-->
-                <img src="../icons/Suivant.png" alt="suivant" class="imgFilter">
-            </div>
+        <div class="flex-column">
+            <span class="flex-row flex-center text-bold font-size-big">
+                <?= isset($_SESSION['departure-date-search']) ? "Départ le " . formatDateLong(htmlspecialchars($_SESSION['departure-date-search'])) : 'Aucune date sélectionnée'; ?>
+            </span>
 
             <!--TRAVELS' SEARCHED BLOCK-->
-            <div class="blocDetails">
+            <div class="flex-column gap-12 pad-20">
 
                 <?php
                 if (!empty($travelsSearched)) {
@@ -121,19 +116,25 @@
                                 <span class="watermark-complet">Complet</span>
                             <?php endif; ?>
 
-                            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photoUser">
-                            <span class="pseudoUser"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
-                            <div class="driverRating">
-                                <img src="../icons/EtoileJaune.png" alt="Etoile" class="imgFilter">
+                            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo-user" id="photo-ss">
+                            <span class="pseudo-user" id="pseudo-ss"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
+                            <div class="driver-rating" id="rating-ss">
+                                <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
                                 <span><?php
                                 $driver = new Driver($pdo, $t['driver_id']);
 
                                 echo htmlspecialchars($driver->getAverageRatings()) . " (" . htmlspecialchars($driver->getNbRatings()) . ")" ?></span>
                             </div>
-                            <span class="dateTravel">Départ à <?= htmlspecialchars($t['travel_departure_time']) ?>
+                            <span class="date-travel" id="date-bs">Départ à <?= htmlspecialchars($t['travel_departure_time']) ?>
                             </span>
-                            <span class="hoursTravel">Arrivée à <?= htmlspecialchars($t['travel_arrival_time']) ?></span>
-                            <span class="seatsAvailable">Encore
+                            <span class="date-travel" id="date-ss" style="display: none;">De
+                                <?= htmlspecialchars($t['travel_departure_time']) ?>
+                            </span>
+                            <span class="hours-travel" id="hours-bs">Arrivée à
+                                <?= htmlspecialchars($t['travel_arrival_time']) ?></span>
+                            <span class="hours-travel" id="hours-ss" style="display: none;">À
+                                <?= htmlspecialchars($t['travel_arrival_time']) ?></span>
+                            <span class="seats-available" id="seats-bs">Encore
                                 <?php
                                 if ($seatsAvailable > 1) {
                                     echo $seatsAvailable . " places";
@@ -141,12 +142,23 @@
                                     echo $seatsAvailable . " place";
                                 }
                                 ?>
-
                             </span>
-                            <div class="criteriaEcoDiv">
-                                <span class="criteriaEco"><?= formatEco(($t['car_electric'])) ?> </span>
+                            <span class="seats-available" id="seats-ss" style="display: none;">
+                                <?php
+                                if ($seatsAvailable > 1) {
+                                    echo $seatsAvailable . " places";
+                                } else {
+                                    echo $seatsAvailable . " place";
+                                }
+                                ?>
+                            </span>
+                            <div class="criteria-eco-div">
+                                <span class="criteria-eco" id="eco-bs"><?= formatEco(($t['car_electric'])) ?> </span>
                             </div>
-                            <span class="travelPrice gras">
+                            <div class="criteria-eco-div" id="eco-ss" style="display: none;">
+                                <span class="criteria-eco"><?= formatEcoSmallScreen(($t['car_electric'])) ?> </span>
+                            </div>
+                            <span class="travel-price text-bold" id="credit-bs">
                                 <?php
                                 $trajetPrice = htmlspecialchars($t['travel_price']);
                                 if ($trajetPrice > 1) {
@@ -155,11 +167,13 @@
                                     echo $trajetPrice . " crédit";
                                 }
                                 ?></span>
-                            <div class="btn action-btn" style="grid-column: 5/6;grid-row: 3/5">
-                                <img class="imgFilter" src="../icons/LoupeRecherche.png" alt="">
-                                <a href="carpool_details.php?id=<?= htmlspecialchars($t['id']) ?>"
-                                    class="travelDetailsLegend">Détail</a>
 
+                            <span class="travel-price text-bold" id="credit-ss"
+                                style="display: none;"><?= htmlspecialchars($t['travel_price']) . " .-"; ?></span>
+                            <div class="btn action-btn" id="details-btn" style="grid-column: 5/6;grid-row: 3/5">
+                                <img class="img-width-20" src="../icons/LoupeRecherche.png" alt="">
+                                <a href="carpool_details.php?id=<?= htmlspecialchars($t['id']) ?>"
+                                    class="font-size-small">Détail</a>
                             </div>
 
                         </div>
@@ -189,7 +203,7 @@
                         <input type="hidden" name="max-duration" value="<?= htmlspecialchars($maxDuration) ?>">
                         <input type="hidden" name="driver-rating-list" value="<?= htmlspecialchars($driverRating) ?>">
 
-                        <button type="submit" class="nextTravelDate">Prochain itinéraire pour cette recherche le
+                        <button type="submit" class="btn bg-very-light-green" style="padding: 10px;">Prochain itinéraire pour cette recherche le
                             <?= htmlspecialchars(formatDateLong($firstTravel['travel_date'])) ?></button>
                     </form>
                 <?php }

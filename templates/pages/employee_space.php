@@ -45,19 +45,19 @@
                             }
                             ?></span>
                         <div class="flex-row m-8">
-                            <img src="..\icons\EtoileJaune.png" class="imgFilter" alt="Icone étoile">
+                            <img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">
                             <span class="text-bold"><?= htmlspecialchars($rating['rating']) ?></span>
                         </div>
                     </div>
                     <div class="flex-row flex-between">
                         <div class="flex-row gap-4">
-                            <img src="..\icons\Voiture.png" class="imgFilter" alt="Icone voiture">
+                            <img src="..\icons\Voiture.png" class="img-width-20" alt="Icone voiture">
                             <span><?= htmlspecialchars($rating['driver_pseudo']) ?></span>
                             <div class="flex-row font-size-very-small">
                                 <?php $averageRating = $driver->getAverageRatings();
                                 if ($averageRating !== null) {
                                     echo '<span>(</span>
-                                    <img src="..\icons\EtoileJaune.png" class="imgFilter" alt="Icone étoile">'
+                                    <img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
                                         . htmlspecialchars($averageRating) . '<span> )</span>';
                                 } else {
                                     echo "<span class = 'italic'>(0 avis)</span>";
@@ -119,7 +119,7 @@
                         <span>À <?= htmlspecialchars($badComment['travel_arrival_city']) ?></span>
                     </div>
                     <div class="flex-row gap-4">
-                        <img src="..\icons\Voiture.png" class="imgFilter" alt="Icone voiture">
+                        <img src="..\icons\Voiture.png" class="img-width-20" alt="Icone voiture">
                         <div class="flex-row gap-12">
                             <span><?= htmlspecialchars($badComment['pseudoDriver']) ?></span>
                             <div class="flex-row" style="padding-right:15px;">
@@ -127,7 +127,7 @@
                                 $averageRating = $driverOfBadComment->getAverageRatings();
                                 if ($averageRating !== null) {
                                     echo '<span>(</span>
-                                    <img src="..\icons\EtoileJaune.png" class="imgFilter" alt="Icone étoile">'
+                                    <img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
                                         . htmlspecialchars($averageRating) . '<span> )</span>';
                                 } else {
                                     echo "<span class = 'italic font-size-very-small'>(0 avis)</span>";
