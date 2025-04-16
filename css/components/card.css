@@ -5,12 +5,19 @@ Dans ton cas, par exemple, chaque trajet affiché (.travel) dans la recherche de
     background-color: var(--col-light-grey);
     border-radius: var(--border-radius);
     padding: 20px;
+    height: fit-content;
 }
 
-.block-light-white {
+.block-white {
     background-color: white;
     border-radius: var(--border-radius);
     padding: 20px;
+}
+
+.block-border-grey {
+    border-radius: var(--border-radius);
+    padding: 20px;
+    border: #D9D9D9 solid 3px;
 }
 
 .block-column-g20 {
@@ -26,12 +33,25 @@ Dans ton cas, par exemple, chaque trajet affiché (.travel) dans la recherche de
     width: 50px;
 }
 
+.text-field {
+    width: 100px;
+    appearance: none;
+    /* Supprime l'icône par défaut (pour Chrome, Safari, etc.) */
+    -webkit-appearance: none;
+    /* Spécifique pour Safari */
+    -moz-appearance: none;
+    /* Spécifique pour Firefox */
+    border-radius: var(--border-radius);
+    padding: 4px;
+    border: 1px solid var(--col-dark-grey);
+}
+
 .date-field {
     appearance: none;
     /* Removes the native icon (for Chrome, Safari, ...) */
     -webkit-appearance: none;
     /* Specific for Safari */
-    -moz-appearance: textfield;
+    -moz-appearance: none;
     /* Specific for Firefox */
     color: var(--col-dark-grey);
     width: 100%;
@@ -47,4 +67,25 @@ Dans ton cas, par exemple, chaque trajet affiché (.travel) dans la recherche de
 .date-field::-moz-calendar-picker-indicator {
     display: none;
     /* Removes the native icon (Firefox) */
+}
+
+/*POPUP*/
+
+div.popup {
+    display: none;
+    background-color: #fff;
+    border: 2px solid #333;
+    padding: 15px;
+    width: 400px;
+    height: fit-content;
+    position: absolute;
+    align-self: anchor-center;
+    justify-self: anchor-center;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+}
+
+.popup h3 {
+    margin-top: 0;
 }

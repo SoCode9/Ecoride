@@ -7,7 +7,7 @@
     </h2>
 
     <section class="flex-row flex-between block-light-grey">
-        <div class="flex-row flex-between block-light-white" style="width:65%;box-sizing: border-box;">
+        <div class="flex-row flex-between block-white" style="width:65%;box-sizing: border-box;">
 
             <div class="course">
 
@@ -57,7 +57,7 @@
 
         </div>
         <div class="flex-column gap-12" style="width: 30%;">
-            <div class="flex-row flex-between block-light-white">
+            <div class="flex-row flex-between block-white">
                 <div>1 passager</div>
                 <div class="bold"><?php $travelPrice = $travel->getPrice();
                 if ($travelPrice > 1) {
@@ -256,7 +256,7 @@
                             <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="user-photo">
                             <span><?= htmlspecialchars($rating['pseudo']) ?></span>
                         </div>
-                        <div class="" style="padding-left: 0px;">
+                        <div style="padding-left: 0px;">
                             <img src="../icons/EtoileJaune.png" class="img-width-20" alt="">
                             <span><?= htmlspecialchars($rating['rating']) ?></span>
 

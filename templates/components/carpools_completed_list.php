@@ -2,11 +2,11 @@
 
     <!--carpool finished and validated-->
     <?php if (!empty($carpoolListFinishedAndValidated)): ?>
-        <h2 class="subTitleGreen" style="color: black ;">Covoiturages terminés</h2>
+        <h3 style="color: black ;">Covoiturages terminés</h3>
     <?php endif; ?>
     <?php foreach ($carpoolListFinishedAndValidated as $carpool): ?>
         <div class="travel" <?php if (($carpool['driver_id'] === $_SESSION['user_id'])) {
-            echo "style='border:2px solid #4D9856;'";
+            echo "style='border:2px solid var(--col-green);'";
         } ?>>
             <?php if ($carpool['travel_status'] === 'cancelled'): ?>
                 <span class="watermark-complet">Annulé</span>
@@ -14,7 +14,7 @@
 
             <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo-user">
             <span class="pseudo-user"><?= htmlspecialchars($carpool['pseudo']) ?></span>
-            <div class="driverRating">
+            <div class="driver-rating">
                 <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
                 <span>
                     <?php

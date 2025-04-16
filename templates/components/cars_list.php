@@ -12,7 +12,7 @@ $car = new Car($pdo, $idUser, null);
 $cars = $car->cars;
 
 if (empty($cars)): ?>
-    <span style='color:red; font-style:italic;'>Ajouter au moins une voiture</span>
+    <span class="italic" style='color:red;'>Ajouter au moins une voiture</span>
 <?php else: ?>
     <?php $totalCars = count($cars); ?>
     <?php foreach ($cars as $index => $car): ?>

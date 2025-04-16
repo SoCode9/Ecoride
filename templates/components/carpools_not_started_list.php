@@ -8,12 +8,12 @@
     <?php endif; ?>
     <?php foreach ($carpoolListToValidate as $carpool): ?>
         <div class="travel" <?php if (($carpool['driver_id'] === $_SESSION['user_id'])) {
-            echo "style='border:2px solid #4D9856;'";
+            echo "style='border:2px solid var(--col-green);'";
         } ?>>
 
             <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo-user">
             <span class="pseudo-user"><?= htmlspecialchars($carpool['pseudo']) ?></span>
-            <div class="driverRating">
+            <div class="driver-rating">
                 <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
                 <span>
                     <?php
@@ -52,16 +52,16 @@
     <?php include '../templates/components/carpool_to_validate_popup.php'; ?>
     <!--carpool not started or in progress-->
     <?php if (!empty($carpoolListNotStarted)): ?>
-        <h2 class="subTitleGreen" style="color: black ;">Covoiturages à venir</h2>
+        <h3 style="color: black ;">Covoiturages à venir</h3>
     <?php endif; ?>
     <?php foreach ($carpoolListNotStarted as $carpool): ?>
         <div class="travel" <?php if (($carpool['driver_id'] === $_SESSION['user_id'])) {
-            echo "style='border:2px solid #4D9856;'";
+            echo "style='border:2px solid var(--col-green)'";
         } ?>>
 
             <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo-user">
             <span class="pseudo-user"><?= htmlspecialchars($carpool['pseudo']) ?></span>
-            <div class="driverRating">
+            <div class="driver-rating">
                 <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
                 <span>
                     <?php
@@ -100,13 +100,13 @@
             $departureDateTime = DateTime::createFromFormat("Y-m-d H:i:s", $carpool['travel_date'] . ' ' . $carpool['travel_departure_time']);
 
             if (($carpool['travel_status'] === 'not started') && ($carpool['driver_id'] === $_SESSION['user_id']) && $departureDateTime !== false && $departureDateTime <= $now): ?>
-                <div class="btn action-btn" style=" background-color: #68C990; grid-column: 5/6; grid-row: 3/5;">
+                <div class="btn action-btn" style=" background-color:var(--col-light-green); grid-column: 5/6; grid-row: 3/5;">
                     <a href="../back/user/user_space.php?action=start_carpool&id=<?= $carpool['id'] ?>"
                         class="font-size-small">Démarrer</a>
                 </div>
             <?php endif; ?>
             <?php if (($carpool['travel_status'] === 'in progress') && ($carpool['driver_id'] === $_SESSION['user_id'])): ?>
-                <div class="btn action-btn" style=" background-color: #68C990; grid-column: 5/6; grid-row: 3/5;">
+                <div class="btn action-btn" style=" background-color:var(--col-light-green); grid-column: 5/6; grid-row: 3/5;">
                     <a href="../back/user/user_space.php?action=complete_carpool&id=<?= $carpool['id'] ?>"
                         class="font-size-small">Terminer</a>
                 </div>

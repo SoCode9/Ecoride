@@ -6,17 +6,17 @@
 
             <div class="flex-row gap-8">
                 <label for="pseudo-employee">Pseudo : </label>
-                <input type="text" id="pseudo-employee" name="pseudo-employee" class="textField" style="flex:1;"
+                <input type="text" id="pseudo-employee" name="pseudo-employee" class="text-field" style="flex:1;"
                     required>
             </div>
             <div class="flex-row gap-8">
                 <label for="mail-employee">Email : </label>
-                <input type="text" id="mail-employee" name="mail-employee" class="textField" style="flex:1;" required>
+                <input type="text" id="mail-employee" name="mail-employee" class="text-field" style="flex:1;" required>
             </div>
             <div class="flex-column">
                 <div class="flex-row gap-8">
                     <label for="password-employee">Mot de passe : </label>
-                    <input type="password" id="password-employee" name="password-employee" class="textField"
+                    <input type="password" id="password-employee" name="password-employee" class="text-field"
                         style="flex:1;" required>
                 </div>
                 <p>

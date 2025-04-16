@@ -1,9 +1,9 @@
 <div class="popup" id="popup-id">
-    <h3>Valider le trajet</h3>
+    <h3 class="m-tb-12">Valider le trajet</h3>
     <div class="block-column-g20">
         <!-- Step 1 -->
         <span>Est-ce que tout s’est bien passé ?</span>
-        <div style="gap:4px;">
+        <div class="gap-4">
             <button id="yesButton" class="yes-no-btn" onclick="handleValidation(true)">Oui</button>
             <button id="noButton" class="yes-no-btn" onclick="handleValidation(false)">Non</button>
         </div>
@@ -11,7 +11,7 @@
 
         <!-- Step 2A : If Yes -->
         <div id="feedback-positive" style="display:none">
-            <h4>Souhaitez-vous laisser un avis ?</h4>
+            <h4 class="m-tb-12">Souhaitez-vous laisser un avis ?</h4>
             <form class="block-column-g20" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"
                 onsubmit="console.log('Form submitted!')">
                 <input type="hidden" name="idReservation" id="popup-idReservation-positive" value="">
@@ -19,7 +19,7 @@
 
                 <div class="flex-row">
                     <label for="driver-rating-list">Note laissée au chauffeur : </label>
-                    <select id="driver-rating-list" name="driver-rating-list" style="width: 50px;">
+                    <select id="driver-rating-list" name="driver-rating-list" class="short-field">
                         <optgroup>
                             <option value=""></option>
                             <option value="5">5</option>

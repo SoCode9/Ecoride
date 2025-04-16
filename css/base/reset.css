@@ -19,7 +19,7 @@ a {
     color: inherit;
 }
 
-button, input, select, textarea {
+button, input {
     font: inherit;
     border: none;
     background: none;
