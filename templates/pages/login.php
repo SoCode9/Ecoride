@@ -1,5 +1,5 @@
-<main class="content-center">
-    <div class="login-blocks flex-row-wrap ">
+<main class="flex-column flex-center item-center">
+    <div class="login-blocks flex-row-wrap">
         <div class="login-block">
             <h1 class="text-green">Se connecter</h1>
             <form action="" method="POST" class="login-form">

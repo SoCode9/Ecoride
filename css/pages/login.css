@@ -40,6 +40,15 @@
 
 @media(max-width:767px) {
     .login-block {
-        max-width: 100%;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .login-blocks {
+        gap: 10px;
+    }
+
+    .login-form {
+        gap: 20px;
     }
 }

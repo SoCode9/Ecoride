@@ -4,7 +4,7 @@
     <!--carpool finished but not validated-->
 
     <?php if (!empty($carpoolListToValidate)): ?>
-        <h2 class="subTitleGreen" style="color: black ;">Covoiturages terminés, en attente de validation</h2>
+        <h3 class="subTitleGreen" style="color: black ;">Covoiturages terminés, en attente de validation</h3>
     <?php endif; ?>
     <?php foreach ($carpoolListToValidate as $carpool): ?>
         <div class="travel" <?php if (($carpool['driver_id'] === $_SESSION['user_id'])) {
