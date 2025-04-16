@@ -9,8 +9,9 @@
 @import url('./components/button_tabs.css');
 @import url('./components/card.css');
 
-/* Optionnel : importer une page précise */
+
 @import url('./pages/login.css');
 @import url('./pages/carpool_search.css');
 @import url('./pages/carpool_details.css');
 @import url('./pages/user-space.css');
+@import url('./pages/header-footer.css');
