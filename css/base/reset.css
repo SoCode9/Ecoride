@@ -27,7 +27,7 @@ main {
     flex: 1;
 }
 
-button, input[type="submit"] {
+button, input[type="submit"], select {
     font: inherit;
     border: none;
     background: none;

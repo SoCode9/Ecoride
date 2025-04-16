@@ -16,7 +16,7 @@
         </nav>
     </div>
     <section id="validate-rating" class="tab-content <?= $currentTab === 'validate-rating' ? 'active' : '' ?>">
-        <h2 class="subTitleGreen">Valider les avis des participants (<?= $totalRatings ?>)</h2>
+        <h2 class="text-green">Valider les avis des participants (<?= $totalRatings ?>)</h2>
         <?php
         if (isset($ratingsInValidation)):
             $totalRatings = count($ratingsInValidation);
@@ -93,7 +93,7 @@
     </section>
 
     <section id="bad-carpool" class="tab-content <?= $currentTab === 'bad-carpool' ? 'active' : '' ?>">
-        <h2 class="subTitleGreen">Contrôler les covoiturages mal passés (<?= $totalBadComments ?>)</h2>
+        <h2 class="text-green">Contrôler les covoiturages mal passés (<?= $totalBadComments ?>)</h2>
         <?php $index = 0;
         foreach ($badComments as $badComment):
             $index++; ?>

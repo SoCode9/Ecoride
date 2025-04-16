@@ -10,7 +10,7 @@
         <div class="flex-row">
             <label for="departure-date-search">Date du départ : </label>
             <div class="flex-row"
-                style=" border: 1px solid var(--col-dark-grey);border-radius: var(--border-radius);padding: 4px; background-color:white;width: 120px;">
+                style=" border: 1px solid var(--col-dark-grey);border-radius: var(--border-radius);padding: 4px; width: 120px;">
                 <img class="img-pointer" src="../icons/Calendrier2.png" alt="Calendrier">
                 <input type="date" id="departure-date-search" name="travelDate" class="date-field" style="width:200px;"
                     required>
@@ -62,7 +62,8 @@
 
             <div class="flex-row">
                 <label for="carSelected">Voiture : </label>
-                <select id="carSelected" name="carSelected" class="text-field" style="width:200px; height:30px;" required>
+                <select id="carSelected" name="carSelected" class="text-field" style="width:200px; height:30px;"
+                    required>
                     <?php foreach ($carsOfDriver as $car): ?>
                         <option value="<?= $car['car_id'] ?>"><?= $car['name'] . " " . $car['car_model'] ?></option>
                     <?php endforeach; ?>
