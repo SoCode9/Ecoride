@@ -1,5 +1,5 @@
 <footer>
-    <div class="footer">
+    <div class="header font-size-small" style="color:white;">
         <div>
             <img src="" alt="Logo"> <!--manque-->
             <span>@2025 EcoRide</span>
