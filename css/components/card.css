@@ -1,0 +1,8 @@
+/*Un "card" est une boîte de contenu stylisée, souvent utilisée pour des fiches, blocs de résultats, etc. 
+Dans ton cas, par exemple, chaque trajet affiché (.travel) dans la recherche de covoiturage est une carte.*/
+
+.block-light-grey {
+    background-color: var(--bg-light-grey);
+    border-radius: var(--border-radius);
+    padding: 16px;
+}

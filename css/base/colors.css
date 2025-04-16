@@ -1,0 +1,17 @@
+.bg-light-green {
+    background-color: var(--col-light-green);
+}
+
+.text-green {
+    color: var(--col-green);
+}
+
+.border-green {
+    border: 2px solid var(--col-green);
+}
+
+
+
+.bg-light-red {
+    background-color: #e08282;
+}

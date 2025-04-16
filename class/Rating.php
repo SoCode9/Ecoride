@@ -1,6 +1,6 @@
 <?php
 
-require_once '../common.php';
+require_once __DIR__ . '/../functions.php';
 class Rating
 {
     private PDO $pdo;

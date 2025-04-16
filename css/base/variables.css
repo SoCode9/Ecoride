@@ -1,0 +1,11 @@
+:root {
+    --border-radius: 15px;
+    --bg-light-grey: #EDEDED;
+    --font-size-very-small: 12px;
+    --col-green: #4D9856;
+    /*for title pages, text*/
+    --col-light-green: #68C990;
+    /*for buttons*/
+    --col-orange: #F2C674;
+    /*for action's buttons*/
+}
