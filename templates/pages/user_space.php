@@ -4,8 +4,7 @@
         <!--header of this section-->
         <div class="flex-row item-center flex-between">
             <div class="flex-row item-center">
-                <img src="<?= displayPhoto($connectedUser->getPhoto()) ?>"
-                    alt="Photo de l'utilisateur" class="photo">
+                <img src="<?= displayPhoto($connectedUser->getPhoto()) ?>" alt="Photo de l'utilisateur" class="photo">
                 <div class="flex-column">
                     <span class="pseudo-user"><?php echo htmlspecialchars($connectedUser->getPseudo()) ?></span>
                     <?php if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)): ?>
@@ -20,12 +19,13 @@
             </div>
 
             <button class="btn action-btn content-btn active" id="edit-button">Modifier le profil</button>
-            <button class="btn action-btn content-btn" id="save-button">Sauvegarder le profil</button>
+            <button class="btn action-btn content-btn " style="background-color : var(--col-light-green)"
+                id="save-button">Sauvegarder le profil</button>
 
         </div>
         <div class="flex-row item-center hidden" id="edit-photo-icon">
             <button onclick="showPopup('popup-new-photo')"
-                style="width: 30px; background-color: var(--col-light-green); padding:4px 4px;" class="btn"><img
+                style="width: 30px; background-color: var(--col-orange); padding:4px 4px;" class="btn"><img
                     src="../icons/Modifier.png" alt="edit">
             </button>
             <span class="italic font-size-small ">Modifier la photo de profil</span>
