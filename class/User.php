@@ -9,6 +9,8 @@ class User
 
     protected ?string $credit;
 
+    protected ?string $photo;
+
     protected ?int $idRole;
     protected ?PDO $pdo; //stocke la connexion à la BDD
 
@@ -93,6 +95,7 @@ class User
             $this->mail = $userData['mail'];
             $this->password = $userData['password'];
             $this->credit = $userData['credit'];
+            $this->photo = $userData['photo'];
             $this->idRole = $userData['id_role'];
         } else {
             throw new Exception("Aucun utilisateur trouvé dans la BDD avec cet ID");
@@ -185,6 +188,10 @@ class User
     {
         return $this->credit;
     }
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
 
     public function getIdRole()
     {
@@ -240,6 +247,14 @@ class User
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(':isActivated', $isActivated, PDO::PARAM_INT);
         $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
+    public function setPhoto($photoUser){
+        $sql = 'UPDATE users SET photo = :photo_user WHERE id = :user_id';
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':photo_user', $photoUser);
+        $statement->bindParam(':user_id', $this->id, PDO::PARAM_INT);
         $statement->execute();
     }
 }

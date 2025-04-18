@@ -4,7 +4,8 @@
         <!--header of this section-->
         <div class="flex-row item-center flex-between">
             <div class="flex-row item-center">
-                <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo">
+                <img src="<?= displayPhoto($connectedUser->getPhoto()) ?>"
+                    alt="Photo de l'utilisateur" class="photo">
                 <div class="flex-column">
                     <span class="pseudo-user"><?php echo htmlspecialchars($connectedUser->getPseudo()) ?></span>
                     <?php if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)): ?>
@@ -22,6 +23,18 @@
             <button class="btn action-btn content-btn" id="save-button">Sauvegarder le profil</button>
 
         </div>
+        <div class="flex-row item-center hidden" id="edit-photo-icon">
+            <button onclick="showPopup('popup-new-photo')"
+                style="width: 30px; background-color: var(--col-light-green); padding:4px 4px;" class="btn"><img
+                    src="../icons/Modifier.png" alt="edit">
+            </button>
+            <span class="italic font-size-small ">Modifier la photo de profil</span>
+        </div>
+
+
+
+        <?php include "../templates/components/new_photo_popup.php";
+        ?>
         <div class="flex-row flex-between">
             <span><?php echo htmlspecialchars($connectedUser->getMail()) ?></span>
             <span><?php echo htmlspecialchars($connectedUser->getCredit()) ?> crédits</span>
@@ -62,7 +75,7 @@
 
                 <div class="carForm hidden">
                     <hr>
-                    <form id="car-form" class="block-column-g20" style="gap: 10px;">
+                    <form id="car-form" class="ajax-form block-column-g20 " style="gap: 10px;">
                         <input type="hidden" name="action" value="formCar">
 
                         <div class="flex-row">
@@ -242,7 +255,7 @@
                 </div>
 
                 <div class="prefForm hidden">
-                    <form action="" method="POST" id="pref-form" class="block-column-g20" style="gap: 10px;">
+                    <form action="" method="POST" id="pref-form" class="ajax-form block-column-g20" style="gap: 10px;">
                         <input type="hidden" name="action" value="formPref">
 
                         <hr>

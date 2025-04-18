@@ -9,21 +9,21 @@ require_once __DIR__ . "/../../class/Car.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 require_once __DIR__ . "/../../class/Travel.php";
 
-$idUser = $_SESSION['user_id'];
+$userId = $_SESSION['user_id'];
 
-$connectedUser = new User($pdo, $idUser, null, null, null);
+$connectedUser = new User($pdo, $userId, null, null, null);
 if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)) {
     $connectedDriver = new Driver($pdo, $connectedUser->getId());
     $carsOfConnectedDriver = new Car($pdo, $connectedDriver->getId(), null);
     $cars = $carsOfConnectedDriver->getCars();
 }
 
-$usersReservations = new Reservation($pdo, $idUser);
-$carpoolListToValidate = $usersReservations->carpoolFinishedToValidate($pdo, $idUser);
+$usersReservations = new Reservation($pdo, $userId);
+$carpoolListToValidate = $usersReservations->carpoolFinishedToValidate($pdo, $userId);
 
-$carpoolListNotStarted = $usersReservations->carpoolNotStarted($pdo, $idUser);
+$carpoolListNotStarted = $usersReservations->carpoolNotStarted($pdo, $userId);
 
-$carpoolListFinishedAndValidated = $usersReservations->carpoolFinishedAndValidated($pdo, $idUser);
+$carpoolListFinishedAndValidated = $usersReservations->carpoolFinishedAndValidated($pdo, $userId);
 
 /*Cars' form*/
 // Request to retrieve car's brands 
@@ -37,7 +37,7 @@ if (isset($_GET['action'])) {
         $idTravel = $_GET['id'];
         $travel = new Travel($pdo, $idTravel);
         /*If I'm the driver*/
-        if ($travel->getDriverId() === $idUser) {
+        if ($travel->getDriverId() === $userId) {
             $reservation = new Reservation($pdo, null, $idTravel);
 
             $passengersIdOfTheCarpool = $reservation->getPassengersOfTheCarpool($pdo, $idTravel);
@@ -58,8 +58,8 @@ if (isset($_GET['action'])) {
             $_SESSION['success_message'] = "Le covoiturage a été annulé. Les passagers ont reçu un mail leur en informant.";
 
             /*If I'm only a passenger*/
-        } elseif ($travel->getDriverId() !== $idUser) {
-            $usersReservations->cancelCarpool($pdo, $idUser, $idTravel);
+        } elseif ($travel->getDriverId() !== $userId) {
+            $usersReservations->cancelCarpool($pdo, $userId, $idTravel);
             header('Location: ../../controllers/user_space.php');
             $_SESSION['success_message'] = "Vous ne participez plus au covoiturage. Vos crédits ont été crédités.";
         }
