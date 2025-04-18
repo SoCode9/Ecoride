@@ -42,6 +42,16 @@ document.addEventListener("DOMContentLoaded", function () {
             if (updatePhoto) {
                 updatePhoto.classList.remove("hidden");
             }
+
+            document.querySelectorAll('.delete-car-icon').forEach(deleteIcon => {
+                deleteIcon.classList.remove("hidden");
+            });
+
+            document.querySelectorAll('.delete-pref-icon').forEach(deleteIcon => {
+                deleteIcon.classList.remove("hidden");
+            });
+
+
             document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
                 checkbox.classList.remove("radio-not-edit");
             });
