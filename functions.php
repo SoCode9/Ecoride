@@ -1,7 +1,7 @@
 <?php
 
 //CONFIG
-define('BASE_URL', '/0-ECFEcoride'); 
+define('BASE_URL', '/0-ECFEcoride');
 
 
 //to store useful functions for all pages
@@ -93,7 +93,7 @@ function formatDateWeekday(string $dateToFormat): string
         IntlDateFormatter::NONE,
         'Europe/Paris',
         IntlDateFormatter::GREGORIAN,
-        'EEEE dd/MM' 
+        'EEEE dd/MM'
     );
 
     return ucfirst($formatter->format($date));
@@ -142,4 +142,16 @@ function formatEcoSmallScreen(bool $nbEco): string
         return '<img src="../icons/Arbre 1.png" alt="Arbre" width="20px">' . " Eco";
     }
     return "";
+}
+
+function displayPhoto(?string $fileName = null): string
+{
+    $real_path = __DIR__ . '/photos/' . $fileName;
+
+    if (!$fileName || !file_exists($real_path)) {
+        return '/0-ECFEcoride/photos/default-user.png';
+    } else {
+        return "/0-ECFEcoride/photos/" . $fileName;
+    }
+
 }

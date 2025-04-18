@@ -4,7 +4,8 @@
         <!--header of this section-->
         <div class="flex-row item-center flex-between">
             <div class="flex-row item-center">
-                <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo">
+                <img src="<?= displayPhoto($connectedUser->getPhoto()) ?>"
+                    alt="Photo de l'utilisateur" class="photo">
                 <div class="flex-column">
                     <span class="pseudo-user"><?php echo htmlspecialchars($connectedUser->getPseudo()) ?></span>
                     <?php if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)): ?>
@@ -30,7 +31,7 @@
             <span class="italic font-size-small ">Modifier la photo de profil</span>
         </div>
 
-        
+
 
         <?php include "../templates/components/new_photo_popup.php";
         ?>
