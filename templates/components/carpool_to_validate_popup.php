@@ -15,7 +15,6 @@
             <form class="block-column-g20" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"
                 onsubmit="console.log('Form submitted!')">
                 <input type="hidden" name="idReservation" id="popup-idReservation-positive" value="">
-                <input type="hidden" name="action" value="positive">
 
                 <div class="flex-row">
                     <label for="driver-rating-list">Note laissée au chauffeur : </label>
@@ -50,9 +49,11 @@
 
         <!-- Step 2B : If No -->
         <div id="feedback-negative" style="display:none">
-            <input type="hidden" name="idReservation" id="popup-idReservation-negative" value="">
 
-            <form class="block-column-g20" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"  onsubmit="console.log('Form submitted!')">
+            <form class="block-column-g20" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"
+                onsubmit="console.log('Form submitted!')">
+                <input type="hidden" name="idReservation" id="popup-idReservation-negative" value="">
+            
                 <label for="comment-negative">Décrivez le problème :</label>
                 <textarea name="comment" id="comment-negative" required></textarea>
                 <div class="btn bg-light-green">
@@ -63,19 +64,19 @@
     </div>
 
     <button type="button" class="col-back-grey-btn btn" style="justify-self:right;"
-        onclick="closePopup()">Annuler</button>
+        onclick="closePopupValidate()">Annuler</button>
 
 </div>
 
 <script>
-    function showPopup(event) {
+    function showPopupValidate(event) {
         const reservationId = event.target.getAttribute('data-id');
         document.getElementById('popup-idReservation-positive').value = reservationId;
         document.getElementById('popup-idReservation-negative').value = reservationId;
         document.getElementById('popup-id').style.display = 'block';
     }
 
-    function closePopup() {
+    function closePopupValidate() {
         document.getElementById('popup-id').style.display = 'none';
         document.getElementById('feedback-positive').style.display = 'none';
         document.getElementById('feedback-negative').style.display = 'none';
@@ -128,8 +129,8 @@
             .then(res => res.text())
             .then(data => {
                 console.log("Réponse du backend :", data);
-                closePopup();
-                location.reload(); 
+                closePopupValidate();
+                location.reload();
             })
             .catch(error => {
                 console.error("Erreur :", error);
@@ -155,7 +156,7 @@
             .then(res => res.text())
             .then(data => {
                 console.log("Réponse du backend :", data);
-                closePopup();
+                closePopupValidate();
                 location.reload();
             })
             .catch(error => {

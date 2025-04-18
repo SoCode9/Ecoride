@@ -42,7 +42,7 @@
                 ?></span>
             <?php if ($driver->getId() !== $idUser): ?>
                 <div class="btn action-btn" style="grid-column: 5/6; grid-row: 3/5;">
-                    <button class="font-size-small" onclick="showPopup(event)" data-id="<?= $carpool['reservationId'] ?>"
+                    <button class="font-size-small" onclick="showPopupValidate(event)" data-id="<?= $carpool['reservationId'] ?>"
                         style="width: 100%;">Valider</button>
                 </div>
 
