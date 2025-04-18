@@ -10,8 +10,9 @@
         <div class="travel" <?php if (($carpool['driver_id'] === $_SESSION['user_id'])) {
             echo "style='border:2px solid var(--col-green);'";
         } ?>>
-
-            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo-user">
+            <div class="photo-user-container" id="photo-ss" style="justify-self:center;">
+                <img src="<?= displayPhoto($carpool['photo']) ?>" alt="Photo de l'utilisateur" class="photo-user">
+            </div>
             <span class="pseudo-user"><?= htmlspecialchars($carpool['pseudo']) ?></span>
             <div class="driver-rating">
                 <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
@@ -40,7 +41,7 @@
                 }
                 ?></span>
             <?php if ($driver->getId() !== $idUser): ?>
-                <div class="btn action-btn"style="grid-column: 5/6; grid-row: 3/5;">
+                <div class="btn action-btn" style="grid-column: 5/6; grid-row: 3/5;">
                     <button class="font-size-small" onclick="showPopup(event)" data-id="<?= $carpool['reservationId'] ?>"
                         style="width: 100%;">Valider</button>
                 </div>
@@ -59,7 +60,10 @@
             echo "style='border:2px solid var(--col-green)'";
         } ?>>
 
-            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo-user">
+            <div class="photo-user-container" id="photo-ss" style="justify-self:center;">
+                <img src="<?= displayPhoto($carpool['photo']) ?>" alt="Photo de l'utilisateur" class="photo-user">
+            </div>
+            
             <span class="pseudo-user"><?= htmlspecialchars($carpool['pseudo']) ?></span>
             <div class="driver-rating">
                 <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">

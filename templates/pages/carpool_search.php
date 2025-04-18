@@ -115,8 +115,10 @@
                             if ($seatsAvailable === 0): ?>
                                 <span class="watermark-complet">Complet</span>
                             <?php endif; ?>
-
-                            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo-user" id="photo-ss">
+                            <div class="photo-user-container" id="photo-ss" style="justify-self:center;">
+                                <img src="<?= displayPhoto($t['driver_photo']) ?>" alt="Photo de l'utilisateur"
+                                    class="photo-user" >
+                            </div>
                             <span class="pseudo-user" id="pseudo-ss"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
                             <div class="driver-rating" id="rating-ss">
                                 <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
@@ -203,7 +205,8 @@
                         <input type="hidden" name="max-duration" value="<?= htmlspecialchars($maxDuration) ?>">
                         <input type="hidden" name="driver-rating-list" value="<?= htmlspecialchars($driverRating) ?>">
 
-                        <button type="submit" class="btn bg-very-light-green" style="padding: 10px;">Prochain itinéraire pour cette recherche le
+                        <button type="submit" class="btn bg-very-light-green" style="padding: 10px;">Prochain itinéraire
+                            pour cette recherche le
                             <?= htmlspecialchars(formatDateLong($firstTravel['travel_date'])) ?></button>
                     </form>
                 <?php }

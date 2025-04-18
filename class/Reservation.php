@@ -32,7 +32,7 @@ class Reservation
 
     public function carpoolFinishedToValidate($pdo, $userId)
     {
-        $sql = "SELECT travels.*, users.pseudo, ratings.rating, reservations.is_validated, reservations.id AS reservationId FROM travels 
+        $sql = "SELECT travels.*, users.pseudo, users.photo, ratings.rating, reservations.is_validated, reservations.id AS reservationId FROM travels 
         JOIN reservations ON reservations.travel_id = travels.id 
         JOIN driver ON driver.user_id = travels.driver_id 
         JOIN users ON users.id = travels.driver_id
@@ -52,7 +52,7 @@ class Reservation
 
     public function carpoolNotStarted($pdo, $userId)
     {
-        $sql = "SELECT travels.*, users.pseudo, ratings.rating FROM travels 
+        $sql = "SELECT travels.*, users.pseudo, users.photo, ratings.rating FROM travels 
         LEFT JOIN reservations ON reservations.travel_id = travels.id 
         JOIN driver ON driver.user_id = travels.driver_id 
         JOIN users ON users.id = travels.driver_id
@@ -75,7 +75,7 @@ class Reservation
 
     public function carpoolFinishedAndValidated($pdo, $userId)
     {
-        $sql = "SELECT travels.*, users.pseudo, ratings.rating, reservations.is_validated FROM travels 
+        $sql = "SELECT travels.*, users.pseudo,  users.photo, ratings.rating, reservations.is_validated FROM travels 
         LEFT JOIN reservations ON reservations.travel_id = travels.id 
         JOIN driver ON driver.user_id = travels.driver_id 
         JOIN users ON users.id = travels.driver_id

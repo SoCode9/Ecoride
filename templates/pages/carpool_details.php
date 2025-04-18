@@ -59,7 +59,7 @@
         <div class="flex-column gap-12" style="width: 30%;">
             <div class="flex-row flex-between block-white">
                 <div>1 passager</div>
-                <div class="bold"><?php $travelPrice = $travel->getPrice();
+                <div class="text-bold"><?php $travelPrice = $travel->getPrice();
                 if ($travelPrice > 1) {
                     echo htmlspecialchars($travelPrice) . " crédits";
                 } else {
@@ -83,7 +83,7 @@
 
         <section class="block-driver-info block-light-grey">
             <div class="flex-column gap-24">
-                <img src="../icons/Femme1.jpg" class="photo" alt="photo de l'utilisateur">
+                <img src="<?= displayPhoto($driver->getPhoto()) ?>" class="photo" alt="photo de l'utilisateur">
                 <div class="flex-column gap-12 flex-center item-center">
                     <span><?= htmlspecialchars($driver->getPseudo()) ?></span>
                     <div class="text-icon" style="padding-left: 0px;">
@@ -253,7 +253,7 @@
                 <div class="flex-column gap-8">
                     <div class="flex-row flex-between">
                         <div class="flex-row item-center gap-4">
-                            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="user-photo">
+                            <img src="<?= displayPhoto($rating['photo']) ?>" alt="Photo de l'utilisateur" class="user-photo">
                             <span><?= htmlspecialchars($rating['pseudo']) ?></span>
                         </div>
                         <div style="padding-left: 0px;">

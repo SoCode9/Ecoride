@@ -12,7 +12,9 @@
                 <span class="watermark-complet">Annulé</span>
             <?php endif; ?>
 
-            <img src="../icons/Femme3.jpg" alt="Photo de l'utilisateur" class="photo-user">
+            <div class="photo-user-container" id="photo-ss" style="justify-self:center;">
+                <img src="<?= displayPhoto($carpool['photo']) ?>" alt="Photo de l'utilisateur" class="photo-user">
+            </div>
             <span class="pseudo-user"><?= htmlspecialchars($carpool['pseudo']) ?></span>
             <div class="driver-rating">
                 <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">

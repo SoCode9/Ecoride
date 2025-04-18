@@ -154,7 +154,7 @@ class Travel
             $dateSearch = $dateObject->format('Y-m-d'); // Format SQL
         }
 
-        $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, AVG(ratings.rating) AS driver_rating, driver.user_id AS driver_id,
+        $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, users.photo AS driver_photo, AVG(ratings.rating) AS driver_rating, driver.user_id AS driver_id,
         cars.car_electric AS car_electric, cars.car_seats_offered AS seats_offered, TIMESTAMPDIFF(MINUTE, travel_departure_time, travel_arrival_time)/60 AS travel_duration 
         FROM travels 
         JOIN users ON users.id = travels.driver_id 
