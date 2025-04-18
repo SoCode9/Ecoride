@@ -61,7 +61,7 @@ class Driver extends User
      */
     public function loadDriversRatingsInformations()
     {
-        $sql = "SELECT ratings.*, users.pseudo FROM ratings JOIN driver ON driver.user_id = ratings.driver_id JOIN users ON users.id = ratings.user_id
+        $sql = "SELECT ratings.*, users.pseudo, users.photo FROM ratings JOIN driver ON driver.user_id = ratings.driver_id JOIN users ON users.id = ratings.user_id
         WHERE ratings.driver_id=:driver_id AND status='validated' ORDER BY created_at DESC";
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(':driver_id', $this->id, PDO::PARAM_INT);
