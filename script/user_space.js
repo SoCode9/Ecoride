@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("submit", function (event) {
-        event.preventDefault();
+        const form = event.target;
+        if (form.classList.contains("ajax-form")) {
+            event.preventDefault();
+        }
+
     }, true);
 
     document.querySelectorAll(".tab-btn").forEach(button => {
