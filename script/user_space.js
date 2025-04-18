@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const saveButton = document.getElementById('save-button');
     const addCarButton = document.getElementById("add_car_button");
     const addPrefButton = document.getElementById("add_pref_button");
+    const updatePhoto = document.getElementById("edit-photo-icon");
 
     if (editButton && saveButton) {
         editButton.addEventListener('click', () => {
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             saveButton.classList.add("active");
 
             document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
-                checkbox.classList.remove("radioNotEdit");
+                checkbox.classList.remove("radio-not-edit");
             });
 
             if (addCarButton) {
@@ -34,9 +35,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (addPrefButton) {
                 addPrefButton.classList.remove("hidden");
             }
-
+            if (updatePhoto) {
+                updatePhoto.classList.remove("hidden");
+            }
             document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
-                checkbox.classList.remove("radioNotEdit");
+                checkbox.classList.remove("radio-not-edit");
             });
 
         });
@@ -47,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
-                checkbox.classList.add("radioNotEdit");
+                checkbox.classList.add("radio-not-edit");
             });
 
             if (addCarButton) {
@@ -59,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             document.querySelectorAll('input[type="radio"]').forEach(checkbox => {
-                checkbox.classList.add("radioNotEdit");
+                checkbox.classList.add("radio-not-edit");
             });
 
         });

@@ -24,14 +24,14 @@
                     ?>
                 </span>
             </div>
-            <span class="date-travel"><?= formatDate(htmlspecialchars($carpool['travel_date'])) ?> </span>
+            <span class="date-travel text-bold"><?= formatDate(htmlspecialchars($carpool['travel_date'])) ?> </span>
             <span class="hours-travel">De <?= htmlspecialchars($carpool['travel_departure_city']) ?>
             </span>
             <span class="seats-available">De
                 <?= formatTime(htmlspecialchars($carpool['travel_departure_time'])) ?> à
                 <?= formatTime(htmlspecialchars($carpool['travel_arrival_time'])) ?></span>
             <span class="criteria-eco-div">À <?= htmlspecialchars($carpool['travel_arrival_city']) ?></span>
-            <span class="travel-price gras">
+            <span class="travel-price">
                 <?php
                 $trajetPrice = htmlspecialchars($carpool['travel_price']);
                 if ($trajetPrice > 1) {

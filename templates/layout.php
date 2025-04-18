@@ -13,9 +13,9 @@
 <body>
     <?php include 'components/header.php'; ?>
 
-   <!--  <main> -->
-        <?php include $templatePage; ?>
-  <!--   </main> -->
+
+    <?php include $templatePage; ?>
+
 
     <?php include 'components/footer.php'; ?>
 </body>

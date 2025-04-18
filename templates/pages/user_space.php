@@ -22,6 +22,14 @@
             <button class="btn action-btn content-btn" id="save-button">Sauvegarder le profil</button>
 
         </div>
+        <div class="flex-row item-center hidden" id="edit-photo-icon">
+            <img src="../icons/Modifier.png" alt="edit"
+                style="width: 30px; background-color: var(--col-light-green); padding:4px 4px;" class='btn'>
+            <span class="italic font-size-small ">Modifier la photo de profil</span>
+        </div>
+
+        <?php include "../templates/components/new_photo.php";
+        ?>
         <div class="flex-row flex-between">
             <span><?php echo htmlspecialchars($connectedUser->getMail()) ?></span>
             <span><?php echo htmlspecialchars($connectedUser->getCredit()) ?> crédits</span>
