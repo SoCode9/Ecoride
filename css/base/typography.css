@@ -24,9 +24,3 @@
 a {
     color: inherit;
 }
-
-@media(max-width:767px) {
-    html {
-        font-size: calc(100% - 3px);
-    }
-}
