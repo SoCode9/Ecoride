@@ -5,9 +5,12 @@
         <h3 style="color: black ;">Covoiturages terminés</h3>
     <?php endif; ?>
     <?php foreach ($carpoolListFinishedAndValidated as $carpool): ?>
-        <div class="travel" <?php if (($carpool['driver_id'] === $_SESSION['user_id'])) {
-            echo "style='border:2px solid var(--col-green);'";
-        } ?>>
+        <div class="travel" onclick="window.location.href='carpool_details.php?id=<?= htmlspecialchars($carpool['id']) ?>'"
+            <?php if (($carpool['driver_id'] === $_SESSION['user_id'])) {
+                echo "style='border:2px solid var(--col-green);cursor:pointer;'";
+            } else {
+                echo "style ='cursor:pointer;'";
+            } ?>>
             <?php if ($carpool['travel_status'] === 'cancelled'): ?>
                 <span class="watermark-complet">Annulé</span>
             <?php endif; ?>
