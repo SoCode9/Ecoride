@@ -103,10 +103,14 @@
                 <?php
                 if (!empty($travelsSearched)) {
                     foreach ($travelsSearched as $t): ?>
+                        <div class="travel"
+                            onclick="window.location.href='carpool_details.php?id=<?= htmlspecialchars($t['id']) ?>'"
+                            <?php if (isset($_SESSION['user_id']) && ($t['driver_id'] === $_SESSION['user_id'])) {
+                                echo "style='border:2px solid var(--col-green);cursor:pointer;'";
+                            } else {
+                                echo "style ='cursor:pointer;'";
+                            } ?>>
 
-                        <div class="travel" <?php if (isset($_SESSION['user_id']) && ($t['driver_id'] === $_SESSION['user_id'])) {
-                            echo "style='border:2px solid #4D9856;'";
-                        } ?>>
                             <?php
                             $seatsAvailable = seatsAvailable(
                                 $car->nbSeatsOfferedInACarpool($pdo, $t['car_id']),
@@ -117,7 +121,7 @@
                             <?php endif; ?>
                             <div class="photo-user-container" id="photo-ss" style="justify-self:center;">
                                 <img src="<?= displayPhoto($t['driver_photo']) ?>" alt="Photo de l'utilisateur"
-                                    class="photo-user" >
+                                    class="photo-user">
                             </div>
                             <span class="pseudo-user" id="pseudo-ss"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
                             <div class="driver-rating" id="rating-ss">
@@ -172,12 +176,6 @@
 
                             <span class="travel-price text-bold" id="credit-ss"
                                 style="display: none;"><?= htmlspecialchars($t['travel_price']) . " .-"; ?></span>
-                            <div class="btn action-btn" id="details-btn" style="grid-column: 5/6;grid-row: 3/5">
-                                <img class="img-width-20" src="../icons/LoupeRecherche.png" alt="">
-                                <a href="carpool_details.php?id=<?= htmlspecialchars($t['id']) ?>"
-                                    class="font-size-small">Détail</a>
-                            </div>
-
                         </div>
 
 

@@ -3,7 +3,7 @@
     <!--Travel's details and booking block-->
 
     <h2 class="text-green text-bold">
-        <?= formatDateLong(htmlspecialchars($_SESSION['departure-date-search'])) ?? '' ?>
+        <?= formatDateLong(htmlspecialchars($travel->getDate($travel->getIdTravel()))) ?? '' ?>
     </h2>
 
     <section class="flex-row flex-between block-light-grey">
@@ -241,7 +241,8 @@
                     } ?>
 
                     </span>
-                    <span class="font-size-very-small"><?= "(" . htmlspecialchars($driver->getNbRatings()) . " avis)" ?></span>
+                    <span
+                        class="font-size-very-small"><?= "(" . htmlspecialchars($driver->getNbRatings()) . " avis)" ?></span>
                 </div>
             </div>
 
@@ -253,7 +254,8 @@
                 <div class="flex-column gap-8">
                     <div class="flex-row flex-between">
                         <div class="flex-row item-center gap-4">
-                            <img src="<?= displayPhoto($rating['photo']) ?>" alt="Photo de l'utilisateur" class="user-photo">
+                            <img src="<?= displayPhoto($rating['photo']) ?>" alt="Photo de l'utilisateur"
+                                class="user-photo">
                             <span><?= htmlspecialchars($rating['pseudo']) ?></span>
                         </div>
                         <div style="padding-left: 0px;">
@@ -263,7 +265,8 @@
                         </div>
                     </div>
                     <p><?= htmlspecialchars(($rating['description'])) ?></p>
-                    <span class="font-size-very-small italic"><?= htmlspecialchars(formatDateMonthAndYear($rating['created_at'])) ?></span>
+                    <span
+                        class="font-size-very-small italic"><?= htmlspecialchars(formatDateMonthAndYear($rating['created_at'])) ?></span>
                     <hr>
                 </div>
             <?php endforeach ?>
