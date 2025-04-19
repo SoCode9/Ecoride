@@ -27,14 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
     if (isset($rating)) {
         $newRating = new Rating($pdo);
         $newRating->saveRatingToDatabase($pdo, $passengerId, $driverId, $rating, $comment);
-        echo "note attribuée !"; // A ENLEVER ?
-    } else {
-        echo "pas de note attribuée.";// A ENLEVER ?
-    }
+    } 
     try {
         $reservation->validateCarpoolYes($pdo, $reservationId);
+        header('Location:../../controllers/user_space.php');
     } catch (Exception $e) {
-        echo "erreur dans la function validateCarpoolYes : " . $e->getMessage();
+        echo "Erreur dans la function validateCarpoolYes : " . $e->getMessage();
     }
 }
 
@@ -46,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'negative') {
     $reservation = new Reservation($pdo);
     try {
         $reservation->validateCarpoolNo($pdo, $reservationId, $comment);
+        header('Location:../../controllers/user_space.php');
     } catch (Exception $e) {
         echo "erreur dans la function validateCarpoolNo : " . $e->getMessage();
     }

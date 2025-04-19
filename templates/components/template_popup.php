@@ -11,3 +11,8 @@
 </div>
 
 
+<?php if (!empty($popup_script)): ?>
+    <script>
+        <?= $popup_script ?>
+    </script>
+<?php endif; ?>
