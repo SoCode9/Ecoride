@@ -35,4 +35,4 @@ ob_start(); ?>
 
 <?php $popup_content = ob_get_clean(); ?>
 
-<?php include '../templates/components/template_popup.php'; ?>
+<?php include '../templates/components/popup/template.php'; ?>

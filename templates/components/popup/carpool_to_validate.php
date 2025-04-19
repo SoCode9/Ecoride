@@ -113,4 +113,4 @@ ob_start(); ?>
 
 </script>
 
-<?php include '../templates/components/template_popup.php'; ?>
+<?php include '../templates/components/popup/template.php'; ?>

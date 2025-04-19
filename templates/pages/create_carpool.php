@@ -82,6 +82,6 @@
             <input type="submit" value="Proposer le trajet">
         </div>
     </form>
-    <?php include "../templates/components/new_car_popup.php";
+    <?php include "../templates/components/popup/new_car.php";
     ?>
 </main>

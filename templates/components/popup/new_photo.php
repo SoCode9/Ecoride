@@ -14,6 +14,6 @@ ob_start(); ?>
 </form>
 <?php $popup_content = ob_get_clean();
 
-include '../templates/components/template_popup.php';
+include '../templates/components/popup/template.php';
 
 ?>
