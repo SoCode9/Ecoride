@@ -9,4 +9,9 @@ function closePopup(id) {
     if (typeof closePopupValidate === 'function') {
         closePopupValidate();
     }
+
+    // for the user space page : calls the closePopupValidate function
+    if (typeof closePopupCar === 'function') {
+        closePopupCar();
+    }
 }

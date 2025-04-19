@@ -69,7 +69,7 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <button type="button" onclick="showPopup(event)" class="btn action-btn"
+            <button type="button" onclick="showPopupCar(event)" class="btn action-btn"
                 style="background-color:inherit; border: 1.5px solid black;">Autre voiture</button>
         </div>
         <div class="flex-row">
