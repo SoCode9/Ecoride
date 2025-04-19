@@ -9,10 +9,3 @@
     <button type="button" class="col-back-grey-btn btn" style="justify-self:right;"
         onclick="closePopup('<?= $popup_id ?>')">Annuler</button>
 </div>
-
-
-<?php if (!empty($popup_script)): ?>
-    <script>
-        <?= $popup_script ?>
-    </script>
-<?php endif; ?>

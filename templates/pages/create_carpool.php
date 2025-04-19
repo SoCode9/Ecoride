@@ -69,7 +69,7 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <button type="button" onclick="showPopup(event)" class="btn action-btn"
+            <button type="button" onclick="showPopupCar(event)" class="btn action-btn"
                 style="background-color:inherit; border: 1.5px solid black;">Autre voiture</button>
         </div>
         <div class="flex-row">
@@ -82,6 +82,6 @@
             <input type="submit" value="Proposer le trajet">
         </div>
     </form>
-    <?php include "../templates/components/new_car_popup.php";
+    <?php include "../templates/components/popup/new_car.php";
     ?>
 </main>

@@ -70,8 +70,8 @@ ob_start(); ?>
     
 <?php $popup_content = ob_get_clean(); ?>
 
-<?php ob_start(); ?>
-    function showPopupValidate(popupId, buttonElement) {
+<script>
+    function showPopupValidate(event) {
         const reservationId = event.target.getAttribute('data-id');
         document.getElementById('popup-idReservation-positive').value = reservationId;
         document.getElementById('popup-idReservation-negative').value = reservationId;
@@ -111,6 +111,6 @@ ob_start(); ?>
         }
     }
 
-<?php $popup_script = ob_get_clean(); ?>
+</script>
 
-<?php include '../templates/components/template_popup.php'; ?>
+<?php include '../templates/components/popup/template.php'; ?>

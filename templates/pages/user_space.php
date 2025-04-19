@@ -33,7 +33,7 @@
 
 
 
-        <?php include "../templates/components/new_photo_popup.php";
+        <?php include "../templates/components/popup/new_photo.php";
         ?>
         <div class="flex-row flex-between">
             <span><?php echo htmlspecialchars($connectedUser->getMail()) ?></span>

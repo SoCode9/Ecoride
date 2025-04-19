@@ -42,14 +42,14 @@
                 ?></span>
             <?php if ($driver->getId() !== $idUser): ?>
                 <div class="btn action-btn" style="grid-column: 5/6; grid-row: 3/5;">
-                    <button class="font-size-small" onclick="showPopupValidate('popup-id', this)"
+                    <button class="font-size-small" onclick="showPopupValidate(event)"
                         data-id="<?= $carpool['reservationId'] ?>" style="width: 100%;">Valider</button>
                 </div>
             <?php endif; ?>
         </div>
     <?php endforeach; ?>
 
-    <?php include '../templates/components/carpool_to_validate_popup.php'; ?>
+    <?php include '../templates/components/popup/carpool_to_validate.php'; ?>
     <!--carpool not started or in progress-->
     <?php if (!empty($carpoolListNotStarted)): ?>
         <h3 style="color: black ;">Covoiturages à venir</h3>
