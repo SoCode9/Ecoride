@@ -34,20 +34,5 @@ ob_start(); ?>
 </form>
 
 <?php $popup_content = ob_get_clean(); ?>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const form = document.querySelector('form[action="../back/user/admin_space.php"]');
-
-        if (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    form.reportValidity();
-                }
-            });
-        }
-    });
-</script>
-
 
 <?php include '../templates/components/template_popup.php'; ?>
