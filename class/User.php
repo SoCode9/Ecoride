@@ -109,6 +109,15 @@ class User
      */
     public function saveUserToDatabase($idRole)
     {
+
+        $sql = "SELECT id FROM users WHERE mail = :mail";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':mail', $this->mail, PDO::PARAM_STR);
+        $statement->execute();
+        if ($statement->fetch()) {
+            throw new Exception("Un compte est déjà activé pour cette adresse email");
+        }
+
         try {
             $stmt = $this->pdo->prepare("INSERT INTO users (pseudo, mail, password, id_role) VALUES (:pseudo, :mail, :password, :idRole)");
             $success = $stmt->execute([
@@ -250,7 +259,8 @@ class User
         $statement->execute();
     }
 
-    public function setPhoto($photoUser){
+    public function setPhoto($photoUser)
+    {
         $sql = 'UPDATE users SET photo = :photo_user WHERE id = :user_id';
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(':photo_user', $photoUser);
