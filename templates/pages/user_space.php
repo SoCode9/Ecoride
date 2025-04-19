@@ -69,7 +69,7 @@
                 <h3 class="text-green">Voitures</h3>
 
                 <div id="car-container" class="flex-column gap-8" style="padding:10px 0px">
-                    <?php include '../templates/components/cars_list.php'; ?>
+                    <?php include '../templates/components/lists/cars.php'; ?>
                 </div>
 
 
@@ -248,7 +248,7 @@
                     </div>
                     <div id="pref-container">
                         <?php
-                        include "../templates/components/other_pref_list.php";
+                        include "../templates/components/lists/other_pref.php";
                         ?>
                     </div>
 
@@ -293,11 +293,11 @@
         </div>
 
         <div id="notStarted" class="tab-content active">
-            <?php include '../templates/components/carpools_not_started_list.php'; ?>
+            <?php include '../templates/components/lists/carpools_not_started.php'; ?>
         </div>
 
         <div id="completed" class="tab-content">
-            <?php include '../templates/components/carpools_completed_list.php'; ?>
+            <?php include '../templates/components/lists/carpools_completed.php'; ?>
         </div>
 
     </section>
