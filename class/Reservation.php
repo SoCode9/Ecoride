@@ -33,7 +33,7 @@ class Reservation
     public function carpoolFinishedToValidate($pdo, $userId)
     {
         $sql = "SELECT travels.*, users.pseudo, users.photo, ratings.rating, reservations.is_validated, reservations.id AS reservationId FROM travels 
-        JOIN reservations ON reservations.travel_id = travels.id 
+        JOIN reservations ON reservations.travel_id = travels.id AND reservations.user_id = :userConnected_id
         JOIN driver ON driver.user_id = travels.driver_id 
         JOIN users ON users.id = travels.driver_id
         LEFT JOIN ratings ON ratings.driver_id = travels.driver_id

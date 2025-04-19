@@ -1,6 +1,8 @@
-<div class="popup" id="popup-id">
-    <h3 class="m-tb-12">Valider le trajet</h3>
-    <div class="block-column-g20">
+<?php
+
+$popup_id = "popup-id";
+$popup_title = "Valider le trajet";
+ob_start(); ?>
         <!-- Step 1 -->
         <span>Est-ce que tout s’est bien passé ?</span>
         <div class="gap-4">
@@ -14,11 +16,12 @@
             <h4 class="m-tb-12">Souhaitez-vous laisser un avis ?</h4>
             <form class="block-column-g20" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"
                 onsubmit="console.log('Form submitted!')">
-                <input type="hidden" name="idReservation" id="popup-idReservation-positive" value="">
+                <input type="hidden" name="idReservation" id="popup-idReservation-positive" value=<?= $carpool['reservationId'] ?>>
+                <input type="hidden" name="action" value="positive">
 
                 <div class="flex-row">
                     <label for="driver-rating-list">Note laissée au chauffeur : </label>
-                    <select id="driver-rating-list" name="driver-rating-list" class="short-field">
+                    <select id="driver-rating-list" name="rating" class="short-field">
                         <optgroup>
                             <option value=""></option>
                             <option value="5">5</option>
@@ -40,7 +43,7 @@
                 <textarea name="comment" id="comment-positive"></textarea>
 
                 <div class="btn bg-light-green">
-                    <button type="submit" onclick="submitPositiveJS()"><strong>Valider le
+                    <button type="submit"><strong>Valider le
                             covoiturage</strong><br>(avec ou sans avis)</button>
                 </div>
             </form>
@@ -52,24 +55,23 @@
 
             <form class="block-column-g20" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"
                 onsubmit="console.log('Form submitted!')">
-                <input type="hidden" name="idReservation" id="popup-idReservation-negative" value="">
-            
+                <input type="hidden" name="idReservation" id="popup-idReservation-negative" value="<?= $carpool['reservationId'] ?>">
+                <input type="hidden" name="action" value="negative">
+
                 <label for="comment-negative">Décrivez le problème :</label>
                 <textarea name="comment" id="comment-negative" required></textarea>
                 <div class="btn bg-light-green">
-                    <button type="submit" onclick="submitNegativeJS()">Soumettre</button>
+                    <button type="submit">Soumettre</button>
                 </div>
             </form>
         </div>
-    </div>
+    
 
-    <button type="button" class="col-back-grey-btn btn" style="justify-self:right;"
-        onclick="closePopupValidate()">Annuler</button>
+    
+<?php $popup_content = ob_get_clean(); ?>
 
-</div>
-
-<script>
-    function showPopupValidate(event) {
+<?php ob_start(); ?>
+    function showPopupValidate(popupId, buttonElement) {
         const reservationId = event.target.getAttribute('data-id');
         document.getElementById('popup-idReservation-positive').value = reservationId;
         document.getElementById('popup-idReservation-negative').value = reservationId;
@@ -109,59 +111,6 @@
         }
     }
 
-    function submitPositiveJS() {
-        const reservationId = document.getElementById('popup-idReservation-positive').value;
-        const comment = document.getElementById('comment-positive').value;
-        const rating = document.getElementById('driver-rating-list').value;
+<?php $popup_script = ob_get_clean(); ?>
 
-        fetch('/0-ECFEcoride/back/carpool/validate.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                idReservation: reservationId,
-                action: 'positive',
-                rating: rating,
-                comment: comment
-            })
-        })
-            .then(res => res.text())
-            .then(data => {
-                console.log("Réponse du backend :", data);
-                closePopupValidate();
-                location.reload();
-            })
-            .catch(error => {
-                console.error("Erreur :", error);
-                alert("Une erreur s'est produite.");
-            });
-    }
-
-    function submitNegativeJS() {
-        const reservationId = document.getElementById('popup-idReservation-negative').value;
-        const comment = document.getElementById('comment-negative').value;
-
-        fetch('/0-ECFEcoride/back/carpool/validate.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                idReservation: reservationId,
-                action: 'negative',
-                comment: comment
-            })
-        })
-            .then(res => res.text())
-            .then(data => {
-                console.log("Réponse du backend :", data);
-                closePopupValidate();
-                location.reload();
-            })
-            .catch(error => {
-                console.error("Erreur :", error);
-                alert("Une erreur s'est produite.");
-            });
-    }
-</script>
+<?php include '../templates/components/template_popup.php'; ?>

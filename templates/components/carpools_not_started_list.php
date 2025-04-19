@@ -42,10 +42,9 @@
                 ?></span>
             <?php if ($driver->getId() !== $idUser): ?>
                 <div class="btn action-btn" style="grid-column: 5/6; grid-row: 3/5;">
-                    <button class="font-size-small" onclick="showPopupValidate(event)" data-id="<?= $carpool['reservationId'] ?>"
-                        style="width: 100%;">Valider</button>
+                    <button class="font-size-small" onclick="showPopupValidate('popup-id', this)"
+                        data-id="<?= $carpool['reservationId'] ?>" style="width: 100%;">Valider</button>
                 </div>
-
             <?php endif; ?>
         </div>
     <?php endforeach; ?>
@@ -63,7 +62,7 @@
             <div class="photo-user-container" id="photo-ss" style="justify-self:center;">
                 <img src="<?= displayPhoto($carpool['photo']) ?>" alt="Photo de l'utilisateur" class="photo-user">
             </div>
-            
+
             <span class="pseudo-user"><?= htmlspecialchars($carpool['pseudo']) ?></span>
             <div class="driver-rating">
                 <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
@@ -82,7 +81,7 @@
                 <?= formatTime(htmlspecialchars($carpool['travel_departure_time'])) ?> à
                 <?= formatTime(htmlspecialchars($carpool['travel_arrival_time'])) ?></span>
             <span class="criteria-eco-div">À <?= htmlspecialchars($carpool['travel_arrival_city']) ?></span>
-            <span class="travel-price text-bold">
+            <span class="travel-price">
                 <?php
                 $trajetPrice = htmlspecialchars($carpool['travel_price']);
                 if ($trajetPrice > 1) {
