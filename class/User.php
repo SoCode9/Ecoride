@@ -11,7 +11,7 @@ class User
 
     protected ?string $photo;
 
-    protected ?int $idRole;
+    protected ?int $idRole = null;
     protected ?PDO $pdo; //stocke la connexion à la BDD
 
 

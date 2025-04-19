@@ -67,12 +67,24 @@
                 }
                 ?> </div>
             </div>
+            <?php $isGuest = $userId === null;
+            $isNotEmployee = !$isGuest && in_array($user->getIdRole(), [1, 2, 3]);
+            $isNotDriver = $travel->getDriverId() != $userId;
+            $status = $travel->getStatus();
+            if (($isGuest || $isNotEmployee) && $isNotDriver && $status === 'not started'): ?>
+                <button id="participate" class="btn action-btn" style="padding: 8px;"
+                    data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>">
+                    <img src="../icons/Calendrier.png" class="img-pointer" alt="booking calendar icon">
+                    <span>Participer au covoiturage</span>
+                </button>
+            <?php endif; ?>
 
-            <button id="participate" class="btn action-btn" style="padding: 8px;"
-                data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>">
-                <img src="../icons/Calendrier.png" class="img-pointer" alt="booking calendar icon">
-                <span>Participer au covoiturage</span>
-            </button>
+            <?php if ($travel->getDriverId() === $userId && $status === 'not started'): ?>
+                <div class="btn action-btn" style="padding: 8px;">
+                    <a href="../back/user/user_space.php?action=cancel_carpool&id=<?= $travel->getIdTravel() ?>">Annuler le
+                        covoiturage</a>
+                </div>
+            <?php endif; ?>
         </div>
 
     </section>
