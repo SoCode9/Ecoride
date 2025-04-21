@@ -15,29 +15,34 @@
             <div>
                 <img src="" alt="Logo">
             </div>
+
+            <!--Navigation display for big screens-->
             <div class="navigation">
-                <a class="nav-btn" id="home-page" href="home_page.php">Accueil</a> <!--manque-->
-                <a class="nav-btn" id="carpoolButton" href="carpool_search.php">Covoiturages</a>
-                <a class="nav-btn" href="">Contact</a> <!--manque-->
-                <?php
-                if (session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                }
-                if (isset($_SESSION['user_id'])) {
-                    if ($_SESSION['role_user'] == 1 || $_SESSION['role_user'] == 2 || $_SESSION['role_user'] == 3) { //if the user is a passenger or a driver or both
-                        echo '<a class="btn border-white" id="userSpace" href="user_space.php">Espace Utilisateur</a>';
-                    } elseif ($_SESSION['role_user'] == 4) { //if the user is an employee
-                        echo '<a class="btn border-white" id="employeeSpace" href="employee_space.php">Espace Employé</a>';
-                    } elseif ($_SESSION['role_user'] == 5) { //if the user is an administraor
-                        echo '<a class="btn border-white" id="adminSpace" href="admin_space.php">Espace Administrateur</a>';
-                    }
-                    echo '<a id="logoutButton" href="#"> <img src="../icons/Deconnexion.png" alt="logout button"  class="logout-btn"> </a>';
-                } else {
-                    echo '<a class="btn border-white" id="loginButton" href="login.php">Connexion</a>';
-                }
-                ?>
+                <?php renderNavigationLinks(); ?>
             </div>
+
+            <!--Navigation display for small screens-->
+            <div id="my-sidenav" class="sidenav" style="display: none;">
+                <a id="close-btn" href="#" class="close">×</a>
+                <ul>
+                    <?php renderNavigationLinks(true); ?>
+                </ul>
+            </div>
+
+            <div class="current-tab hidden" id="current-tab-mobile"></div>
+
+            <a href="#" id="open-btn" style="display: none;">
+                <span class="burger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </a>
         </div>
+
+
+
+
     </header>
 
     <!--display of error or success messages-->
@@ -74,3 +79,5 @@
         }
     });
 </script>
+
+<script src="../script/burger_menu.js" defer></script>
