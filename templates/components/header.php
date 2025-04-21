@@ -16,7 +16,7 @@
                 <img src="" alt="Logo">
             </div>
             <div class="navigation">
-                <a class="nav-btn" href="">Accueil</a> <!--manque-->
+                <a class="nav-btn" id="home-page" href="home_page.php">Accueil</a> <!--manque-->
                 <a class="nav-btn" id="carpoolButton" href="carpool_search.php">Covoiturages</a>
                 <a class="nav-btn" href="">Contact</a> <!--manque-->
                 <?php
