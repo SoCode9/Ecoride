@@ -29,6 +29,10 @@
         margin: 10px;
         box-sizing: border-box;
     }
+
+    .header{
+        padding: 10px !important;
+    }
 }
 
 @media(max-width:767px) {
