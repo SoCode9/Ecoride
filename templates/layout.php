@@ -11,7 +11,9 @@
 </head>
 
 <body>
-    <?php include 'components/header.php'; ?>
+    <?php require_once __DIR__ . "/../functions.php";
+
+    include 'components/header.php'; ?>
 
 
     <?php include $templatePage; ?>

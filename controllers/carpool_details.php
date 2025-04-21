@@ -13,7 +13,7 @@ include "../templates/layout.php";
 
 ?>
 <style>
-    #carpoolButton {
+    #carpool-button {
         color: #F2C674;
     }
 </style>
