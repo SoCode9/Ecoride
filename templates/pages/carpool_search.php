@@ -7,7 +7,7 @@
 
             <div class="flex-row gap-4 search-field">
                 <img class="img-width-20" src="../icons/Localisation(2).png" alt="lieu de départ">
-                <input type="text" id="departure-city-search" name="departure-city-search" class="font-size-small"
+                <input type="text" id="departure-city-search" name="departure-city-search" class="font-size-small text-breakable"
                     style="color: var(--col-dark-grey);" placeholder="Ville de départ"
                     value="<?= isset($_SESSION['departure-city-search']) ? htmlspecialchars($_SESSION['departure-city-search']) : '' ?>"
                     required>
@@ -16,7 +16,7 @@
             <span class="flex-row">→</span>
             <div class="flex-row gap-4 search-field">
                 <img class="img-width-20" src="../icons/Localisation(2).png" alt="">
-                <input type="text" id="arrival-city-search" name="arrival-city-search" class="font-size-small"
+                <input type="text" id="arrival-city-search" name="arrival-city-search" class="font-size-small text-breakable"
                     style="color: var(--col-dark-grey);" placeholder="Ville d'arrivée"
                     value="<?= isset($_SESSION['arrival-city-search']) ? htmlspecialchars($_SESSION['arrival-city-search']) : '' ?>"
                     required>
@@ -29,21 +29,28 @@
                     value="<?= isset($_SESSION['departure-date-search']) ? htmlspecialchars($_SESSION['departure-date-search']) : '' ?>"
                     required>
             </div>
-
-            <div class="btn bg-light-green">
-                <img class="img-width-20" src="../icons/LoupeRecherche.png" alt="">
-                <input type="submit" value="Rechercher">
+            <div class="flex-row" style="width:100%;">
+                <div class="btn bg-light-green">
+                            <img class="img-width-20" src="../icons/LoupeRecherche.png" alt="">
+                            <input type="submit" value="Rechercher">
+                        </div>
+                        <div id="filter-icon" class="inactive" style="display: none;" >
+                            <a href="#" id="filter-toggle" class="btn" style="border-radius: 50%; width: fit-content; height: 35px; justify-self:right;">
+                                <img class="img-width-20" src="../icons/Filtre.png" alt="">
+                            </a>
+                        </div>
             </div>
+          
         </form>
-
-
     </div>
 
+   
+    
     <div class="block-filter-details">
 
         <!--Search filters-->
 
-        <div class="flex-column gap-24 block-light-grey">
+        <div class="flex-column gap-24 block-light-grey " id="filter-block">
             <h3 class="text-green">Filtres de recherche</h3>
             <form class="block-column-g20" action="carpool_search.php" method="POST">
                 <input type="hidden" name="action" value="filters"> <!--identify filters-->
@@ -123,7 +130,7 @@
                                 <img src="<?= displayPhoto($t['driver_photo']) ?>" alt="Photo de l'utilisateur"
                                     class="photo-user">
                             </div>
-                            <span class="pseudo-user" id="pseudo-ss"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
+                            <span class="pseudo-user text-breakable" id="pseudo-ss"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
                             <div class="driver-rating" id="rating-ss">
                                 <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
                                 <span><?php

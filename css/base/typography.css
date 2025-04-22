@@ -24,3 +24,9 @@
 a {
     color: inherit;
 }
+
+.text-breakable {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
