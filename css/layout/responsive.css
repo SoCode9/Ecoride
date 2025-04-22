@@ -1,5 +1,5 @@
 /*for large screens*/
-@media (min-width:1024px) {
+@media (min-width:1025px) {
     main {
         width: 80%;
         margin: 0 auto;
@@ -16,6 +16,9 @@
 @media (max-width:1024px) {
     main {
         margin: 10px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
     }
 }
 
@@ -28,6 +31,10 @@
     main {
         margin: 10px;
         box-sizing: border-box;
+    }
+
+    .header {
+        padding: 10px !important;
     }
 }
 

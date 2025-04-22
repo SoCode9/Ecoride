@@ -1,6 +1,26 @@
-//const Orange = #F2C674; ??
+document.addEventListener("DOMContentLoaded", function () {
+    const filterToggle = document.getElementById('filter-toggle');
+    const filterIcon = document.getElementById('filter-icon');
+    const filterBlock = document.getElementById('filter-block');
 
+    if (filterToggle) {
+        filterToggle.addEventListener('click', (e) => {
+            e.preventDefault(); // empêche le scroll haut à chaque clic
 
+            const isActive = filterIcon.classList.contains('active');
+
+            if (isActive) {
+                filterBlock.style.display = 'none';
+                filterIcon.classList.remove('active');
+                filterIcon.classList.add('inactive');
+            } else {
+                filterBlock.style.display = 'block';
+                filterIcon.classList.add('active');
+                filterIcon.classList.remove('inactive');
+            }
+        });
+    }
+});
 
 //the calender icon opens the calender
 
@@ -44,7 +64,7 @@ function updateSuggestions(inputField, suggestionsContainer, data) {
         div.textContent = villeAffichage;
 
         // Quand on clique sur une suggestion, seul le nom de la ville est inséré
-        div.addEventListener("click", function() {
+        div.addEventListener("click", function () {
             inputField.value = villeSelection; // Insère seulement le nom de la ville
             suggestionsContainer.innerHTML = ""; // Cache la liste après sélection
             suggestionsContainer.style.display = "none";
@@ -60,7 +80,7 @@ function setupAutocomplete(inputId, suggestionsId) {
     const suggestionsContainer = document.getElementById(suggestionsId);
 
     // Affichage des suggestions en fonction de la saisie
-    inputField.addEventListener("input", async function() {
+    inputField.addEventListener("input", async function () {
         let query = this.value.trim();
         if (query.length > 2) {
             let results = await searchLocation(query);
@@ -72,14 +92,14 @@ function setupAutocomplete(inputId, suggestionsId) {
     });
 
     // Cacher la liste si on clique en dehors du champ
-    document.addEventListener("click", function(event) {
+    document.addEventListener("click", function (event) {
         if (!inputField.contains(event.target) && !suggestionsContainer.contains(event.target)) {
             suggestionsContainer.style.display = "none";
         }
     });
 
     // Réafficher la liste si on clique dans le champ (et qu'il contient déjà une valeur)
-    inputField.addEventListener("focus", async function() {
+    inputField.addEventListener("focus", async function () {
         let query = this.value.trim();
         if (query.length > 2) {
             let results = await searchLocation(query);
