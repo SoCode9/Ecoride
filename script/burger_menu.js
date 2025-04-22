@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const labels = {
         "home_page.php": "Accueil",
         "carpool_search.php": "Covoiturages",
+        "carpool_details.php": "Covoiturages",
         "login.php": "Connexion",
         "user_space.php": "Utilisateur",
         "employee_space.php": "Employé",

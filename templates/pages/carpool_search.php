@@ -1,6 +1,6 @@
 <main>
     <!-- Find a carpool -->
-    <div class="flex-column gap-24 block-light-grey">
+    <div class="flex-column gap-24 block-light-grey pad-10-ss">
         <h2 class="text-green text-bold">Rechercher un covoiturage</h2>
         <form class="block-search" action="carpool_search.php" method="POST">
             <input type="hidden" name="action" value="search"> <!--identify request-->
@@ -46,11 +46,11 @@
 
    
     
-    <div class="block-filter-details">
+    <div class="block-filter-details flex-column-ss">
 
         <!--Search filters-->
 
-        <div class="flex-column gap-24 block-light-grey " id="filter-block">
+        <div class="flex-column gap-24 block-light-grey pad-10-ss" id="filter-block">
             <h3 class="text-green">Filtres de recherche</h3>
             <form class="block-column-g20" action="carpool_search.php" method="POST">
                 <input type="hidden" name="action" value="filters"> <!--identify filters-->
@@ -105,12 +105,12 @@
             </span>
 
             <!--TRAVELS' SEARCHED BLOCK-->
-            <div class="flex-column gap-12 pad-20">
+            <div class="flex-column gap-12 pad-20 pad-10-ss" id="travels-list">
 
                 <?php
                 if (!empty($travelsSearched)) {
                     foreach ($travelsSearched as $t): ?>
-                        <div class="travel"
+                        <div class="travel pad-10-ss"
                             onclick="window.location.href='carpool_details.php?id=<?= htmlspecialchars($t['id']) ?>'"
                             <?php if (isset($_SESSION['user_id']) && ($t['driver_id'] === $_SESSION['user_id'])) {
                                 echo "style='border:2px solid var(--col-green);cursor:pointer;'";

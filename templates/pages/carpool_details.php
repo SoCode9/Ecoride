@@ -6,8 +6,8 @@
         <?= formatDateLong(htmlspecialchars($travel->getDate($travel->getIdTravel()))) ?? '' ?>
     </h2>
 
-    <section class="flex-row flex-between block-light-grey">
-        <div class="flex-row flex-between block-white" style="width:65%;box-sizing: border-box;">
+    <section class="flex-row flex-between block-light-grey pad-10-ss flex-column-ss no-background-ss">
+        <div class="flex-row flex-between block-white flex-column-ss" id="travel-details" style="width:65%;box-sizing: border-box;">
 
             <div class="course">
 
@@ -38,7 +38,7 @@
 
             </div>
 
-            <div class="flex-column gap-8" style="align-items: end;">
+            <div class="flex-column gap-8" id="seats-eco" style="align-items: end;">
                 <div> <?php $seatsAvailable = seatsAvailable($car->nbSeatsOfferedInACarpool($pdo, $travel->getCarId()), ($reservation->nbPassengerInACarpool($pdo, $travel->getIdTravel())));
 
                 if ($seatsAvailable <= 1) {
@@ -56,8 +56,8 @@
             </div>
 
         </div>
-        <div class="flex-column gap-12" style="width: 30%;">
-            <div class="flex-row flex-between block-white">
+        <div class="flex-column gap-12" id="passenger-credits-btn" style="width: 30%;">
+            <div class="flex-row flex-between block-white pad-10-ss">
                 <div>1 passager</div>
                 <div class="text-bold"><?php $travelPrice = $travel->getPrice();
                 if ($travelPrice > 1) {

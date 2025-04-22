@@ -206,11 +206,6 @@
         width: 100%;
     }
 
-    .block-filter-details {
-        display: flex;
-        flex-direction: column;
-    }
-
     .travel {
         grid-template-columns: 30% 30% 20% 20%;
         grid-template-rows: 10px 30px 30px 10px;

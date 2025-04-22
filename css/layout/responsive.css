@@ -33,8 +33,23 @@
         box-sizing: border-box;
     }
 
-    .header {
+    .pad-10-ss {
         padding: 10px !important;
+    }
+
+    .flex-column-ss {
+        display: flex;
+        flex-direction: column  !important;
+    }
+
+    .flex-row-ss {
+        display: flex;
+        flex-direction: row  !important;
+    }
+
+    .no-background-ss{
+        background-color: inherit !important;
+        padding: inherit !important;
     }
 }
 
