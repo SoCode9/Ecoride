@@ -14,17 +14,6 @@ Dans ton cas, par exemple, chaque trajet affiché (.travel) dans la recherche de
     padding: 20px;
 }
 
-@media (max-width:767px) {
-    .block-white {
-        padding: 10px;
-    }
-
-    .block-light-grey {
-        padding: 10px;
-        gap: 12px;
-    }
-}
-
 .block-border-grey {
     border-radius: var(--border-radius);
     padding: 20px;
@@ -123,4 +112,21 @@ div.popup {
     z-index: 1000;
 
     transition: opacity 0.5s ease-in-out;
+}
+
+@media (max-width:767px) {
+    .block-white {
+        padding: 10px;
+    }
+
+    .block-light-grey {
+        padding: 10px;
+        gap: 12px;
+    }
+
+    .message {
+        width: 90%;
+        font-size: 14px;
+        padding: 5px;
+    }
 }
