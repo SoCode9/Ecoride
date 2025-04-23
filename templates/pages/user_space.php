@@ -297,20 +297,18 @@
         </div>
         <!-- User's carpool -->
         <div class="main-tab-content <?= $currentTab === 'carpools' ? 'active' : '' ?>" id="carpools">
-            <section class="flex-column block-light-grey">
-                <div class="flex-row item-center flex-between">
-                    <h1 class="text-green">Mes covoiturages</h1>
+            <section class="flex-column">
+                <div class="flex-row flex-between flex-row-wrap">
+                    <div class="tabs">
+                        <button class="btn tab-btn active" data-target="notStarted">En cours</button>
+                        <button class="btn tab-btn" data-target="completed">Terminés</button>
+                    </div>
                     <?php if (($connectedUser->getIdRole() === 2 || $connectedUser->getIdRole() === 3) && $cars == !null): ?>
-                        <a class="btn action-btn" style="padding: 8px;" href="../controllers/create_carpool.php">Proposer un
+                        <a class="btn action-btn" style="padding: 8px; text-align:right;"
+                            href="../controllers/create_carpool.php">Proposer un
                             covoiturage</a>
                     <?php endif; ?>
                 </div>
-
-                <div class="tabs">
-                    <button class="btn tab-btn active" data-target="notStarted">En cours</button>
-                    <button class="btn tab-btn" data-target="completed">Terminés</button>
-                </div>
-
                 <div id="notStarted" class="tab-content active">
                     <?php include '../templates/components/lists/carpools_not_started.php'; ?>
                 </div>
