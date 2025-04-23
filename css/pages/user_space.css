@@ -1,8 +1,7 @@
 /*main blocks*/
 .user-info-carpools-block {
-    display: grid;
-    grid-template-columns: 35% 65%;
-    gap: 20px;
+
+    width: 100%;
 }
 
 .radio-not-edit {
@@ -59,4 +58,67 @@
 .selected-btn {
     background-color: var(--col-dark-grey);
     color: #fff;
+}
+
+/* Style général (desktop et tablette) */
+.user-header-mobile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    grid-column: 1 / 3;
+    grid-row: 2 / 4;
+}
+
+.photo-user-container {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    background-color: #f5f5f5;
+}
+
+.photo-user {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Conteneur texte */
+.user-info-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.driver-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Responsive mobile */
+@media (max-width: 767px) {
+    .travel {
+        display: flex !important;
+        flex-direction: column;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .user-header-mobile {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .photo-user-container {
+        width: 50px;
+        height: 50px;
+    }
+
+    .travel-price {
+        padding-right: 0px;
+    }
 }

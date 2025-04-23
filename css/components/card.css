@@ -14,12 +14,6 @@ Dans ton cas, par exemple, chaque trajet affiché (.travel) dans la recherche de
     padding: 20px;
 }
 
-.block-border-grey {
-    border-radius: var(--border-radius);
-    padding: 20px;
-    border: #D9D9D9 solid 3px;
-}
-
 .block-column-g20 {
     display: flex;
     flex-direction: column;
@@ -67,6 +61,13 @@ Dans ton cas, par exemple, chaque trajet affiché (.travel) dans la recherche de
 .date-field::-moz-calendar-picker-indicator {
     display: none;
     /* Removes the native icon (Firefox) */
+}
+
+.photo-100 {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
 }
 
 /*POPUP*/
@@ -122,6 +123,11 @@ div.popup {
     .block-light-grey {
         padding: 10px;
         gap: 12px;
+    }
+
+    .photo-100 {
+        width: 75px;
+        height: 75px;
     }
 
     .message {

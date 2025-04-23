@@ -62,3 +62,9 @@
     width: 20px;
     cursor: pointer;
 }
+
+@media(max-width:767px){
+    .half-separation{
+        grid-template-columns: none;
+    }
+}

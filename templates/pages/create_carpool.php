@@ -1,7 +1,7 @@
 <main>
     <div class="flex-row flex-between">
         <h2 class="text-green text-bold">Proposer un covoiturage</h2>
-        <a href="../controllers/user_space.php" class="btn"
+        <a href="../controllers/user_space.php?tab=carpools" class="btn"
             style="border: 2px solid var(--col-green); background-color:var(--col-light-grey);">Retourner à l'espace
             utilisateur</a>
     </div>
