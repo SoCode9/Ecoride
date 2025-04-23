@@ -4,9 +4,11 @@
         <!--header of this section-->
         <div class="flex-row item-center flex-between">
             <div class="flex-row item-center">
-                <img src="<?= displayPhoto($connectedUser->getPhoto()) ?>" alt="Photo de l'utilisateur" class="photo-100">
+                <img src="<?= displayPhoto($connectedUser->getPhoto()) ?>" alt="Photo de l'utilisateur"
+                    class="photo-100">
                 <div class="flex-column">
-                    <span class="pseudo-user"><?php echo htmlspecialchars($connectedUser->getPseudo()) ?></span>
+                    <span
+                        class="pseudo-user text-breakable"><?php echo htmlspecialchars($connectedUser->getPseudo()) ?></span>
                     <?php if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)): ?>
                         <div class="flex-row">
                             <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
@@ -18,9 +20,9 @@
                 </div>
             </div>
 
-            <button class="btn action-btn content-btn active" id="edit-button">Modifier le profil</button>
-            <button class="btn action-btn content-btn " style="background-color : var(--col-light-green)"
-                id="save-button">Sauvegarder le profil</button>
+            <button class="btn action-btn content-btn active" id="edit-button">Modifier</button>
+            <button class="btn action-btn content-btn " style="background-color : var(--col-light-green); "
+                id="save-button">Sauvegarder</button>
 
         </div>
         <div class="flex-row item-center hidden" id="edit-photo-icon">
