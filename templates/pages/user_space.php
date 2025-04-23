@@ -3,8 +3,10 @@
     $currentTab = $_GET['tab'] ?? 'profil';
     ?>
     <div class="tabs">
-        <button class="btn main-tab-btn <?= $currentTab === 'profil' ? 'active' : ''?>" data-target="profil" onclick="window.location.href='user_space.php?tab=profil'">Mon profil</button>
-        <button class="btn main-tab-btn <?= $currentTab === 'carpools' ? 'active' : ''?>" data-target="carpools" onclick="window.location.href='user_space.php?tab=carpools'">Mes covoiturages</button>
+        <button class="btn main-tab-btn <?= $currentTab === 'profil' ? 'active' : '' ?>" data-target="profil"
+            onclick="window.location.href='user_space.php?tab=profil'">Mon profil</button>
+        <button class="btn main-tab-btn <?= $currentTab === 'carpools' ? 'active' : '' ?>" data-target="carpools"
+            onclick="window.location.href='user_space.php?tab=carpools'">Mes covoiturages</button>
     </div>
 
     <div class="user-info-carpools-block">
@@ -75,12 +77,12 @@
                     </div>
                 </div>
 
-                <div class="scrollable-container flex-column gap-8">
+                <div class="scrollable-container gap-24 half-separation">
                     <!--Cars section-->
-                    <div class="flex-column gap-8 block-light-grey" style="padding: 16px;">
+                    <div class="flex-column gap-8 block-light-grey no-background-ss" style="padding: 16px;">
                         <h3 class="text-green">Voitures</h3>
 
-                        <div id="car-container" class="flex-column gap-8" style="padding:10px 0px">
+                        <div id="car-container" class="flex-column gap-8">
                             <?php include '../templates/components/lists/cars.php'; ?>
                         </div>
 
@@ -146,9 +148,9 @@
                     </div>
 
                     <!--preferences section-->
-                    <div class="flex-column gap-8 block-light-grey" style="padding: 16px;">
+                    <div class="flex-column gap-8 block-light-grey no-background-ss" style="padding: 16px;">
                         <h3 class="text-green">Préférences en tant que chauffeur</h3>
-                        <div class="flex-column gap-8" style="padding:10px 0px">
+                        <div class="flex-column gap-8">
                             <span>Voyager avec des fumeurs ne me dérange pas</span>
                             <div class="flex-row flex-between">
                                 <div class="flex-row">

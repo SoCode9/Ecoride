@@ -1,7 +1,7 @@
 /*main blocks*/
 .user-info-carpools-block {
 
-        width: 100%;
+    width: 100%;
 }
 
 .radio-not-edit {
@@ -58,4 +58,8 @@
 .selected-btn {
     background-color: var(--col-dark-grey);
     color: #fff;
+}
+
+@media(max-width:768px) {
+    
 }
