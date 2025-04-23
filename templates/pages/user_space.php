@@ -10,17 +10,17 @@
     <div class="user-info-carpools-block">
         <!-- User's informations -->
         <div class="main-tab-content <?= $currentTab === 'profil' ? 'active' : '' ?>" id="profil">
-            <section class="flex-column block-border-grey gap-24">
+            <section class="flex-column gap-24">
                 <!--header of this section-->
                 <div class="flex-row item-center flex-between">
                     <div class="flex-row item-center">
                         <img src="<?= displayPhoto($connectedUser->getPhoto()) ?>" alt="Photo de l'utilisateur"
                             class="photo-100">
-                        <div class="flex-column">
+                        <div class="flex-column gap-8">
                             <span
                                 class="pseudo-user text-breakable"><?php echo htmlspecialchars($connectedUser->getPseudo()) ?></span>
                             <?php if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)): ?>
-                                <div class="flex-row">
+                                <div class="flex-row" style="padding-left: 10px;">
                                     <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
                                     <span>
                                         <?= htmlspecialchars($connectedDriver->getAverageRatings()) . " (" . htmlspecialchars($connectedDriver->getNbRatings()) . ")" ?>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="flex-column gap-8">
                     <h3 class="text-green">Type d'utilisateur</h3>
-                    <div class="flex-row flex-between">
+                    <div class="flex-row gap-24">
                         <div class="flex-row">
                             <label for="role_passenger" class="radio-not-edit">passager</label>
                             <input type="radio" name="user_role" id="role_passenger" <?php if ($connectedUser->getIdRole() === 1) {
