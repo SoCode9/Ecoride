@@ -46,11 +46,11 @@
 
    
     
-    <div class="block-filter-details">
+    <div class="block-filter-details flex-column-ss">
 
         <!--Search filters-->
 
-        <div class="flex-column gap-24 block-light-grey " id="filter-block">
+        <div class="flex-column gap-24 block-light-grey" id="filter-block">
             <h3 class="text-green">Filtres de recherche</h3>
             <form class="block-column-g20" action="carpool_search.php" method="POST">
                 <input type="hidden" name="action" value="filters"> <!--identify filters-->
@@ -105,7 +105,7 @@
             </span>
 
             <!--TRAVELS' SEARCHED BLOCK-->
-            <div class="flex-column gap-12 pad-20">
+            <div class="flex-column gap-12 pad-20 pad-10-ss" id="travels-list">
 
                 <?php
                 if (!empty($travelsSearched)) {

@@ -10,6 +10,12 @@
     align-items: center;
 }
 
+@media(max-width:767px){
+    .header{
+        padding: 10px;
+    }
+}
+
 .navigation {
     display: flex;
     flex-direction: row;

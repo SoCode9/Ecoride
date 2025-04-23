@@ -6,8 +6,9 @@
         <?= formatDateLong(htmlspecialchars($travel->getDate($travel->getIdTravel()))) ?? '' ?>
     </h2>
 
-    <section class="flex-row flex-between block-light-grey">
-        <div class="flex-row flex-between block-white" style="width:65%;box-sizing: border-box;">
+    <section class="flex-row flex-between block-light-grey flex-column-ss no-background-ss">
+        <div class="flex-row flex-between block-white" id="travel-details"
+            style="width:65%;box-sizing: border-box;">
 
             <div class="course">
 
@@ -17,18 +18,19 @@
                         <span><?= htmlspecialchars($travel->getDepartureCity()) ?></span>
                     </div>
 
-                    <div id="ellipse"></div>
+                    <div id="dot"></div>
                 </div>
 
-                <div class="duration-line">
-                    <div class="text-green">
+                <div class="line-container">
+                    <div class="line"></div>
+                    <div class="duration text-green">
                         <?= htmlspecialchars($travel->travelDuration($travel->getDepartureTime(), $travel->getArrivalTime())) ?>
                     </div>
                     <div class="line"></div>
                 </div>
 
                 <div class="time-location-ellipse">
-                    <div id="ellipse"></div>
+                    <div id="dot"></div>
                     <div class="flex-column gap-8 time-location">
                         <span><?= formatTime(htmlspecialchars($travel->getArrivalTime())) ?></span>
                         <span><?= htmlspecialchars($travel->getArrivalCity()) ?></span>
@@ -38,7 +40,7 @@
 
             </div>
 
-            <div class="flex-column gap-8" style="align-items: end;">
+            <div class="flex-column gap-8" id="travel-extra" style="align-items: end; min-width:max-content;">
                 <div> <?php $seatsAvailable = seatsAvailable($car->nbSeatsOfferedInACarpool($pdo, $travel->getCarId()), ($reservation->nbPassengerInACarpool($pdo, $travel->getIdTravel())));
 
                 if ($seatsAvailable <= 1) {
@@ -56,7 +58,7 @@
             </div>
 
         </div>
-        <div class="flex-column gap-12" style="width: 30%;">
+        <div class="flex-column gap-12" id="passenger-credits-btn" style="width: 30%;">
             <div class="flex-row flex-between block-white">
                 <div>1 passager</div>
                 <div class="text-bold"><?php $travelPrice = $travel->getPrice();
@@ -89,13 +91,13 @@
 
     </section>
 
-    <div style="display: flex; justify-content: space-between;" class="gap-24">
+    <div style="display: flex; justify-content: space-between;" class="gap-24 flex-column-ms flex-column-ss">
 
         <!--Driver's details-->
 
-        <section class="block-driver-info block-light-grey">
-            <div class="flex-column gap-24">
-                <img src="<?= displayPhoto($driver->getPhoto()) ?>" class="photo" alt="photo de l'utilisateur">
+        <section class="block-driver-info block-light-grey flex-column-ss">
+            <div class="flex-column gap-24 flex-row-ss">
+                <img src="<?= displayPhoto($driver->getPhoto()) ?>" class="photo-100" alt="photo de l'utilisateur">
                 <div class="flex-column gap-12 flex-center item-center">
                     <span><?= htmlspecialchars($driver->getPseudo()) ?></span>
                     <div class="text-icon" style="padding-left: 0px;">
@@ -241,7 +243,7 @@
         <!--RATING'S DRIVER BLOCK-->
 
 
-        <section class="flex-column block-light-grey gap-12 block-driver-ratings">
+        <section class="flex-column block-light-grey gap-12 block-driver-ratings w-100-ss">
 
             <div class="flex-column gap-8 item-center">
                 <h3 class="text-green">Avis du chauffeur</h3>
@@ -267,10 +269,10 @@
                     <div class="flex-row flex-between">
                         <div class="flex-row item-center gap-4">
                             <img src="<?= displayPhoto($rating['photo']) ?>" alt="Photo de l'utilisateur"
-                                class="user-photo">
+                                class="photo-50">
                             <span><?= htmlspecialchars($rating['pseudo']) ?></span>
                         </div>
-                        <div style="padding-left: 0px;">
+                        <div class="flex-row item-center gap-4" style="padding-left: 0px;">
                             <img src="../icons/EtoileJaune.png" class="img-width-20" alt="">
                             <span><?= htmlspecialchars($rating['rating']) ?></span>
 

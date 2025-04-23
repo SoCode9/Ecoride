@@ -1,44 +1,60 @@
 /*CARPOOL'S DETAILS BLOCK*/
+#travel-details {
+    gap: 20px;
+    box-sizing: border-box;
+}
 
 .course {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
 }
 
 .time-location-ellipse {
     display: flex;
-    flex-direction: row;
-    align-items: end;
-    gap: 8px;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+
 }
 
 .time-location {
-    min-width: 100px;
-    max-width: 200px;
+    flex: 1 1 auto;
+    /* prend la place nécessaire sans casser le layout */
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.2;
+    min-width: 0;
+    /* essentiel pour que flex-wrap fonctionne bien */
 }
 
-#ellipse {
-    width: 15px;
-    height: 15px;
+#dot {
+    width: 12px;
+    height: 12px;
     background-color: var(--col-green);
     border-radius: 50%;
+    flex-shrink: 0;
 }
 
-.duration-line {
+/* Ligne + durée */
+.line-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: end;
-    gap: 10px;
-    width: auto;
-    min-width: 100px;
-    padding: 0px 0px 7px 0px;
+    gap: 5px;
 }
 
 .line {
-    width: 100%;
+    width: 25px;
     height: 2px;
     background-color: var(--col-green);
+}
+
+.duration {
+    font-size: 0.9rem;
+    color: var(--col-green);
 }
 
 
@@ -48,11 +64,11 @@
     display: flex;
     flex-direction: row;
     gap: 35px;
-    width: 100%;
+    width: 65%;
     height: fit-content;
 }
 
-.photo {
+.photo-100 {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -64,19 +80,106 @@
     display: flex;
     flex-direction: row;
     gap: 4px;
-    align-items: flex-end;
+    align-items: center;
 }
 
 /*DRIVER'S RATINGS BLOCK*/
 
 .block-driver-ratings {
-    width: 500px;
+    width: 30%;
     height: fit-content;
 }
 
-.user-photo {
+.photo-50 {
     width: 50px;
-    height: 50px; 
+    height: 50px;
     object-fit: cover;
     border-radius: var(--border-radius);
+}
+
+/*RESPONSIVE*/
+
+@media(max-width:1024px) {
+    #travel-details {
+        flex-wrap: wrap;
+    }
+
+    #travel-extra {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+
+@media(max-width:1023px) {
+    .block-driver-ratings {
+        width: 100% !important;
+        height: fit-content;
+    }
+
+    .block-driver-info {
+        width: 100% !important;
+        height: fit-content;
+        gap: 20px !important;
+    }
+}
+
+@media(max-width:767px) {
+
+    #travel-details {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        width: 100% !important;
+
+    }
+
+    .course {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 8px;
+        width: 100%;
+    }
+
+    #dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .line-container {
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .line {
+        width: 12px;
+        height: 2px;
+    }
+
+    .duration {
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    #travel-extra {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 0.9rem;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #passenger-credits-btn {
+        width: 100% !important;
+    }
+
+    .photo-100 {
+        width: 75px;
+        height: 75px;
+    }
 }
