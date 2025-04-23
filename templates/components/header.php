@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <div class="header pad-10-ss">
+        <div class="header">
             <div>
                 <img src="" alt="Logo">
             </div>

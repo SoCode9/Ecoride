@@ -12,7 +12,8 @@
     }
 }
 
-/*for small screens*/
+/*for medium screens*/
+
 @media (max-width:1024px) {
     main {
         margin: 10px;
@@ -22,6 +23,14 @@
     }
 }
 
+@media (max-width:1023px) {
+    .flex-column-ms {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+}
+
+/*for small screens*/
 
 @media(max-width:767px) {
     .flex-row-wrap {
@@ -37,17 +46,21 @@
         padding: 10px !important;
     }
 
+    .w-100-ss {
+        width: 100% !important;
+    }
+
     .flex-column-ss {
-        display: flex;
-        flex-direction: column  !important;
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     .flex-row-ss {
-        display: flex;
-        flex-direction: row  !important;
+        display: flex !important;
+        flex-direction: row !important;
     }
 
-    .no-background-ss{
+    .no-background-ss {
         background-color: inherit !important;
         padding: inherit !important;
     }
