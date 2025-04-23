@@ -193,7 +193,7 @@ function renderNavigationLinks($asListItem = false)
                 echo $tagOpen . '<a class="btn border-white" id="adminSpace" href="admin_space.php">Espace Administrateur</a>' . $tagClose;
                 break;
         }
-        echo $tagOpen . '<a id="logoutButton" href="#"> <img src="../icons/Deconnexion.png" alt="logout" class="logout-btn"> </a>' . $tagClose;
+        echo $tagOpen . '<a id="logoutButton" href="login.php"> <img src="../icons/Deconnexion.png" alt="logout" class="logout-btn"> </a>' . $tagClose;
     } else {
         echo $tagOpen . '<a class="btn border-white" id="loginButton" href="login.php">Connexion</a>' . $tagClose;
     }
