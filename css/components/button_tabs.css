@@ -9,10 +9,28 @@
     cursor: pointer;
 }
 
-.btn:hover, .tab-btn:hover {
+.btn:hover, .tab-btn:hover, .main-tab-btn:hover {
     filter: brightness(90%);
 }
 
+.main-tab-btn {
+    width: fit-content;
+    min-width: 150px;
+    padding: 10px 10px;
+    min-height: 30px;
+    text-align: center;
+    border-radius: var(--border-radius);
+    background-color: var(--col-green);
+    color: white;
+    justify-content: center;
+}
+
+.main-tab-btn.active {
+    background-color: #155724;
+    color: white;
+    display: flex;
+    text-align: center;
+}
 
 .tab-btn {
     width: fit-content;
@@ -43,12 +61,12 @@
     padding: 15px 0px;
 }
 
-.tab-content {
+.tab-content, .main-tab-content {
     display: none;
     /* Hide default sections */
 }
 
-.tab-content.active {
+.tab-content.active, .main-tab-content.active {
     display: block;
     /* Display only the active tab  */
     display: flex;

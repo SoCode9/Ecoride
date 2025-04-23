@@ -1,8 +1,7 @@
 /*main blocks*/
 .user-info-carpools-block {
-    display: grid;
-    grid-template-columns: 35% 65%;
-    gap: 20px;
+
+        width: 100%;
 }
 
 .radio-not-edit {
