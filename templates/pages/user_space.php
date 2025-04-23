@@ -4,7 +4,7 @@
         <!--header of this section-->
         <div class="flex-row item-center flex-between">
             <div class="flex-row item-center">
-                <img src="<?= displayPhoto($connectedUser->getPhoto()) ?>" alt="Photo de l'utilisateur" class="photo">
+                <img src="<?= displayPhoto($connectedUser->getPhoto()) ?>" alt="Photo de l'utilisateur" class="photo-100">
                 <div class="flex-column">
                     <span class="pseudo-user"><?php echo htmlspecialchars($connectedUser->getPseudo()) ?></span>
                     <?php if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)): ?>

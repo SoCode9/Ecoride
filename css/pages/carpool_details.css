@@ -68,14 +68,6 @@
     height: fit-content;
 }
 
-.photo-100 {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: var(--border-radius);
-}
-
-
 .text-icon {
     display: flex;
     flex-direction: row;
@@ -176,10 +168,5 @@
 
     #passenger-credits-btn {
         width: 100% !important;
-    }
-
-    .photo-100 {
-        width: 75px;
-        height: 75px;
     }
 }

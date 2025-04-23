@@ -69,6 +69,13 @@ Dans ton cas, par exemple, chaque trajet affiché (.travel) dans la recherche de
     /* Removes the native icon (Firefox) */
 }
 
+.photo-100 {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
 /*POPUP*/
 
 div.popup {
@@ -122,6 +129,11 @@ div.popup {
     .block-light-grey {
         padding: 10px;
         gap: 12px;
+    }
+
+    .photo-100 {
+        width: 75px;
+        height: 75px;
     }
 
     .message {
