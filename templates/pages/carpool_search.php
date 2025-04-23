@@ -110,7 +110,7 @@
                 <?php
                 if (!empty($travelsSearched)) {
                     foreach ($travelsSearched as $t): ?>
-                        <div class="travel"
+                        <div class="travel travel-ss"
                             onclick="window.location.href='carpool_details.php?id=<?= htmlspecialchars($t['id']) ?>'"
                             <?php if (isset($_SESSION['user_id']) && ($t['driver_id'] === $_SESSION['user_id'])) {
                                 echo "style='border:2px solid var(--col-green);cursor:pointer;'";

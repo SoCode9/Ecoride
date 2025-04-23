@@ -2,10 +2,10 @@
     <?php
     $currentTab = $_GET['tab'] ?? 'profil';
     ?>
-    <div class="tabs">
-        <button class="btn main-tab-btn <?= $currentTab === 'profil' ? 'active' : '' ?>" data-target="profil"
+    <div class="tabs" style="justify-content: space-between;">
+        <button class="btn main-tab-btn <?= $currentTab === 'profil' ? 'active' : '' ?>" style=" width:100%;" data-target="profil"
             onclick="window.location.href='user_space.php?tab=profil'">Mon profil</button>
-        <button class="btn main-tab-btn <?= $currentTab === 'carpools' ? 'active' : '' ?>" data-target="carpools"
+        <button class="btn main-tab-btn <?= $currentTab === 'carpools' ? 'active' : '' ?>" style=" width:100%;" data-target="carpools"
             onclick="window.location.href='user_space.php?tab=carpools'">Mes covoiturages</button>
     </div>
 
@@ -297,7 +297,7 @@
         </div>
         <!-- User's carpool -->
         <div class="main-tab-content <?= $currentTab === 'carpools' ? 'active' : '' ?>" id="carpools">
-            <section class="flex-column">
+            <section class="flex-column gap-12">
                 <div class="flex-row flex-between flex-row-wrap">
                     <div class="tabs">
                         <button class="btn tab-btn active" data-target="notStarted">En cours</button>
