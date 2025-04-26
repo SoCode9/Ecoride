@@ -2,6 +2,7 @@
 .half-separation {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
 
@@ -19,6 +20,9 @@
     border-radius: var(--border-radius);
 }
 
+.flex-row label {
+    min-width:  fit-content;
+}
 .flex-column {
     display: flex;
     flex-direction: column;
@@ -63,8 +67,8 @@
     cursor: pointer;
 }
 
-@media(max-width:767px){
-    .half-separation{
+@media(max-width:767px) {
+    .half-separation {
         grid-template-columns: none;
     }
 }

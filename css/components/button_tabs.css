@@ -81,6 +81,11 @@
     cursor: pointer;
 }
 
+.return-btn {
+    border: 2px solid var(--col-green);
+    background-color: var(--col-light-grey);
+}
+
 .border-white {
     border: 2px solid white;
 }
@@ -90,7 +95,7 @@
 }
 
 .col-back-grey-btn:hover {
-    background-color: #ccc;
+    background-color: var(--col-grey);
 }
 
 
@@ -101,7 +106,7 @@ input[type="radio"] {
     -moz-appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid #ccc;
+    border: 2px solid var(--col-grey);
     border-radius: 50%;
     outline: none;
     cursor: pointer;

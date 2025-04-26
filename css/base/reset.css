@@ -46,8 +46,16 @@ input {
     outline: none;
 }
 
+textarea,
+input,
+select {
+    padding: 8px;
+    border: 1px solid var(--col-grey);
+    border-radius: var(--border-radius);
+    width: 100%;
+}
 
 hr {
-    border: 0.5px solid #ccc;
+    border: 0.5px solid var(--col-grey);
     margin: 10px 0;
 }

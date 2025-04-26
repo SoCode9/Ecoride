@@ -12,4 +12,6 @@
     /*for legend's filters and selected tabs*/
     --col-very-light-green: #d6f0e0;
     /*for block hovering*/
+    --col-grey :#ccc;
+    /*for grey borders*/
 }
