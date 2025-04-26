@@ -4,16 +4,16 @@
     $currentTab = $_GET['tab'] ?? 'employees-management';
     ?>
 
-    <div class="flex-row flex-between">
+    <div class="flex-row flex-between flex-column-ss">
         <div class="flex-row gap-12 m-tb-12 m-8">
             <span><?= htmlspecialchars($administrator->getPseudo()) ?></span>
             <span><?= htmlspecialchars($administrator->getMail()) ?></span>
         </div>
-        <nav class="tabs">
+        <nav class="tabs" style="flex-wrap: wrap;">
             <a class="tab-btn <?= $currentTab === 'employees-management' ? 'active' : '' ?> flex-row"
-                data-target="employees-management" href="?tab=employees-management">Gestion des employés</a>
+                data-target="employees-management" href="?tab=employees-management">Comptes employés</a>
             <a class="tab-btn <?= $currentTab === 'users-management' ? 'active' : '' ?> flex-row"
-                data-target="users-management" href="?tab=users-management">Gestion des utilisateurs</a>
+                data-target="users-management" href="?tab=users-management">Comptes utilisateurs</a>
             <a class="tab-btn <?= $currentTab === 'statistic' ? 'active' : '' ?> flex-row" data-target="statistic"
                 href="?tab=statistic">Statistiques</a>
         </nav>
@@ -21,8 +21,8 @@
 
     <section id="employees-management"
         class="tab-content <?= $currentTab === 'employees-management' ? 'active' : '' ?>">
-        <div class="flex-row flex-between">
-            <h2 class="subTitleGreen">Gérer les comptes des employés (<?= count($employeeList) ?>)</h2>
+        <div class="main-header">
+            <h2 class="text-green text-bold">Gérer les comptes des employés (<?= count($employeeList) ?>)</h2>
             <a class="btn action-btn" onclick="showPopup('popup-new-employee')">Créer un compte employé</a>
 
             <?php include "../templates/components/popup/new_employee.php"; ?>
@@ -51,11 +51,11 @@
 
     <section id="users-management" class="tab-content <?= $currentTab === 'users-management' ? 'active' : '' ?>">
         <div class="flex-row flex-between">
-            <h2 class="subTitleGreen">Gérer les comptes des utilisateurs
+            <h2 class="text-green text-bold">Gérer les comptes des utilisateurs
                 (<?= count($passengersList) + count($driversList) + count($passengersAndDriversList) ?>)</h2>
 
         </div>
-        <h3 class="subTitleGreen" style="color: black ;">Passagers</h3>
+        <h3 style="color: black;">Passagers</h3>
         <div class="half-separation m-tb-12 gap-12">
 
             <?php
@@ -77,7 +77,7 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <h3 class="subTitleGreen" style="color: black ;">Chauffeurs</h3>
+        <h3 style="color: black ;">Chauffeurs</h3>
         <div class="half-separation m-tb-12 gap-12">
 
             <?php foreach ($driversList as $driver): ?>
@@ -98,7 +98,7 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        <h3 class="subTitleGreen" style="color: black ;">Passagers-Chauffeurs</h3>
+        <h3 style="color: black ;">Passagers-Chauffeurs</h3>
         <div class="half-separation m-tb-12 gap-12">
 
             <?php foreach ($passengersAndDriversList as $both): ?>
