@@ -7,16 +7,16 @@ $popup_title = "Ajouter une voiture";
 ob_start(); ?>
 <form id="car-form-id" class="block-column-g20" style="gap: 10px;">
 
-    <div class="flex-row">
+    <div class="flex-row flex-column-ss">
         <label for="licence_plate">Plaque immatriculation : </label>
         <input type="text" id="licence_plate" name="licence_plate" class="text-field" placeholder="AA-000-AA">
     </div>
 
-    <div class="flex-row">
+    <div class="flex-row flex-column-ss">
         <label for="first_registration_date">Date première immatriculation : </label>
         <input type="date" id="first_registration_date" name="first_registration_date" class="text-field">
     </div>
-    <div class="flex-row">
+    <div class="flex-row flex-column-ss">
         <label for="brand">Marque : </label>
         <select id="brand" class="text-field" name="brand">
             <option value="">Sélectionner</option>
@@ -27,7 +27,7 @@ ob_start(); ?>
             <?php endforeach; ?>
         </select>
     </div>
-    <div class="flex-row">
+    <div class="flex-row flex-column-ss">
         <label for="model">Modèle : </label>
         <input type="text" id="model" name="model" class="text-field">
     </div>
@@ -40,7 +40,7 @@ ob_start(); ?>
         <label for="electric_no">non</label>
 
     </div>
-    <div class="flex-row">
+    <div class="flex-row flex-column-ss">
         <label for="color">Couleur : </label>
         <input type="text" id="color" name="color" class="text-field">
     </div>
