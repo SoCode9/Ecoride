@@ -6,7 +6,7 @@ fetch("../back/carpool/chart_per_day.php")
     })
     .then((data) => {
         if (carpoolsPerDayChart) {
-            createChart(carpoolsPerDayChart, data, 'bar', 'Nombre de covoiturages sur les prochains jours', 'Nombre de covoiturages', 'Dix prochains jours', 'travelDate', 'nbCarpool')
+            createChart(carpoolsPerDayChart, data, 'bar', 'Nb de covoiturages sur les prochains jours', 'Nb de covoiturages', 'Dix prochains jours', 'travelDate', 'nbCarpool')
         } else {
             console.warn("Élément #carpoolsPerDayChart introuvable.");
         }
@@ -20,7 +20,7 @@ fetch("../back/carpool/chart_credits_earned.php")
     })
     .then((data) => {
         if (creditsEarnedByPlatform) {
-            createChart(creditsEarnedByPlatform, data, 'bar', 'Nombre de crédits gagnés dans les précédents jours', 'Nombre de crédits gagnés', 'Dix derniers jours', 'validationCarpoolDate', 'carpoolsValidated')
+            createChart(creditsEarnedByPlatform, data, 'bar', 'Nb de crédits gagnés dans les derniers jours', 'Nb de crédits gagnés', 'Dix derniers jours', 'validationCarpoolDate', 'carpoolsValidated')
         } else {
             console.warn("Élément #creditsEarnedByPlatform introuvable.");
         }

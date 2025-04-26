@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "carpool_search.php": "Covoiturages",
         "carpool_details.php": "Covoiturages",
         "login.php": "Connexion",
-        "user_space.php": "Utilisateur",
-        "employee_space.php": "Employé",
-        "admin_space.php": "Admin"
+        "user_space.php": "Mon espace",
+        "employee_space.php": "Mon espace",
+        "admin_space.php": "Mon espace"
     };
 
     if (labels[currentPage]) {

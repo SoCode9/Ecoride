@@ -13,7 +13,7 @@ include "../templates/layout.php";
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../script/chart_carpools_per_day.js" defer></script>
+<script src="../script/charts.js" defer></script>
 <style>
     #adminSpace {
         background-color: #F2C674;
