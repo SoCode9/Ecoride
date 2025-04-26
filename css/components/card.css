@@ -20,24 +20,12 @@ Dans ton cas, par exemple, chaque trajet affiché (.travel) dans la recherche de
     gap: 20px;
 }
 
-.short-field {
-    border-radius: var(--border-radius);
-    padding: 4px;
-    border: 1px solid var(--col-dark-grey);
-    width: 50px;
-}
-
-.text-field {
-    width: 100px;
-    appearance: none;
-    /* Supprime l'icône par défaut (pour Chrome, Safari, etc.) */
-    -webkit-appearance: none;
-    /* Spécifique pour Safari */
-    -moz-appearance: none;
-    /* Spécifique pour Firefox */
-    border-radius: var(--border-radius);
-    padding: 4px;
-    border: 1px solid var(--col-dark-grey);
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .date-field {

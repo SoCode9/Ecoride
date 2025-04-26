@@ -14,7 +14,7 @@
         <div class="main-tab-content <?= $currentTab === 'profil' ? 'active' : '' ?>" id="profil">
             <section class="flex-column gap-24">
                 <!--header of this section-->
-                <div class="flex-row item-center flex-between">
+                <div class="main-header">
                     <div class="flex-row item-center">
                         <img src="<?= displayPhoto($connectedUser->getPhoto()) ?>" alt="Photo de l'utilisateur"
                             class="photo-100">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                <div class="scrollable-container gap-24 half-separation">
+                <div class="scrollable-container half-separation">
                     <!--Cars section-->
                     <div class="flex-column gap-8 block-light-grey no-background-ss" style="padding: 16px;">
                         <h3 class="text-green">Voitures</h3>
@@ -298,7 +298,7 @@
         <!-- User's carpool -->
         <div class="main-tab-content <?= $currentTab === 'carpools' ? 'active' : '' ?>" id="carpools">
             <section class="flex-column gap-12">
-                <div class="flex-row flex-between flex-row-wrap">
+                <div class="main-header">
                     <div class="tabs">
                         <button class="btn tab-btn active" data-target="notStarted">En cours</button>
                         <button class="btn tab-btn" data-target="completed">Terminés</button>

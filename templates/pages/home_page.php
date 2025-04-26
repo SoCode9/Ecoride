@@ -14,7 +14,7 @@
 
                 <div class="flex-row gap-4 search-field">
                     <img class="img-width-20" src="../icons/Localisation(2).png" alt="lieu de départ">
-                    <input type="text" id="departure-city-search" name="departure-city-search" class="font-size-small text-breakable"
+                    <input type="text" id="departure-city-search" name="departure-city-search" class="font-size-small text-breakable  "
                         placeholder="De"
                         value="<?= isset($_SESSION['departure-city-search']) ? htmlspecialchars($_SESSION['departure-city-search']) : '' ?>"
                         required>
@@ -25,7 +25,7 @@
 
                 <div class="flex-row gap-4 search-field">
                     <img class="img-width-20" src="../icons/Localisation(2).png" alt="">
-                    <input type="text" id="arrival-city-search" name="arrival-city-search" class="font-size-small text-breakable"
+                    <input type="text" id="arrival-city-search" name="arrival-city-search" class="font-size-small text-breakable  "
                         placeholder="À"
                         value="<?= isset($_SESSION['arrival-city-search']) ? htmlspecialchars($_SESSION['arrival-city-search']) : '' ?>"
                         required>
@@ -35,7 +35,7 @@
                 <div class="flex-row gap-4 search-field">
                     <img class="img-pointer" src="../icons/Calendrier2.png" alt="Calendrier">
                     <input type="date" id="departure-date-search" name="departure-date-search"
-                        class="date-field font-size-small" placeholder="Départ"
+                        class="date-field font-size-small  "  style="width:110px;"
                         value="<?= isset($_SESSION['departure-date-search']) ? htmlspecialchars($_SESSION['departure-date-search']) : '' ?>"
                         required>
                 </div>

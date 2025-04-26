@@ -17,6 +17,13 @@
     width: auto;
 }
 
+.search-field input {
+    color: var(--col-dark-grey);
+    border: none;
+    padding: unset;
+    width: auto;
+}
+
 /*SEARCH FILTERS BLOCK*/
 
 .block-filter-details {
@@ -144,7 +151,7 @@
     top: 100%;
     /* Positions the list right below the field */
     background: white;
-    border: 1px solid #ccc;
+    border: 1px solid var(--col-grey);
     border-top: none;
     /* Avoids double border with the input field */
     width: calc(100% - 2px);

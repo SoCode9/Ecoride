@@ -23,15 +23,17 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //the calender icon opens the calender
+if (document.querySelector('.img-pointer')) {
+    document.querySelector('.img-pointer').addEventListener('click', () => {
+        const dateInput = document.querySelector('#departure-date-search'); // Vérifie si le navigateur supporte showPicker, sinon fallback sur focus
+        if (dateInput.showPicker) {
+            dateInput.showPicker(); // Force l'ouverture du calendrier
+        } else {
+            dateInput.focus(); // Fallback pour les anciens navigateurs
+        }
+    });
+}
 
-document.querySelector('.img-pointer').addEventListener('click', () => {
-    const dateInput = document.querySelector('#departure-date-search'); // Vérifie si le navigateur supporte showPicker, sinon fallback sur focus
-    if (dateInput.showPicker) {
-        dateInput.showPicker(); // Force l'ouverture du calendrier
-    } else {
-        dateInput.focus(); // Fallback pour les anciens navigateurs
-    }
-});
 
 //API to search locations in France
 

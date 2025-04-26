@@ -52,7 +52,7 @@
 }
 
 .yes-no-btn:hover {
-    background-color: #ccc;
+    background-color: var(--col-grey);
 }
 
 .selected-btn {
@@ -120,5 +120,9 @@
 
     .travel-price {
         padding-right: 0px;
+    }
+
+    #comment {
+        width: 100%;
     }
 }

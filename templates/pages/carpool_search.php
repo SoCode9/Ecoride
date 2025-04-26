@@ -5,27 +5,27 @@
         <form class="block-search" action="carpool_search.php" method="POST">
             <input type="hidden" name="action" value="search"> <!--identify request-->
 
-            <div class="flex-row gap-4 search-field">
+            <div class="flex-row search-field">
                 <img class="img-width-20" src="../icons/Localisation(2).png" alt="lieu de départ">
-                <input type="text" id="departure-city-search" name="departure-city-search" class="font-size-small text-breakable"
-                    style="color: var(--col-dark-grey);" placeholder="Ville de départ"
+                <input type="text" id="departure-city-search" name="departure-city-search" class="font-size-small text-breakable  "
+                     placeholder="Ville de départ"
                     value="<?= isset($_SESSION['departure-city-search']) ? htmlspecialchars($_SESSION['departure-city-search']) : '' ?>"
                     required>
                 <div id="departure-suggestions" class="suggestions-list"></div>
             </div>
             <span class="flex-row">→</span>
-            <div class="flex-row gap-4 search-field">
+            <div class="flex-row search-field">
                 <img class="img-width-20" src="../icons/Localisation(2).png" alt="">
-                <input type="text" id="arrival-city-search" name="arrival-city-search" class="font-size-small text-breakable"
-                    style="color: var(--col-dark-grey);" placeholder="Ville d'arrivée"
+                <input type="text" id="arrival-city-search" name="arrival-city-search" class="font-size-small text-breakable  "
+                 placeholder="Ville d'arrivée"
                     value="<?= isset($_SESSION['arrival-city-search']) ? htmlspecialchars($_SESSION['arrival-city-search']) : '' ?>"
                     required>
                 <div id="arrival-suggestions" class="suggestions-list"></div>
             </div>
-            <div class="flex-row gap-4 search-field">
+            <div class="flex-row search-field">
                 <img class="img-pointer" src="../icons/Calendrier2.png" alt="Calendrier">
                 <input type="date" id="departure-date-search" name="departure-date-search"
-                    class="date-field font-size-small" placeholder="Date du départ"
+                    class="date-field font-size-small  " style="width:110px;"
                     value="<?= isset($_SESSION['departure-date-search']) ? htmlspecialchars($_SESSION['departure-date-search']) : '' ?>"
                     required>
             </div>
