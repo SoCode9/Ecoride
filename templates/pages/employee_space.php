@@ -3,7 +3,7 @@
     $currentTab = $_GET['tab'] ?? 'validate-rating';
     ?>
 
-    <div class="flex-row flex-between">
+    <div class="flex-row flex-between flex-column-ss">
         <div class="flex-row gap-12 m-tb-12 m-8">
             <span><?= htmlspecialchars($employee->getPseudo()) ?></span>
             <span><?= htmlspecialchars($employee->getMail()) ?></span>
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="flex-row flex-between">
-                        <span class="text-bold">
+                        <span class="text-bold text-breakable" style="width:100%">
                             <?php if (isset($rating['description'])) {
                                 echo '"' . htmlspecialchars($rating['description']) . '"';
                             } else {
