@@ -22,14 +22,15 @@
                     <div class="user-info-mobile">
                         <span class="pseudo-user text-breakable"><?= htmlspecialchars($carpool['pseudo']) ?></span>
                         <div class="driver-rating">
-                            <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
-                            <span>
-                                <?php
-                                $driver = new driver($pdo, $carpool['driver_id']);
-                                $rating = $driver->getAverageRatings();
-                                echo $rating;
-                                ?>
-                            </span>
+                        <?php
+                        $driver = new Driver($pdo, $carpool['driver_id']);                                            
+                        $averageRating = $driver->getAverageRatings();
+                        if ($averageRating !== null) {
+                            echo '<img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
+                                    . htmlspecialchars($averageRating);
+                        } else {
+                            echo "<span class = 'italic'>0 avis</span>";
+                        } ?>
                         </div>
                     </div>
                 </div>

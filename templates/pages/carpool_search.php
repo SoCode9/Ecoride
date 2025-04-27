@@ -134,14 +134,18 @@
                                 </div>
                                 <div class="user-info-mobile"> 
                                     <span class="pseudo-user"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
-                                    <div class="driver-rating">
-                                        <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
-                                        <span>
+                                    <div class="driver-rating">                                        
+                                        <div class="flex-row font-size-very-small">
                                             <?php
-                                            $driver = new Driver($pdo, $t['driver_id']);
-
-                                            echo htmlspecialchars($driver->getAverageRatings()) . " (" . htmlspecialchars($driver->getNbRatings()) . ")" ?>
-                                        </span>
+                                            $driver = new Driver($pdo, $t['driver_id']);                                            
+                                            $averageRating = $driver->getAverageRatings();
+                                            if ($averageRating !== null) {
+                                                echo '<img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
+                                                    . htmlspecialchars($averageRating);
+                                            } else {
+                                                echo "<span class = 'italic'>0 avis</span>";
+                                            } ?>
+                                        </div>
                                     </div>
                                 </div>
                            </div>
