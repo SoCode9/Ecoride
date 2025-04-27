@@ -33,9 +33,10 @@ if (empty($cars)): ?>
                 href="<?= BASE_URL ?>/back/car/delete.php?action=delete_car&id=<?= $car['car_id'] ?>">
                 <img src="../icons/Supprimer.png" class="img-width-20" style="cursor: pointer;">
             </a>
-        </div>
-        <?php if ($index !== $totalCars - 1):
+            <?php if ($index !== $totalCars - 1):
             echo '<hr>';
         endif; ?>
+        </div>
+       
     <?php endforeach; ?>
 <?php endif; ?>
