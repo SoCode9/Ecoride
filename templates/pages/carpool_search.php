@@ -50,8 +50,8 @@
 
         <!--Search filters-->
 
-        <div class="flex-column gap-24 block-light-grey" id="filter-block">
-            <h3 class="text-green">Filtres de recherche</h3>
+        <div class="flex-column block-light-grey" id="filter-block">
+            <h3 class="text-green" style="padding-bottom: 24px;">Filtres de recherche</h3>
             <form class="block-column-g20" action="carpool_search.php" method="POST">
                 <input type="hidden" name="action" value="filters"> <!--identify filters-->
 
@@ -134,14 +134,18 @@
                                 </div>
                                 <div class="user-info-mobile"> 
                                     <span class="pseudo-user"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
-                                    <div class="driver-rating">
-                                        <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
-                                        <span>
+                                    <div class="driver-rating">                                        
+                                        <div class="flex-row font-size-very-small">
                                             <?php
-                                            $driver = new Driver($pdo, $t['driver_id']);
-
-                                            echo htmlspecialchars($driver->getAverageRatings()) . " (" . htmlspecialchars($driver->getNbRatings()) . ")" ?>
-                                        </span>
+                                            $driver = new Driver($pdo, $t['driver_id']);                                            
+                                            $averageRating = $driver->getAverageRatings();
+                                            if ($averageRating !== null) {
+                                                echo '<img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
+                                                    . htmlspecialchars($averageRating);
+                                            } else {
+                                                echo "<span class = 'italic'>0 avis</span>";
+                                            } ?>
+                                        </div>
                                     </div>
                                 </div>
                            </div>
