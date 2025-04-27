@@ -46,7 +46,7 @@
 
    
     
-    <div class="block-filter-details flex-column-ss">
+    <div class="block-filter-details">
 
         <!--Search filters-->
 
@@ -105,17 +105,17 @@
             </span>
 
             <!--TRAVELS' SEARCHED BLOCK-->
-            <div class="flex-column gap-12 pad-20 pad-10-ss" id="travels-list">
+            <div class="flex-column gap-12 pad-20 pad-10-ss grid-auto-columns">
 
                 <?php
                 if (!empty($travelsSearched)) {
                     foreach ($travelsSearched as $t): ?>
-                        <div class="travel travel-ss"
+                        <div class="travel"
                             onclick="window.location.href='carpool_details.php?id=<?= htmlspecialchars($t['id']) ?>'"
                             <?php if (isset($_SESSION['user_id']) && ($t['driver_id'] === $_SESSION['user_id'])) {
-                                echo "style='border:2px solid var(--col-green);cursor:pointer;'";
+                                echo " style='border:2px solid var(--col-green);cursor:pointer;'";
                             } else {
-                                echo "style ='cursor:pointer;'";
+                                echo " style ='cursor:pointer;'";
                             } ?>>
 
                             <?php
@@ -126,26 +126,28 @@
                             if ($seatsAvailable === 0): ?>
                                 <span class="watermark-complet">Complet</span>
                             <?php endif; ?>
-                            <div class="photo-user-container" id="photo-ss" style="justify-self:center;">
-                                <img src="<?= displayPhoto($t['driver_photo']) ?>" alt="Photo de l'utilisateur"
-                                    class="photo-user">
-                            </div>
-                            <span class="pseudo-user text-breakable" id="pseudo-ss"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
-                            <div class="driver-rating" id="rating-ss">
-                                <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
-                                <span><?php
-                                $driver = new Driver($pdo, $t['driver_id']);
 
-                                echo htmlspecialchars($driver->getAverageRatings()) . " (" . htmlspecialchars($driver->getNbRatings()) . ")" ?></span>
-                            </div>
-                            <span class="date-travel" id="date-bs">Départ à <?= htmlspecialchars($t['travel_departure_time']) ?>
+                            <div class="user-header-mobile">
+                                <div class="photo-user-container" style="justify-self:center;">
+                                    <img src="<?= displayPhoto($t['driver_photo']) ?>" alt="Photo de l'utilisateur"
+                                        class="photo-user">
+                                </div>
+                                <div class="user-info-mobile"> 
+                                    <span class="pseudo-user"><?= htmlspecialchars($t['driver_pseudo']) ?></span>
+                                    <div class="driver-rating">
+                                        <img src="../icons/EtoileJaune.png" alt="Etoile" class="img-width-20">
+                                        <span>
+                                            <?php
+                                            $driver = new Driver($pdo, $t['driver_id']);
+
+                                            echo htmlspecialchars($driver->getAverageRatings()) . " (" . htmlspecialchars($driver->getNbRatings()) . ")" ?>
+                                        </span>
+                                    </div>
+                                </div>
+                           </div>
+                            <span class="date-travel">Départ à <?= htmlspecialchars($t['travel_departure_time']) ?>
                             </span>
-                            <span class="date-travel" id="date-ss" style="display: none;">De
-                                <?= htmlspecialchars($t['travel_departure_time']) ?>
-                            </span>
-                            <span class="hours-travel" id="hours-bs">Arrivée à
-                                <?= htmlspecialchars($t['travel_arrival_time']) ?></span>
-                            <span class="hours-travel" id="hours-ss" style="display: none;">À
+                            <span class="hours-travel">Arrivée à
                                 <?= htmlspecialchars($t['travel_arrival_time']) ?></span>
                             <span class="seats-available" id="seats-bs">Encore
                                 <?php
@@ -156,22 +158,13 @@
                                 }
                                 ?>
                             </span>
-                            <span class="seats-available" id="seats-ss" style="display: none;">
-                                <?php
-                                if ($seatsAvailable > 1) {
-                                    echo $seatsAvailable . " places";
-                                } else {
-                                    echo $seatsAvailable . " place";
-                                }
-                                ?>
-                            </span>
+                               
+                            </span> 
                             <div class="criteria-eco-div">
-                                <span class="criteria-eco" id="eco-bs"><?= formatEco(($t['car_electric'])) ?> </span>
+                                <span class="criteria-eco"><?= formatEco(($t['car_electric'])) ?> </span>
                             </div>
-                            <div class="criteria-eco-div" id="eco-ss" style="display: none;">
-                                <span class="criteria-eco"><?= formatEcoSmallScreen(($t['car_electric'])) ?> </span>
-                            </div>
-                            <span class="travel-price text-bold" id="credit-bs">
+                    
+                            <span class="travel-price text-bold">
                                 <?php
                                 $trajetPrice = htmlspecialchars($t['travel_price']);
                                 if ($trajetPrice > 1) {
@@ -180,9 +173,6 @@
                                     echo $trajetPrice . " crédit";
                                 }
                                 ?></span>
-
-                            <span class="travel-price text-bold" id="credit-ss"
-                                style="display: none;"><?= htmlspecialchars($t['travel_price']) . " .-"; ?></span>
                         </div>
 
 

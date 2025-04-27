@@ -99,14 +99,19 @@
     gap: 5px;
 }
 
-/* Responsive mobile */
-@media (max-width: 767px) {
+
+@media (max-width:1023px) {
     .travel {
         display: flex !important;
         flex-direction: column;
         padding: 12px;
         gap: 10px;
     }
+}
+
+/* Responsive mobile */
+@media (max-width: 767px) {
+
 
     .user-header-mobile {
         flex-direction: row;

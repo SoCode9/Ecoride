@@ -69,7 +69,7 @@
                 echo "style ='cursor:pointer;'";
             } ?>>
             <div class="user-header-mobile">
-                <div class="photo-user-container" id="photo-ss" style="justify-self:center;">
+                <div class="photo-user-container" style="justify-self:center;">
                     <img src="<?= displayPhoto($carpool['photo']) ?>" alt="Photo de l'utilisateur" class="photo-user">
                 </div>
                 <div class="user-info-mobile">
