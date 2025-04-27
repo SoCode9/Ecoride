@@ -126,14 +126,6 @@ function formatEco(bool $nbEco): string
     return "";
 }
 
-function formatEcoSmallScreen(bool $nbEco): string
-{
-    if ($nbEco == 1) {
-        return '<img src="../icons/Arbre 1.png" alt="Arbre" width="20px">' . " Eco";
-    }
-    return "";
-}
-
 /*---------------- CALCULATION ----------------*/
 
 /**
