@@ -46,7 +46,7 @@
 
    
     
-    <div class="block-filter-details flex-column-ss">
+    <div class="block-filter-details">
 
         <!--Search filters-->
 
@@ -105,7 +105,7 @@
             </span>
 
             <!--TRAVELS' SEARCHED BLOCK-->
-            <div class="flex-column gap-12 pad-20 pad-10-ss" id="travels-list">
+            <div class="flex-column gap-12 pad-20 pad-10-ss grid-auto-columns">
 
                 <?php
                 if (!empty($travelsSearched)) {

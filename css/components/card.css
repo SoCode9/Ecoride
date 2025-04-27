@@ -56,6 +56,7 @@ Dans ton cas, par exemple, chaque trajet affiché (.travel) dans la recherche de
     height: 100px;
     object-fit: cover;
     border-radius: var(--border-radius);
+    background-color: #f5f5f5;
 }
 
 /*POPUP*/
