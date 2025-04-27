@@ -50,8 +50,8 @@
 
         <!--Search filters-->
 
-        <div class="flex-column gap-24 block-light-grey" id="filter-block">
-            <h3 class="text-green">Filtres de recherche</h3>
+        <div class="flex-column block-light-grey" id="filter-block">
+            <h3 class="text-green" style="padding-bottom: 24px;">Filtres de recherche</h3>
             <form class="block-column-g20" action="carpool_search.php" method="POST">
                 <input type="hidden" name="action" value="filters"> <!--identify filters-->
 
