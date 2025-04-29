@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentPage = window.location.pathname.split("/").pop();
 
     const labels = {
-        "home_page.php": "Accueil",
+        "index.php": "Accueil",
         "carpool_search.php": "Covoiturages",
         "carpool_details.php": "Covoiturages",
         "login.php": "Connexion",
