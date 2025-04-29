@@ -164,7 +164,7 @@ function renderNavigationLinks($asListItem = false)
     $tagOpen = $asListItem ? '<li>' : '';
     $tagClose = $asListItem ? '</li>' : '';
 
-    echo $tagOpen . '<a id="home-page" href="home_page.php">Accueil</a>' . $tagClose;
+    echo $tagOpen . '<a id="home-page" href="index.php">Accueil</a>' . $tagClose;
     echo $tagOpen . '<a id="carpool-button" href="carpool_search.php">Covoiturages</a>' . $tagClose;
     echo $tagOpen . '<a href="#">Contact</a>' . $tagClose;
 
