@@ -164,8 +164,8 @@ function renderNavigationLinks($asListItem = false)
     $tagOpen = $asListItem ? '<li>' : '';
     $tagClose = $asListItem ? '</li>' : '';
 
-    echo $tagOpen . '<a id="home-page" href="index.php">Accueil</a>' . $tagClose;
-    echo $tagOpen . '<a id="carpool-button" href="carpool_search.php">Covoiturages</a>' . $tagClose;
+    echo $tagOpen . '<a id="home-page" href="../public/index.php">Accueil</a>' . $tagClose;
+    echo $tagOpen . '<a id="carpool-button" href="../controllers/carpool_search.php">Covoiturages</a>' . $tagClose;
     echo $tagOpen . '<a href="#">Contact</a>' . $tagClose;
 
     if (session_status() === PHP_SESSION_NONE)
@@ -176,17 +176,17 @@ function renderNavigationLinks($asListItem = false)
             case 1:
             case 2:
             case 3:
-                echo $tagOpen . '<a class="btn border-white" id="userSpace" href="user_space.php">Espace Utilisateur</a>' . $tagClose;
+                echo $tagOpen . '<a class="btn border-white" id="userSpace" href="../controllers/user_space.php">Espace Utilisateur</a>' . $tagClose;
                 break;
             case 4:
-                echo $tagOpen . '<a class="btn border-white" id="employeeSpace" href="employee_space.php">Espace Employé</a>' . $tagClose;
+                echo $tagOpen . '<a class="btn border-white" id="employeeSpace" href="../controllers/employee_space.php">Espace Employé</a>' . $tagClose;
                 break;
             case 5:
-                echo $tagOpen . '<a class="btn border-white" id="adminSpace" href="admin_space.php">Espace Administrateur</a>' . $tagClose;
+                echo $tagOpen . '<a class="btn border-white" id="adminSpace" href="../controllers/admin_space.php">Espace Administrateur</a>' . $tagClose;
                 break;
         }
-        echo $tagOpen . '<a id="logoutButton" href="login.php"> <img src="../icons/Deconnexion.png" alt="logout" class="logout-btn"> </a>' . $tagClose;
+        echo $tagOpen . '<a id="logoutButton" href="../controllers/login.php"> <img src="../icons/Deconnexion.png" alt="logout" class="logout-btn"> </a>' . $tagClose;
     } else {
-        echo $tagOpen . '<a class="btn border-white" id="loginButton" href="login.php">Connexion</a>' . $tagClose;
+        echo $tagOpen . '<a class="btn border-white" id="loginButton" href="../controllers/login.php">Connexion</a>' . $tagClose;
     }
 }

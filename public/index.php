@@ -2,9 +2,6 @@
 if (session_status() === PHP_SESSION_NONE)
     session_start();
 
-
-require_once '../back/carpool/home_page.php';
-
 $travelsSearched = $_SESSION['travelsSearched'] ?? [];
 $nextTravelDate = $_SESSION['nextTravelDate'] ?? [];
 $error_message = $_SESSION['error_message'] ?? null;
