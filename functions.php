@@ -144,14 +144,13 @@ function seatsAvailable(int $seatsOfferedNb, int $seatsAllocatedNb): int
 
 function displayPhoto(?string $fileName = null): string
 {
-    $real_path = __DIR__ . '/photos/' . $fileName;
+    $real_path = __DIR__ . '/public/photos/' . $fileName;
 
     if (!$fileName || !file_exists($real_path)) {
-        return '/0-ECFEcoride/photos/default-user.png';
+        return '/0-ECFEcoride/public/photos/default-user.png';
     } else {
-        return "/0-ECFEcoride/photos/" . $fileName;
+        return "/0-ECFEcoride/public/photos/" . $fileName;
     }
-
 }
 
 /**
