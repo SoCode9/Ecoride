@@ -35,7 +35,7 @@ ob_start(); ?>
                             <option value="1">1</option>
                         </optgroup>
                     </select>
-                    <label for="driver-rating-list"><img src="<?= BASE_URL ?> /icons/EtoileJaune.png" alt="EtoileJaune"
+                    <label for="driver-rating-list"><img src="<?= BASE_URL ?>/icons/EtoileJaune.png" alt="EtoileJaune"
                             class="img-width-20"></label>
                 </div>
 

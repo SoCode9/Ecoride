@@ -46,7 +46,7 @@
                 <div class="flex-row item-center hidden" id="edit-photo-icon">
                     <button onclick="showPopup('popup-new-photo')"
                         style="width: 30px; background-color: var(--col-orange); padding:4px 4px;" class="btn"><img
-                            src="<?= BASE_URL ?> /icons/Modifier.png" alt="edit">
+                            src="<?= BASE_URL ?>/icons/Modifier.png" alt="edit">
                     </button>
                     <span class="italic font-size-small ">Modifier la photo de profil</span>
                 </div>
@@ -327,7 +327,7 @@
                 </div>
                 <?php if (($connectedUser->getIdRole() === 2 || $connectedUser->getIdRole() === 3) && $cars == !null): ?>
                     <a class="btn action-btn" style="padding: 8px; text-align:right;"
-                        href="<?= BASE_URL ?> /controllers /create_carpool.php">Proposer un
+                        href="<?= BASE_URL ?>/controllers /create_carpool.php">Proposer un
                         covoiturage</a>
                 <?php endif; ?>
             </div>
