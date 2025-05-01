@@ -22,7 +22,7 @@
 <main class="gap-24">
     <div class="main-header">
         <h2 class="text-green">Proposer un covoiturage</h2>
-        <a href="../controllers/user_space.php?tab=carpools" class="btn return-btn">Retour à l'espace utilisateur</a>
+        <a href= "<?= BASE_URL ?> /controllers /user_space.php?tab=carpools" class="btn return-btn">Retour à l'espace utilisateur</a>
     </div>
 
     <form action="../back/carpool/create.php" method="POST" class="half-separation">
@@ -65,7 +65,7 @@
         </div>
 
         <div class="flex-row">
-            <img src="../icons/addPref.png" alt="info" class="img-width-20" />
+            <img src="<?= BASE_URL ?> /icons/addPref.png" alt="info" class="img-width-20" />
             <span class="italic text-green font-size-small">Rappel : 2 crédits sont pris par la plateforme EcoRide</span>
         </div>
 
@@ -92,7 +92,7 @@
             <input type="submit" value="Proposer le trajet"  />
         </div>
     </form>
-    <?php include "../templates/components/popup/new_car.php";
+    <?php include __DIR__ . "/../templates/components/popup/new_car.php";
     ?>
 </main>
 
@@ -100,7 +100,7 @@
 <!-- <main>
     <div class="flex-row flex-between">
         <h2 class="text-green text-bold">Proposer un covoiturage</h2>
-        <a href="../controllers/user_space.php?tab=carpools" class="btn"
+        <a href= "<?= BASE_URL ?> /controllers /user_space.php?tab=carpools" class="btn"
             style="border: 2px solid var(--col-green); background-color:var(--col-light-grey);">Retourner à l'espace
             utilisateur</a>
     </div>
@@ -110,7 +110,7 @@
             <label for="departure-date-search">Date du départ : </label>
             <div class="flex-row"
                 style=" border: 1px solid var(--col-dark-grey);border-radius: var(--border-radius);padding: 4px; width: 120px;">
-                <img class="img-pointer" src="../icons/Calendrier2.png" alt="Calendrier">
+                <img class="img-pointer" src="<?= BASE_URL ?> /icons/Calendrier2.png" alt="Calendrier">
                 <input type="date" id="departure-date-search" name="travelDate" class="date-field" style="width:200px;"
                     required>
             </div>
@@ -152,7 +152,7 @@
                 <label for="travelPrice">crédits </label>
             </div>
             <div class="flex-row">
-                <img src="../icons/addPref.png" class="img-width-20" alt="warningIcon">
+                <img src="<?= BASE_URL ?> /icons/addPref.png" class="img-width-20" alt="warningIcon">
                 <span class="italic text-green font-size-small">Rappel : 2 crédits sont pris par
                     la plateforme EcoRide</span>
             </div>

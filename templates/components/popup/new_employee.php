@@ -3,7 +3,7 @@ $popup_id = "popup-new-employee";
 $popup_title = "Ajouter un compte employé";
 ob_start(); ?>
 
-<form action="/0-ECFEcoride/back/user/admin_space.php" method="POST" class="flex-column gap-12">
+<form action="<?= BASE_URL ?>/back/user/admin_space.php" method="POST" class="flex-column gap-12">
     <input type="hidden" name="action" value="create-employee">
 
     <div class="flex-row gap-8">
@@ -35,4 +35,4 @@ ob_start(); ?>
 
 <?php $popup_content = ob_get_clean(); ?>
 
-<?php include '../templates/components/popup/template.php'; ?>
+<?php include __DIR__ . '/../popup/template.php'; ?>

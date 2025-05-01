@@ -12,7 +12,7 @@ $pageTitle = "Accueil";
 $customScript =  "carpool_search.js" ;
 $templatePage = "pages/home_page.php";
 
-include "../templates/layout.php";
+include __DIR__ . "/../templates/layout.php";
 
 ?>
 <style>

@@ -9,7 +9,7 @@ $pageTitle = "Proposer un covoiturage";
 $customScript = "carpool_search.js";
 $templatePage = "pages/create_carpool.php";
 
-include "../templates/layout.php";
+include __DIR__ . "/../templates/layout.php";
 
 ?>
 

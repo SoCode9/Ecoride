@@ -1,8 +1,12 @@
 <?php
 
-//CONFIG
-define('BASE_URL', '/0-ECFEcoride');
+$host = $_SERVER['HTTP_HOST'];
 
+if ($host === 'localhost') {
+    define('BASE_URL', '/0-ECFEcoride');
+} else {
+    define('BASE_URL', '');
+}
 
 //to store useful functions for all pages
 
@@ -121,7 +125,7 @@ function formatTime(string $timeToFormat): string
 function formatEco(bool $nbEco): string
 {
     if ($nbEco == 1) {
-        return '<img src="../icons/Arbre 1.png" alt="Arbre" width="20px">' . " Economique";
+        return '<img src="' . BASE_URL . ' /icons/Arbre 1.png" alt="Arbre" width="20px">' . " Economique";
     }
     return "";
 }
@@ -144,12 +148,12 @@ function seatsAvailable(int $seatsOfferedNb, int $seatsAllocatedNb): int
 
 function displayPhoto(?string $fileName = null): string
 {
-    $real_path = __DIR__ . '/public/photos/' . $fileName;
+    $real_path = __DIR__ . '/photos/' . $fileName;
 
     if (!$fileName || !file_exists($real_path)) {
-        return '/0-ECFEcoride/public/photos/default-user.png';
+        return BASE_URL . '/photos/default-user.png';
     } else {
-        return "/0-ECFEcoride/public/photos/" . $fileName;
+        return BASE_URL . '/photos/' . $fileName;
     }
 }
 
@@ -160,32 +164,32 @@ function displayPhoto(?string $fileName = null): string
  */
 function renderNavigationLinks($asListItem = false)
 {
+    $base = BASE_URL;
     $tagOpen = $asListItem ? '<li>' : '';
     $tagClose = $asListItem ? '</li>' : '';
 
-    echo $tagOpen . '<a id="home-page" href="../public/index.php">Accueil</a>' . $tagClose;
-    echo $tagOpen . '<a id="carpool-button" href="../controllers/carpool_search.php">Covoiturages</a>' . $tagClose;
-    echo $tagOpen . '<a href="#">Contact</a>' . $tagClose;
-
-    if (session_status() === PHP_SESSION_NONE)
-        session_start();
+    echo $tagOpen . "<a id='home-page' href='{$base}/index.php'>Accueil</a>" . $tagClose;
+    echo $tagOpen . "<a id='carpool-button' href='{$base}/controllers/carpool_search.php'>Covoiturages</a>" . $tagClose;
+    echo $tagOpen . "<a href='#'>Contact</a>" . $tagClose;
 
     if (isset($_SESSION['user_id'])) {
         switch ($_SESSION['role_user']) {
             case 1:
             case 2:
             case 3:
-                echo $tagOpen . '<a class="btn border-white" id="userSpace" href="../controllers/user_space.php">Espace Utilisateur</a>' . $tagClose;
+                echo $tagOpen . "<a class='btn border-white' id='userSpace' href='{$base}/controllers/user_space.php'>Espace Utilisateur</a>" . $tagClose;
                 break;
             case 4:
-                echo $tagOpen . '<a class="btn border-white" id="employeeSpace" href="../controllers/employee_space.php">Espace Employé</a>' . $tagClose;
+                echo $tagOpen . "<a class='btn border-white' id='employeeSpace' href='{$base}/controllers/employee_space.php'>Espace Employé</a>" . $tagClose;
                 break;
             case 5:
-                echo $tagOpen . '<a class="btn border-white" id="adminSpace" href="../controllers/admin_space.php">Espace Administrateur</a>' . $tagClose;
+                echo $tagOpen . "<a class='btn border-white' id='adminSpace' href='{$base}/controllers/admin_space.php'>Espace Administrateur</a>" . $tagClose;
                 break;
         }
-        echo $tagOpen . '<a id="logoutButton" href="../controllers/login.php"> <img src="../icons/Deconnexion.png" alt="logout" class="logout-btn"> </a>' . $tagClose;
+        echo $tagOpen . "<a id='logoutButton' href='{$base}/controllers/login.php'> 
+            <img src='{$base}/icons/Deconnexion.png' alt='logout' class='logout-btn'> 
+        </a>" . $tagClose;
     } else {
-        echo $tagOpen . '<a class="btn border-white" id="loginButton" href="../controllers/login.php">Connexion</a>' . $tagClose;
+        echo $tagOpen . "<a class='btn border-white' id='loginButton' href='{$base}/controllers/login.php'>Connexion</a>" . $tagClose;
     }
 }

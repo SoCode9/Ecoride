@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'edit-photo-us
 
         // Generate a unique filename to avoid conflicts
         $uniqueName = uniqid($userId . '_', true) . '.' . $extension;
-        $uploadDir = __DIR__ . '/../public/photos/';
+        $uploadDir = __DIR__ . '/../photos/';
         $destination = $uploadDir . $uniqueName;
 
         // Move the uploaded file to the destination folder

@@ -9,7 +9,7 @@ $pageTitle = "Espace Employé";
 $customScript = "employee_space.js";
 $templatePage = "pages/employee_space.php";
 
-include "../templates/layout.php";
+include __DIR__ . "/../templates/layout.php";
 ?>
 
 <style>

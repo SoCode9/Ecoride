@@ -5,7 +5,7 @@ $pageTitle = "Connexion";
 //$customScript = "carpool_details.js";
 $templatePage = "pages/login.php";
 
-include "../templates/layout.php";
+include __DIR__ . "/../templates/layout.php";
 ?>
 
 <style>

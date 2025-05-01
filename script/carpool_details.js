@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     let confirmLogin = confirm("Vous devez être connecté pour réserver. Cliquer sur \"OK\" pour créer un compte.");
                     if (confirmLogin) {
-                        window.location.href = "../controllers/login.php";
+                        window.location.href = BASE_URL + "/controllers/login.php";
                     }
                 }
 

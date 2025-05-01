@@ -1,7 +1,6 @@
 /*  Search section */
 .search {
     height: 100vh;
-    background: url('../../icons/Accueil_transp.jpg') center/cover no-repeat;
     color: #000;
     display: flex;
     flex-direction: column;

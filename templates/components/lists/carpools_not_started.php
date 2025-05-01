@@ -25,7 +25,7 @@
                         $driver = new Driver($pdo, $carpool['driver_id']);                                            
                         $averageRating = $driver->getAverageRatings();
                         if ($averageRating !== null) {
-                            echo '<img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
+                            echo '<img src="' . BASE_URL . '/icons/EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
                                     . htmlspecialchars($averageRating);
                         } else {
                             echo "<span class = 'italic'>0 avis</span>";
@@ -58,7 +58,7 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <?php include '../templates/components/popup/carpool_to_validate.php'; ?>
+    <?php include __DIR__ . '/../popup/carpool_to_validate.php'; ?>
     <!--carpool not started or in progress-->
     <?php if (!empty($carpoolListNotStarted)): ?>
         <h3 style="color: black ;">Covoiturages à venir</h3>
@@ -82,7 +82,7 @@
                     $driver = new Driver($pdo, $carpool['driver_id']);                                            
                     $averageRating = $driver->getAverageRatings();
                     if ($averageRating !== null) {
-                         echo '<img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
+                         echo '<img src="' . BASE_URL . '\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
                                 . htmlspecialchars($averageRating);
                     } else {
                          echo "<span class = 'italic'>0 avis</span>";
