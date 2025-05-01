@@ -2,12 +2,11 @@
 
 $host = $_SERVER['HTTP_HOST'];
 
-if ($host === 'localhost') {
+if (in_array($host, ['localhost', '127.0.0.1', '::1'])) {
     define('BASE_URL', '/0-ECFEcoride');
 } else {
     define('BASE_URL', '');
 }
-
 //to store useful functions for all pages
 
 /*---------------- FORMATING ----------------*/
