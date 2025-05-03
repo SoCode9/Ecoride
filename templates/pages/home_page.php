@@ -1,7 +1,8 @@
 <main>
 
     <!-- Search section -->
-    <section class="search">
+    <section class="search"
+        style=" background: url('<?= BASE_URL ?>/icons/Accueil_transp.jpg') center/cover no-repeat;">
         <h1>
             EcoRide, la plateforme qui révolutionne vos déplacements<br>
             tout en respectant l'environnement.
@@ -9,13 +10,13 @@
 
         <div class="flex-column gap-24 block-light-grey">
             <h2 class="text-green text-bold">Rechercher un covoiturage</h2>
-            <form class="block-search" action="carpool_search.php" method="POST">
+            <form class="block-search" action= "<?= BASE_URL ?>/controllers/carpool_search.php" method="POST">
                 <input type="hidden" name="action" value="search">
 
                 <div class="flex-row gap-4 search-field">
-                    <img class="img-width-20" src="../icons/Localisation(2).png" alt="lieu de départ">
-                    <input type="text" id="departure-city-search" name="departure-city-search" class="font-size-small text-breakable  "
-                        placeholder="De"
+                    <img class="img-width-20" src="<?= BASE_URL ?>/icons/Localisation(2).png" alt="lieu de départ">
+                    <input type="text" id="departure-city-search" name="departure-city-search"
+                        class="font-size-small text-breakable  " placeholder="De"
                         value="<?= isset($_SESSION['departure-city-search']) ? htmlspecialchars($_SESSION['departure-city-search']) : '' ?>"
                         required>
                     <div id="departure-suggestions" class="suggestions-list"></div>
@@ -24,24 +25,24 @@
                 <span class="flex-row">→</span>
 
                 <div class="flex-row gap-4 search-field">
-                    <img class="img-width-20" src="../icons/Localisation(2).png" alt="">
-                    <input type="text" id="arrival-city-search" name="arrival-city-search" class="font-size-small text-breakable  "
-                        placeholder="À"
+                    <img class="img-width-20" src="<?= BASE_URL ?>/icons/Localisation(2).png" alt="">
+                    <input type="text" id="arrival-city-search" name="arrival-city-search"
+                        class="font-size-small text-breakable  " placeholder="À"
                         value="<?= isset($_SESSION['arrival-city-search']) ? htmlspecialchars($_SESSION['arrival-city-search']) : '' ?>"
                         required>
                     <div id="arrival-suggestions" class="suggestions-list"></div>
                 </div>
 
                 <div class="flex-row gap-4 search-field">
-                    <img class="img-pointer" src="../icons/Calendrier2.png" alt="Calendrier">
+                    <img class="img-pointer" src="<?= BASE_URL ?>/icons/Calendrier2.png" alt="Calendrier">
                     <input type="date" id="departure-date-search" name="departure-date-search"
-                        class="date-field font-size-small  "  style="width:110px;"
+                        class="date-field font-size-small  " style="width:110px;"
                         value="<?= isset($_SESSION['departure-date-search']) ? htmlspecialchars($_SESSION['departure-date-search']) : '' ?>"
                         required>
                 </div>
 
                 <div class="btn bg-light-green">
-                    <img class="img-width-20" src="../icons/LoupeRecherche.png" alt="">
+                    <img class="img-width-20" src="<?= BASE_URL ?>/icons/LoupeRecherche.png" alt="">
                     <input type="submit" value="Rechercher">
                 </div>
             </form>
@@ -66,7 +67,7 @@
             </p>
         </div>
         <div class="image">
-            <img src="../icons/Accueil_GPT.png" alt="Image de covoiturage EcoRide">
+            <img src="<?= BASE_URL ?>/icons/Accueil_GPT.png" alt="Image de covoiturage EcoRide">
         </div>
     </section>
 

@@ -27,7 +27,7 @@
                                     <?php
                                     $averageRating = $connectedDriver->getAverageRatings();
                                     if ($averageRating !== null) {
-                                        echo '<img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
+                                        echo '<img src="' . BASE_URL . '/icons/EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
                                             . htmlspecialchars($averageRating);
                                     } else {
                                         echo "<span class = 'italic'>0 avis</span>";
@@ -46,14 +46,14 @@
                 <div class="flex-row item-center hidden" id="edit-photo-icon">
                     <button onclick="showPopup('popup-new-photo')"
                         style="width: 30px; background-color: var(--col-orange); padding:4px 4px;" class="btn"><img
-                            src="../icons/Modifier.png" alt="edit">
+                            src="<?= BASE_URL ?>/icons/Modifier.png" alt="edit">
                     </button>
                     <span class="italic font-size-small ">Modifier la photo de profil</span>
                 </div>
 
 
 
-                <?php include "../templates/components/popup/new_photo.php";
+                <?php include __DIR__ . "/../components/popup/new_photo.php";
                 ?>
                 <div class="flex-row flex-between">
                     <span><?php echo htmlspecialchars($connectedUser->getMail()) ?></span>
@@ -89,7 +89,7 @@
                         <h3 class="text-green">Voitures</h3>
 
                         <div id="car-container" class="flex-column gap-8 grid-auto-columns">
-                            <?php include '../templates/components/lists/cars.php'; ?>
+                            <?php include __DIR__ . '/../components/lists/cars.php'; ?>
                         </div>
 
 
@@ -288,29 +288,29 @@
                         </div>
                         <div id="pref-container">
                             <?php
-                            include "../templates/components/lists/other_pref.php";
+                            include __DIR__ . "/../components/lists/other_pref.php";
                             ?>
                         </div>
 
-                    </div>
 
-                    <div class="prefForm hidden">
-                        <form action="" method="POST" id="pref-form" class="ajax-form block-column-g20"
-                            style="gap: 10px;">
-                            <input type="hidden" name="action" value="formPref">
 
+                        <div class="prefForm hidden">
+                            <form action="" method="POST" id="pref-form" class="ajax-form block-column-g20"
+                                style="gap: 10px;">
+                                <input type="hidden" name="action" value="formPref">
+
+                                <hr>
+                                <input type="text" placeholder="Entrez la préférence" name="new_pref" id="new_pref"
+                                    class="text-field" style="width:auto" required>
+
+                                <div class="btn bg-light-green" style="width:100px; align-self:self-end;">
+                                    <input type="submit" value="Enregistrer">
+                                </div>
+                            </form>
                             <hr>
-                            <input type="text" placeholder="Entrez la préférence" name="new_pref" id="new_pref"
-                                class="text-field" style="width:auto" required>
-
-                            <div class="btn bg-light-green" style="width:100px; align-self:self-end;">
-                                <input type="submit" value="Enregistrer">
-                            </div>
-                        </form>
-                        <hr>
+                        </div>
+                        <button class="btn action-btn hidden" id="add_pref_button">Ajouter une préférence</button>
                     </div>
-                    <button class="btn action-btn hidden" id="add_pref_button">Ajouter une préférence</button>
-
                 </div>
         </div>
 
@@ -327,16 +327,16 @@
                 </div>
                 <?php if (($connectedUser->getIdRole() === 2 || $connectedUser->getIdRole() === 3) && $cars == !null): ?>
                     <a class="btn action-btn" style="padding: 8px; text-align:right;"
-                        href="../controllers/create_carpool.php">Proposer un
+                        href="<?= BASE_URL ?>/controllers /create_carpool.php">Proposer un
                         covoiturage</a>
                 <?php endif; ?>
             </div>
             <div id="notStarted" class="tab-content active">
-                <?php include '../templates/components/lists/carpools_not_started.php'; ?>
+                <?php include __DIR__ . '/../components/lists/carpools_not_started.php'; ?>
             </div>
 
             <div id="completed" class="tab-content">
-                <?php include '../templates/components/lists/carpools_completed.php'; ?>
+                <?php include __DIR__ . '/../components/lists/carpools_completed.php'; ?>
             </div>
 
         </section>

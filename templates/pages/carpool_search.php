@@ -6,7 +6,7 @@
             <input type="hidden" name="action" value="search"> <!--identify request-->
 
             <div class="flex-row search-field">
-                <img class="img-width-20" src="../icons/Localisation(2).png" alt="lieu de départ">
+                <img class="img-width-20" src="<?= BASE_URL ?>/icons/Localisation(2).png" alt="lieu de départ">
                 <input type="text" id="departure-city-search" name="departure-city-search" class="font-size-small text-breakable  "
                      placeholder="Ville de départ"
                     value="<?= isset($_SESSION['departure-city-search']) ? htmlspecialchars($_SESSION['departure-city-search']) : '' ?>"
@@ -15,7 +15,7 @@
             </div>
             <span class="flex-row">→</span>
             <div class="flex-row search-field">
-                <img class="img-width-20" src="../icons/Localisation(2).png" alt="">
+                <img class="img-width-20" src="<?= BASE_URL ?>/icons/Localisation(2).png" alt="">
                 <input type="text" id="arrival-city-search" name="arrival-city-search" class="font-size-small text-breakable  "
                  placeholder="Ville d'arrivée"
                     value="<?= isset($_SESSION['arrival-city-search']) ? htmlspecialchars($_SESSION['arrival-city-search']) : '' ?>"
@@ -23,7 +23,7 @@
                 <div id="arrival-suggestions" class="suggestions-list"></div>
             </div>
             <div class="flex-row search-field">
-                <img class="img-pointer" src="../icons/Calendrier2.png" alt="Calendrier">
+                <img class="img-pointer" src="<?= BASE_URL ?>/icons/Calendrier2.png" alt="Calendrier">
                 <input type="date" id="departure-date-search" name="departure-date-search"
                     class="date-field font-size-small  " style="width:110px;"
                     value="<?= isset($_SESSION['departure-date-search']) ? htmlspecialchars($_SESSION['departure-date-search']) : '' ?>"
@@ -31,12 +31,12 @@
             </div>
             <div class="flex-row" style="width:100%;">
                 <div class="btn bg-light-green" id="search-btn">
-                            <img class="img-width-20" src="../icons/LoupeRecherche.png" alt="">
+                            <img class="img-width-20" src="<?= BASE_URL ?>/icons/LoupeRecherche.png" alt="">
                             <input type="submit" value="Rechercher">
                         </div>
                         <div id="filter-icon" class="inactive" style="display: none;" >
                             <a href="#" id="filter-toggle" class="btn" style="border-radius: 50%; width: fit-content; height: 35px; justify-self:right;">
-                                <img class="img-width-20" src="../icons/Filtre.png" alt="">
+                                <img class="img-width-20" src="<?= BASE_URL ?>/icons/Filtre.png" alt="">
                             </a>
                         </div>
             </div>
@@ -86,7 +86,7 @@
                             <option value="1" <?= (isset($_SESSION['driver-rating-list']) && strval($_SESSION['driver-rating-list']) === "1") ? 'selected' : ''; ?>>1</option>
                         </optgroup>
                     </select>
-                    <label for="driver-rating-list"><img src="../icons/EtoileJaune.png" alt="EtoileJaune"
+                    <label for="driver-rating-list"><img src="<?= BASE_URL ?>/icons/EtoileJaune.png" alt="EtoileJaune"
                             class="img-width-20"></label>
                 </div>
                 <div class="btn bg-light-green">
@@ -140,7 +140,7 @@
                                             $driver = new Driver($pdo, $t['driver_id']);                                            
                                             $averageRating = $driver->getAverageRatings();
                                             if ($averageRating !== null) {
-                                                echo '<img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
+                                                echo '<img src="' . BASE_URL . '/icons/EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
                                                     . htmlspecialchars($averageRating);
                                             } else {
                                                 echo "<span class = 'italic'>0 avis</span>";

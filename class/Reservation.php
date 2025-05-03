@@ -4,14 +4,14 @@ class Reservation
 {
     private ?PDO $pdo;
     private int $reservationId;
-    private ?int $userId;
+    private ?string $userId;
     private ?int $travelId;
 
     private ?bool $isValidated;
     private ?int $creditSpent;
     private ?string $badComment;
 
-    public function __construct($pdo, ?int $userId = null, ?int $travelId = null, ?bool $isValidated = null, ?string $badComment = null)
+    public function __construct($pdo, ?string $userId = null, ?int $travelId = null, ?bool $isValidated = null, ?string $badComment = null)
     {
         $this->pdo = $pdo;
         $this->userId = $userId;
@@ -42,7 +42,7 @@ class Reservation
         ORDER BY travel_date ASC ";
 
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(":userConnected_id", $userId, PDO::PARAM_INT);
+        $statement->bindParam(":userConnected_id", $userId, PDO::PARAM_STR);
         $statement->execute();
 
         $carpoolListToValidate = $statement->fetchAll();
@@ -64,8 +64,8 @@ class Reservation
         ORDER BY travel_date ASC ";
 
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(":userConnected_id", $userId, PDO::PARAM_INT);
-        $statement->bindParam(":user_connected_id", $userId, PDO::PARAM_INT);
+        $statement->bindParam(":userConnected_id", $userId, PDO::PARAM_STR);
+        $statement->bindParam(":user_connected_id", $userId, PDO::PARAM_STR);
         $statement->execute();
 
         $carpoolListNotStarted = $statement->fetchAll();
@@ -85,8 +85,8 @@ class Reservation
         ORDER BY travel_date ASC ";
 
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(":userConnected_id", $userId, PDO::PARAM_INT);
-        $statement->bindParam(":user_connected_id", $userId, PDO::PARAM_INT);
+        $statement->bindParam(":userConnected_id", $userId, PDO::PARAM_STR);
+        $statement->bindParam(":user_connected_id", $userId, PDO::PARAM_STR);
         $statement->execute();
 
         $carpoolListFinishedAndValidated = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -114,8 +114,8 @@ class Reservation
 
         $sql = 'DELETE FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_STR);
         try {
             $statement->execute();
 
@@ -214,7 +214,7 @@ class Reservation
 
         $sql = 'SELECT driver_id FROM travels WHERE id = :travelId';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_STR);
         try {
             $statement->execute();
             $driverId = $statement->fetch(PDO::FETCH_ASSOC);
@@ -235,8 +235,8 @@ class Reservation
     {
         $sql = 'SELECT id FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_STR);
         try {
             $statement->execute();
             $reservationId = $statement->fetch(PDO::FETCH_ASSOC);
@@ -278,7 +278,7 @@ class Reservation
     {
         $sql = 'SELECT user_id FROM reservations WHERE travel_id = :travelId';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_STR);
         try {
             $statement->execute();
             $passengersOfTheCarpool = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -292,7 +292,7 @@ class Reservation
     {
         $sql = 'SELECT * FROM reservations WHERE (is_validated = 0 OR bad_comment_validated = 0) AND travel_id = :travelId';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam('travelId', $travelId, PDO::PARAM_INT);
+        $statement->bindParam('travelId', $travelId, PDO::PARAM_STR);
         try {
             $statement->execute();
             $reservationsNotValidated = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -334,7 +334,7 @@ class Reservation
         $sql = 'UPDATE users SET credit=credit+:creditToSent WHERE id = :userId';
         $statement = $pdo->prepare($sql);
         $statement->bindParam(':creditToSent', $creditToSent, PDO::PARAM_INT);
-        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
         try {
             $statement->execute();
         } catch (Exception $e) {
@@ -379,7 +379,7 @@ class Reservation
     {
         $sql = 'UPDATE reservations SET bad_comment_validated = 1  WHERE id = :reservationId';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':reservationId', $reservationId, PDO::PARAM_STR);
+        $statement->bindParam(':reservationId', $reservationId, PDO::PARAM_INT);
         try {
             $statement->execute();
         } catch (Exception $e) {

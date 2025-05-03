@@ -14,7 +14,7 @@ ob_start(); ?>
         <!-- Step 2A : If Yes -->
         <div id="feedback-positive" style="display:none">
             <h4 class="m-tb-12">Souhaitez-vous laisser un avis ?</h4>
-            <form class="block-column-g20" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"
+            <form class="block-column-g20" action="<?= BASE_URL ?>/back/carpool/validate.php" method="POST"
                 onsubmit="console.log('Form submitted!')">
                 <input type="hidden" name="idReservation" id="popup-idReservation-positive" value=<?= $carpool['reservationId'] ?>>
                 <input type="hidden" name="action" value="positive">
@@ -35,7 +35,7 @@ ob_start(); ?>
                             <option value="1">1</option>
                         </optgroup>
                     </select>
-                    <label for="driver-rating-list"><img src="../icons/EtoileJaune.png" alt="EtoileJaune"
+                    <label for="driver-rating-list"><img src="<?= BASE_URL ?>/icons/EtoileJaune.png" alt="EtoileJaune"
                             class="img-width-20"></label>
                 </div>
 
@@ -53,7 +53,7 @@ ob_start(); ?>
         <!-- Step 2B : If No -->
         <div id="feedback-negative" style="display:none">
 
-            <form class="block-column-g20" action="/0-ECFEcoride/back/carpool/validate.php" method="POST"
+            <form class="block-column-g20" action="<?= BASE_URL ?>/back/carpool/validate.php" method="POST"
                 onsubmit="console.log('Form submitted!')">
                 <input type="hidden" name="idReservation" id="popup-idReservation-negative" value="<?= $carpool['reservationId'] ?>">
                 <input type="hidden" name="action" value="negative">
@@ -113,4 +113,4 @@ ob_start(); ?>
 
 </script>
 
-<?php include '../templates/components/popup/template.php'; ?>
+<?php include __DIR__ . '/../popup/template.php'; ?>

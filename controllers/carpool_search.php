@@ -15,7 +15,7 @@ $pageTitle = "Covoiturages";
 $customScript = "carpool_search.js";
 $templatePage = "pages/carpool_search.php";
 
-include "../templates/layout.php";
+include __DIR__ . "/../templates/layout.php";
 
 ?>
 <style>

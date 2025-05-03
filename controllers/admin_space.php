@@ -9,11 +9,11 @@ $customScript = "admin_space.js";
 $templatePage = "pages/admin_space.php";
 
 
-include "../templates/layout.php";
+include __DIR__ . "/../templates/layout.php";
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../script/charts.js" defer></script>
+<script src="<?= BASE_URL ?>/script/charts.js" defer></script>
 <style>
     #adminSpace {
         background-color: #F2C674;

@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../script/login.js" defer></script>
-    <link rel="stylesheet" href="../css/style.css">
+    <script src="<?= BASE_URL ?>/script/login.js" defer></script>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css">
 
 </head>
 
@@ -80,4 +80,4 @@
     });
 </script>
 
-<script src="../script/burger_menu.js" defer></script>
+<script src="<?= BASE_URL ?>/script/burger_menu.js" defer></script>

@@ -76,7 +76,7 @@
             if (($isGuest || $isNotEmployee) && $isNotDriver && $status === 'not started'): ?>
                 <button id="participate" class="btn action-btn" style="padding: 8px;"
                     data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>">
-                    <img src="../icons/Calendrier.png" class="img-pointer" alt="booking calendar icon">
+                    <img src="<?= BASE_URL ?>/icons/Calendrier.png" class="img-pointer" alt="booking calendar icon">
                     <span>Participer au covoiturage</span>
                 </button>
             <?php endif; ?>
@@ -101,7 +101,7 @@
                 <div class="flex-column gap-12 flex-center item-center">
                     <span><?= htmlspecialchars($driver->getPseudo()) ?></span>
                     <div class="text-icon" style="padding-left: 0px;">
-                        <img src="../icons/EtoileJaune.png" class="img-width-20" alt="">
+                        <img src="<?= BASE_URL ?>/icons/EtoileJaune.png" class="img-width-20" alt="">
                         <span><?php $averageRating = $driver->getAverageRatings();
                         if ($averageRating !== null) {
                             echo htmlspecialchars($averageRating);
@@ -129,7 +129,7 @@
                 <div class="flex-column gap-12">
                     <div class="text-bold">Véhicule</div>
                     <div class="text-icon">
-                        <img src="../icons/Voiture.png" class="img-width-20" alt="">
+                        <img src="<?= BASE_URL ?>/icons/Voiture.png" class="img-width-20" alt="">
                         <span><?php
                         echo htmlspecialchars($car->getBrand() . " " . $car->getModel() . " - " . $car->getColor());
                         if ($car->getElectric() === true) {
@@ -145,12 +145,12 @@
                     $petPref = $driver->getPetPreference();
                     if ($petPref === true): ?>
                         <div class="text-icon">
-                            <img src='../icons/AnimauxOk.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/AnimauxOk.png' class='img-width-20' alt=''>
                             <span>J'aime la compagnie des animaux</span>
                         </div>
                     <?php elseif ($petPref === false): ?>
                         <div class="text-icon">
-                            <img src='../icons/AnimauxPasOk.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/AnimauxPasOk.png' class='img-width-20' alt=''>
                             <span>Je préfère ne pas voyager avec des animaux</span>
                         </div>
                     <?php endif; ?>
@@ -160,12 +160,12 @@
                     $smokerPref = $driver->getSmokerPreference();
                     if ($smokerPref === true): ?>
                         <div class="text-icon">
-                            <img src='../icons/FumerOk.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/FumerOk.png' class='img-width-20' alt=''>
                             <span>La fumée ne me dérange pas</span>
                         </div>
                     <?PHP elseif ($smokerPref === false): ?>
                         <div class="text-icon">
-                            <img src='../icons/FumerPasOk.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/FumerPasOk.png' class='img-width-20' alt=''>
                             <span>Je préfère ne pas voyager avec des fumeurs</span>
                         </div>
                     <?php endif; ?>
@@ -174,12 +174,12 @@
                     $musicPref = $driver->getMusicPreference();
                     if ($musicPref === true): ?>
                         <div class="text-icon">
-                            <img src='../icons/MusiqueOk.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/MusiqueOk.png' class='img-width-20' alt=''>
                             <span>J'aime conduire en écoutant de la musique</span>
                         </div>
                     <?PHP elseif ($musicPref === false): ?>
                         <div class="text-icon">
-                            <img src='../icons/MusiquePasOk.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/MusiquePasOk.png' class='img-width-20' alt=''>
                             <span>Je préfère ne pas écouter de musique pendant que je conduis</span>
                         </div>
                     <?php endif; ?>
@@ -188,12 +188,12 @@
                     $speakerPref = $driver->getSpeakerPreference();
                     if ($speakerPref === true): ?>
                         <div class="text-icon">
-                            <img src='../icons/speakOk.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/speakOk.png' class='img-width-20' alt=''>
                             <span>Je discute volontiers avec mes passagers</span>
                         </div>
                     <?PHP elseif ($speakerPref === false): ?>
                         <div class="text-icon">
-                            <img src='../icons/speakNotOk.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/speakNotOk.png' class='img-width-20' alt=''>
                             <span>Je préfère me concentrer sur la route</span>
                         </div>
                     <?php endif; ?>
@@ -202,12 +202,12 @@
                     $foodPref = $driver->getFoodPreference();
                     if ($foodPref === true): ?>
                         <div class="text-icon">
-                            <img src='../icons/foodOk.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/foodOk.png' class='img-width-20' alt=''>
                             <span>La nourriture est autorisée dans la voiture </span>
                         </div>
                     <?PHP elseif ($foodPref === false): ?>
                         <div class="text-icon">
-                            <img src='../icons/foodNotOk.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/foodNotOk.png' class='img-width-20' alt=''>
                             <span>Pas de nourriture dans la voiture s'il vous plait</span>
                         </div>
                     <?php endif; ?>
@@ -216,7 +216,7 @@
                     $addPref1 = $driver->getAddPref1();
                     if (isset($addPref1)): ?>
                         <div class="text-icon">
-                            <img src='../icons/addPref.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/addPref.png' class='img-width-20' alt=''>
                             <span><?= $addPref1 ?></span>
                         </div>
                     <?php endif; ?>
@@ -224,7 +224,7 @@
                     $addPref2 = $driver->getAddPref2();
                     if (isset($addPref2)): ?>
                         <div class="text-icon">
-                            <img src='../icons/addPref.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/addPref.png' class='img-width-20' alt=''>
                             <span><?= $addPref2 ?></span>
                         </div>
                     <?php endif; ?>
@@ -232,7 +232,7 @@
                     $addPref3 = $driver->getAddPref3();
                     if (isset($addPref3)): ?>
                         <div class="text-icon">
-                            <img src='../icons/addPref.png' class='img-width-20' alt=''>
+                            <img src='<?= BASE_URL ?>/icons/addPref.png' class='img-width-20' alt=''>
                             <span><?= $addPref3 ?></span>
                         </div>
                     <?php endif; ?>
@@ -248,7 +248,7 @@
             <div class="flex-column gap-8 item-center">
                 <h3 class="text-green">Avis du chauffeur</h3>
                 <div class="flex-row item-center gap-4" style="padding-left: 0px;">
-                    <img src="../icons/EtoileJaune.png" class="img-width-20" alt="">
+                    <img src="<?= BASE_URL ?>/icons/EtoileJaune.png" class="img-width-20" alt="">
                     <span><?php $averageRating = $driver->getAverageRatings();
                     if ($averageRating !== null) {
                         echo htmlspecialchars($averageRating) . " / 5";
@@ -273,7 +273,7 @@
                             <span><?= htmlspecialchars($rating['pseudo']) ?></span>
                         </div>
                         <div class="flex-row item-center gap-4" style="padding-left: 0px;">
-                            <img src="../icons/EtoileJaune.png" class="img-width-20" alt="">
+                            <img src="<?= BASE_URL ?>/icons/EtoileJaune.png" class="img-width-20" alt="">
                             <span><?= htmlspecialchars($rating['rating']) ?></span>
 
                         </div>

@@ -4,22 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($pageTitle ?? "Ecoride") ?></title>
-    <script src="../script/popup.js" defer></script>
+    <?php require_once __DIR__ . "/../functions.php"; ?>
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
+    <script src="<?= BASE_URL ?>/script/popup.js" defer></script>
     <?php if (!empty($customScript)): ?>
-        <script src="../script/<?= $customScript ?>" defer></script>
+        <script src="<?= BASE_URL ?>/script/<?= $customScript ?>" defer></script>
     <?php endif; ?>
 </head>
 
 <body>
-    <?php require_once __DIR__ . "/../functions.php";
 
-    include 'components/header.php'; ?>
+
+    <?php require_once __DIR__ . "/../functions.php"; ?>
+
+    <?php
+    include __DIR__ . '/../templates/components/header.php'; ?>
 
 
     <?php include $templatePage; ?>
 
 
-    <?php include 'components/footer.php'; ?>
+    <?php include __DIR__ . '/../templates/components/footer.php'; ?>
 </body>
 
 </html>

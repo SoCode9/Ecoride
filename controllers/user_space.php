@@ -7,7 +7,7 @@ $pageTitle = "Espace utilisateur";
 $customScript = "user_space.js";
 $templatePage = "pages/user_space.php";
 
-include "../templates/layout.php";
+include __DIR__ . "/../templates/layout.php";
 
 ?>
 

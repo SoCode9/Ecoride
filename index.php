@@ -2,9 +2,6 @@
 if (session_status() === PHP_SESSION_NONE)
     session_start();
 
-
-require_once '../back/carpool/home_page.php';
-
 $travelsSearched = $_SESSION['travelsSearched'] ?? [];
 $nextTravelDate = $_SESSION['nextTravelDate'] ?? [];
 $error_message = $_SESSION['error_message'] ?? null;
@@ -12,10 +9,10 @@ $error_message = $_SESSION['error_message'] ?? null;
 unset($_SESSION['travelsSearched'], $_SESSION['nextTravelDate'], $_SESSION['error_message']);
 
 $pageTitle = "Accueil";
-$customScript =  "carpool_search.js" ;
+$customScript = "carpool_search.js";
 $templatePage = "pages/home_page.php";
 
-include "../templates/layout.php";
+include __DIR__ . '/templates/layout.php';
 
 ?>
 <style>
