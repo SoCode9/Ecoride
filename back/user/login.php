@@ -40,7 +40,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         $_SESSION['success_message'] = 'Connexion réussie !';
         $_SESSION['user_id'] = $searchUser->getId();
         $_SESSION['role_user'] = $searchUser->getIdRole();
-        header('Location: login.php');
+        header('Location: ' . BASE_URL . '/index.php');
         exit();
 
     } catch (Exception $e) {
