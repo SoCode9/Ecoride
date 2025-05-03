@@ -7,14 +7,14 @@ class Car
 {
 
     private $pdo;
-    private $driverId;
-    private $brand;
-    private $model;
+    private string|null $driverId;
+    private string $brand;
+    private string $model;
     private string $licencePlate;
     private string $firstRegistrationDate;
     private int $seatsOffered;
     private bool $electric;
-    private $color;
+    private string $color;
 
     private ?array $car = null; //if the search is by travelID
     public array $cars = []; //if the search is by driverId. A driver can have one or many cars
@@ -25,7 +25,7 @@ class Car
      * @param mixed $driverId
      * @param mixed $travelId
      */
-    public function __construct(PDO $pdo, ?int $driverId = null, ?int $travelId = null)
+    public function __construct(PDO $pdo, ?string $driverId = null, ?string $travelId = null)
     {
         $this->pdo = $pdo;
 
@@ -33,25 +33,25 @@ class Car
 
     }
 
-    public function createCar(PDO $pdo, int $userId, string $brandId, string $model, string $licencePlate, string $firstRegistrationDate, int $seatsOffered, bool $electric, string $color)
+    public function createCar(PDO $pdo, string $userId, string $brandId, string $model, string $licencePlate, string $firstRegistrationDate, int $seatsOffered, bool $electric, string $color)
     {
         // Vérifier si l'utilisateur est déjà un driver
         $sqlCheckDriver = 'SELECT user_id FROM driver WHERE user_id = :userId';
         $stmtCheckDriver = $pdo->prepare($sqlCheckDriver);
-        $stmtCheckDriver->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $stmtCheckDriver->bindValue(':userId', $userId, PDO::PARAM_STR);
         $stmtCheckDriver->execute();
 
         if (!$stmtCheckDriver->fetch()) {
             // L'utilisateur n'est pas encore un driver, donc on l'ajoute
             $sqlInsertDriver = 'INSERT INTO driver (user_id) VALUES (:userId)';
             $stmtInsertDriver = $pdo->prepare($sqlInsertDriver);
-            $stmtInsertDriver->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $stmtInsertDriver->bindValue(':userId', $userId, PDO::PARAM_STR);
             $stmtInsertDriver->execute();
 
             //et on ajoute le rôle driver à l'utilisateur, 2 par défaut
             $sqlUpdateTypeUser = 'UPDATE users SET id_role = 2 WHERE id = :userId';
             $stmtUpdateTypeUser = $pdo->prepare($sqlUpdateTypeUser);
-            $stmtUpdateTypeUser->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmtUpdateTypeUser->bindParam(':userId', $userId, PDO::PARAM_STR);
             $stmtUpdateTypeUser->execute();
         }
 
@@ -59,7 +59,7 @@ class Car
         VALUES (:brand_id, :driver_id, :car_licence_plate, :car_first_registration_date, :car_seats_offered, :car_model, :car_color, :car_electric)';
         $statement = $pdo->prepare($sql);
         $statement->bindParam(':brand_id', $brandId, PDO::PARAM_INT);
-        $statement->bindParam(':driver_id', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':driver_id', $userId, PDO::PARAM_STR);
         $statement->bindParam(':car_licence_plate', $licencePlate, PDO::PARAM_STR);
         $statement->bindParam(':car_first_registration_date', $firstRegistrationDate, PDO::PARAM_STR);
         $statement->bindParam(':car_seats_offered', $seatsOffered, PDO::PARAM_INT);
@@ -76,7 +76,7 @@ class Car
      * @throws \Exception
      * @return void
      */
-    private function loadCarFromDB(?int $travelId = null, ?int $driverId = null)
+    private function loadCarFromDB(?string $travelId = null, ?string $driverId = null)
     {
         $sql = "SELECT cars.*, brands.* FROM cars 
         JOIN driver ON driver.user_id = cars.driver_id 
@@ -104,7 +104,7 @@ class Car
         $statement = $this->pdo->prepare($sql);
 
         foreach ($params as $key => $value) {
-            $statement->bindValue($key, $value, PDO::PARAM_INT);
+            $statement->bindValue($key, $value, PDO::PARAM_STR);
         }
 
         $statement->execute();

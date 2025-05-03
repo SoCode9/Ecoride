@@ -5,8 +5,8 @@ require_once __DIR__ . '/../functions.php';
 class Travel
 {
     private PDO $pdo;
-    private int $id;
-    private int $driverId;
+    private string $id;
+    private string $driverId;
     private ?string $travelDate;
 
 
@@ -25,7 +25,7 @@ class Travel
     private ?string $travelStatus;
 
 
-    public function __construct(PDO $pdo, ?int $travelId = null)
+    public function __construct(PDO $pdo, ?string $travelId = null)
     {
         $this->pdo = $pdo;
         //for using the searching function (in carpoolSearch page)
@@ -40,7 +40,7 @@ class Travel
     {
         $sql = "SELECT * FROM travels WHERE id = :travel_id";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':travel_id', $this->id, PDO::PARAM_INT);
+        $stmt->bindParam(':travel_id', $this->id, PDO::PARAM_STR);
         $stmt->execute();
         $travelData = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -119,7 +119,7 @@ class Travel
         try {
             $sql = "INSERT INTO travels (driver_id, travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price, car_id, travel_description) VALUES (:driverId,:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:car_id,:travelComment)";
             $statement = $pdo->prepare($sql);
-            $statement->bindParam(':driverId', $driverId, PDO::PARAM_INT);
+            $statement->bindParam(':driverId', $driverId, PDO::PARAM_STR);
             $statement->bindParam(':travel_date', $travelDate, PDO::PARAM_STR);
             $statement->bindParam(':travel_departure_city', $travelDepartureCity, PDO::PARAM_STR);
             $statement->bindParam(':travel_arrival_city', $travelArrivalCity, PDO::PARAM_STR);
@@ -296,7 +296,7 @@ class Travel
 
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(':newStatus', $newStatus, PDO::PARAM_STR);
-        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_STR);
         if ($newStatus === 'ended') {
             $today = date('Y-m-d H:i:s');
             $statement->bindParam(':currentDate', $today, PDO::PARAM_STR);
@@ -344,11 +344,11 @@ class Travel
 
 
 
-    public function getDate(int $idTravel)
+    public function getDate(string $idTravel)
     {
         $sql = "SELECT travel_date FROM travels WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(":id", $idTravel, PDO::PARAM_INT);
+        $stmt->bindParam(":id", $idTravel, PDO::PARAM_STR);
         if ($stmt->execute()) {
             $result = $stmt->fetch(PDO::FETCH_COLUMN);
             return $result ? htmlspecialchars($result) : "Aucune donnée trouvée.";

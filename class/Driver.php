@@ -5,7 +5,7 @@ require_once "User.php";
 class Driver extends User
 {
 
-    protected ?int $id;
+    protected ?string $id;
     private bool|null $petPreference;
     private bool|null $smokerPreference;
     private bool|null $musicPreference;
@@ -16,11 +16,10 @@ class Driver extends User
     private string|null $addPref3;
 
 
-    public function __construct(PDO $pdo, int $driverId)
+    public function __construct(PDO $pdo, string $driverId)
     {
-        parent::__construct($pdo, $driverId); // Charge les données User
+        parent::__construct($pdo, $driverId); 
         $this->loadDriverFromDB();
-        //$this->loadDriversRatings();
     }
 
     /**
@@ -34,7 +33,7 @@ class Driver extends User
         $sql = "SELECT driver.*,users.pseudo FROM driver JOIN users ON driver.user_id = users.id 
         WHERE driver.user_id = :driver_id";
         $statement = $this->pdo->prepare($sql);
-        $statement->bindParam(':driver_id', $this->id, PDO::PARAM_INT);
+        $statement->bindParam(':driver_id', $this->id, PDO::PARAM_STR);
         $statement->execute();
 
         $driverData = $statement->fetch(PDO::FETCH_ASSOC);
@@ -64,7 +63,7 @@ class Driver extends User
         $sql = "SELECT ratings.*, users.pseudo, users.photo FROM ratings JOIN driver ON driver.user_id = ratings.driver_id JOIN users ON users.id = ratings.user_id
         WHERE ratings.driver_id=:driver_id AND status='validated' ORDER BY created_at DESC";
         $statement = $this->pdo->prepare($sql);
-        $statement->bindParam(':driver_id', $this->id, PDO::PARAM_INT);
+        $statement->bindParam(':driver_id', $this->id, PDO::PARAM_STR);
         $statement->execute();
 
         $ratingsData = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -80,7 +79,7 @@ class Driver extends User
                 $sql = "UPDATE driver SET $columnName = :customPrefToAdd WHERE user_id = :driver_id";
                 $statement = $pdo->prepare($sql);
                 $statement->bindParam(':customPrefToAdd', $customPrefToAdd, PDO::PARAM_STR);
-                $statement->bindParam(':driver_id', $driverId, PDO::PARAM_INT);
+                $statement->bindParam(':driver_id', $driverId, PDO::PARAM_STR);
 
                 $statement->execute();
                 return; // On sort de la fonction après la mise à jour
@@ -99,7 +98,7 @@ class Driver extends User
     {
         $sql = 'SELECT add_pref_1, add_pref_2, add_pref_3 FROM driver WHERE user_id = :driver_id';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':driver_id', $driverId, PDO::PARAM_INT);
+        $statement->bindParam(':driver_id', $driverId, PDO::PARAM_STR);
         $statement->execute();
 
         $customPreferencesInDB = $statement->fetch(PDO::FETCH_ASSOC);

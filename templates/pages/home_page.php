@@ -10,7 +10,7 @@
 
         <div class="flex-column gap-24 block-light-grey">
             <h2 class="text-green text-bold">Rechercher un covoiturage</h2>
-            <form class="block-search" action= "<?= BASE_URL ?>/controllers /carpool_search.php" method="POST">
+            <form class="block-search" action= "<?= BASE_URL ?>/controllers/carpool_search.php" method="POST">
                 <input type="hidden" name="action" value="search">
 
                 <div class="flex-row gap-4 search-field">

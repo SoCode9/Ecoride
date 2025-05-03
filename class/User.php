@@ -2,7 +2,7 @@
 
 class User
 {
-    protected ?int $id;
+    protected ?string $id;
     protected ?string $pseudo;
     protected ?string $mail;
     protected ?string $password;
@@ -15,7 +15,7 @@ class User
     protected ?PDO $pdo; //stocke la connexion à la BDD
 
 
-    public function __construct(?PDO $pdo = null, ?int $userId = null, ?string $pseudo = null, ?string $mail = null, ?string $password = null)
+    public function __construct(?PDO $pdo = null, ?string $userId = null, ?string $pseudo = null, ?string $mail = null, ?string $password = null)
     {
         $this->pdo = $pdo;
         $this->id = $userId;
@@ -48,9 +48,9 @@ class User
      * @param mixed $mailTested
      * @param mixed $passwordTested
      * @throws \Exception
-     * @return bool
+     * @return void
      */
-    public function searchUserInDB($mailTested, $passwordTested)
+    public function searchUserInDB($mailTested, $passwordTested): void
     {
         $sql = 'SELECT * FROM users WHERE (mail=:mailTested)';
         $stmt = $this->pdo->prepare($sql);
@@ -58,33 +58,26 @@ class User
         $stmt->execute();
 
         $foundUserInDB = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($foundUserInDB === false) {
+
+        if (
+            ($foundUserInDB === false)
+            || ($foundUserInDB['is_activated'] === 0)
+            || (password_verify($passwordTested, $foundUserInDB['password']) === false)
+            || (!isset($foundUserInDB['id']))
+        ) {
             throw new Exception("Identifiants invalides");
-        } else {
-            if (password_verify($passwordTested, $foundUserInDB['password']) === false) {
-                throw new Exception("Identifiants invalides");
-            } else {
-                if ($foundUserInDB['is_activated'] === 0) {
-                    throw new Exception("Compte désactivé");
-                } else {
-                    // Récupération de l'ID depuis l'objet trouvé
-                    if (isset($foundUserInDB['id'])) {
-                        $this->id = $foundUserInDB['id'];
-                        $this->idRole = $foundUserInDB['id_role'];
-                        return true;
-                    } else {
-                        throw new Exception("Erreur : ID utilisateur non trouvé");
-                    }
-                }
-            }
         }
+
+        $this->id = $foundUserInDB['id'];
+        $this->idRole = $foundUserInDB['id_role'];
     }
+
     private function loadUserFromDB()
     {
         $sql = "SELECT * FROM users WHERE id=:user_id";
 
         $statement = $this->pdo->prepare($sql);
-        $statement->bindParam(':user_id', $this->id, PDO::PARAM_INT);
+        $statement->bindParam(':user_id', $this->id, PDO::PARAM_STR);
         $statement->execute();
 
         $userData = $statement->fetch(PDO::FETCH_ASSOC);
@@ -105,21 +98,16 @@ class User
     /**
      * Create the user in DB. Can be a user or an employee
      * @param mixed $idRole // id = 1 if the user register on the login page (passenger) / id = 4 if the user is an employee created by the administrator
-     * @return bool
+     * @return void
      */
-    public function saveUserToDatabase($idRole)
+    public function saveUserToDatabase($idRole): void
     {
-
-        $sql = "SELECT id FROM users WHERE mail = :mail";
-        $statement = $this->pdo->prepare($sql);
-        $statement->bindParam(':mail', $this->mail, PDO::PARAM_STR);
-        $statement->execute();
-        if ($statement->fetch()) {
+        if ($this->getIdInDB() !== null) {
             throw new Exception("Un compte est déjà activé pour cette adresse email");
         }
 
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO users (pseudo, mail, password, id_role) VALUES (:pseudo, :mail, :password, :idRole)");
+            $stmt = $this->pdo->prepare("INSERT INTO users (id, pseudo, mail, password, id_role) VALUES (UUID(), :pseudo, :mail, :password, :idRole)");
             $success = $stmt->execute([
                 ':pseudo' => $this->pseudo,
                 ':mail' => $this->mail,
@@ -127,14 +115,14 @@ class User
                 ':idRole' => $idRole,
             ]);
 
-            if ($idRole === 1) {
-                if ($success) {
-                    $this->id = $this->pdo->lastInsertId(); // Retrieves new user ID
+            if ($success) {
+                $this->getIdInDB();
+                $this->idRole = $idRole;
+
+                if ($idRole === 1) {
                     $this->setCredit(20);
-                    $this->idRole = $idRole;
                 }
             }
-            return $success;
 
         } catch (PDOException $e) {
             die("Erreur lors de l'insertion : " . $e->getMessage());
@@ -176,6 +164,19 @@ class User
 
     public function getId()
     {
+        return $this->id;
+    }
+
+    public function getIdInDB()
+    {
+        $sql = "SELECT id FROM users WHERE mail = :mail";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':mail', $this->mail, PDO::PARAM_STR);
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $this->id = $result['id'] ?? null;
+
         return $this->id;
     }
 
@@ -231,7 +232,7 @@ class User
         $sql = 'UPDATE users SET credit = :newCredit WHERE id = :idUser';
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam('newCredit', $newCredit, PDO::PARAM_INT);
-        $statement->bindParam('idUser', $this->id, PDO::PARAM_INT);
+        $statement->bindParam('idUser', $this->id, PDO::PARAM_STR);
         $statement->execute();
     }
 
@@ -240,7 +241,7 @@ class User
         $sql = "UPDATE users SET id_role = :roleId WHERE id = :userId";
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(':roleId', $roleId, PDO::PARAM_INT);
-        $statement->bindParam(':userId', $this->id, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $this->id, PDO::PARAM_STR);
         $statement->execute();
     }
 
@@ -255,7 +256,7 @@ class User
         $sql = "UPDATE users SET is_activated = :isActivated WHERE id = :userId";
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(':isActivated', $isActivated, PDO::PARAM_INT);
-        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
         $statement->execute();
     }
 
@@ -264,7 +265,7 @@ class User
         $sql = 'UPDATE users SET photo = :photo_user WHERE id = :user_id';
         $statement = $this->pdo->prepare($sql);
         $statement->bindParam(':photo_user', $photoUser);
-        $statement->bindParam(':user_id', $this->id, PDO::PARAM_INT);
+        $statement->bindParam(':user_id', $this->id, PDO::PARAM_STR);
         $statement->execute();
     }
 }

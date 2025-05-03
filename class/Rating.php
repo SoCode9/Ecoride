@@ -5,15 +5,15 @@ class Rating
 {
     private PDO $pdo;
 
-    private int|null $userId;
-    private int|null $driverId;
+    private string|null $userId;
+    private string|null $driverId;
 
     private float|null $rating;
     private string|null $comment;
     private string $status;
 
 
-    public function __construct(PDO $pdo, ?int $userId = null, ?int $driverId = null, ?float $rating = null, ?string $comment = null)
+    public function __construct(PDO $pdo, ?string $userId = null, ?string $driverId = null, ?float $rating = null, ?string $comment = null)
     {
         $this->pdo = $pdo;
         $this->userId = $userId;
@@ -22,12 +22,12 @@ class Rating
         $this->comment = $comment;
     }
 
-    public function saveRatingToDatabase(PDO $pdo, int $userId, int $driverId, float $newRating, ?string $newComment = null)
+    public function saveRatingToDatabase(PDO $pdo, string $userId, string $driverId, float $newRating, ?string $newComment = null)
     {
         $sql = 'INSERT INTO ratings (user_id, driver_id, rating, description) VALUES (:userId, :driverId, :rating, :comment)';
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $statement->bindParam(':driverId', $driverId, PDO::PARAM_INT);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+        $statement->bindParam(':driverId', $driverId, PDO::PARAM_STR);
         $statement->bindParam(':rating', $newRating, PDO::PARAM_INT);
         $statement->bindParam(':comment', $newComment, PDO::PARAM_STR);
         try {
