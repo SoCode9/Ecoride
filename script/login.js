@@ -5,7 +5,7 @@ if (logoutButton) {
             .then(response => response.json())
             .then(data => {
                 if (data.status === "success") {
-                    window.location.href = BASE_URL + "/controllers /login.php";
+                    window.location.href = BASE_URL + "/controllers/login.php";
                 }
             })
             .catch(error => console.error('Erreur lors de la déconnexion:', error));

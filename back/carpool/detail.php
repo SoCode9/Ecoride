@@ -12,8 +12,8 @@ require_once __DIR__ . "/../../class/User.php";
 $userId = $_SESSION['user_id'] ?? null;
 
 try {
-    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-        $travelId = intval($_GET['id']);
+    if (isset($_GET['id'])) {
+        $travelId = $_GET['id'];
     }
     $travel = new Travel($pdo, $travelId);
     $driver = new Driver($pdo, $travel->getDriverId());
@@ -23,5 +23,5 @@ try {
 
 
 } catch (Exception $e) {
-    echo "Erreur : !!" . $e->getMessage();
+    echo "Erreur lors du chargement du détail du covoiturage : " . $e->getMessage();
 }

@@ -148,4 +148,4 @@ ob_start(); ?>
     }
 </script>
 
-<?php include __DIR__ . '/../templates/components/popup/template.php'; ?>
+<?php include __DIR__ . '/../../../templates/components/popup/template.php'; ?>

@@ -2,9 +2,8 @@
 
 
     <!--carpool finished but not validated-->
-
     <?php if (!empty($carpoolListToValidate)): ?>
-        <h3 class="subTitleGreen" style="color: black ;">Covoiturages terminés, en attente de validation</h3>
+        <h3 style="color: black ;">Covoiturages terminés, en attente de validation</h3>
     <?php endif; ?>
     <div class="flex-column gap-8 grid-auto-columns">
         <?php foreach ($carpoolListToValidate as $carpool): ?>

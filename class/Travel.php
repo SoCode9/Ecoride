@@ -117,7 +117,7 @@ class Travel
     public function saveTravelToDatabase($pdo, $driverId, $travelDate, $travelDepartureCity, $travelArrivalCity, $travelDepartureTime, $travelArrivalTime, $travelPrice, $carId, $travelComment)
     {
         try {
-            $sql = "INSERT INTO travels (driver_id, travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price, car_id, travel_description) VALUES (:driverId,:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:car_id,:travelComment)";
+            $sql = "INSERT INTO travels (id, driver_id, travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price, car_id, travel_description) VALUES (UUID(), :driverId,:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:car_id,:travelComment)";
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':driverId', $driverId, PDO::PARAM_STR);
             $statement->bindParam(':travel_date', $travelDate, PDO::PARAM_STR);
@@ -148,10 +148,12 @@ class Travel
         if (!$this->pdo) {
             die("<p style='color: red;'>Erreur : Connexion à la base de données non disponible.</p>");
         }
-        // Convert date from `dd.mm.yyyy` to `yyyy-mm-dd`
-        $dateObject = DateTime::createFromFormat('d.m.Y', $dateSearch);
-        if ($dateObject) {
-            $dateSearch = $dateObject->format('Y-m-d'); // Format SQL
+        if (!empty($dateSearch)) {
+            // Convert date from `dd.mm.yyyy` to `yyyy-mm-dd`
+            $dateObject = DateTime::createFromFormat('d.m.Y', $dateSearch);
+            if ($dateObject) {
+                $dateSearch = $dateObject->format('Y-m-d'); // Format SQL
+            }
         }
 
         $sql = "SELECT travels.*, users.pseudo AS driver_pseudo, users.photo AS driver_photo, AVG(ratings.rating) AS driver_rating, driver.user_id AS driver_id,

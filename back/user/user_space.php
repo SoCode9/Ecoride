@@ -54,14 +54,14 @@ if (isset($_GET['action'])) {
             }
             $travel->setTravelStatus('cancelled', $idTravel); //change travel's status
 
-            header('Location: ../../controllers/user_space.php');
+            header('Location: ../../controllers/user_space?tab=carpools.php');
             $_SESSION['success_message'] = "Le covoiturage a été annulé. Les passagers ont reçu un mail leur en informant.";
 
             /*If I'm only a passenger*/
         } elseif ($travel->getDriverId() !== $userId) {
             $usersReservations->cancelCarpool($pdo, $userId, $idTravel);
-            header('Location: ../../controllers/user_space.php');
-            $_SESSION['success_message'] = "Vous ne participez plus au covoiturage. Vos crédits ont été crédités.";
+            header('Location: ../../controllers/user_space.php?tab=carpools');
+            $_SESSION['success_message'] = "Vous ne participez plus au covoiturage. Vos crédits vous ont été restitués.";
         }
     }
 
@@ -70,7 +70,7 @@ if (isset($_GET['action'])) {
         $idTravel = $_GET['id'];
         $travel = new Travel($pdo, $idTravel);
         $travel->setTravelStatus('in progress', $idTravel);
-        header('Location: ../../controllers/user_space.php');
+        header('Location: ../../controllers/user_space.php?tab=carpools');
         $_SESSION['success_message'] = "Le covoiturage a débuté.";
     }
 
@@ -79,7 +79,7 @@ if (isset($_GET['action'])) {
         $idTravel = $_GET['id'];
         $travel = new Travel($pdo, $idTravel);
         $travel->setTravelStatus('in validation', $idTravel);
-        header('Location: ../../controllers/user_space.php');
+        header('Location: ../../controllers/user_space.php?tab=carpools');
 
         //send an email to passengers
         $reservation = new Reservation($pdo, null, $idTravel);

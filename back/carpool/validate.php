@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
     } 
     try {
         $reservation->validateCarpoolYes($pdo, $reservationId);
-        header('Location:../../controllers/user_space.php');
+        header('Location:../../controllers/user_space?tab=carpools.php');
     } catch (Exception $e) {
         echo "Erreur dans la function validateCarpoolYes : " . $e->getMessage();
     }
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'negative') {
     $reservation = new Reservation($pdo);
     try {
         $reservation->validateCarpoolNo($pdo, $reservationId, $comment);
-        header('Location:../../controllers/user_space.php');
+        header('Location:../../controllers/user_space?tab=carpools.php');
     } catch (Exception $e) {
         echo "erreur dans la function validateCarpoolNo : " . $e->getMessage();
     }

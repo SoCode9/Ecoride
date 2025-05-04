@@ -23,7 +23,7 @@ if (!isset($_POST['travel_id'])) {
 }
 
 $userId = $_SESSION['user_id'];
-$travelId = intval($_POST['travel_id']);
+$travelId = $_POST['travel_id'];
 
 // Check that carpooling exists and get the price
 $reservation = new Reservation($pdo, $userId, $travelId);

@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $newTravel = new Travel($pdo);
     if ($newTravel->saveTravelToDatabase($pdo, $driverId, $travelDate, $travelDepartureCity, $travelArrivalCity, $travelDepartureTime, $travelArrivalTime, $travelPrice, $carSelectedId, $travelComment)) {
         $_SESSION['success_message'] = 'Le voyage a bien été publié';
-        header('Location:../../controllers/user_space.php');
+        header('Location:../../controllers/user_space.php?tab=carpools');
     } else {
         $_SESSION['error_message'] = 'Erreur lors de la création du voyage';
     }

@@ -5,13 +5,13 @@ class Reservation
     private ?PDO $pdo;
     private int $reservationId;
     private ?string $userId;
-    private ?int $travelId;
+    private ?string $travelId;
 
     private ?bool $isValidated;
     private ?int $creditSpent;
     private ?string $badComment;
 
-    public function __construct($pdo, ?string $userId = null, ?int $travelId = null, ?bool $isValidated = null, ?string $badComment = null)
+    public function __construct($pdo, ?string $userId = null, ?string $travelId = null, ?bool $isValidated = null, ?string $badComment = null)
     {
         $this->pdo = $pdo;
         $this->userId = $userId;
@@ -24,7 +24,7 @@ class Reservation
     {
         $sql = "SELECT COUNT(travel_id)AS 'seats_allocated' FROM reservations WHERE travel_id = :travelId";
         $statement = $pdo->prepare($sql);
-        $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
+        $statement->bindParam(':travelId', $travelId, PDO::PARAM_STR);
         $statement->execute();
         $nbPassengerInACarpool = $statement->fetch();
         return $nbPassengerInACarpool['seats_allocated'];
@@ -32,8 +32,9 @@ class Reservation
 
     public function carpoolFinishedToValidate($pdo, $userId)
     {
-        $sql = "SELECT travels.*, users.pseudo, users.photo, ratings.rating, reservations.is_validated, reservations.id AS reservationId FROM travels 
-        JOIN reservations ON reservations.travel_id = travels.id AND reservations.user_id = :userConnected_id
+        $sql = "SELECT travels.*, users.pseudo, users.photo, ratings.rating, reservations.is_validated, reservations.id AS reservationId 
+        FROM travels 
+        LEFT JOIN reservations ON reservations.travel_id = travels.id AND reservations.user_id = :userConnected_id
         JOIN driver ON driver.user_id = travels.driver_id 
         JOIN users ON users.id = travels.driver_id
         LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
