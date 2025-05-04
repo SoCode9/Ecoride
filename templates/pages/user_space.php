@@ -327,7 +327,7 @@
                 </div>
                 <?php if (($connectedUser->getIdRole() === 2 || $connectedUser->getIdRole() === 3) && $cars == !null): ?>
                     <a class="btn action-btn" style="padding: 8px; text-align:right;"
-                        href="<?= BASE_URL ?>/controllers /create_carpool.php">Proposer un
+                        href="<?= BASE_URL ?>/controllers/create_carpool.php">Proposer un
                         covoiturage</a>
                 <?php endif; ?>
             </div>

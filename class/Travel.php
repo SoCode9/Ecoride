@@ -117,7 +117,7 @@ class Travel
     public function saveTravelToDatabase($pdo, $driverId, $travelDate, $travelDepartureCity, $travelArrivalCity, $travelDepartureTime, $travelArrivalTime, $travelPrice, $carId, $travelComment)
     {
         try {
-            $sql = "INSERT INTO travels (driver_id, travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price, car_id, travel_description) VALUES (:driverId,:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:car_id,:travelComment)";
+            $sql = "INSERT INTO travels (id, driver_id, travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price, car_id, travel_description) VALUES (UUID(), :driverId,:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:car_id,:travelComment)";
             $statement = $pdo->prepare($sql);
             $statement->bindParam(':driverId', $driverId, PDO::PARAM_STR);
             $statement->bindParam(':travel_date', $travelDate, PDO::PARAM_STR);
