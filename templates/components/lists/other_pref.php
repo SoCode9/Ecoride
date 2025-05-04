@@ -12,16 +12,17 @@ $driver = new Driver($pdo, $idUser);
 
 if (isset($driver)) {
     $customPreferencesInDB = $driver->loadCustomPreferences($pdo, $idUser);
+    if (!empty($customPreferencesInDB)) {
+        foreach ($customPreferencesInDB as $preference) {
+            if ($preference !== null) {
+                echo '<hr>';
+                $url = BASE_URL . "/back/preference/delete.php?action=delete_pref&id=" . urlencode($preference);
 
-    foreach ($customPreferencesInDB as $preference) {
-        if ($preference == !null) {
-            echo '<hr>';
-            $url = BASE_URL . "/back/preference/delete.php?action=delete_pref&id=" . urlencode($preference);
-
-            echo "<span style='display:flex; gap:4px; align-items:center;'>
+                echo "<span style='display:flex; gap:4px; align-items:center;'>
         <a class='hidden delete-pref-icon' href='$url'> <img src='" . BASE_URL . "/icons/Supprimer.png' class='img-width-20' style='cursor: pointer;'></a>
         $preference
     </span>";
+            }
         }
     }
 }
