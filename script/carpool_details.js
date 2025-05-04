@@ -16,12 +16,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.success) {
                     if (data.availableSeats === 0) {
                         alert("Désolé, il n'y a plus de places disponibles.");
-                        return;// On stoppe ici 
+                        return;
                     }
                     // Check if user has  credit enough
                     if (data.userCredits < data.travelPrice) {
                         alert("Vous n'avez pas assez de crédits pour réserver ce covoiturage.");
-                        return; // On stoppe ici
+                        return; 
                     }
 
                     // double confirmation
