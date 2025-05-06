@@ -19,11 +19,11 @@ if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)) 
 }
 
 $usersReservations = new Reservation($pdo, $userId);
-$carpoolListToValidate = $usersReservations->carpoolFinishedToValidate($pdo, $userId);
+$carpoolListToValidate = $usersReservations->getCarpoolsToValidate($userId);
 
-$carpoolListNotStarted = $usersReservations->carpoolNotStarted($pdo, $userId);
+$carpoolListNotStarted = $usersReservations->getCarpoolsNotStarted($userId);
 
-$carpoolListFinishedAndValidated = $usersReservations->carpoolFinishedAndValidated($pdo, $userId);
+$carpoolListFinishedAndValidated = $usersReservations->getCarpoolsCompleted($userId);
 
 /*Cars' form*/
 // Request to retrieve car's brands 
@@ -35,33 +35,42 @@ if (isset($_GET['action'])) {
     /*Cancel a carpool*/
     if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'cancel_carpool') {
         $idTravel = $_GET['id'];
-        $travel = new Travel($pdo, $idTravel);
-        /*If I'm the driver*/
-        if ($travel->getDriverId() === $userId) {
-            $reservation = new Reservation($pdo, null, $idTravel);
 
-            $passengersIdOfTheCarpool = $reservation->getPassengersOfTheCarpool($pdo, $idTravel);
-            $travelDate = formatDateLong($travel->getDate($idTravel));
-            $travelDeparture = $travel->getDepartureCity();
-            $travelArrival = $travel->getArrivalCity();
-            $message = "Le covoiturage du $travelDate de $travelDeparture à $travelArrival a été annulé par le chauffeur.";
+        try {
+            $travel = new Travel($pdo, $idTravel);
+            /*If I'm the driver*/
+            if ($travel->getDriverId() === $userId) {
+                $reservation = new Reservation($pdo, null, $idTravel);
 
-            foreach ($passengersIdOfTheCarpool as $passengerId) {
-                $passenger = new User($pdo, $passengerId['user_id']);
-                $passengerMail = $passenger->getMail();
-                mail($passengerMail, 'Annulation du covoiturage', $message, 'FROM: test@ecoride.local');
-                $reservation->cancelCarpool($pdo, $passengerId['user_id'], $idTravel);
+                $passengersIdOfTheCarpool = $reservation->getPassengersOfTheCarpool( $idTravel);
+                $travelDate = formatDateLong($travel->getDate($idTravel));
+                $travelDeparture = $travel->getDepartureCity();
+                $travelArrival = $travel->getArrivalCity();
+                $message = "Le covoiturage du $travelDate de $travelDeparture à $travelArrival a été annulé par le chauffeur.";
+
+                foreach ($passengersIdOfTheCarpool as $passengerId) {
+                    $passenger = new User($pdo, $passengerId['user_id']);
+                    $passengerMail = $passenger->getMail();
+                    mail($passengerMail, 'Annulation du covoiturage', $message, 'FROM: test@ecoride.local');
+                    $reservation->cancelCarpool($passengerId['user_id'], $idTravel);
+                }
+                $travel->setTravelStatus('cancelled', $idTravel); //change travel's status
+
+                header('Location: ../../controllers/user_space.php?tab=carpool');
+                $_SESSION['success_message'] = "Le covoiturage a été annulé. Les passagers ont reçu un mail leur en informant.";
+                exit;
+
+                /*If I'm only a passenger*/
+            } elseif ($travel->getDriverId() !== $userId) {
+                $usersReservations->cancelCarpool($userId, $idTravel);
+                header('Location: ../../controllers/user_space.php?tab=carpools');
+                $_SESSION['success_message'] = "Vous ne participez plus au covoiturage. Vos crédits vous ont été restitués.";
+                exit;
             }
-            $travel->setTravelStatus('cancelled', $idTravel); //change travel's status
-
-            header('Location: ../../controllers/user_space?tab=carpools.php');
-            $_SESSION['success_message'] = "Le covoiturage a été annulé. Les passagers ont reçu un mail leur en informant.";
-
-            /*If I'm only a passenger*/
-        } elseif ($travel->getDriverId() !== $userId) {
-            $usersReservations->cancelCarpool($pdo, $userId, $idTravel);
+        } catch (Exception $e) {
+            $_SESSION['error_message'] = $e->getMessage();
             header('Location: ../../controllers/user_space.php?tab=carpools');
-            $_SESSION['success_message'] = "Vous ne participez plus au covoiturage. Vos crédits vous ont été restitués.";
+            exit;
         }
     }
 
@@ -84,7 +93,7 @@ if (isset($_GET['action'])) {
         //send an email to passengers
         $reservation = new Reservation($pdo, null, $idTravel);
 
-        $passengersIdOfTheCarpool = $reservation->getPassengersOfTheCarpool($pdo, $idTravel);
+        $passengersIdOfTheCarpool = $reservation->getPassengersOfTheCarpool( $idTravel);
         $travelDate = formatDateLong($travel->getDate($idTravel));
         $travelDeparture = $travel->getDepartureCity();
         $travelArrival = $travel->getArrivalCity();

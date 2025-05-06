@@ -121,7 +121,7 @@
                             <?php
                             $seatsAvailable = seatsAvailable(
                                 $car->nbSeatsOfferedInACarpool($pdo, $t['car_id']),
-                                $reservation->nbPassengerInACarpool($pdo, $t['id'])
+                                $reservation->countPassengers( $t['id'])
                             );
                             if ($seatsAvailable === 0): ?>
                                 <span class="watermark-complet">Complet</span>
