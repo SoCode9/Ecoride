@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['action'])) {
         header('Location: ../../controllers/employee_space.php');
     } elseif ($_GET['action'] == 'resolved') {
         $reservationId = $_GET['id'];
-        $reservation->resolveBadComment($pdo, $reservationId);
+        $reservation->resolveBadComment($reservationId);
 
         $_SESSION['success_message'] = "Litige résolu";
         header('Location: ../../controllers/employee_space.php?tab=bad-carpool'); 

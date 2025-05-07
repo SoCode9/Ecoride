@@ -29,7 +29,7 @@ $travelId = $_POST['travel_id'];
 $reservation = new Reservation($pdo, $userId, $travelId);
 $car = new Car($pdo, null, $travelId);
 $newTravel = new Travel($pdo, $travelId);
-$seatsAllocated = $reservation->nbPassengerInACarpool($pdo, $travelId);
+$seatsAllocated = $reservation->countPassengers( $travelId);
 $seatsOffered = $car->nbSeatsOfferedInACarpool($pdo, $newTravel->getCarId());
 $stmt = $pdo->prepare("SELECT $seatsOffered - $seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = ?");
 $stmt->execute([$travelId]);
