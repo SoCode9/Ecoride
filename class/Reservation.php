@@ -243,7 +243,8 @@ class Reservation
 
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         if (!$result || !isset($result['driver_id'])) {
-            throw new Exception("Aucun chauffeur trouvé pour le trajet #$travelId");
+            error_log("getDriverIdFromReservation() failed for the reservation : {$reservationId} ");
+            throw new Exception("Impossible de récupérer le chauffeur de cette réservation");
         }
 
         return $result['driver_id'];
