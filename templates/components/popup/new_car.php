@@ -107,6 +107,23 @@ ob_start(); ?>
         }
     });
 
+    /** Refresh only Car's section (not full page) **/
+    function refreshCarField() {
+        fetch("../templates/components/lists/car_select.php")
+            .then(response => response.text())
+            .then(html => {
+                let carContainer = document.getElementById("car-field");
+                if (!carContainer) {
+                    console.error("Erreur : car-field introuvable dans le DOM !");
+                    return;
+                }
+
+                carContainer.innerHTML = html; // update car's section
+            })
+            .catch(error => {
+                console.error("Erreur de mise à jour car-field :", error);
+            });
+    }
 
     function submitJS() {
         const licencePlate = document.getElementById('licence_plate').value;
@@ -139,7 +156,7 @@ ob_start(); ?>
             .then(data => {
                 console.log("Réponse du backend :", data);
                 closePopupCar();
-                location.reload();
+                refreshCarField(); // refresh the cars' list
             })
             .catch(error => {
                 console.error("Erreur :", error);

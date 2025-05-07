@@ -25,7 +25,7 @@ if (($_SERVER['REQUEST_METHOD'] === "POST" /* && $_POST['action'] === "formCar" 
     $seatOffered = $_POST['nb_passengers'];
     try {
         $newCar = new Car($pdo, $idUser, null);
-        $newCar->createCar($pdo, $idUser, $brand, $model, $licencePlate, $firstRegistrationDate, $seatOffered, $electric, $color);
+        $newCar->createNewCar( $idUser, $brand, $model, $licencePlate, $firstRegistrationDate, $seatOffered, $electric, $color);
 
         echo json_encode([
             "success" => true,

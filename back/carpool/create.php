@@ -4,15 +4,12 @@ if (session_status() === PHP_SESSION_NONE)
 
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Driver.php";
-require_once __DIR__ . "/../../class/Car.php";
 require_once __DIR__ . "/../../class/Travel.php";
 
 /**To get all the driver's cars */
 
 $driverId = $_SESSION['user_id'];
 $driver = new Driver($pdo, $driverId);
-$cars = new Car($pdo, $driverId);
-$carsOfDriver = $cars->getCars();
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {

@@ -1,10 +1,8 @@
 <style>
-   
-
     .form-group {
         display: flex;
         flex-direction: column;
-        justify-content :end;
+        justify-content: end;
     }
 
     .form-group label {
@@ -15,14 +13,13 @@
     .full-width-grid {
         grid-column: 1 / -1;
     }
-
-   
 </style>
 
 <main class="gap-24">
     <div class="main-header">
         <h2 class="text-green">Proposer un covoiturage</h2>
-        <a href= "<?= BASE_URL ?>/controllers/user_space.php?tab=carpools" class="btn return-btn">Retour à l'espace utilisateur</a>
+        <a href="<?= BASE_URL ?>/controllers/user_space.php?tab=carpools" class="btn return-btn">Retour à l'espace
+            utilisateur</a>
     </div>
 
     <form action="../back/carpool/create.php" method="POST" class="half-separation">
@@ -66,16 +63,12 @@
 
         <div class="flex-row">
             <img src="<?= BASE_URL ?>/icons/addPref.png" alt="info" class="img-width-20" />
-            <span class="italic text-green font-size-small">Rappel : 2 crédits sont pris par la plateforme EcoRide</span>
+            <span class="italic text-green font-size-small">Rappel : 2 crédits sont pris par la plateforme
+                EcoRide</span>
         </div>
 
-        <div class="form-group">
-            <label for="carSelected">Voiture</label>
-            <select id="carSelected" name="carSelected" required>
-                <?php foreach ($carsOfDriver as $car): ?>
-                    <option value="<?= $car['car_id'] ?>"><?= $car['name'] . " " . $car['car_model'] ?></option>
-                <?php endforeach; ?>
-            </select>
+        <div class="form-group" id="car-field">
+            <?php include __DIR__ . '/../components/lists/car_select.php'; ?>
         </div>
 
         <div class="form-group">
@@ -89,7 +82,7 @@
         </div>
 
         <div class="btn bg-light-green full-width-grid">
-            <input type="submit" value="Proposer le trajet"  />
+            <input type="submit" value="Proposer le trajet" />
         </div>
     </form>
     <?php include __DIR__ . "/../../templates/components/popup/new_car.php";

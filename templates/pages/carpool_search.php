@@ -120,7 +120,7 @@
 
                             <?php
                             $seatsAvailable = seatsAvailable(
-                                $car->nbSeatsOfferedInACarpool($pdo, $t['car_id']),
+                                $car->getSeatsOfferedByCar($t['car_id']),
                                 $reservation->countPassengers( $t['id'])
                             );
                             if ($seatsAvailable === 0): ?>

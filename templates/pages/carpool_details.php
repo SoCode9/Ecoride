@@ -41,7 +41,7 @@
             </div>
 
             <div class="flex-column gap-8" id="travel-extra" style="align-items: end; min-width:max-content;">
-                <div> <?php $seatsAvailable = seatsAvailable($car->nbSeatsOfferedInACarpool($pdo, $travel->getCarId()), ($reservation->countPassengers($travel->getIdTravel())));
+                <div> <?php $seatsAvailable = seatsAvailable($car->getSeatsOfferedByCar( $travel->getCarId()), ($reservation->countPassengers($travel->getIdTravel())));
 
                 if ($seatsAvailable <= 1) {
                     echo htmlspecialchars($seatsAvailable) . " place restante";
