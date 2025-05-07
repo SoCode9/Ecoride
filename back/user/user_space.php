@@ -27,8 +27,8 @@ $carpoolListFinishedAndValidated = $usersReservations->getCarpoolsCompleted($use
 
 /*Cars' form*/
 // Request to retrieve car's brands 
-$stmt = $pdo->query("SELECT id, name FROM brands ORDER BY name ASC");
-$brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$statement = $pdo->query("SELECT id, name FROM brands ORDER BY name ASC");
+$brands = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
 if (isset($_GET['action'])) {

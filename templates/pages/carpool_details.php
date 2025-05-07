@@ -256,13 +256,13 @@
 
                     </span>
                     <span
-                        class="font-size-very-small"><?= "(" . htmlspecialchars($driver->getNbRatings()) . " avis)" ?></span>
+                        class="font-size-very-small"><?= "(" . htmlspecialchars($driver->countRatings()) . " avis)" ?></span>
                 </div>
             </div>
 
 
             <!--ratings list-->
-            <?php $ratingsList = $driver->loadDriversRatingsInformations();
+            <?php $ratingsList = $driver->loadValidatedRatings();
             foreach ($ratingsList as $rating): ?>
 
                 <div class="flex-column gap-8">

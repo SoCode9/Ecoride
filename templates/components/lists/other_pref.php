@@ -11,7 +11,7 @@ $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 $driver = new Driver($pdo, $idUser);
 
 if (isset($driver)) {
-    $customPreferencesInDB = $driver->loadCustomPreferences($pdo, $idUser);
+    $customPreferencesInDB = $driver->loadCustomPreferences();
     if (!empty($customPreferencesInDB)) {
         foreach ($customPreferencesInDB as $preference) {
             if ($preference !== null) {

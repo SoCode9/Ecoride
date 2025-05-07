@@ -31,9 +31,9 @@ $car = new Car($pdo, null, $travelId);
 $newTravel = new Travel($pdo, $travelId);
 $seatsAllocated = $reservation->countPassengers( $travelId);
 $seatsOffered = $car->getSeatsOfferedByCar($newTravel->getCarId());
-$stmt = $pdo->prepare("SELECT $seatsOffered - $seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = ?");
-$stmt->execute([$travelId]);
-$travel = $stmt->fetch();
+$statement = $pdo->prepare("SELECT $seatsOffered - $seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = ?");
+$statement->execute([$travelId]);
+$travel = $statement->fetch();
 
 if (!$travel) {
     echo json_encode(["success" => false, "message" => "Covoiturage introuvable."]);
@@ -54,9 +54,9 @@ if ($newTravel->getStatus() !== 'not started') {
 }
 
 // Check that the user has enough credits 
-$stmt = $pdo->prepare("SELECT credit FROM users WHERE id = ?");
-$stmt->execute([$userId]);
-$user = $stmt->fetch();
+$statement = $pdo->prepare("SELECT credit FROM users WHERE id = ?");
+$statement->execute([$userId]);
+$user = $statement->fetch();
 
 if (!$user) {
     echo json_encode(["success" => false, "message" => "Utilisateur introuvable."]);
@@ -76,11 +76,11 @@ try {
     $pdo->beginTransaction();
 
     //debit the user
-    $stmt = $pdo->prepare("UPDATE users SET credit = credit - ? WHERE id = ?");
-    $stmt->execute([$travelPrice, $userId]);
+    $statement = $pdo->prepare("UPDATE users SET credit = credit - ? WHERE id = ?");
+    $statement->execute([$travelPrice, $userId]);
 
-    $stmt = $pdo->prepare("INSERT INTO reservations (user_id,travel_id, credits_spent) VALUES (?,?,?)");
-    $stmt->execute([$userId, $travelId, $travelPrice]);
+    $statement = $pdo->prepare("INSERT INTO reservations (user_id,travel_id, credits_spent) VALUES (?,?,?)");
+    $statement->execute([$userId, $travelId, $travelPrice]);
 
 
     $pdo->commit(); // validates the transaction

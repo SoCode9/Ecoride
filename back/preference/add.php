@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && $_POST['action'] === "formPref") {
     try {
         $newPrefInsert = $_POST['new_pref'];
         $driver = new Driver($pdo, $driverId);
-        $customPreferencesInDB = $driver->loadCustomPreferences($pdo, $driverId);
+        $customPreferencesInDB = $driver->loadCustomPreferences();
         // Counts the number of non-null preferences
         $nonEmptyPrefsCount = 0;
         foreach ($customPreferencesInDB as $pref) {
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && $_POST['action'] === "formPref") {
         }
 
         if ($nonEmptyPrefsCount < 3) {
-            $driver->addCustomPreference($pdo, $driverId, $newPrefInsert);
+            $driver->addCustomPreference($newPrefInsert);
             echo json_encode([
                 "success" => true,
                 "newPrefInsert" => $newPrefInsert

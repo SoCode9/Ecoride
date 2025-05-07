@@ -10,7 +10,7 @@ $driverId = $_SESSION['user_id'];
 
 if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'delete_pref') {
     $driver = new Driver($pdo, $driverId);
-    $customPreferencesInDB = $driver->loadCustomPreferences($pdo, $driverId);
+    $customPreferencesInDB = $driver->loadCustomPreferences();
 
     foreach ($customPreferencesInDB as $columnName => $value) {
         if ($value === $prefToDelete) {

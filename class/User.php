@@ -126,8 +126,8 @@ class User
         $this->idRole = $user['id_role'];
     }
     /**
-     * Loads user data from the database using the current user ID.
-     * @throws \Exception If no user is found with the given ID.
+     * Loads user data from the database using the current user ID
+     * @throws \Exception If no user is found with the given ID
      * @return void
      */
     protected function loadUserFromDB(): void
@@ -345,7 +345,7 @@ class User
     public function setIsActivatedUser(string $userId, bool $isActivated): void
     {
         if (empty($userId)) {
-            throw new Exception("Aucun ID utilisateur fourni pour l'activation.");
+            throw new Exception("Aucun ID utilisateur fourni pour l'activation");
         }
 
         try {
@@ -356,7 +356,7 @@ class User
             $statement->execute();
         } catch (PDOException $e) {
             error_log("Database error in setIsActivatedUser() (user ID: $userId) : " . $e->getMessage());
-            throw new Exception("Impossible de modifier le statut du compte utilisateur.");
+            throw new Exception("Impossible de modifier le statut du compte utilisateur");
         }
     }
 
@@ -369,7 +369,7 @@ class User
     public function setPhoto(string $photoUser): void
     {
         if (empty($this->id)) {
-            throw new Exception("Impossible de modifier la photo sans identifiant utilisateur.");
+            throw new Exception("Impossible de modifier la photo sans identifiant utilisateur");
         }
 
         try {
@@ -379,7 +379,7 @@ class User
             $statement->bindParam(':user_id', $this->id, PDO::PARAM_STR);
             $statement->execute();
         } catch (PDOException $e) {
-            error_log("Database errorin setPhoto() (user ID: {$this->id}) : " . $e->getMessage());
+            error_log("Database error in setPhoto() (user ID: {$this->id}) : " . $e->getMessage());
             throw new Exception("Impossible de mettre à jour la photo de profil");
         }
     }
