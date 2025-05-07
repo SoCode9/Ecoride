@@ -18,7 +18,9 @@ class Driver extends User
 
     public function __construct(PDO $pdo, string $driverId)
     {
-        parent::__construct($pdo, $driverId); 
+        parent::__construct($pdo);
+        $this->id = $driverId;
+        $this->loadUserFromDB();
         $this->loadDriverFromDB();
     }
 

@@ -11,7 +11,7 @@ require_once __DIR__ . "/../../class/Travel.php";
 
 $userId = $_SESSION['user_id'];
 
-$connectedUser = new User($pdo, $userId, null, null, null);
+$connectedUser = User::fromId ($pdo, $userId);
 if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)) {
     $connectedDriver = new Driver($pdo, $connectedUser->getId());
     $carsOfConnectedDriver = new Car($pdo, $connectedDriver->getId(), null);
@@ -49,7 +49,7 @@ if (isset($_GET['action'])) {
                 $message = "Le covoiturage du $travelDate de $travelDeparture à $travelArrival a été annulé par le chauffeur.";
 
                 foreach ($passengersIdOfTheCarpool as $passengerId) {
-                    $passenger = new User($pdo, $passengerId['user_id']);
+                    $passenger = User::fromId ($pdo, $passengerId['user_id']);
                     $passengerMail = $passenger->getMail();
                     mail($passengerMail, 'Annulation du covoiturage', $message, 'FROM: test@ecoride.local');
                     $reservation->cancelCarpool($passengerId['user_id'], $idTravel);
@@ -102,7 +102,7 @@ if (isset($_GET['action'])) {
         N'hésitez pas à soumettre un avis.";
 
         foreach ($passengersIdOfTheCarpool as $passengerId) {
-            $passenger = new User($pdo, $passengerId['user_id']);
+            $passenger = User::fromId ($pdo, $passengerId['user_id']);
             $passengerMail = $passenger->getMail();
             mail($passengerMail, 'Validation du covoiturage', $message, 'FROM: test@ecoride.local');
         }

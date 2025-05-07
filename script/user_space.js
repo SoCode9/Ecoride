@@ -191,7 +191,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    console.log("Profil mis à jour !");
                     location.reload();
                 } else {
                     console.error("Erreur : " + data.message);
@@ -256,7 +255,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        console.log("Voiture ajoutée avec succès !");
                         carForm.reset(); // Reset the form
                         refreshCarList(); // refresh the cars' list
                     } else {

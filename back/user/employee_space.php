@@ -7,7 +7,7 @@ require_once __DIR__ . "/../../class/Driver.php";
 require_once __DIR__ . "/../../class/Rating.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 
-$employee = new User($pdo, $_SESSION['user_id']);
+$employee = User::fromId ($pdo, $_SESSION['user_id']);
 
 //VERIFY RATINGS TAB
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;

@@ -13,10 +13,9 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         $password = $_POST['password'];
 
         // User creation
-        $newUser = new User($pdo, null, $pseudo, $mail, $password);
+        $newUser = User::register($pdo, $pseudo, $mail, $password,1);
 
         // Check if user is created well
-        $newUser->saveUserToDatabase(1);
         $_SESSION['success_message'] = 'Compte créé avec succès ! Vous avez été crédité de 20 crédits 🎉';
         $_SESSION['user_id'] = $newUser->getId();
         $_SESSION['role_user'] = $newUser->getIdRole();
@@ -34,9 +33,8 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         $mail = $_POST['mail'];
         $password = $_POST['password'];
 
-        $searchUser = new User($pdo, null, null, $mail, $password);
+        $searchUser = User::login($pdo, $mail, $password);
 
-        $searchUser->searchUserInDB($mail, $password);
         $_SESSION['success_message'] = 'Connexion réussie !';
         $_SESSION['user_id'] = $searchUser->getId();
         $_SESSION['role_user'] = $searchUser->getIdRole();

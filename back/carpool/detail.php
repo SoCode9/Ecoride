@@ -19,7 +19,7 @@ try {
     $driver = new Driver($pdo, $travel->getDriverId());
     $car = new Car($pdo, null, $travelId);
 
-    $user = new User($pdo, $userId);
+    $user = User::fromId ($pdo, $userId);
 
 
 } catch (Exception $e) {
