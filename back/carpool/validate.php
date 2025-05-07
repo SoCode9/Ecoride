@@ -12,28 +12,30 @@ $passengerId = $_SESSION['user_id'];
 
 //If the passenger has validated the carpool (with or without a rating)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
-    $reservationId = $_POST['idReservation'];
-
-    $rating = $_POST['rating'] ?? null;
-    if ($rating === '')
-        $rating = null;
-
-    $comment = $_POST['comment'] ?? null;
-
-    $reservation = new Reservation($pdo);
-    $driverId = $reservation->getDriverIdFromReservation($reservationId);
-
-
-    if (isset($rating)) {
-        $newRating = new Rating($pdo);
-        $newRating->saveRatingToDatabase($pdo, $passengerId, $driverId, $rating, $comment);
-    }
     try {
+        $reservationId = $_POST['idReservation'];
+
+        $rating = $_POST['rating'] ?? null;
+        if ($rating === '')
+            $rating = null;
+
+        $comment = $_POST['comment'] ?? null;
+
+        $reservation = new Reservation($pdo);
+
+        $driverId = $reservation->getDriverIdFromReservation($reservationId);
+
+        if (isset($rating)) {
+            $newRating = new Rating($pdo);
+            $newRating->saveRatingToDatabase($passengerId, $driverId, $rating, $comment);
+        }
+
         $reservation->validateCarpoolYes($reservationId);
         header('Location:../../controllers/user_space.php?tab=carpools');
         $_SESSION['success_message'] = "Le covoiturage a été validé";
     } catch (Exception $e) {
-        $_SESSION['error_message'] = $e->getMessage();
+        error_log("Carpool validation error : " . $e->getMessage());
+        $_SESSION['error_message'] = "Une erreur est survenue";
     }
 }
 
@@ -48,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'negative') {
         header('Location:../../controllers/user_space.php?tab=carpools');
         $_SESSION['success_message'] = "Votre retour a été transmis pour traitement";
     } catch (Exception $e) {
-        echo "erreur dans la function validateCarpoolNo : " . $e->getMessage();
+        error_log("Carpool validation error : " . $e->getMessage());
+        $_SESSION['error_message'] = "Une erreur est survenue";
     }
 
 }
