@@ -204,11 +204,11 @@ class Car
     {
         $sql = "SELECT car_seats_offered FROM cars WHERE car_id = :carId";
 
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':carId', $carId, PDO::PARAM_INT);
-        $stmt->execute();
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':carId', $carId, PDO::PARAM_INT);
+        $statement->execute();
 
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (!$result) {
             throw new Exception("Aucune voiture trouvée pour cet id : $carId");

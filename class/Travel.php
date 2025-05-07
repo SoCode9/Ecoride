@@ -39,10 +39,10 @@ class Travel
     private function loadTravelFromDB(): void
     {
         $sql = "SELECT * FROM travels WHERE id = :travel_id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':travel_id', $this->id, PDO::PARAM_STR);
-        $stmt->execute();
-        $travelData = $stmt->fetch(PDO::FETCH_ASSOC);
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':travel_id', $this->id, PDO::PARAM_STR);
+        $statement->execute();
+        $travelData = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($travelData) {
             $this->driverId = $travelData['driver_id'];
@@ -349,10 +349,10 @@ class Travel
     public function getDate(string $idTravel)
     {
         $sql = "SELECT travel_date FROM travels WHERE id = :id";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(":id", $idTravel, PDO::PARAM_STR);
-        if ($stmt->execute()) {
-            $result = $stmt->fetch(PDO::FETCH_COLUMN);
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(":id", $idTravel, PDO::PARAM_STR);
+        if ($statement->execute()) {
+            $result = $statement->fetch(PDO::FETCH_COLUMN);
             return $result ? htmlspecialchars($result) : "Aucune donnée trouvée.";
         } else {
             return "Erreur lors de l'exécution de la requête.";

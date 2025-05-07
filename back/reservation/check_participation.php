@@ -35,9 +35,9 @@ if ($reservationAlreadyDone) {
 }
 
 // Retrieve user's credits
-$stmt = $pdo->prepare("SELECT credit FROM users where id = ?");
-$stmt->execute([$userId]);
-$user = $stmt->fetch();
+$statement = $pdo->prepare("SELECT credit FROM users where id = ?");
+$statement->execute([$userId]);
+$user = $statement->fetch();
 
 if (!$user) {
     echo json_encode(["success" => false, "message" => "Utilisateur introuvable"]);
@@ -53,9 +53,9 @@ $car = new Car($pdo, null, $travelId);
 $newTravel = new Travel($pdo, $travelId);
 $seatsAllocated = $reservation->countPassengers( $travelId);
 $seatsOffered = $car->getSeatsOfferedByCar($newTravel->getCarId());
-$stmt = $pdo->prepare("SELECT $seatsOffered - $seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = ?"); // "?" => 'travel_id'
-$stmt->execute([$travelId]);
-$travel = $stmt->fetch();
+$statement = $pdo->prepare("SELECT $seatsOffered - $seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = ?"); // "?" => 'travel_id'
+$statement->execute([$travelId]);
+$travel = $statement->fetch();
 
 if (!$travel) {
     echo json_encode(["success" => false, "message" => "Covoiturage introuvable."]);
