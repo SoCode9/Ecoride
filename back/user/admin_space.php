@@ -7,40 +7,70 @@ require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/User.php";
 require_once __DIR__ . "/../../class/Travel.php";
 
-$administrator = new User($pdo, $_SESSION['user_id']);
+$administrator = User::fromId ($pdo, $_SESSION['user_id']);
 
-//display the users on the tabs
-$employeeList = $administrator->loadListUsersFromDB(4);
-$passengersList = $administrator->loadListUsersFromDB(1);
-$driversList = $administrator->loadListUsersFromDB(2);
-$passengersAndDriversList = $administrator->loadListUsersFromDB(3);
+try {
+    //display the users on the tabs
+    $employeeList = $administrator->loadListUsersFromDB(4);
+    $passengersList = $administrator->loadListUsersFromDB(1);
+    $driversList = $administrator->loadListUsersFromDB(2);
+    $passengersAndDriversList = $administrator->loadListUsersFromDB(3);
+} catch (Exception $e) {
+    $_SESSION['error_message'] = $e->getMessage();
+    header('Location: ../../controllers/admin_space.php');
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     //activated and desactivated an employee
     if ($_GET['action'] === 'suspend-employee') {
         $idUser = $_GET['id'];
-        $administrator->setIsActivatedUser($idUser, 0);
+        try {
+            $administrator->setIsActivatedUser($_GET['id'], 0);
+            $_SESSION['success_message'] = "L'employé a bien été désactivé";
+        } catch (Exception $e) {
+            error_log("Erreur suspend-employee : " . $e->getMessage());
+            $_SESSION['error_message'] = "Impossible de désactiver l'employé";
+        }
         header('Location: ../../controllers/admin_space.php?tab=employees-management');
-        $_SESSION['success_message'] = "L'employé a bien été désactivé";
+        exit();
 
     } elseif ($_GET['action'] === 'reactivate-employee') {
         $idUser = $_GET['id'];
-        $administrator->setIsActivatedUser($idUser, 1);
+        try {
+            $administrator->setIsActivatedUser($idUser, 1);
+            $_SESSION['success_message'] = "L'employé a été réactivé avec succès";
+        } catch (Exception $e) {
+            error_log("Erreur reactivate-employee (ID: $idUser) : " . $e->getMessage());
+            $_SESSION['error_message'] = "Impossible de réactiver l'employé";
+        }
         header('Location: ../../controllers/admin_space.php?tab=employees-management');
-        $_SESSION['success_message'] = "L'employé a été réactivé avec succès";
+        exit();
 
         //activated and desactivated a user
     } elseif ($_GET['action'] === 'suspend-user') {
         $idUser = $_GET['id'];
-        $administrator->setIsActivatedUser($idUser, 0);
+        try {
+            $administrator->setIsActivatedUser($idUser, 0);
+            $_SESSION['success_message'] = "L'utilisateur a bien été désactivé";
+        } catch (Exception $e) {
+            error_log("Erreur suspend-user (ID: $idUser) : " . $e->getMessage());
+            $_SESSION['error_message'] = "Impossible de désactiver l'utilisateur";
+        }
         header('Location: ../../controllers/admin_space.php?tab=users-management');
-        $_SESSION['success_message'] = "L'utilisateur a bien été désactivé";
+        exit();
 
     } elseif ($_GET['action'] === 'reactivate-user') {
         $idUser = $_GET['id'];
-        $administrator->setIsActivatedUser($idUser, 1);
+        try {
+            $administrator->setIsActivatedUser($idUser, 1);
+            $_SESSION['success_message'] = "L'utilisateur a été réactivé avec succès";
+        } catch (Exception $e) {
+            error_log("Erreur reactivate-user (ID: $idUser) : " . $e->getMessage());
+            $_SESSION['error_message'] = "Impossible de réactiver l'utilisateur";
+        }
         header('Location: ../../controllers/admin_space.php?tab=users-management');
-        $_SESSION['success_message'] = "L'utilisateur a été réactivé avec succès";
+        exit();
     }
 }
 
@@ -51,8 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'create-employ
         $mailEmployee = $_POST['mail-employee'];
         $passwordEmployee = $_POST['password-employee'];
 
-        $newEmployee = new User($pdo, null, $pseudoEmployee, $mailEmployee, $passwordEmployee);
-        $newEmployee->saveUserToDatabase(4);
+        $newEmployee = User::register($pdo,$pseudoEmployee, $mailEmployee, $passwordEmployee,4);
+        $_SESSION['success_message'] = "Compte employé créé avec succès";
         header('Location:../../controllers/admin_space.php');
     } catch (Exception $e) {
         $_SESSION['error_message'] = $e->getMessage();

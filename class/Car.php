@@ -76,7 +76,7 @@ class Car
 
     /**
      * Delete a car
-     * @param int $carId $carId //car id to delete
+     * @param int $carId car id to delete
      * @throws \Exception
      * @return void
      */

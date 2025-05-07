@@ -6,7 +6,7 @@ require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/User.php";
 
 $userId = $_SESSION['user_id'];
-$connectedUser = new User($pdo, $userId, null, null, null);
+$connectedUser = User::fromId ($pdo, $userId);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'edit-photo-user') {
 

@@ -38,11 +38,12 @@ $speakPref = processPreference($_POST['speak_pref'] ?? null, "discussion");
 $musicPref = processPreference($_POST['music_pref'] ?? null, "musique");
 
 try {
-    $user = new User($pdo, $userId);
+    $user = User::fromId ($pdo, $userId);
     try {
         $driver = new Driver($pdo, $userId);
     } catch (Exception $e) {
-        $user->createDriver($pdo, $userId);
+        error_log("Driver not found, creating one for user $userId");
+        $user->createDriver($userId);
         $driver = new Driver($pdo, $userId);
     }
     $user->setIdRole($roleId);
@@ -53,7 +54,9 @@ try {
     $driver->setMusicPreference($musicPref);
 
     echo json_encode(["success" => true, "message" => "Rôle et préférences mis à jour"]);
+    $_SESSION['success_message'] = "Profil mis à jour";
     exit;
 } catch (Exception $e) {
-    echo json_encode(["success" => false, "message" => "Erreur : " . $e->getMessage()]);
+    error_log("Erreur update profil (user ID: $userId) : " . $e->getMessage());
+    echo json_encode(["success" => false, "message" => "Impossible de mettre à jour votre profil"]);
 }
