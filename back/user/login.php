@@ -13,7 +13,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         $password = $_POST['password'];
 
         // User creation
-        $newUser = User::register($pdo, $pseudo, $mail, $password,1);
+        $newUser = User::register($pdo, $pseudo, $mail, $password, 1);
 
         // Check if user is created well
         $_SESSION['success_message'] = 'Compte créé avec succès ! Vous avez été crédité de 20 crédits 🎉';
@@ -23,7 +23,8 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         exit();
 
     } catch (Exception $e) {
-        $_SESSION['error_message'] = $e->getMessage();
+        error_log("Error in the user creation : " . $e->getMessage());
+        $_SESSION['error_message'] = "Une erreur est survenue";
         header('Location: login.php');
         exit();
     }
@@ -42,7 +43,8 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         exit();
 
     } catch (Exception $e) {
-        $_SESSION['error_message'] = $e->getMessage();
+        error_log("Error in the connection process : " . $e->getMessage());
+        $_SESSION['error_message'] = "Une erreur est survenue";
         header('Location: login.php');
         exit();
     }

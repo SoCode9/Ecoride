@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then(response => response.json()) // We expect a JSON response
             .then(data => {
-                console.log("Réponse du serveur :", data);
                 if (data.success) {
                     if (data.availableSeats === 0) {
                         alert("Désolé, il n'y a plus de places disponibles.");
@@ -33,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // If the user is not logged in, suggest he/she log in.
                 if (data.message && typeof data.message === "string" && data.message.includes("Utilisateur non connecte")) {
-                    console.log("User non connecté, affichage du confirm()");
 
                     let confirmLogin = confirm("Vous devez être connecté pour réserver. Cliquer sur \"OK\" pour créer un compte.");
                     if (confirmLogin) {
@@ -45,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     alert("Vous êtes déjà inscrit à ce covoiturage.")
                 }
 
-                if (data.message && data.message.includes("Le covoiturage est soit en cours, soit annulé, soit terminé.")) {
+                if (data.message && data.message.includes("Le covoiturage est soit en cours, soit annulé, soit terminé")) {
                     alert("Impossible de participer au covoiturage.")
                 }
             })

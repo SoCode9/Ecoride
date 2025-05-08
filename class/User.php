@@ -302,11 +302,20 @@ class User
      */
     private function setCredit(int $newCredit): void
     {
-        $sql = 'UPDATE users SET credit = :newCredit WHERE id = :idUser';
-        $statement = $this->pdo->prepare($sql);
-        $statement->bindParam('newCredit', $newCredit, PDO::PARAM_INT);
-        $statement->bindParam('idUser', $this->id, PDO::PARAM_STR);
-        $statement->execute();
+        if (empty($this->id)) {
+            throw new Exception("Impossible de mettre à jour les crédits sans identifiant utilisateur");
+        }
+        
+        try {
+            $sql = 'UPDATE users SET credit = :newCredit WHERE id = :idUser';
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindParam('newCredit', $newCredit, PDO::PARAM_INT);
+            $statement->bindParam('idUser', $this->id, PDO::PARAM_STR);
+            $statement->execute();
+        } catch (PDOException $e) {
+            error_log("Database error in setCredit() (idUser: {$this->id}) : " . $e->getMessage());
+            throw new Exception("Impossible de mettre à jour les crédits");
+        }
     }
 
     /**

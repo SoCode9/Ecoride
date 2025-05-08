@@ -5,27 +5,26 @@ if (session_status() === PHP_SESSION_NONE)
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Car.php";
 
-//$pdo = isset($pdo) ? $pdo : null;
 $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-if (($_SERVER['REQUEST_METHOD'] === "POST" /* && $_POST['action'] === "formCar" */)) {
+if (($_SERVER['REQUEST_METHOD'] === "POST")) {
     header('Content-Type: application/json');
-
-    $licencePlate = $_POST['licence_plate'];
-    $firstRegistrationDate = $_POST['first_registration_date'];
-    $brand = $_POST['brand'];
-    $model = $_POST['model'];
-    $electricValue = $_POST['electric'];
-    if ($electricValue === "yes") {
-        $electric = 1;
-    } elseif ($electricValue === "no") {
-        $electric = 0;
-    }
-    $color = $_POST['color'];
-    $seatOffered = $_POST['nb_passengers'];
     try {
+        $licencePlate = $_POST['licence_plate'];
+        $firstRegistrationDate = $_POST['first_registration_date'];
+        $brand = $_POST['brand'];
+        $model = $_POST['model'];
+        $electricValue = $_POST['electric'];
+        if ($electricValue === "yes") {
+            $electric = 1;
+        } elseif ($electricValue === "no") {
+            $electric = 0;
+        }
+        $color = $_POST['color'];
+        $seatOffered = $_POST['nb_passengers'];
+
         $newCar = new Car($pdo, $idUser, null);
-        $newCar->createNewCar( $idUser, $brand, $model, $licencePlate, $firstRegistrationDate, $seatOffered, $electric, $color);
+        $newCar->createNewCar($idUser, $brand, $model, $licencePlate, $firstRegistrationDate, $seatOffered, $electric, $color);
 
         echo json_encode([
             "success" => true,
