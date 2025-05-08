@@ -99,7 +99,7 @@ class Driver extends User
     {
         if (empty($this->id)) {
             error_log("loadCustomPreferences() failed: driver ID is empty");
-            throw new Exception("Impossible de charger les préférences sans identifiant utilisateur.");
+            throw new Exception("Impossible de charger les préférences sans identifiant utilisateur");
         }
 
         try {

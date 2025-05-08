@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
         $_SESSION['success_message'] = "Le covoiturage a été validé";
     } catch (Exception $e) {
         error_log("Carpool validation error : " . $e->getMessage());
+        header('Location:../../controllers/user_space.php?tab=carpools');
         $_SESSION['error_message'] = "Une erreur est survenue";
     }
 }
@@ -51,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'negative') {
         $_SESSION['success_message'] = "Votre retour a été transmis pour traitement";
     } catch (Exception $e) {
         error_log("Carpool validation error : " . $e->getMessage());
+        header('Location:../../controllers/user_space.php?tab=carpools');
         $_SESSION['error_message'] = "Une erreur est survenue";
     }
 

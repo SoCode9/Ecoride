@@ -18,10 +18,12 @@ try {
     $travel = new Travel($pdo, $travelId);
     $driver = new Driver($pdo, $travel->getDriverId());
     $car = new Car($pdo, null, $travelId);
-
-    $user = User::fromId ($pdo, $userId);
-
+    if ($userId !== null) {
+        $user = User::fromId($pdo, $userId);
+    }
 
 } catch (Exception $e) {
-    echo "Erreur lors du chargement du détail du covoiturage : " . $e->getMessage();
+    error_log("Error in details carpool : " . $e->getMessage());
+    header('Location:../../controllers/carpool_details.php');
+    $_SESSION['error_message'] = "Une erreur est survenue";
 }

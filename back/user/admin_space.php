@@ -16,6 +16,7 @@ try {
     $driversList = $administrator->loadListUsersFromDB(2);
     $passengersAndDriversList = $administrator->loadListUsersFromDB(3);
 } catch (Exception $e) {
+    error_log("Error in load users : " . $e->getMessage());
     $_SESSION['error_message'] = $e->getMessage();
     header('Location: ../../controllers/admin_space.php');
     exit();
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
             $administrator->setIsActivatedUser($_GET['id'], 0);
             $_SESSION['success_message'] = "L'employé a bien été désactivé";
         } catch (Exception $e) {
-            error_log("Erreur suspend-employee : " . $e->getMessage());
+            error_log("Error suspend-employee : " . $e->getMessage());
             $_SESSION['error_message'] = "Impossible de désactiver l'employé";
         }
         header('Location: ../../controllers/admin_space.php?tab=employees-management');
@@ -41,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
             $administrator->setIsActivatedUser($idUser, 1);
             $_SESSION['success_message'] = "L'employé a été réactivé avec succès";
         } catch (Exception $e) {
-            error_log("Erreur reactivate-employee (ID: $idUser) : " . $e->getMessage());
+            error_log("Error reactivate-employee (ID: $idUser) : " . $e->getMessage());
             $_SESSION['error_message'] = "Impossible de réactiver l'employé";
         }
         header('Location: ../../controllers/admin_space.php?tab=employees-management');
@@ -54,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
             $administrator->setIsActivatedUser($idUser, 0);
             $_SESSION['success_message'] = "L'utilisateur a bien été désactivé";
         } catch (Exception $e) {
-            error_log("Erreur suspend-user (ID: $idUser) : " . $e->getMessage());
+            error_log("Error suspend-user (ID: $idUser) : " . $e->getMessage());
             $_SESSION['error_message'] = "Impossible de désactiver l'utilisateur";
         }
         header('Location: ../../controllers/admin_space.php?tab=users-management');
@@ -66,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
             $administrator->setIsActivatedUser($idUser, 1);
             $_SESSION['success_message'] = "L'utilisateur a été réactivé avec succès";
         } catch (Exception $e) {
-            error_log("Erreur reactivate-user (ID: $idUser) : " . $e->getMessage());
+            error_log("Error reactivate-user (ID: $idUser) : " . $e->getMessage());
             $_SESSION['error_message'] = "Impossible de réactiver l'utilisateur";
         }
         header('Location: ../../controllers/admin_space.php?tab=users-management');
@@ -85,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'create-employ
         $_SESSION['success_message'] = "Compte employé créé avec succès";
         header('Location:../../controllers/admin_space.php');
     } catch (Exception $e) {
+        error_log("Error in employee creation : " . $e->getMessage());
         $_SESSION['error_message'] = $e->getMessage();
         header('Location: ../../controllers/admin_space.php');
         exit();
