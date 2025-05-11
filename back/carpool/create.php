@@ -23,8 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $travelComment = $_POST["comment"];
 
         $newTravel = new Travel($pdo);
-        $success = $newTravel->saveTravelToDatabase(
-            $pdo,
+        $success = $newTravel->createNewTravel(
             $driverId,
             $travelDate,
             $travelDepartureCity,
