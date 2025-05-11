@@ -56,8 +56,8 @@
                 <?php include __DIR__ . "/../components/popup/new_photo.php";
                 ?>
                 <div class="flex-row flex-between">
-                    <span><?php echo htmlspecialchars($connectedUser->getMail()) ?></span>
-                    <span><?php echo htmlspecialchars($connectedUser->getCredit()) ?> crédits</span>
+                    <span><?= htmlspecialchars($connectedUser->getMail()) ?></span>
+                    <span><?= htmlspecialchars($connectedUser->getCredit()) ?> crédits</span>
                 </div>
                 <div class="flex-column gap-8">
                     <h3 class="text-green">Type d'utilisateur</h3>

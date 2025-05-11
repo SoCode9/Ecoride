@@ -128,7 +128,7 @@
                 style="width:fit-content;">
                 <span class="text-green">Crédits gagnés par la plateforme</span>
                 <?php $travels = new Travel($pdo); ?>
-                <span class="font-size-very-big "><?= $travels->getCreditsEarned(); ?></span>
+                <span class="font-size-very-big "><?= htmlspecialchars($travels->getCreditsEarned()); ?></span>
             </div>
             <div class="block-light-grey flex-column gap-12 flex-center text-bold item-center"
                 style="width:fit-content;">
