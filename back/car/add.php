@@ -33,7 +33,11 @@ if (($_SERVER['REQUEST_METHOD'] === "POST")) {
             "licence_plate" => $licencePlate
         ]);
     } catch (Exception $e) {
-        echo "Exception attrappée : " . $e->getMessage();
+        error_log("Erreur dans car/add.php : " . $e->getMessage());
+        echo json_encode([
+            "success" => false,
+            "message" => "Une erreur est survenue lors de l'ajout du véhicule"
+        ]);
     }
     exit();
 }

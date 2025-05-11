@@ -102,9 +102,9 @@ document.addEventListener("DOMContentLoaded", function () {
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
 
         if (selectedRole === "role_passenger") {
-            carSection.classList.add("hidden"); // Hide the section
+            carSection.classList.add("hidden"); 
         } else {
-            carSection.classList.remove("hidden"); // Display the section
+            carSection.classList.remove("hidden"); 
         }
     }
 
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
-                carContainer.innerHTML = html; // update car's section
+                carContainer.innerHTML = html; 
             })
             .catch(error => {
                 console.error("Erreur de mise à jour car-container :", error);
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
-                prefContainer.innerHTML = html; //update pref's section
+                prefContainer.innerHTML = html; 
             })
             .catch(error => {
                 console.error("Erreur de mise à jour pref-container: ", error);
@@ -244,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (carForm) {
         carForm.addEventListener("submit", function (event) {
-            event.preventDefault(); // prevent page reload
+            event.preventDefault(); 
 
             let formData = new FormData(carForm);
 
@@ -255,8 +255,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        carForm.reset(); // Reset the form
-                        refreshCarList(); // refresh the cars' list
+                        carForm.reset(); 
+                        refreshCarList(); 
                     } else {
                         console.error("Erreur :", data.error);
                         alert("Erreur : " + data.error);
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const prefForm = document.getElementById("pref-form");
     if (prefForm) {
         prefForm.addEventListener('submit', function (event) {
-            event.preventDefault(); // prevent page reload
+            event.preventDefault(); 
 
             let formData = new FormData(prefForm);
             fetch("../back/preference/add.php", {
@@ -283,8 +283,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 .then(data => {
                     if (data.success) {
-                        prefForm.reset(); // Reset the form
-                        refreshPrefList(); // refresh the preferences' list
+                        prefForm.reset(); 
+                        refreshPrefList(); 
                     } else {
                         console.error("Erreur :", data.error);
                         alert(data.error);

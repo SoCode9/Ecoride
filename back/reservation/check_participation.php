@@ -75,6 +75,6 @@ try {
     error_log("Error in check_participation.php : " . $e->getMessage());
     echo json_encode([
         "success" => false,
-        "message" => "Une erreur est survenue : " . $e->getMessage()
+        "message" => "Une erreur est survenue"
     ]);
 }

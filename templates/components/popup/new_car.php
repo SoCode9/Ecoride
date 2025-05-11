@@ -118,7 +118,7 @@ ob_start(); ?>
                     return;
                 }
 
-                carContainer.innerHTML = html; // update car's section
+                carContainer.innerHTML = html; 
             })
             .catch(error => {
                 console.error("Erreur de mise à jour car-field :", error);
@@ -156,7 +156,7 @@ ob_start(); ?>
             .then(data => {
                 console.log("Réponse du backend :", data);
                 closePopupCar();
-                refreshCarField(); // refresh the cars' list
+                refreshCarField(); 
             })
             .catch(error => {
                 console.error("Erreur :", error);

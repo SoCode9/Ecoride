@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'delete_pref') {
                 $statement->bindParam(':driverId', $driverId, PDO::PARAM_INT);
                 $statement->execute();
                 header('Location:../../controllers/user_space.php');
+                $_SESSION['success_message'] = "La préférence a été supprimée";
                 exit;
             }
         }
