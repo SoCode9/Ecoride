@@ -185,7 +185,7 @@ class User
                 }
             }
 
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             error_log("Database error in createNewUser(): " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
         }
