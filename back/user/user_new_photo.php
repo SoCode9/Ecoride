@@ -39,10 +39,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'edit-photo-us
         $uploadDir = __DIR__ . '/../../photos/';
         $destination = $uploadDir . $uniqueName;
 
+        // Delete the user's old photos from the folder
+        $photoFolder = scandir($uploadDir);
+        foreach ($photoFolder as $photo) {
+            $photoSearched = strstr($photo, $userId . "_");
+            if ($photoSearched !== false) {
+                unlink($uploadDir . $photoSearched);
+            }
+        }
+
         // Move the uploaded file to the destination folder
         if (!move_uploaded_file($file['tmp_name'], $destination)) {
             throw new Exception("Erreur lors de l'enregistrement du fichier");
         }
+
 
         // Update the user's photo path in the database
         $connectedUser->setPhoto($uniqueName);
@@ -50,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'edit-photo-us
 
     } catch (Exception $e) {
         error_log("Erreur upload photo (user ID $userId) : " . $e->getMessage());
-        $_SESSION['error_message'] = "Une erreur est survenue lors de la mise à jour de votre photo";
+        $_SESSION['error_message'] = $e->getMessage();
     }
 
     header('Location: ../../controllers/user_space.php');
