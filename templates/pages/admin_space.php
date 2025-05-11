@@ -141,13 +141,13 @@
         <!--CHART nb carpools in the next 10 days-->
         <div class="block-light-grey flex-column gap-12 flex-center text-bold">
             <span class="text-green">Evolution des covoiturages</span>
-            <canvas id="carpoolsPerDayChart" width="2500" height="2000"></canvas>
+            <canvas id="carpools-per-day-chart" width="2500" height="2000"></canvas>
         </div>
 
         <!--CHART credits earned by the platform over the last 10 days-->
         <div class="block-light-grey flex-column gap-12 flex-center text-bold">
             <span class="text-green">Evolution des crédits gagnés par la plateforme</span>
-            <canvas id="creditsEarnedByPlatform" width="2500" height="2000"></canvas>
+            <canvas id="credits-earned-by-platform" width="2500" height="2000"></canvas>
         </div>
 
     </section>

@@ -2,7 +2,7 @@
 
     <!-- Search section -->
     <section class="search"
-        style=" background: url('<?= BASE_URL ?>/icons/Accueil_transp.jpg') center/cover no-repeat;">
+        style="background: url('<?= BASE_URL ?>/icons/Accueil_transp.jpg') center/cover no-repeat;">
         <h1>
             EcoRide, la plateforme qui révolutionne vos déplacements<br>
             tout en respectant l'environnement.

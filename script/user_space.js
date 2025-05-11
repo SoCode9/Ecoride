@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const editButton = document.getElementById('edit-button');
     const saveButton = document.getElementById('save-button');
-    const addCarButton = document.getElementById("add_car_button");
-    const addPrefButton = document.getElementById("add_pref_button");
+    const addCarButton = document.getElementById("add-car-button");
+    const addPrefButton = document.getElementById("add-pref-button");
     const updatePhoto = document.getElementById("edit-photo-icon");
 
     if (editButton && saveButton) {
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function toggleCarSection() {
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
 
-        if (selectedRole === "role_passenger") {
+        if (selectedRole === "role-passenger") {
             carSection.classList.add("hidden"); 
         } else {
             carSection.classList.remove("hidden"); 
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /** Display form to add a new preference **/
     if (addPrefButton) {
         addPrefButton.addEventListener('click', () => {
-            document.querySelector(".prefForm").classList.remove("hidden");
+            document.querySelector(".pref-form").classList.remove("hidden");
         });
     }
 
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const carForm = document.querySelector(".carForm");
         carForm.classList.add("hidden");
 
-        const prefForm = document.querySelector(".prefForm");
+        const prefForm = document.querySelector(".pref-form");
         prefForm.classList.add("hidden");
 
         let selectedRole = document.querySelector('input[name="user_role"]:checked').id;
@@ -150,34 +150,34 @@ document.addEventListener("DOMContentLoaded", function () {
         let selectedMusicPref = document.querySelector('input[name="music_pref"]:checked').id;
 
         let roleId;
-        if (selectedRole === "role_passenger") roleId = 1;
-        if (selectedRole === "role_driver") roleId = 2;
-        if (selectedRole === "role_both") roleId = 3;
+        if (selectedRole === "role-passenger") roleId = 1;
+        if (selectedRole === "role-driver") roleId = 2;
+        if (selectedRole === "role-both") roleId = 3;
 
         let smokePref;
-        if (selectedSmokePref === "smoke_yes") smokePref = 1;
-        if (selectedSmokePref === "smoke_no") smokePref = 0;
-        if (selectedSmokePref === "smoke_undefined") smokePref = "NULL";
+        if (selectedSmokePref === "smoke-yes") smokePref = 1;
+        if (selectedSmokePref === "smoke-no") smokePref = 0;
+        if (selectedSmokePref === "smoke-undefined") smokePref = "NULL";
 
         let petPref;
-        if (selectedPetPref === "pet_yes") petPref = 1;
-        if (selectedPetPref === "pet_no") petPref = 0;
-        if (selectedPetPref === "pet_undefined") petPref = "NULL";
+        if (selectedPetPref === "pet-yes") petPref = 1;
+        if (selectedPetPref === "pet-no") petPref = 0;
+        if (selectedPetPref === "pet-undefined") petPref = "NULL";
 
         let foodPref;
-        if (selectedFoodPref === "food_yes") foodPref = 1;
-        if (selectedFoodPref === "food_no") foodPref = 0;
-        if (selectedFoodPref === "food_undefined") foodPref = "NULL";
+        if (selectedFoodPref === "food-yes") foodPref = 1;
+        if (selectedFoodPref === "food-no") foodPref = 0;
+        if (selectedFoodPref === "food-undefined") foodPref = "NULL";
 
         let speakPref;
-        if (selectedSpeakPref === "speak_yes") speakPref = 1;
-        if (selectedSpeakPref === "speak_no") speakPref = 0;
-        if (selectedSpeakPref === "speak_undefined") speakPref = "NULL";
+        if (selectedSpeakPref === "speak-yes") speakPref = 1;
+        if (selectedSpeakPref === "speak-no") speakPref = 0;
+        if (selectedSpeakPref === "speak-undefined") speakPref = "NULL";
 
         let musicPref;
-        if (selectedMusicPref === "music_yes") musicPref = 1;
-        if (selectedMusicPref === "music_no") musicPref = 0;
-        if (selectedMusicPref === "music_undefined") musicPref = "NULL";
+        if (selectedMusicPref === "music-yes") musicPref = 1;
+        if (selectedMusicPref === "music-no") musicPref = 0;
+        if (selectedMusicPref === "music-undefined") musicPref = "NULL";
 
         fetch('../back/user/update_user_profile.php', {
             method: 'POST',

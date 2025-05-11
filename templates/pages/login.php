@@ -3,7 +3,7 @@
         <div class="login-block">
             <h1 class="text-green">Se connecter</h1>
             <form action="" method="POST" class="login-form">
-                <input type="hidden" name="action" value="formLogin"> <!--login form-->
+                <input type="hidden" name="action" value="formLogin">
                 <input type="email" id="mail" name="mail" placeholder="Email" class="field-connexion" required>
                 <input type="password" name="password" placeholder="Mot de passe" class="field-connexion" required>
                 <div class="btn bg-light-green font-size-very-big" style="color: white;">

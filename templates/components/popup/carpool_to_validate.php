@@ -6,8 +6,8 @@ ob_start(); ?>
         <!-- Step 1 -->
         <span>Est-ce que tout s’est bien passé ?</span>
         <div class="gap-4">
-            <button id="yesButton" class="yes-no-btn" onclick="handleValidation(true)">Oui</button>
-            <button id="noButton" class="yes-no-btn" onclick="handleValidation(false)">Non</button>
+            <button id="yes-button" class="yes-no-btn" onclick="handleValidation(true)">Oui</button>
+            <button id="no-button" class="yes-no-btn" onclick="handleValidation(false)">Non</button>
         </div>
 
 
@@ -82,8 +82,8 @@ ob_start(); ?>
         document.getElementById('popup-id').style.display = 'none';
         document.getElementById('feedback-positive').style.display = 'none';
         document.getElementById('feedback-negative').style.display = 'none';
-        document.getElementById('yesButton').classList.remove('selected-btn');
-        document.getElementById('noButton').classList.remove('selected-btn');
+        document.getElementById('yes-button').classList.remove('selected-btn');
+        document.getElementById('no-button').classList.remove('selected-btn');
 
         // reset forms
         document.querySelector('#feedback-positive form')?.reset();
@@ -94,8 +94,8 @@ ob_start(); ?>
         if ($bool == true) {
             document.getElementById('feedback-positive').style.display = 'block';
             document.getElementById('feedback-negative').style.display = 'none';
-            document.getElementById('yesButton').classList.add('selected-btn');
-            document.getElementById('noButton').classList.remove('selected-btn');
+            document.getElementById('yes-button').classList.add('selected-btn');
+            document.getElementById('no-button').classList.remove('selected-btn');
 
             const commentNegative = document.getElementById('comment-negative') ?? null;
             commentNegative?.removeAttribute('required');
@@ -103,8 +103,8 @@ ob_start(); ?>
         } else {
             document.getElementById('feedback-negative').style.display = 'block';
             document.getElementById('feedback-positive').style.display = 'none';
-            document.getElementById('yesButton').classList.remove('selected-btn');
-            document.getElementById('noButton').classList.add('selected-btn');
+            document.getElementById('yes-button').classList.remove('selected-btn');
+            document.getElementById('no-button').classList.add('selected-btn');
 
             const commentNegative = document.getElementById('comment-negative') ?? null;
             commentNegative?.setAttribute('required', '');

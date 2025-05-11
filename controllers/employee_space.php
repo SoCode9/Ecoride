@@ -13,7 +13,7 @@ include __DIR__ . "/../templates/layout.php";
 ?>
 
 <style>
-    #employeeSpace {
+    #employee-space {
         background-color: #F2C674;
         color: black;
         border: #F2C674;

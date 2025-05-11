@@ -1,5 +1,5 @@
 //chart carpools per day
-const carpoolsPerDayChart = document.querySelector("#carpoolsPerDayChart");
+const carpoolsPerDayChart = document.querySelector("#carpools-per-day-chart");
 fetch("../back/carpool/chart_per_day.php")
     .then((response) => {
         return response.json();
@@ -8,12 +8,12 @@ fetch("../back/carpool/chart_per_day.php")
         if (carpoolsPerDayChart) {
             createChart(carpoolsPerDayChart, data, 'bar', 'Nb de covoiturages sur les prochains jours', 'Nb de covoiturages', 'Dix prochains jours', 'travelDate', 'nbCarpool')
         } else {
-            console.warn("Élément #carpoolsPerDayChart introuvable.");
+            console.warn("Élément #carpools-per-day-chart introuvable");
         }
     });
 
 //chart credits earned by the platform
-const creditsEarnedByPlatform = document.querySelector("#creditsEarnedByPlatform");
+const creditsEarnedByPlatform = document.querySelector("#credits-earned-by-platform");
 fetch("../back/carpool/chart_credits_earned.php")
     .then((response) => {
         return response.json();
@@ -22,7 +22,7 @@ fetch("../back/carpool/chart_credits_earned.php")
         if (creditsEarnedByPlatform) {
             createChart(creditsEarnedByPlatform, data, 'bar', 'Nb de crédits gagnés dans les derniers jours', 'Nb de crédits gagnés', 'Dix derniers jours', 'validationCarpoolDate', 'carpoolsValidated')
         } else {
-            console.warn("Élément #creditsEarnedByPlatform introuvable.");
+            console.warn("Élément #credits-earned-by-platform introuvable.");
         }
     });
 

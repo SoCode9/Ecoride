@@ -13,7 +13,7 @@ $carsOfDriver = $cars->getCars();
 ?>
 
 <label for="carSelected">Voiture</label>
-<select id="carSelected" name="carSelected" required>
+<select id="car-selected" name="carSelected" required>
     <?php foreach ($carsOfDriver as $car): ?>
         <option value="<?= $car['car_id'] ?>"><?= $car['name'] . " " . $car['car_model'] ?></option>
     <?php endforeach; ?>

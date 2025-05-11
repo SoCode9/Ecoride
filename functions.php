@@ -176,19 +176,19 @@ function renderNavigationLinks($asListItem = false)
             case 1:
             case 2:
             case 3:
-                echo $tagOpen . "<a class='btn border-white' id='userSpace' href='{$base}/controllers/user_space.php'>Espace Utilisateur</a>" . $tagClose;
+                echo $tagOpen . "<a class='btn border-white' id='user-space' href='{$base}/controllers/user_space.php'>Espace Utilisateur</a>" . $tagClose;
                 break;
             case 4:
-                echo $tagOpen . "<a class='btn border-white' id='employeeSpace' href='{$base}/controllers/employee_space.php'>Espace Employé</a>" . $tagClose;
+                echo $tagOpen . "<a class='btn border-white' id='employee-space' href='{$base}/controllers/employee_space.php'>Espace Employé</a>" . $tagClose;
                 break;
             case 5:
-                echo $tagOpen . "<a class='btn border-white' id='adminSpace' href='{$base}/controllers/admin_space.php'>Espace Administrateur</a>" . $tagClose;
+                echo $tagOpen . "<a class='btn border-white' id='admin-space' href='{$base}/controllers/admin_space.php'>Espace Administrateur</a>" . $tagClose;
                 break;
         }
-        echo $tagOpen . "<a id='logoutButton' href='{$base}/controllers/login.php'> 
+        echo $tagOpen . "<a id='logout-button' href='{$base}/controllers/login.php'> 
             <img src='{$base}/icons/Deconnexion.png' alt='logout' class='logout-btn'> 
         </a>" . $tagClose;
     } else {
-        echo $tagOpen . "<a class='btn border-white' id='loginButton' href='{$base}/controllers/login.php'>Connexion</a>" . $tagClose;
+        echo $tagOpen . "<a class='btn border-white' id='login-button' href='{$base}/controllers/login.php'>Connexion</a>" . $tagClose;
     }
 }
