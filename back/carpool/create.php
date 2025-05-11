@@ -13,13 +13,13 @@ $driver = new Driver($pdo, $driverId);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     try {
-        $travelDate = $_POST["travelDate"];
+        $travelDate = $_POST["travel-date"];
         $travelDepartureCity = $_POST["departure-city-search"];
         $travelArrivalCity = $_POST["arrival-city-search"];
-        $travelDepartureTime = $_POST["travelDepartureTime"];
-        $travelArrivalTime = $_POST["travelArrivalTime"];
-        $travelPrice = $_POST["travelPrice"];
-        $carSelectedId = $_POST["carSelected"];
+        $travelDepartureTime = $_POST["travel-departure-time"];
+        $travelArrivalTime = $_POST["travel-arrival-time"];
+        $travelPrice = $_POST["travel-price"];
+        $carSelectedId = $_POST["car-selected"];
         $travelComment = $_POST["comment"];
 
         $newTravel = new Travel($pdo);

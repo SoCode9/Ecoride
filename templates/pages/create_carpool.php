@@ -24,8 +24,8 @@
 
     <form action="../back/carpool/create.php" method="POST" class="half-separation">
         <div class="form-group full-width-grid">
-            <label for="travelDate">Date du départ</label>
-            <input type="date" id="travelDate" name="travelDate" required />
+            <label for="travel-date">Date du départ</label>
+            <input type="date" id="travel-date" name="travel-date" required />
         </div>
 
         <div class="form-group" style="position: relative;">
@@ -36,8 +36,8 @@
         </div>
 
         <div class="form-group">
-            <label for="travelDepartureTime">Heure de départ</label>
-            <input type="time" id="travelDepartureTime" name="travelDepartureTime" required />
+            <label for="travel-departure-time">Heure de départ</label>
+            <input type="time" id="travel-departure-time" name="travel-departure-time" required />
         </div>
 
         <div class="form-group" style="position: relative;">
@@ -49,14 +49,14 @@
 
 
         <div class="form-group">
-            <label for="travelArrivalTime">Heure d'arrivée</label>
-            <input type="time" id="travelArrivalTime" name="travelArrivalTime" required />
+            <label for="travel-arrival-time">Heure d'arrivée</label>
+            <input type="time" id="travel-arrival-time" name="travel-arrival-time" required />
         </div>
 
         <div class="form-group">
-            <label for="travelPrice">Prix pour une personne</label>
+            <label for="travel-price">Prix pour une personne</label>
             <div class="flex-row">
-                <input type="number" id="travelPrice" name="travelPrice" min="1" required />
+                <input type="number" id="travel-price" name="travel-price" min="1" required />
                 <span>crédits</span>
             </div>
         </div>

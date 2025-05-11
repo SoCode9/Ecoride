@@ -15,7 +15,7 @@ include __DIR__ . "/../templates/layout.php";
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="<?= BASE_URL ?>/script/charts.js" defer></script>
 <style>
-    #adminSpace {
+    #admin-space {
         background-color: #F2C674;
         color: black;
         border: #F2C674;

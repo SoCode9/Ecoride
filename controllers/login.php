@@ -10,7 +10,7 @@ include __DIR__ . "/../templates/layout.php";
 
 <style>
     /*Adapt Login button*/
-    #loginButton {
+    #login-button {
         background-color: #F2C674;
         color: black;
         border: #F2C674;

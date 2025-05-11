@@ -9,12 +9,12 @@ ob_start(); ?>
 
     <div class="flex-row flex-column-ss">
         <label for="licence_plate">Plaque immatriculation : </label>
-        <input type="text" id="licence_plate" name="licence_plate" class="text-field" placeholder="AA-000-AA">
+        <input type="text" id="licence-plate" name="licence_plate" class="text-field" placeholder="AA-000-AA">
     </div>
 
     <div class="flex-row flex-column-ss">
         <label for="first_registration_date">Date première immatriculation : </label>
-        <input type="date" id="first_registration_date" name="first_registration_date" class="text-field">
+        <input type="date" id="first-registration-date" name="first_registration_date" class="text-field">
     </div>
     <div class="flex-row flex-column-ss">
         <label for="brand">Marque : </label>
@@ -33,10 +33,10 @@ ob_start(); ?>
     </div>
     <div class="flex-row">
         <label for="electric">Electrique : </label>
-        <input type="radio" name="electric" value="yes" id="electric_yes">
+        <input type="radio" name="electric" value="yes" id="electric-yes">
         <label for="electric_yes">oui</label>
 
-        <input type="radio" name="electric" value="no" id="electric_no">
+        <input type="radio" name="electric" value="no" id="electric-no">
         <label for="electric_no">non</label>
 
     </div>
@@ -46,7 +46,7 @@ ob_start(); ?>
     </div>
     <div class="flex-row">
         <label for="nb_passengers">Nombre de passagers possible : </label>
-        <input type="number" id="nb_passengers" name="nb_passengers" class="numberField text-field"
+        <input type="number" id="nb-passengers" name="nb_passengers" class="text-field"
             style="width: 40px;">
     </div>
     <div class="btn bg-light-green">
@@ -60,13 +60,13 @@ ob_start(); ?>
         event.preventDefault();
         document.getElementById('popup-new-car').style.display = 'block';
 
-        const licencePlate = document.getElementById('licence_plate');
-        const firstRegistrationDate = document.getElementById('first_registration_date');
+        const licencePlate = document.getElementById('licence-plate');
+        const firstRegistrationDate = document.getElementById('first-registration-date');
         const brand = document.getElementById('brand');
         const model = document.getElementById('model');
-        const electric = document.getElementById('electric_yes');
+        const electric = document.getElementById('electric-yes');
         const color = document.getElementById('color');
-        const nbPassengers = document.getElementById('nb_passengers');
+        const nbPassengers = document.getElementById('nb-passengers');
 
         licencePlate.setAttribute('required', '');
         firstRegistrationDate.setAttribute('required', '');
@@ -80,13 +80,13 @@ ob_start(); ?>
     function closePopupCar() {
         document.getElementById('popup-new-car').style.display = 'none';
 
-        const licencePlate = document.getElementById('licence_plate');
-        const firstRegistrationDate = document.getElementById('first_registration_date');
+        const licencePlate = document.getElementById('licence-plate');
+        const firstRegistrationDate = document.getElementById('first-registration-date');
         const brand = document.getElementById('brand');
         const model = document.getElementById('model');
-        const electric = document.getElementById('electric_yes');
+        const electric = document.getElementById('electric-yes');
         const color = document.getElementById('color');
-        const nbPassengers = document.getElementById('nb_passengers');
+        const nbPassengers = document.getElementById('nb-passengers');
 
         licencePlate.removeAttribute('required', '');
         firstRegistrationDate.removeAttribute('required', '');
@@ -126,14 +126,14 @@ ob_start(); ?>
     }
 
     function submitJS() {
-        const licencePlate = document.getElementById('licence_plate').value;
-        const firstRegistrationDate = document.getElementById('first_registration_date').value;
+        const licencePlate = document.getElementById('licence-plate').value;
+        const firstRegistrationDate = document.getElementById('first-registration-date').value;
         const brand = document.getElementById('brand').value;
         const model = document.getElementById('model').value;
         const electricInput = document.querySelector('input[name="electric"]:checked');
         const electric = electricInput ? electricInput.value : '';
         const color = document.getElementById('color').value;
-        const nbPassengers = document.getElementById('nb_passengers').value;
+        const nbPassengers = document.getElementById('nb-passengers').value;
 
         fetch('/0-ECFEcoride/back/car/add.php', {
 

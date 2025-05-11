@@ -1,4 +1,4 @@
-const logoutButton = document.getElementById("logoutButton");
+const logoutButton = document.getElementById("logout-button");
 if (logoutButton) {
     logoutButton.addEventListener('click', () => {
         fetch('../back/user/logout.php', { method: 'POST' })
