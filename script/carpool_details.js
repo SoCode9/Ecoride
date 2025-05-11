@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('participate').addEventListener('click', function () {
-        let travelId = this.getAttribute("data-id"); // Retrieve travel id
+        let travelId = this.getAttribute("data-id"); 
 
         // Sent AJAX query to server to check available seats
         fetch("../back/reservation/check_participation.php", {
@@ -8,18 +8,18 @@ document.addEventListener("DOMContentLoaded", function () {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: "travel_id=" + travelId // sent travel id to server
+            body: "travel_id=" + travelId 
         })
-            .then(response => response.json()) // We expect a JSON response
+            .then(response => response.json()) 
             .then(data => {
                 if (data.success) {
                     if (data.availableSeats === 0) {
-                        alert("Désolé, il n'y a plus de places disponibles.");
+                        alert("Désolé, il n'y a plus de places disponibles");
                         return;
                     }
                     // Check if user has  credit enough
                     if (data.userCredits < data.travelPrice) {
-                        alert("Vous n'avez pas assez de crédits pour réserver ce covoiturage.");
+                        alert("Vous n'avez pas assez de crédits pour réserver ce covoiturage");
                         return; 
                     }
 
@@ -40,16 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 if (data.message && data.message.includes("Utilisateur déjà inscrit à ce covoiturage")) {
-                    alert("Vous êtes déjà inscrit à ce covoiturage.")
+                    alert("Vous êtes déjà inscrit à ce covoiturage")
                 }
 
                 if (data.message && data.message.includes("Le covoiturage est soit en cours, soit annulé, soit terminé")) {
-                    alert("Impossible de participer au covoiturage.")
+                    alert("Impossible de participer au covoiturage")
                 }
             })
             .catch(error => {
                 console.error("Erreur AJAX :", error);
-                alert("Une erreur est survenue. Veuillez réessayer plus tard.");
+                alert("Une erreur est survenue");
             });
     });
 
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: "travel_id=" + travelId // sent travel id to server
+            body: "travel_id=" + travelId 
         })
             .then(response => response.json())
             .then(data => {
