@@ -7,8 +7,7 @@
     </h2>
 
     <section class="flex-row flex-between block-light-grey flex-column-ss no-background-ss">
-        <div class="flex-row flex-between block-white" id="travel-details"
-            style="width:65%;box-sizing: border-box;">
+        <div class="flex-row flex-between block-white" id="travel-details" style="width:65%;box-sizing: border-box;">
 
             <div class="course">
 
@@ -41,7 +40,7 @@
             </div>
 
             <div class="flex-column gap-8" id="travel-extra" style="align-items: end; min-width:max-content;">
-                <div> <?php $seatsAvailable = seatsAvailable($car->getSeatsOfferedByCar( $travel->getCarId()), ($reservation->countPassengers($travel->getIdTravel())));
+                <div> <?php $seatsAvailable = seatsAvailable($car->getSeatsOfferedByCar($travel->getCarId()), ($reservation->countPassengers($travel->getIdTravel())));
 
                 if ($seatsAvailable <= 1) {
                     echo htmlspecialchars($seatsAvailable) . " place restante";
@@ -53,7 +52,7 @@
                 </div>
                 <div>
                     <span class="criteria-eco"><?php
-                    echo formatEco(($car->getElectric())) ?></span>
+                    echo htmlspecialchars(formatEco(($car->getElectric()))) ?></span>
                 </div>
             </div>
 
@@ -217,7 +216,7 @@
                     if (isset($addPref1)): ?>
                         <div class="text-icon">
                             <img src='<?= BASE_URL ?>/icons/addPref.png' class='img-width-20' alt=''>
-                            <span><?= $addPref1 ?></span>
+                            <span><?= htmlspecialchars($addPref1) ?></span>
                         </div>
                     <?php endif; ?>
                     <?php
@@ -225,7 +224,7 @@
                     if (isset($addPref2)): ?>
                         <div class="text-icon">
                             <img src='<?= BASE_URL ?>/icons/addPref.png' class='img-width-20' alt=''>
-                            <span><?= $addPref2 ?></span>
+                            <span><?= htmlspecialchars($addPref2) ?></span>
                         </div>
                     <?php endif; ?>
                     <?php
@@ -233,7 +232,7 @@
                     if (isset($addPref3)): ?>
                         <div class="text-icon">
                             <img src='<?= BASE_URL ?>/icons/addPref.png' class='img-width-20' alt=''>
-                            <span><?= $addPref3 ?></span>
+                            <span><?= htmlspecialchars($addPref3) ?></span>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -268,8 +267,7 @@
                 <div class="flex-column gap-8">
                     <div class="flex-row flex-between">
                         <div class="flex-row item-center gap-4">
-                            <img src="<?= displayPhoto($rating['photo']) ?>" alt="Photo de l'utilisateur"
-                                class="photo-50">
+                            <img src="<?= displayPhoto($rating['photo']) ?>" alt="Photo de l'utilisateur" class="photo-50">
                             <span><?= htmlspecialchars($rating['pseudo']) ?></span>
                         </div>
                         <div class="flex-row item-center gap-4" style="padding-left: 0px;">
