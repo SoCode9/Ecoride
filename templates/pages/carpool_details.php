@@ -51,8 +51,7 @@
                 ?>
                 </div>
                 <div>
-                    <span class="criteria-eco"><?php
-                    echo htmlspecialchars(formatEco(($car->getElectric()))) ?></span>
+                    <span class="criteria-eco"><?= formatEco(($car->getElectric())) ?></span>
                 </div>
             </div>
 
