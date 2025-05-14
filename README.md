@@ -57,6 +57,9 @@ Ce fichier va :
 
 #### b. Données de test (optionnel)
 Le fichier `ecoride_test_data.sql` permet de remplir la base avec des utilisateurs fictifs, trajets et réservations pour tester l’application sans tout créer manuellement.
+
+Importez le fichier fichier SQL situé à la racine du projet : `ecoride_test_data.sql` :
+
 - toujours dans phpMyAdmin, cliquez sur l’onglet Importer
 - sélectionnez le fichier `ecoride_test_data.sql`
 - cliquez sur Exécuter
@@ -66,7 +69,7 @@ Ou en ligne de commande :
 mysql -u root -p ecoride < ecoride_test_data.sql
 ```
 > Consulter le contenu du fichier pour voir les utilisateurs et trajets ajoutés.
-> Les mots de passe sont déjà hachés et prêts à l'emploi.
+> Les mots de passe des utilisateurs sont : `Test1234!`
 
 ## Configuration
 L'application détecte automatiquement si elle s'exécute en local ou en production grâce à l'adresse du serveur ($_SERVER['HTTP_HOST']).
