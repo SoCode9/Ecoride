@@ -17,6 +17,6 @@ include __DIR__ . '/templates/layout.php';
 ?>
 <style>
     #home-page {
-        color: #F2C674;
+        color: var(--col-orange);
     }
 </style>

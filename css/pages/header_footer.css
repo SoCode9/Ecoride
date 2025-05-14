@@ -10,8 +10,8 @@
     align-items: center;
 }
 
-@media(max-width:767px){
-    .header{
+@media(max-width:767px) {
+    .header {
         padding: 10px;
     }
 }
@@ -78,7 +78,7 @@ a {
         z-index: 1;
         top: 0;
         right: -250px;
-        background-color: #e8e8e8;
+        background-color: var(--col-light-grey);
         padding-top: 60px;
         transition: right 0.5s ease;
 
@@ -88,7 +88,7 @@ a {
         padding: 8px 8px 8px 32px;
         text-decoration: none;
         font-size: 1.5rem;
-        color: #818181;
+        color: var(--col-dark-grey);
         display: block;
         transition: 0.3s;
     }

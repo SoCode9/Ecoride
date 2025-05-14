@@ -23,7 +23,7 @@
 }
 
 .field-connexion {
-    background-color: #D9D9D9;
+    background-color: var(--col-grey);
     color: var(--col-dark-grey);
     width: 100%;
     padding: 8px 10px;

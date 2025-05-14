@@ -14,8 +14,8 @@ include __DIR__ . "/../templates/layout.php";
 
 <style>
     #employee-space {
-        background-color: #F2C674;
+        background-color: var(--col-orange);
         color: black;
-        border: #F2C674;
+        border: var(--col-orange);
     }
 </style>

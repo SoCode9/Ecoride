@@ -56,7 +56,7 @@
     <?php endif; ?>
 
     <?php if (isset($_SESSION['error_message'])): ?>
-        <div class="message" style="background-color: #f8d7da; color: #721c24;">
+        <div class="message" style="background-color: var(--col-light-red); color: var(--col-dark-red);">
             <?php
             echo $_SESSION['error_message'];
             unset($_SESSION['error_message']); // Deletes after display

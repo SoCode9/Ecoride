@@ -38,7 +38,7 @@
 
 .about .text p {
     line-height: 1.6;
-    color: #333;
+    color: var(--col-very-dark-grey);
 }
 
 .about .image img {

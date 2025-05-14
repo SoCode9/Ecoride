@@ -20,6 +20,6 @@ include __DIR__ . "/../templates/layout.php";
 ?>
 <style>
     #carpool-button {
-        color: #F2C674;
+        color: var(--col-orange);
     }
 </style>
