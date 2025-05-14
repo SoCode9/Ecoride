@@ -11,7 +11,7 @@
 }
 
 .bg-light-red {
-    background-color: #e08282;
+    background-color: var(--col-red);
 }
 
 .bg-very-light-green {

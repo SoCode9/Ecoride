@@ -130,7 +130,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    color: #4D9856;
+    color: var(--col-green);
 
 }
 
@@ -179,7 +179,7 @@
 }
 
 .suggestion-item:hover {
-    background: #f5f5f5;
+    background: var(--col-very-light-grey);
 }
 
 
