@@ -317,7 +317,7 @@ VALUES (
     UUID(),
     'admin',
     'admin@test.com',
-    '$2y$10$Rx.2VZ4KvX7vHRWqHjDjWe6BKgWbFjeVJkV/R0q.6qnyVErGGcPei',
+    '$2y$10$hi1v6Bp3duxTCOMPplFehuFu7WlnDQoSWjP7A75aCGE8myqYXzncy',
     NULL,
     NULL,
     5,
