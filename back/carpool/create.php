@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $travelDepartureTime = $_POST["travel-departure-time"];
         $travelArrivalTime = $_POST["travel-arrival-time"];
         $travelPrice = $_POST["travel-price"];
-        $carSelectedId = $_POST["car-selected"];
+        $carSelectedId = $_POST["carSelected"];
         $travelComment = $_POST["comment"];
 
         $newTravel = new Travel($pdo);
-        $success = $newTravel->createNewTravel(
+        $newTravel->createNewTravel(
             $driverId,
             $travelDate,
             $travelDepartureCity,
@@ -35,12 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $travelComment
         );
 
-        if (!$success) {
-            throw new Exception("Erreur lors de la création du voyage.");
-        }
-
         $_SESSION['success_message'] = 'Le voyage a bien été publié.';
-
     } catch (Exception $e) {
         error_log("Error in create_carpool.php (user ID: " . ($_SESSION['user_id'] ?? 'inconnu') . ") : " . $e->getMessage());
         $_SESSION['error_message'] = "Une erreur est survenue lors de la création du covoiturage.";
