@@ -27,6 +27,13 @@ C:\xampp\htdocs\
 >Par exemple, vous obtiendrez : C:\xampp\htdocs\Ecoride
 >Ensuite, vous pourrez y accéder via : http://localhost/Ecoride
 
+### 3. Installer l'extension intl de php
+Ouvrir le fichier php.ini et ajouter l'extension, qui fournit des outils pour le formatage des dates notamment.
+```bash
+extension=php_intl.dll
+```
+Penser à redémarrer le serveur (Apache) pour charger l'extension.
+
 ### 3. Créer la base de données
 #### a. Structure + données essentielles
 1. Ouvrir phpMyAdmin ou votre outil MySQL 
