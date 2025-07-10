@@ -33,7 +33,6 @@ class Travel
             $this->id = $travelId;
             $this->loadTravelFromDB();
         }
-
     }
 
     /**
@@ -134,7 +133,7 @@ class Travel
      * @throws \Exception If a database error occurs
      * @return bool
      */
-    public function createNewTravel(string $driverId, string $travelDate, string $travelDepartureCity, string $travelArrivalCity, string $travelDepartureTime, string $travelArrivalTime, int $travelPrice, int $carId, string $travelComment): void
+    public function createNewTravel(string $driverId, string $travelDate, string $travelDepartureCity, string $travelArrivalCity, string $travelDepartureTime, string $travelArrivalTime, int $travelPrice, int $carId, ?string $travelComment = null): void
     {
         try {
             $sql = "INSERT INTO travels (id, driver_id, travel_date,travel_departure_city, travel_arrival_city, travel_departure_time, travel_arrival_time,travel_price, car_id, travel_description) VALUES (UUID(), :driverId,:travel_date, :travel_departure_city,:travel_arrival_city,:travel_departure_time,:travel_arrival_time,:travel_price,:car_id,:travelComment)";
@@ -149,12 +148,10 @@ class Travel
             $statement->bindParam(':car_id', $carId, PDO::PARAM_INT);
             $statement->bindParam(':travelComment', $travelComment, PDO::PARAM_STR);
             $statement->execute();
-
         } catch (PDOException $e) {
             error_log("Database error in createNewTravel(): " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
         }
-
     }
 
     /**
@@ -310,7 +307,6 @@ class Travel
             $nextTravelDate = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             return $nextTravelDate;
-
         } catch (PDOException $e) {
             error_log("Database error in searchnextTravelDate(): " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
@@ -342,7 +338,6 @@ class Travel
             }
 
             $statement->execute();
-
         } catch (Exception $e) {
             error_log("Database error in setTravelStatus(): " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
@@ -409,7 +404,6 @@ class Travel
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_COLUMN);
             return $result ? htmlspecialchars($result) : "Aucune donnée trouvée.";
-
         } catch (PDOException $e) {
             error_log("Database error in getDate() : " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
