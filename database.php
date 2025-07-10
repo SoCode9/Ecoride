@@ -7,14 +7,14 @@ if (in_array($host, ['localhost', '127.0.0.1', '::1'])) {
     // Local connection (XAMPP)
     $dbHost = 'localhost';
     $dbName = 'ecoride';
-    $dbPort = 3308;
-    $dbUser = 'root';
-    $dbPass = '';
+    $dbPort = 3306;
+    $dbUser = 'admin_php';
+    $dbPass = 'Test1234!';
 } else {
     // AlwaysData connection (production)
     $dbHost = 'mysql-ecoride-sge.alwaysdata.net';
     $dbName = 'ecoride-sge_ecoride';
-    $dbPort = 3306; // par défaut
+    $dbPort = 3306; 
     $dbUser = '411431';
     $dbPass = 'Germain14!';
 }

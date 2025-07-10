@@ -135,7 +135,7 @@ ob_start(); ?>
         const color = document.getElementById('color').value;
         const nbPassengers = document.getElementById('nb-passengers').value;
 
-        fetch('/0-ECFEcoride/back/car/add.php', {
+        fetch('/Ecoride/back/car/add.php', {
 
             method: 'POST',
             headers: {
