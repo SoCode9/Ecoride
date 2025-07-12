@@ -61,7 +61,7 @@ if (isset($_GET['action'])) {
                 }
                 $travel->setTravelStatus('cancelled', $idTravel); //change travel's status
 
-                header('Location: ../../controllers/user_space.php?tab=carpool');
+                header('Location: ../../controllers/user_space.php?tab=carpools');
                 $_SESSION['success_message'] = "Le covoiturage a été annulé. Les passagers ont reçu un mail leur en informant.";
                 exit;
 
