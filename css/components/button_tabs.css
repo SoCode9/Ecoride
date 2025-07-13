@@ -80,6 +80,12 @@
     cursor: pointer;
 }
 
+.btn-desactivated {
+    background-color: var(--col-grey);
+    color: var(--col-dark-grey);
+    cursor: not-allowed;
+}
+
 .return-btn {
     border: 2px solid var(--col-green);
     background-color: var(--col-light-grey);

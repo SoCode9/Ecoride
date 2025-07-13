@@ -68,15 +68,20 @@
                 ?> </div>
             </div>
             <?php $isGuest = $userId === null;
-            $isNotEmployee = !$isGuest && in_array($user->getIdRole(), [1, 2, 3]);
+            $isPassenger = !$isGuest && in_array($user->getIdRole(), [1, 3]);
             $isNotDriver = $travel->getDriverId() != $userId;
             $status = $travel->getStatus();
-            if (($isGuest || $isNotEmployee) && $isNotDriver && $status === 'not started'): ?>
+            if (($isGuest || $isPassenger) && $isNotDriver && $status === 'not started'): ?>
                 <button id="participate" class="btn action-btn" style="padding: 8px;"
                     data-id="<?= htmlspecialchars($travel->getIdTravel()) ?>">
                     <img src="<?= BASE_URL ?>/icons/Calendrier.png" class="img-pointer" alt="booking calendar icon">
                     <span>Participer au covoiturage</span>
                 </button>
+            <?php else: ?>
+                <div class="btn btn-desactivated" style="padding: 8px;">
+                    <span>Participer au covoiturage</span>
+                </div>
+
             <?php endif; ?>
 
             <?php if ($travel->getDriverId() === $userId && $status === 'not started'): ?>
