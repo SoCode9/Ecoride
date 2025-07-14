@@ -119,10 +119,10 @@ class Driver extends User
     }
 
     /**
-     * Adds a new custom preference to the first available (null or empty) slot
-     * among the three custom preference fields (add_pref_1, add_pref_2, add_pref_3)
+     * Add a custom preference for the driver
+     * This method inserts a new custom preference into the MongoDB collection.
      * @param string $customPrefToAdd The new preference to insert
-     * @throws Exception If the user ID is not set or a database error occurs
+     * @throws \Exception If the user ID is not set or a database error occurs
      * @return void
      */
     public function addCustomPreference(string $customPrefToAdd): void
@@ -144,6 +144,33 @@ class Driver extends User
             return;
         } catch (Exception $e) {
             error_log("Database error in addCustomPreference() (user ID: {$this->id}) : " . $e->getMessage());
+            throw new Exception("Une erreur est survenue");
+        }
+    }
+
+    /**
+     * Deletes a custom preference for the driver
+     * This method removes a specific custom preference from the MongoDB collection.
+     * @param string $customPrefToDelete The preference to delete
+     * @throws \Exception If the user ID is not set or a database error occurs
+     * @return void
+     */
+    public function deleteCustomPreference(string $customPrefToDelete): void
+    {
+        if (empty($this->id)) {
+            error_log("deleteCustomPreference() failed: user ID is empty.");
+            throw new Exception("Impossible de supprimer une préférence sans identifiant utilisateur");
+        }
+
+        try {
+            $client = new MongoDB\Client("mongodb://localhost:27017");
+            $collectionPreferences = $client->ecoride->preferences;
+            $collectionPreferences->deleteOne([
+                'user_id' => $this->id,
+                'custom_preference' => $customPrefToDelete
+            ]);
+        } catch (Exception $e) {
+            error_log("Database error in deleteCustomPreference() (user ID: {$this->id}) : " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
         }
     }
