@@ -104,7 +104,6 @@ class Driver extends User
         }
 
         try {
-
             $client = new MongoDB\Client("mongodb://localhost:27017");
             $collectionPreferences = $client->ecoride->preferences;
             $result = $collectionPreferences->find([

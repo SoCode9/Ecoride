@@ -216,29 +216,14 @@
                     <?php endif; ?>
                     <!--Others preferences-->
                     <?php
-                    $addPref1 = $driver->getAddPref1();
-                    if (isset($addPref1)): ?>
+                    $customPreferences = $driver->loadCustomPreferences();
+                    foreach ($customPreferences as $pref): ?>
                         <div class="text-icon">
                             <img src='<?= BASE_URL ?>/icons/addPref.png' class='img-width-20' alt=''>
-                            <span><?= htmlspecialchars($addPref1) ?></span>
+                            <span><?= htmlspecialchars($pref['custom_preference']) ?></span>
                         </div>
-                    <?php endif; ?>
-                    <?php
-                    $addPref2 = $driver->getAddPref2();
-                    if (isset($addPref2)): ?>
-                        <div class="text-icon">
-                            <img src='<?= BASE_URL ?>/icons/addPref.png' class='img-width-20' alt=''>
-                            <span><?= htmlspecialchars($addPref2) ?></span>
-                        </div>
-                    <?php endif; ?>
-                    <?php
-                    $addPref3 = $driver->getAddPref3();
-                    if (isset($addPref3)): ?>
-                        <div class="text-icon">
-                            <img src='<?= BASE_URL ?>/icons/addPref.png' class='img-width-20' alt=''>
-                            <span><?= htmlspecialchars($addPref3) ?></span>
-                        </div>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
+                   
                 </div>
             </div>
         </section>
