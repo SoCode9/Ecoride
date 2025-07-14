@@ -1,6 +1,7 @@
 <?php
 
 require_once "User.php";
+require_once __DIR__ . '/../vendor/autoload.php'; // inclure l'autochargeur de Composer
 
 class Driver extends User
 {
@@ -103,25 +104,24 @@ class Driver extends User
         }
 
         try {
-            $sql = 'SELECT add_pref_1, add_pref_2, add_pref_3 FROM driver WHERE user_id = :driver_id';
-            $statement = $this->pdo->prepare($sql);
-            $statement->bindParam(':driver_id', $this->id, PDO::PARAM_STR);
-            $statement->execute();
+            $client = new MongoDB\Client("mongodb://localhost:27017");
+            $collectionPreferences = $client->ecoride->preferences;
+            $result = $collectionPreferences->find([
+                'user_id' => $this->id
+            ])->toArray();
 
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-            return $result;
-        } catch (PDOException $e) {
+            return array_map(fn($doc) => (array)$doc, $result);
+        } catch (Exception $e) {
             error_log("Database error in loadCustomPreferences() (user ID: {$this->id}) : " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
         }
     }
 
     /**
-     * Adds a new custom preference to the first available (null or empty) slot
-     * among the three custom preference fields (add_pref_1, add_pref_2, add_pref_3)
+     * Add a custom preference for the driver
+     * This method inserts a new custom preference into the MongoDB collection.
      * @param string $customPrefToAdd The new preference to insert
-     * @throws Exception If the user ID is not set or a database error occurs
+     * @throws \Exception If the user ID is not set or a database error occurs
      * @return void
      */
     public function addCustomPreference(string $customPrefToAdd): void
@@ -131,20 +131,45 @@ class Driver extends User
             throw new Exception("Impossible d'ajouter une préférence sans identifiant utilisateur");
         }
 
-        $customPreferencesInDB = $this->loadCustomPreferences();
         try {
-            foreach ($customPreferencesInDB as $columnName => $value) {
-                if ($value === null) {
-                    $sql = "UPDATE driver SET $columnName = :customPrefToAdd WHERE user_id = :driver_id";
-                    $statement = $this->pdo->prepare($sql);
-                    $statement->bindParam(':customPrefToAdd', $customPrefToAdd, PDO::PARAM_STR);
-                    $statement->bindParam(':driver_id', $this->id, PDO::PARAM_STR);
-                    $statement->execute();
-                    return;
-                }
-            }
-        } catch (PDOException $e) {
+
+            $client = new MongoDB\Client("mongodb://localhost:27017");
+            $collectionPreferences = $client->ecoride->preferences;
+            $collectionPreferences->insertOne([
+                'user_id' => $this->id,
+                'custom_preference' => $customPrefToAdd
+            ]);
+
+            return;
+        } catch (Exception $e) {
             error_log("Database error in addCustomPreference() (user ID: {$this->id}) : " . $e->getMessage());
+            throw new Exception("Une erreur est survenue");
+        }
+    }
+
+    /**
+     * Deletes a custom preference for the driver
+     * This method removes a specific custom preference from the MongoDB collection.
+     * @param string $customPrefToDelete The preference to delete
+     * @throws \Exception If the user ID is not set or a database error occurs
+     * @return void
+     */
+    public function deleteCustomPreference(string $customPrefToDelete): void
+    {
+        if (empty($this->id)) {
+            error_log("deleteCustomPreference() failed: user ID is empty.");
+            throw new Exception("Impossible de supprimer une préférence sans identifiant utilisateur");
+        }
+
+        try {
+            $client = new MongoDB\Client("mongodb://localhost:27017");
+            $collectionPreferences = $client->ecoride->preferences;
+            $collectionPreferences->deleteOne([
+                'user_id' => $this->id,
+                'custom_preference' => $customPrefToDelete
+            ]);
+        } catch (Exception $e) {
+            error_log("Database error in deleteCustomPreference() (user ID: {$this->id}) : " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
         }
     }
@@ -236,7 +261,6 @@ class Driver extends User
     public function setMusicPreference($preference)
     {
         $this->updateDriverPreference('music', $preference);
-
     }
 
     private function updateDriverPreference(string $column, $value): void
