@@ -17,11 +17,11 @@ try {
             foreach ($customPreferencesInDB as $preference) {
                 if ($preference !== null) {
                     echo '<hr>';
-                    $url = BASE_URL . "/back/preference/delete.php?action=delete_pref&id=" . urlencode($preference);
+                    $url = BASE_URL . "/back/preference/delete.php?action=delete_pref&id=" . urlencode($preference['custom_preference'] ?? '');
 
                     echo "<span style='display:flex; gap:4px; align-items:center;'>
         <a class='hidden delete-pref-icon' href='$url'> <img src='" . BASE_URL . "/icons/Supprimer.png' class='img-width-20' style='cursor: pointer;'></a>
-        $preference
+        {$preference['custom_preference']}
     </span>";
                 }
             }

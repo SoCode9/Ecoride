@@ -1,6 +1,7 @@
 <?php
 
 require_once "User.php";
+require_once __DIR__ . '/../vendor/autoload.php'; // inclure l'autochargeur de Composer
 
 class Driver extends User
 {
@@ -103,15 +104,15 @@ class Driver extends User
         }
 
         try {
-            $sql = 'SELECT add_pref_1, add_pref_2, add_pref_3 FROM driver WHERE user_id = :driver_id';
-            $statement = $this->pdo->prepare($sql);
-            $statement->bindParam(':driver_id', $this->id, PDO::PARAM_STR);
-            $statement->execute();
 
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $client = new MongoDB\Client("mongodb://localhost:27017");
+            $collectionPreferences = $client->ecoride->preferences;
+            $result = $collectionPreferences->find([
+                'user_id' => $this->id
+            ])->toArray();
 
-            return $result;
-        } catch (PDOException $e) {
+            return array_map(fn($doc) => (array)$doc, $result);
+        } catch (Exception $e) {
             error_log("Database error in loadCustomPreferences() (user ID: {$this->id}) : " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
         }
@@ -131,19 +132,17 @@ class Driver extends User
             throw new Exception("Impossible d'ajouter une préférence sans identifiant utilisateur");
         }
 
-        $customPreferencesInDB = $this->loadCustomPreferences();
         try {
-            foreach ($customPreferencesInDB as $columnName => $value) {
-                if ($value === null) {
-                    $sql = "UPDATE driver SET $columnName = :customPrefToAdd WHERE user_id = :driver_id";
-                    $statement = $this->pdo->prepare($sql);
-                    $statement->bindParam(':customPrefToAdd', $customPrefToAdd, PDO::PARAM_STR);
-                    $statement->bindParam(':driver_id', $this->id, PDO::PARAM_STR);
-                    $statement->execute();
-                    return;
-                }
-            }
-        } catch (PDOException $e) {
+
+            $client = new MongoDB\Client("mongodb://localhost:27017");
+            $collectionPreferences = $client->ecoride->preferences;
+            $collectionPreferences->insertOne([
+                'user_id' => $this->id,
+                'custom_preference' => $customPrefToAdd
+            ]);
+
+            return;
+        } catch (Exception $e) {
             error_log("Database error in addCustomPreference() (user ID: {$this->id}) : " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
         }
@@ -236,7 +235,6 @@ class Driver extends User
     public function setMusicPreference($preference)
     {
         $this->updateDriverPreference('music', $preference);
-
     }
 
     private function updateDriverPreference(string $column, $value): void
