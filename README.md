@@ -1,5 +1,5 @@
-# Ecoride
-Ecoride est une application web de covoiturage conçue pour faciliter la mise en relation entre conducteurs et passagers, dans une démarche écologique et économique.
+# EcoRide
+EcoRide est une application web de covoiturage conçue pour faciliter la mise en relation entre conducteurs et passagers, dans une démarche écologique et économique.
 
 Ce dépôt contient le code source du projet, incluant un frontend (HTML/CSS/JS) et un backend en PHP, avec une base de données MySQL.
 
@@ -24,8 +24,8 @@ Copiez le dossier du projet dans :
 ```bash
 C:\xampp\htdocs\
 ```
->Par exemple, vous obtiendrez : C:\xampp\htdocs\Ecoride
->Ensuite, vous pourrez y accéder via : http://localhost/Ecoride
+>Par exemple, vous obtiendrez : C:\xampp\htdocs\EcoRide
+>Ensuite, vous pourrez y accéder via : http://localhost/EcoRide
 
 ### 3. Installer l'extension intl de php
 Ouvrir le fichier php.ini et ajouter l'extension, qui fournit des outils pour le formatage des dates notamment.
@@ -114,5 +114,5 @@ sendmail_from = test@ecoride.local
 2. Démarrer Apache et MySQL
 3. Accéder à l’application dans votre navigateur à l’adresse :
 
-**http://localhost/Ecoride**
+**http://localhost/EcoRide**
 
