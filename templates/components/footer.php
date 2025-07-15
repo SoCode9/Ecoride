@@ -8,7 +8,7 @@
             <a href="mailto:info@ecoride.fr">info@ecoride.fr</a>
         </div>
         <div>
-            <a href="<?= BASE_URL ?>/templates/pages/legal_informations.php" class="nav-btn"> Mentions légales</a>
+            <a href="<?= BASE_URL ?>/controllers/legal_informations.php" class="nav-btn"> Mentions légales</a>
         </div>
     </div>
 </footer>
