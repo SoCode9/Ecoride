@@ -12,9 +12,9 @@
 <body>
     <header>
         <div class="header">
-            <div>
-                <img src="" alt="Logo">
-            </div>
+            <a href="<?= BASE_URL ?>/index.php">
+                <img src="<?= BASE_URL ?>/icons/Logo.png" alt="Logo" style=" width: 100px;">
+            </a>
 
             <!--Navigation display for big screens-->
             <div class="navigation">
@@ -67,7 +67,7 @@
 </body>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const message = document.querySelector(".message");
         if (message) {
             setTimeout(() => {
