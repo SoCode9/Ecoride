@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($pageTitle ?? "Ecoride") ?></title>
+    <title><?= htmlspecialchars($pageTitle ?? "EcoRide") ?></title>
     <?php require_once __DIR__ . "/../functions.php"; ?>
     <script>
         const BASE_URL = "<?= BASE_URL ?>";

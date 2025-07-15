@@ -2,10 +2,10 @@
     <h2 class="text-green text-bold">Mentions légales</h2>
     <h3>Identité et coordonnées</h3>
     <p>
-        Le site Ecoride est édité par : <br>
+        Le site EcoRide est édité par : <br>
 
     <ul>
-        <li>Nom de l’entreprise : Ecoride</li>
+        <li>Nom de l’entreprise : EcoRide</li>
         <li>Responsable de la publication : José Studi</li>
         <li>Adresse postale : 18 rue des Érables, 69007 Lyon, France</li>
         <li>Adresse e-mail : info@ecoride.fr</li>
@@ -14,7 +14,7 @@
     </p>
     <h3>Statut juridique</h3>
     <p>
-        Ecoride est une société par actions simplifiée (SAS) au capital de 10 000 euros, immatriculée au Registre du Commerce et des Sociétés de Lyon sous le numéro 892 345 678.
+        EcoRide est une société par actions simplifiée (SAS) au capital de 10 000 euros, immatriculée au Registre du Commerce et des Sociétés de Lyon sous le numéro 892 345 678.
     </p>
     <h3>Hébergement du site</h3>
     <p>
@@ -27,13 +27,13 @@
     </p>
 
     <h3>Propriété intellectuelle</h3>
-    <p>L’ensemble des éléments présents sur le site Ecoride (textes, images, graphismes, logo, vidéos, structure générale, etc.) relève de la législation française et internationale sur le droit d’auteur et la propriété intellectuelle.
-        Sauf mention contraire, ces contenus sont la propriété exclusive de Ecoride.
+    <p>L’ensemble des éléments présents sur le site EcoRide (textes, images, graphismes, logo, vidéos, structure générale, etc.) relève de la législation française et internationale sur le droit d’auteur et la propriété intellectuelle.
+        Sauf mention contraire, ces contenus sont la propriété exclusive de EcoRide.
         Toute reproduction, représentation, modification, publication, adaptation de tout ou partie du site, quel que soit le moyen ou le procédé utilisé, est interdite sans autorisation écrite préalable.</p>
 
     <h3>Protection des données personnelles</h3>
     <p>
-        Conformément au Règlement Général sur la Protection des Données (RGPD), Ecoride s’engage à respecter la confidentialité des données personnelles collectées.
+        Conformément au Règlement Général sur la Protection des Données (RGPD), EcoRide s’engage à respecter la confidentialité des données personnelles collectées.
     <ul>
         <li>Données collectées : lors de l’inscription, de la réservation d’un trajet, de la proposition d'un trajet ou via les formulaires de contact, les informations suivantes peuvent être collectées : nom, prénom, adresse e-mail, numéro de téléphone, informations sur les véhicules, historique de trajets.</li>
         <li>Utilisation : ces données sont utilisées uniquement pour fournir les services de la plateforme (mise en relation, gestion des trajets), pour améliorer l’expérience utilisateur.</li>

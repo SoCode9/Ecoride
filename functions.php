@@ -3,7 +3,7 @@
 $host = $_SERVER['HTTP_HOST'];
 
 if (in_array($host, ['localhost', '127.0.0.1', '::1'])) {
-    define('BASE_URL', '/Ecoride');
+    define('BASE_URL', '/EcoRide');
 } else {
     define('BASE_URL', '');
 }

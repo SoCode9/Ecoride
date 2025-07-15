@@ -368,7 +368,7 @@ class Travel
     }
 
     /**
-     * Get the credits earned by the Ecoride platform
+     * Get the credits earned by the EcoRide platform
      * @throws \Exception If a database error occurs
      * @return int
      */
