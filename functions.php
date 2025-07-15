@@ -174,7 +174,7 @@ function renderNavigationLinks($asListItem = false)
 
     echo $tagOpen . "<a id='home-page' href='{$base}/index.php'>Accueil</a>" . $tagClose;
     echo $tagOpen . "<a id='carpool-button' href='{$base}/controllers/carpool_search.php'>Covoiturages</a>" . $tagClose;
-    echo $tagOpen . "<a href='#'>Contact</a>" . $tagClose;
+    echo $tagOpen . "<a id='contact-button' href='{$base}/controllers/contact.php'>Contact</a>" . $tagClose;
 
     if (isset($_SESSION['user_id'])) {
         switch ($_SESSION['role_user']) {
