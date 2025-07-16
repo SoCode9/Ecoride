@@ -1,7 +1,7 @@
 <?php
 
 require_once "User.php";
-require_once __DIR__ . '/../vendor/autoload.php'; // inclure l'autochargeur de Composer
+require_once __DIR__ . "/../database.php";
 
 class Driver extends User
 {
@@ -12,10 +12,6 @@ class Driver extends User
     private ?bool $musicPreference;
     private ?bool $speakerPreference;
     private ?bool $foodPreference;
-    private ?string $addPref1;
-    private ?string $addPref2;
-    private ?string $addPref3;
-
 
     public function __construct(PDO $pdo, string $driverId)
     {
@@ -48,9 +44,6 @@ class Driver extends User
             $this->musicPreference = $driverData['music'];
             $this->speakerPreference = $driverData['speaker'];
             $this->foodPreference = $driverData['food'];
-            $this->addPref1 = $driverData['add_pref_1'];
-            $this->addPref2 = $driverData['add_pref_2'];
-            $this->addPref3 = $driverData['add_pref_3'];
         } else {
             error_log("loadDriverFromDB() failed for user ID: {$this->id}");
             throw new Exception("Une erreur est survenue lors du chargement des informations de l'utilisateur");
@@ -94,19 +87,19 @@ class Driver extends User
      * Loads the custom preferences of the current driver.
      *
      * @throws Exception If the user ID is not set or the preferences cannot be loaded
-     * @return array Associative array with keys: add_pref_1, add_pref_2, add_pref_3
+     * @return array 
      */
     public function loadCustomPreferences(): array
     {
+        global $mongoDb;
         if (empty($this->id)) {
             error_log("loadCustomPreferences() failed: driver ID is empty");
             throw new Exception("Impossible de charger les préférences sans identifiant utilisateur");
         }
 
         try {
-            $client = new MongoDB\Client("mongodb://localhost:27017");
-            $collectionPreferences = $client->ecoride->preferences;
-            $result = $collectionPreferences->find([
+            $preferenceCollection = $mongoDb->preferences;
+            $result = $preferenceCollection->find([
                 'user_id' => $this->id
             ])->toArray();
 
@@ -126,18 +119,17 @@ class Driver extends User
      */
     public function addCustomPreference(string $customPrefToAdd): void
     {
+        global $mongoDb;
         if (empty($this->id)) {
             error_log("addCustomPreference() failed: user ID is empty.");
             throw new Exception("Impossible d'ajouter une préférence sans identifiant utilisateur");
         }
 
         try {
-
-            $client = new MongoDB\Client("mongodb://localhost:27017");
-            $collectionPreferences = $client->ecoride->preferences;
-            $collectionPreferences->insertOne([
+            $preferenceCollection = $mongoDb->preferences;
+            $preferenceCollection->insertOne([
                 'user_id' => $this->id,
-                'custom_preference' => $customPrefToAdd
+                'custom_preference' => $customPrefToAdd,
             ]);
 
             return;
@@ -156,17 +148,17 @@ class Driver extends User
      */
     public function deleteCustomPreference(string $customPrefToDelete): void
     {
+        global $mongoDb;
         if (empty($this->id)) {
             error_log("deleteCustomPreference() failed: user ID is empty.");
             throw new Exception("Impossible de supprimer une préférence sans identifiant utilisateur");
         }
 
         try {
-            $client = new MongoDB\Client("mongodb://localhost:27017");
-            $collectionPreferences = $client->ecoride->preferences;
-            $collectionPreferences->deleteOne([
+            $preferenceCollection = $mongoDb->preferences;
+            $preferenceCollection->deleteOne([
                 'user_id' => $this->id,
-                'custom_preference' => $customPrefToDelete
+                'custom_preference' => $customPrefToDelete,
             ]);
         } catch (Exception $e) {
             error_log("Database error in deleteCustomPreference() (user ID: {$this->id}) : " . $e->getMessage());
@@ -195,24 +187,6 @@ class Driver extends User
     {
         return $this->foodPreference;
     }
-
-    public function getAddPref1(): ?string
-    {
-        return $this->addPref1;
-    }
-
-
-    public function getAddPref2(): ?string
-    {
-        return $this->addPref2;
-    }
-
-
-    public function getAddPref3(): ?string
-    {
-        return $this->addPref3;
-    }
-
     /**
      * Calculates the average rating for the driver based on validated ratings
      * @return float|null The average rating (e.g., 4.2), or null if no rating is available
