@@ -9,7 +9,10 @@ require_once __DIR__ . "/../../class/Car.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 require_once __DIR__ . "/../../class/Travel.php";
 
+$pdo = pdo();
+
 $userId = $_SESSION['user_id'];
+
 try {
     $connectedUser = User::fromId($pdo, $userId);
     if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)) {
@@ -31,8 +34,8 @@ try {
     $brands = $statement->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     error_log("Error in user_space (load info) : " . $e->getMessage());
+    header('Location: ../index.php');
     $_SESSION['error_message'] = "Une erreur est survenue";
-    header('Location: ../../controllers/user_space.php');
     exit;
 }
 
@@ -88,6 +91,7 @@ if (isset($_GET['action'])) {
             $travel->setTravelStatus('in progress', $idTravel);
             header('Location: ../../controllers/user_space.php?tab=carpools');
             $_SESSION['success_message'] = "Le covoiturage a débuté.";
+            exit;
         } catch (Exception $e) {
             error_log("Error in start a carpool : " . $e->getMessage());
             $_SESSION['error_message'] = "Une erreur est survenue";
@@ -127,6 +131,5 @@ if (isset($_GET['action'])) {
             header('Location: ../../controllers/user_space.php?tab=carpools');
             exit;
         }
-
     }
 }

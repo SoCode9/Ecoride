@@ -6,6 +6,8 @@ require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Driver.php";
 require_once __DIR__ . "/../../class/Travel.php";
 
+$pdo = pdo();
+
 /**To get all the driver's cars */
 $driverId = $_SESSION['user_id'];
 $driver = new Driver($pdo, $driverId);

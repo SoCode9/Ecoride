@@ -9,6 +9,8 @@ if (session_status() === PHP_SESSION_NONE)
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Driver.php";
 
+$pdo = pdo();
+
 $driverId = $_SESSION['user_id'];
 if ($_SERVER['REQUEST_METHOD'] === "POST" && $_POST['action'] === "formPref") {
     header('Content-Type: application/json');

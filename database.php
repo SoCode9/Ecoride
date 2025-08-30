@@ -1,48 +1,61 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php'; // inclure l'autochargeur de Composer
+declare(strict_types=1);
 
-//CONNECTION TO THE DATABASE
-$host = $_SERVER['HTTP_HOST'];
+require_once __DIR__ . '/vendor/autoload.php'; 
 
-if (in_array($host, ['localhost', '127.0.0.1', '::1'])) {
-    // Local connection (XAMPP)
-    $dbHost = 'localhost';
-    $dbName = 'ecoride';
-    $dbPort = 3306;
-    $dbUser = 'admin_php';
-    $dbPass = 'Test1234!';
-
-    // MongoDB local connection
-    $mongoUri = 'mongodb://localhost:27017';
-    $mongoDbName = 'ecoride';
-} else {
-    // AlwaysData connection (production)
-    $dbHost = 'mysql-ecoride-sge.alwaysdata.net';
-    $dbName = 'ecoride-sge_ecoride';
-    $dbPort = 3306;
-    $dbUser = '411431';
-    $dbPass = 'Germain14!';
-
-    // MongoDB Atlas
-    $mongoUri = 'mongodb+srv://tennis00015:KPlwAD4WolWKW4hh@ecoride-cluster.9cv0pxh.mongodb.net/?retryWrites=true&w=majority&appName=ecoride-cluster';
-    $mongoDbName = 'ecoride';
+// --- Mini loader .env (local seulement) ---
+$envFile = __DIR__ . '/.env';
+if (is_file($envFile)) {
+    foreach (file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#')) continue;
+        [$k, $v] = array_map('trim', explode('=', $line, 2));
+        if ($k !== '') putenv("$k=$v");
+    }
+}
+function env(string $key, ?string $default = null): ?string {
+    $v = getenv($key);
+    return $v === false ? $default : $v;
 }
 
-try {
-    $pdo = new PDO(
-        "mysql:host=$dbHost;port=$dbPort;dbname=$dbName;charset=utf8mb4",
-        $dbUser,
-        $dbPass
-    );
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion à la base de données : " . $e->getMessage());
+// --- Singleton PDO ---
+function pdo(): PDO {
+    static $pdo = null;
+    if ($pdo instanceof PDO) return $pdo;
+
+    $host    = env('DB_HOST', '127.0.0.1');
+    $port    = (int) env('DB_PORT', '3306');
+    $name    = env('DB_NAME', 'ecoride');
+    $user    = env('DB_USER', 'root');
+    $pass    = env('DB_PASS', '');
+    $charset = env('DB_CHARSET', 'utf8mb4');
+
+    $dsn = sprintf('mysql:host=%s;port=%d;dbname=%s;charset=%s', $host, $port, $name, $charset);
+
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false,
+    ];
+
+    $pdo = new PDO($dsn, $user, $pass, $options);
+    return $pdo;
 }
 
-try {
-    $mongoClient = new MongoDB\Client($mongoUri);
-    $mongoDb = $mongoClient->$mongoDbName;
-} catch (Exception $e) {
-    die("Erreur de connexion à MongoDB : " . $e->getMessage());
+// --- Singleton MongoDB ---
+function mongo_db(): ?MongoDB\Database {
+    static $db = null;
+    if ($db instanceof MongoDB\Database) return $db;
+
+    $uri = env('MONGO_URI'); 
+    $name = env('MONGO_DB');
+
+    if (!$uri || !$name) return null;
+
+    $client = new MongoDB\Client($uri);
+    $db = $client->selectDatabase($name);
+    return $db;
 }
+
+$GLOBALS['mongoDb'] = mongo_db();

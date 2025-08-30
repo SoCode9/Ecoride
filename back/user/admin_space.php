@@ -7,6 +7,8 @@ require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/User.php";
 require_once __DIR__ . "/../../class/Travel.php";
 
+$pdo = pdo();
+
 $administrator = User::fromId ($pdo, $_SESSION['user_id']);
 
 try {
@@ -85,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'create-employ
         $newEmployee = User::register($pdo,$pseudoEmployee, $mailEmployee, $passwordEmployee,4);
         $_SESSION['success_message'] = "Compte employé créé avec succès";
         header('Location:../../controllers/admin_space.php');
+        exit;
     } catch (Exception $e) {
         error_log("Error in employee creation : " . $e->getMessage());
         $_SESSION['error_message'] = $e->getMessage();

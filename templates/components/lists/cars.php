@@ -6,6 +6,8 @@ if (session_status() === PHP_SESSION_NONE)
 require_once __DIR__ . "/../../../database.php";
 require_once __DIR__ . "/../../../class/Car.php";
 
+$pdo = pdo();
+
 $idUser = $_SESSION['user_id'];
 
 $car = new Car($pdo, $idUser, null);

@@ -8,6 +8,8 @@ require_once __DIR__ . "/../../class/Travel.php";
 require_once __DIR__ . "/../../class/Rating.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 
+$pdo = pdo();
+
 $passengerId = $_SESSION['user_id'];
 
 //If the passenger has validated the carpool (with or without a rating)
@@ -37,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'positive') {
         error_log("Carpool validation error : " . $e->getMessage());
         header('Location:../../controllers/user_space.php?tab=carpools');
         $_SESSION['error_message'] = "Une erreur est survenue";
+        exit;
     }
 }
 
@@ -54,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'negative') {
         error_log("Carpool validation error : " . $e->getMessage());
         header('Location:../../controllers/user_space.php?tab=carpools');
         $_SESSION['error_message'] = "Une erreur est survenue";
+        exit;
     }
 
 }

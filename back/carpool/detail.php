@@ -9,6 +9,8 @@ require_once __DIR__ . "/../../class/User.php";
 require_once __DIR__ . "/../../class/Driver.php";
 require_once __DIR__ . "/../../class/User.php";
 
+$pdo = pdo();
+
 $userId = $_SESSION['user_id'] ?? null;
 
 try {
@@ -26,4 +28,5 @@ try {
     error_log("Error in details carpool : " . $e->getMessage());
     header('Location:../../controllers/carpool_details.php');
     $_SESSION['error_message'] = "Une erreur est survenue";
+    exit;
 }

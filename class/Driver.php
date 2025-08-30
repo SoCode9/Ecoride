@@ -3,6 +3,8 @@
 require_once "User.php";
 require_once __DIR__ . "/../database.php";
 
+$pdo = pdo();
+
 class Driver extends User
 {
 

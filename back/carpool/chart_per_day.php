@@ -4,6 +4,9 @@ if (session_status() === PHP_SESSION_NONE)
 
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../functions.php";
+
+$pdo = pdo();
+
 try {
     $today = date('Y-m-d');
 

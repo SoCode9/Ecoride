@@ -16,9 +16,11 @@ try {
         $car->deleteCar($idCarToDelete);
         header('Location:../../controllers/user_space.php');
         $_SESSION['success_message'] = "La voiture a été supprimée";
+        exit;
     }
 } catch (Exception $e) {
     error_log("Error in delete a car (driver ID: $idDriver) : " . $e->getMessage());
     header('Location:../../controllers/user_space.php');
     $_SESSION['error_message'] = $e->getMessage();
+    exit;
 }

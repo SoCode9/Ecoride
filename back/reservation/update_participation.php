@@ -8,6 +8,8 @@ require_once __DIR__ . "/../../class/Reservation.php";
 require_once __DIR__ . "/../../class/Car.php";
 require_once __DIR__ . "/../../class/Travel.php";
 
+$pdo = pdo();
+
 ### second check ###
 
 header('Content-Type: application/json');
