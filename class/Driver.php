@@ -102,7 +102,7 @@ class Driver extends User
         try {
             $preferenceCollection = $mongoDb->preferences;
             $result = $preferenceCollection->find([
-                'idUser' => $this->id
+                'id_user' => $this->id
             ])->toArray();
 
             return array_map(fn($doc) => (array)$doc, $result);
@@ -130,7 +130,7 @@ class Driver extends User
         try {
             $preferenceCollection = $mongoDb->preferences;
             $preferenceCollection->insertOne([
-                'user_id' => $this->id,
+                'id_user' => $this->id,
                 'custom_preference' => $customPrefToAdd,
             ]);
 
@@ -159,7 +159,7 @@ class Driver extends User
         try {
             $preferenceCollection = $mongoDb->preferences;
             $preferenceCollection->deleteOne([
-                'user_id' => $this->id,
+                'id_user' => $this->id,
                 'custom_preference' => $customPrefToDelete,
             ]);
         } catch (Exception $e) {
