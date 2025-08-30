@@ -100,7 +100,7 @@ class Driver extends User
         try {
             $preferenceCollection = $mongoDb->preferences;
             $result = $preferenceCollection->find([
-                'user_id' => $this->id
+                'idUser' => $this->id
             ])->toArray();
 
             return array_map(fn($doc) => (array)$doc, $result);
