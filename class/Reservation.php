@@ -50,16 +50,18 @@ class Reservation
         try {
             $sql = "SELECT travels.*, users.pseudo, users.photo, ratings.rating, reservations.is_validated, reservations.id AS reservationId 
                 FROM travels 
-                LEFT JOIN reservations ON reservations.travel_id = travels.id AND reservations.user_id = :userConnectedId
+                LEFT JOIN reservations ON reservations.travel_id = travels.id AND reservations.user_id = :userConnectedId1
                 JOIN driver ON driver.user_id = travels.driver_id 
                 JOIN users ON users.id = travels.driver_id
                 LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
-                WHERE (travel_status = 'in validation') AND ((reservations.user_id =:userConnectedId AND reservations.is_validated = 0) OR (travels.driver_id =:userConnectedId))
+                WHERE (travel_status = 'in validation') AND ((reservations.user_id =:userConnectedId2 AND reservations.is_validated = 0) OR (travels.driver_id =:userConnectedId3))
                 GROUP BY travels.id, users.pseudo
                 ORDER BY travel_date ASC ";
 
             $statement = $this->pdo->prepare($sql);
-            $statement->bindParam(":userConnectedId", $userId, PDO::PARAM_STR);
+            $statement->bindParam(":userConnectedId1", $userId, PDO::PARAM_STR);
+            $statement->bindParam(":userConnectedId2", $userId, PDO::PARAM_STR);
+            $statement->bindParam(":userConnectedId3", $userId, PDO::PARAM_STR);
             $statement->execute();
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -153,7 +155,6 @@ class Reservation
             $statement->execute();
 
             $this->pdo->commit();
-
         } catch (Exception $e) {
             $this->pdo->rollBack();
             error_log("Database error in cancelCarpool() : " . $e->getMessage());
@@ -192,7 +193,6 @@ class Reservation
             }
 
             $this->pdo->commit();
-
         } catch (Exception $e) {
             $this->pdo->rollBack();
             error_log("Error in validateCarpoolYes() : " . $e->getMessage());
@@ -455,7 +455,6 @@ class Reservation
                 error_log("setCreditToUser() affected 0 rows for user ID $userId");
                 throw new Exception("Aucun utilisateur trouvé avec l'ID fourni");
             }
-
         } catch (PDOException $e) {
             error_log("Database error in setCreditToUser() (user ID: $userId): " . $e->getMessage());
             throw new Exception("Erreur lors de la mise à jour des crédits");

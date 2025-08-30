@@ -4,6 +4,8 @@ require_once __DIR__ . "/../../functions.php";
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/User.php";
 
+$pdo = pdo();
+
 //CONNECTION WITH DATABASE WHEN AN ACCOUNT IS CREATE
 if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccount")) {
 

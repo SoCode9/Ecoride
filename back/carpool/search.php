@@ -9,6 +9,7 @@ require_once __DIR__ . "/../../class/User.php";
 require_once __DIR__ . "/../../class/Driver.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 
+$pdo = pdo();
 
 try {
     // form actions
@@ -77,5 +78,6 @@ try {
     error_log("Error in search carpool : " . $e->getMessage());
     header('Location:../../controllers/carpool_search.php');
     $_SESSION['error_message'] = "Une erreur est survenue";
+    exit;
 }
 

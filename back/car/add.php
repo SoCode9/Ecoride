@@ -5,6 +5,8 @@ if (session_status() === PHP_SESSION_NONE)
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Car.php";
 
+$pdo = pdo();
+
 $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 if (($_SERVER['REQUEST_METHOD'] === "POST")) {

@@ -8,6 +8,8 @@ require_once __DIR__ . "/../../class/Reservation.php";
 require_once __DIR__ . "/../../class/Car.php";
 require_once __DIR__ . "/../../class/Travel.php";
 
+$pdo = pdo();
+
 try {
     // check if travel ID is sent
     if (!isset($_POST['travel_id'])) {

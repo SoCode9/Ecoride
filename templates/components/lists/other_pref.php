@@ -6,6 +6,8 @@ require_once __DIR__ . "/../../../database.php";
 require_once __DIR__ . "/../../../class/Driver.php";
 require_once __DIR__ . "/../../../back/user/user_space.php";
 
+$pdo = pdo();
+
 $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 try {

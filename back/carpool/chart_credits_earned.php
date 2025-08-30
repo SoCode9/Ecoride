@@ -4,6 +4,9 @@ if (session_status() === PHP_SESSION_NONE)
 
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../functions.php";
+
+$pdo = pdo();
+
 try {
     $sql = 'SELECT validated_at AS validationCarpoolDate, count(validated_at)*2 AS carpoolsValidated FROM travels WHERE validated_at IS NOT NULL GROUP BY validationCarpoolDate ORDER BY validationCarpoolDate ASC LIMIT 10';
     $statement = $pdo->prepare($sql);

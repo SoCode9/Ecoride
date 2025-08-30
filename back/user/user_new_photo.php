@@ -5,6 +5,8 @@ if (session_status() === PHP_SESSION_NONE)
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/User.php";
 
+$pdo = pdo();
+
 $userId = $_SESSION['user_id'];
 $connectedUser = User::fromId($pdo, $userId);
 

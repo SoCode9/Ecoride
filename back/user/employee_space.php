@@ -7,6 +7,8 @@ require_once __DIR__ . "/../../class/Driver.php";
 require_once __DIR__ . "/../../class/Rating.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 
+$pdo = pdo();
+
 try {
     $employee = User::fromId($pdo, $_SESSION['user_id']);
 

@@ -5,6 +5,8 @@ if (session_status() === PHP_SESSION_NONE)
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Driver.php";
 
+$pdo = pdo();
+
 $prefToDelete = $_GET['id'];
 $driverId = $_SESSION['user_id'];
 
