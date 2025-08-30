@@ -34,9 +34,9 @@ INSERT INTO `users` (`id`, `pseudo`, `mail`, `password`, `credit`, `photo`, `id_
 -- Dumping data for table `driver`
 --
 
-INSERT INTO `driver` (`user_id`, `food`, `music`, `pets`, `smoker`, `speaker`, `add_pref_1`, `add_pref_2`, `add_pref_3`) VALUES
-('13a40eaa-2802-11f0-9346-5254007e02a0', NULL, NULL, 1, 1, NULL, NULL, NULL, NULL),
-('9a17f210-2807-11f0-9346-5254007e02a0', 0, NULL, 1, 0, NULL, 'Privilégier les petits bagages', NULL, NULL);
+INSERT INTO `driver` (`user_id`, `food`, `music`, `pets`, `smoker`, `speaker`) VALUES
+('13a40eaa-2802-11f0-9346-5254007e02a0', NULL, NULL, 1, 1, NULL),
+('9a17f210-2807-11f0-9346-5254007e02a0', 0, NULL, 1, 0, NULL);
 
 --
 -- Dumping data for table `cars`

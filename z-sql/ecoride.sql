@@ -73,10 +73,7 @@ CREATE TABLE `driver` (
   `music` tinyint(1) DEFAULT NULL,
   `pets` tinyint(1) DEFAULT NULL,
   `smoker` tinyint(1) DEFAULT NULL,
-  `speaker` tinyint(1) DEFAULT NULL,
-  `add_pref_1` varchar(255) DEFAULT NULL,
-  `add_pref_2` varchar(255) DEFAULT NULL,
-  `add_pref_3` varchar(255) DEFAULT NULL
+  `speaker` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
