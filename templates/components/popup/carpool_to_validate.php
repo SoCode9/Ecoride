@@ -13,8 +13,7 @@ ob_start(); ?>
 <!-- Step 2A : If Yes -->
 <div id="feedback-positive" style="display:none">
     <h4 class="m-tb-12">Souhaitez-vous laisser un avis ?</h4>
-    <form class="block-column-g20" action="<?= BASE_URL ?>/back/carpool/validate.php" method="POST"
-        onsubmit="console.log('Form submitted!')">
+    <form class="block-column-g20" action="<?= BASE_URL ?>/back/carpool/validate.php" method="POST">
         <input type="hidden" name="idReservation" id="popup-idReservation-positive">
         <input type="hidden" name="action" value="positive">
 
@@ -51,8 +50,7 @@ ob_start(); ?>
 <!-- Step 2B : If No -->
 <div id="feedback-negative" style="display:none">
 
-    <form class="block-column-g20" action="<?= BASE_URL ?>/back/carpool/validate.php" method="POST"
-        onsubmit="console.log('Form submitted!')">
+    <form class="block-column-g20" action="<?= BASE_URL ?>/back/carpool/validate.php" method="POST">
         <input type="hidden" name="idReservation" id="popup-idReservation-negative">
         <input type="hidden" name="action" value="negative">
 
