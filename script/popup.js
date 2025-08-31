@@ -10,7 +10,7 @@ function closePopup(id) {
         closePopupValidate();
     }
 
-    // for the user space page : calls the closePopupValidate function
+    // for the new carpool page : calls the closePopupCar function
     if (typeof closePopupCar === 'function') {
         closePopupCar();
     }

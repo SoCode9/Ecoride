@@ -2,7 +2,6 @@
     <h3 class=" m-tb-12"><?= $popup_title ?></h3>
     <div class="block-column-g20">
 
-        <!--popup content-->
         <?= $popup_content ?>
 
     </div>
