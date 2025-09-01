@@ -20,8 +20,17 @@ class Reservation
         $this->badComment = $badComment;
     }
 
-    public function createNewReservation(string $userId, string $travelId, int $creditsSspent) {
-         try {
+    /**
+     * Create a new reservation for a user on a given travel (carpool).
+     * @param string $userId Passenger user UUID
+     * @param string $travelId Travel UUID to join
+     * @param int $creditsSspent Amount of credits recorded as spent for this reservation
+     * @throws \Exception If a database error occurs
+     * @return bool True on successful insert, false otherwise.
+     */
+    public function createNewReservation(string $userId, string $travelId, int $creditsSspent)
+    {
+        try {
             $sql = 'INSERT INTO reservations (user_id, travel_id, credits_spent) VALUES (:userId, :travelId, :creditSpent)';
             $statement = $this->pdo->prepare($sql);
             $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
