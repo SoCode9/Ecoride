@@ -7,15 +7,15 @@ require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 require_once __DIR__ . "/../../class/Car.php";
 require_once __DIR__ . "/../../class/Travel.php";
+require_once __DIR__ . "/../../class/User.php";
 
 $pdo = pdo();
 
 try {
-    // check if travel ID is sent
+    // Check if travel ID is sent
     if (!isset($_POST['travel_id'])) {
         throw new Exception("ID du covoiturage manquant");
     }
-
     $travelId = $_POST['travel_id'];
     $userId = $_SESSION['user_id'] ?? null;
 
@@ -24,54 +24,35 @@ try {
         throw new Exception("Utilisateur non connecte");
     }
 
-    $statement = $pdo->prepare('SELECT id FROM reservations WHERE user_id = :userId AND travel_id = :travelId');
-    $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
-    $statement->bindParam(':travelId', $travelId, PDO::PARAM_INT);
-    $statement->execute();
-    $reservationAlreadyDone = $statement->fetch();
-    if ($reservationAlreadyDone) {
+    // Check if user is already a passenger
+    $reservation = new Reservation($pdo, $userId, $travelId);
+    if ($reservation->existsForUserAndTravel($userId, $travelId)) {
         throw new Exception("Utilisateur déjà inscrit à ce covoiturage");
     }
 
     // Retrieve user's credits
-    $statement = $pdo->prepare("SELECT credit FROM users where id = ?");
-    $statement->execute([$userId]);
-    $user = $statement->fetch();
+    $user = User::fromId($pdo, $userId);
+    $userCredit = (int)$user->getCredit();
 
-    if (!$user) {
-        throw new Exception("Utilisateur introuvable");
-    }
-
-    $userCredit = (int) $user['credit'];
-
-
-    // SQL query to retrieve available seats in real time 
-    $reservation = new Reservation($pdo, $userId, $travelId);
+    // Check the available seats and retrieve the carpool's price
+    $travel = new Travel($pdo, $travelId);
+    $seatsAllocated = (int)$reservation->countPassengers($travelId);
     $car = new Car($pdo, null, $travelId);
-    $newTravel = new Travel($pdo, $travelId);
+    $seatsOffered = (int)$car->getSeatsOfferedByCar($travel->getCarId());
+    $availableSeats = max(0, $seatsOffered - $seatsAllocated);
 
-    $seatsAllocated = $reservation->countPassengers($travelId);
-    $seatsOffered = $car->getSeatsOfferedByCar($newTravel->getCarId());
+    $travelPrice = (int)$travel->getPrice();
 
-    $statement = $pdo->prepare("SELECT :seatsOffered - :seatsAllocated AS availableSeats, travel_price FROM travels WHERE id = :travelId");
-    $statement->bindValue(':seatsOffered', $seatsOffered, PDO::PARAM_INT);
-    $statement->bindValue(':seatsAllocated', $seatsAllocated, PDO::PARAM_INT);
-    $statement->bindValue(':travelId', $travelId, PDO::PARAM_STR);
-    $statement->execute();
-    $travel = $statement->fetch();
-
-    if (!$travel) {
-        throw new Exception("Covoiturage introuvable");
-    }
-
-    if ($newTravel->getStatus() !== 'not started') {
+    // Check the carpool's status
+    if ($travel->getStatus() !== 'not started') {
         throw new Exception("Le covoiturage est soit en cours, soit annulé, soit terminé");
     }
+
     echo json_encode([
         "success" => true,
-        "availableSeats" => (int) $travel['availableSeats'],
+        "availableSeats" => $availableSeats,
         "userCredits" => $userCredit,
-        "travelPrice" => (int) $travel['travel_price']
+        "travelPrice" => $travelPrice
     ]);
 } catch (Exception $e) {
     error_log("Error in check_participation.php : " . $e->getMessage());

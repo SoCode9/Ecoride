@@ -360,7 +360,29 @@ class Reservation
             throw new Exception("Impossible de récupérer les passagers du covoiturage");
         }
     }
+    /**
+     * Check if a reservation already exists for a given user and travel.
+     * @param int $userId    The passenger's user ID
+     * @param int $travelId  The travel (carpool) ID
+     * @return bool          True if a reservation exists, false otherwise
+     * @throws Exception     If a database error occurs
+     */
+    public function existsForUserAndTravel(string $userId, string $travelId): bool
+    {
+        try {
+            $sql = 'SELECT COUNT(*) FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
 
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
+            $stmt->bindParam(':travelId', $travelId, PDO::PARAM_STR);
+            $stmt->execute();
+
+            return (int)$stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("DB error in existsForUserAndTravel(user:$userId, travel:$travelId): " . $e->getMessage());
+            throw new Exception("Impossible de vérifier l'existance de la réservation");
+        }
+    }
 
     /**
      * Get the reservations not validated of a carpool
