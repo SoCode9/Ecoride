@@ -300,7 +300,7 @@ class User
      * @param int $newCredit //default = 20 credits
      * @return void
      */
-    private function setCredit(int $newCredit): void
+    public function setCredit(int $newCredit): void
     {
         if (empty($this->id)) {
             throw new Exception("Impossible de mettre à jour les crédits sans identifiant utilisateur");

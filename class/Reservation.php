@@ -20,6 +20,20 @@ class Reservation
         $this->badComment = $badComment;
     }
 
+    public function createNewReservation(string $userId, string $travelId, int $creditsSspent) {
+         try {
+            $sql = 'INSERT INTO reservations (user_id, travel_id, credits_spent) VALUES (:userId, :travelId, :creditSpent)';
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+            $statement->bindParam(':travelId', $travelId, PDO::PARAM_STR);
+            $statement->bindValue(':creditSpent', $creditsSspent, PDO::PARAM_INT);
+            return $statement->execute();
+        } catch (PDOException $e) {
+            error_log("Database error in createNewReservation() : " . $e->getMessage());
+            throw new Exception("Une erreur est survenue lors de l'enregistrement de la réservation");
+        }
+    }
+
     /**
      * count the number of passengers in a carpool
      * @param string $travelId
