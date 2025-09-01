@@ -21,6 +21,29 @@ class Reservation
     }
 
     /**
+     * Create a new reservation for a user on a given travel (carpool).
+     * @param string $userId Passenger user UUID
+     * @param string $travelId Travel UUID to join
+     * @param int $creditsSspent Amount of credits recorded as spent for this reservation
+     * @throws \Exception If a database error occurs
+     * @return bool True on successful insert, false otherwise.
+     */
+    public function createNewReservation(string $userId, string $travelId, int $creditsSspent)
+    {
+        try {
+            $sql = 'INSERT INTO reservations (user_id, travel_id, credits_spent) VALUES (:userId, :travelId, :creditSpent)';
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+            $statement->bindParam(':travelId', $travelId, PDO::PARAM_STR);
+            $statement->bindValue(':creditSpent', $creditsSspent, PDO::PARAM_INT);
+            return $statement->execute();
+        } catch (PDOException $e) {
+            error_log("Database error in createNewReservation() : " . $e->getMessage());
+            throw new Exception("Une erreur est survenue lors de l'enregistrement de la réservation");
+        }
+    }
+
+    /**
      * count the number of passengers in a carpool
      * @param string $travelId
      * @return int
@@ -360,7 +383,29 @@ class Reservation
             throw new Exception("Impossible de récupérer les passagers du covoiturage");
         }
     }
+    /**
+     * Check if a reservation already exists for a given user and travel.
+     * @param int $userId    The passenger's user ID
+     * @param int $travelId  The travel (carpool) ID
+     * @return bool          True if a reservation exists, false otherwise
+     * @throws Exception     If a database error occurs
+     */
+    public function existsForUserAndTravel(string $userId, string $travelId): bool
+    {
+        try {
+            $sql = 'SELECT COUNT(*) FROM reservations WHERE user_id = :userId AND travel_id = :travelId';
 
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_STR);
+            $stmt->bindParam(':travelId', $travelId, PDO::PARAM_STR);
+            $stmt->execute();
+
+            return (int)$stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("DB error in existsForUserAndTravel(user:$userId, travel:$travelId): " . $e->getMessage());
+            throw new Exception("Impossible de vérifier l'existance de la réservation");
+        }
+    }
 
     /**
      * Get the reservations not validated of a carpool

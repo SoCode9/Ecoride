@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("participate").addEventListener("click", function () {
     let travelId = this.getAttribute("data-id");
-
     // Sent AJAX query to server to check available seats
     fetch("../back/reservation/check_participation.php", {
       method: "POST",
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = BASE_URL + "/controllers/login.php";
           }
         }
-
+        // Check if user is already a passenger
         if (
           data.message &&
           data.message.includes("Utilisateur déjà inscrit à ce covoiturage")
@@ -51,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
           alert("Vous êtes déjà inscrit à ce covoiturage");
         }
 
+        //Check the carpool's status
         if (
           data.message &&
           data.message.includes(
