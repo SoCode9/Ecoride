@@ -5,7 +5,6 @@
         margin: 0 auto;
         margin-top: 20px;
         margin-bottom: 20px;
-        /*centers content horizontally*/
         display: flex;
         flex-direction: column;
         row-gap: 20px;
@@ -40,11 +39,6 @@
 @media(max-width:767px) {
     .flex-row-wrap {
         flex-wrap: wrap;
-    }
-
-    main {
-        margin: 10px;
-        box-sizing: border-box;
     }
 
     .pad-10-ss {
