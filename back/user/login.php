@@ -23,7 +23,6 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         $_SESSION['role_user'] = $newUser->getIdRole();
         header('Location: ' . BASE_URL . '/index.php');
         exit();
-
     } catch (Exception $e) {
         error_log("Error in the user creation : " . $e->getMessage());
         $_SESSION['error_message'] = "Une erreur est survenue";
@@ -43,7 +42,6 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         $_SESSION['role_user'] = $searchUser->getIdRole();
         header('Location: ' . BASE_URL . '/index.php');
         exit();
-
     } catch (Exception $e) {
         error_log("Error in the connection process : " . $e->getMessage());
         $_SESSION['error_message'] = "Une erreur est survenue";

@@ -41,14 +41,12 @@
 
             <div class="flex-column gap-8" id="travel-extra" style="align-items: end; min-width:max-content;">
                 <div> <?php $seatsAvailable = seatsAvailable($car->getSeatsOfferedByCar($travel->getCarId()), ($reservation->countPassengers($travel->getIdTravel())));
-
-                if ($seatsAvailable <= 1) {
-                    echo htmlspecialchars($seatsAvailable) . " place restante";
-                } else {
-                    echo htmlspecialchars($seatsAvailable) . " places restantes";
-                }
-
-                ?>
+                        if ($seatsAvailable <= 1) {
+                            echo htmlspecialchars($seatsAvailable) . " place restante";
+                        } else {
+                            echo htmlspecialchars($seatsAvailable) . " places restantes";
+                        }
+                        ?>
                 </div>
                 <div>
                     <span class="criteria-eco"><?= formatEco(($car->getElectric())) ?></span>
@@ -59,13 +57,15 @@
         <div class="flex-column gap-12" id="passenger-credits-btn" style="width: 30%;">
             <div class="flex-row flex-between block-white">
                 <div>1 passager</div>
-                <div class="text-bold"><?php $travelPrice = $travel->getPrice();
-                if ($travelPrice > 1) {
-                    echo htmlspecialchars($travelPrice) . " crédits";
-                } else {
-                    echo htmlspecialchars($travelPrice) . " crédit";
-                }
-                ?> </div>
+                <div class="text-bold">
+                    <?php $travelPrice = $travel->getPrice();
+                    if ($travelPrice > 1) {
+                        echo htmlspecialchars($travelPrice) . " crédits";
+                    } else {
+                        echo htmlspecialchars($travelPrice) . " crédit";
+                    }
+                    ?>
+                </div>
             </div>
             <?php $isGuest = $userId === null;
             $isPassenger = !$isGuest && in_array($user->getIdRole(), [1, 3]);
@@ -105,12 +105,14 @@
                     <span><?= htmlspecialchars($driver->getPseudo()) ?></span>
                     <div class="text-icon" style="padding-left: 0px;">
                         <img src="<?= BASE_URL ?>/icons/EtoileJaune.png" class="img-width-20" alt="">
-                        <span><?php $averageRating = $driver->getAverageRatings();
-                        if ($averageRating !== null) {
-                            echo htmlspecialchars($averageRating);
-                        } else {
-                            echo "(0 avis)";
-                        } ?> </span>
+                        <span>
+                            <?php $averageRating = $driver->getAverageRatings();
+                            if ($averageRating !== null) {
+                                echo htmlspecialchars($averageRating);
+                            } else {
+                                echo "(0 avis)";
+                            } ?>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -119,10 +121,9 @@
 
 
                 <?php $travelDescription = $travel->getDescription();
-                ;
 
                 if ($travelDescription != null) {
-                    ?>
+                ?>
                     <p>
                         <?= htmlspecialchars($travelDescription); ?>
                     </p>
@@ -133,12 +134,14 @@
                     <div class="text-bold">Véhicule</div>
                     <div class="text-icon">
                         <img src="<?= BASE_URL ?>/icons/Voiture.png" class="img-width-20" alt="">
-                        <span><?php
-                        echo htmlspecialchars($car->getBrand() . " " . $car->getModel() . " - " . $car->getColor());
-                        if ($car->getElectric() === true) {
-                            echo " - Electrique";
-                        }
-                        ?></span>
+                        <span>
+                            <?php
+                            echo htmlspecialchars($car->getBrand() . " " . $car->getModel() . " - " . $car->getColor());
+                            if ($car->getElectric() === true) {
+                                echo " - Electrique";
+                            }
+                            ?>
+                        </span>
                     </div>
                 </div>
 
@@ -166,7 +169,7 @@
                             <img src='<?= BASE_URL ?>/icons/FumerOk.png' class='img-width-20' alt=''>
                             <span>La fumée ne me dérange pas</span>
                         </div>
-                    <?PHP elseif ($smokerPref === false): ?>
+                    <?php elseif ($smokerPref === false): ?>
                         <div class="text-icon">
                             <img src='<?= BASE_URL ?>/icons/FumerPasOk.png' class='img-width-20' alt=''>
                             <span>Je préfère ne pas voyager avec des fumeurs</span>
@@ -180,7 +183,7 @@
                             <img src='<?= BASE_URL ?>/icons/MusiqueOk.png' class='img-width-20' alt=''>
                             <span>J'aime conduire en écoutant de la musique</span>
                         </div>
-                    <?PHP elseif ($musicPref === false): ?>
+                    <?php elseif ($musicPref === false): ?>
                         <div class="text-icon">
                             <img src='<?= BASE_URL ?>/icons/MusiquePasOk.png' class='img-width-20' alt=''>
                             <span>Je préfère ne pas écouter de musique pendant que je conduis</span>
@@ -194,7 +197,7 @@
                             <img src='<?= BASE_URL ?>/icons/speakOk.png' class='img-width-20' alt=''>
                             <span>Je discute volontiers avec mes passagers</span>
                         </div>
-                    <?PHP elseif ($speakerPref === false): ?>
+                    <?php elseif ($speakerPref === false): ?>
                         <div class="text-icon">
                             <img src='<?= BASE_URL ?>/icons/speakNotOk.png' class='img-width-20' alt=''>
                             <span>Je préfère me concentrer sur la route</span>
@@ -208,7 +211,7 @@
                             <img src='<?= BASE_URL ?>/icons/foodOk.png' class='img-width-20' alt=''>
                             <span>La nourriture est autorisée dans la voiture </span>
                         </div>
-                    <?PHP elseif ($foodPref === false): ?>
+                    <?php elseif ($foodPref === false): ?>
                         <div class="text-icon">
                             <img src='<?= BASE_URL ?>/icons/foodNotOk.png' class='img-width-20' alt=''>
                             <span>Pas de nourriture dans la voiture s'il vous plait</span>
@@ -223,7 +226,7 @@
                             <span><?= htmlspecialchars($pref['custom_preference']) ?></span>
                         </div>
                     <?php endforeach; ?>
-                   
+
                 </div>
             </div>
         </section>
@@ -237,14 +240,14 @@
                 <h3 class="text-green">Avis du chauffeur</h3>
                 <div class="flex-row item-center gap-4" style="padding-left: 0px;">
                     <img src="<?= BASE_URL ?>/icons/EtoileJaune.png" class="img-width-20" alt="">
-                    <span><?php $averageRating = $driver->getAverageRatings();
-                    if ($averageRating !== null) {
-                        echo htmlspecialchars($averageRating) . " / 5";
-                    } ?>
-
+                    <span>
+                        <?php $averageRating = $driver->getAverageRatings();
+                        if ($averageRating !== null) {
+                            echo htmlspecialchars($averageRating) . " / 5";
+                        }
+                        ?>
                     </span>
-                    <span
-                        class="font-size-very-small"><?= "(" . htmlspecialchars($driver->countRatings()) . " avis)" ?></span>
+                    <span class="font-size-very-small"><?= "(" . htmlspecialchars($driver->countRatings()) . " avis)" ?></span>
                 </div>
             </div>
 
@@ -262,17 +265,13 @@
                         <div class="flex-row item-center gap-4" style="padding-left: 0px;">
                             <img src="<?= BASE_URL ?>/icons/EtoileJaune.png" class="img-width-20" alt="">
                             <span><?= htmlspecialchars($rating['rating']) ?></span>
-
                         </div>
                     </div>
                     <p><?= htmlspecialchars(($rating['description'])) ?></p>
-                    <span
-                        class="font-size-very-small italic"><?= htmlspecialchars(formatDateMonthAndYear($rating['created_at'])) ?></span>
+                    <span class="font-size-very-small italic"><?= htmlspecialchars(formatDateMonthAndYear($rating['created_at'])) ?></span>
                     <hr>
                 </div>
             <?php endforeach ?>
-
-
 
         </section>
 

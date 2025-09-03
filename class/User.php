@@ -184,7 +184,6 @@ class User
                     $this->setCredit(20);
                 }
             }
-
         } catch (PDOException $e) {
             error_log("Database error in createNewUser(): " . $e->getMessage());
             throw new Exception("Une erreur est survenue");
@@ -204,7 +203,6 @@ class User
             $statement = $this->pdo->prepare($sql);
             $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
             $statement->execute();
-
         } catch (PDOException $e) {
             error_log("Database error in createDriver(): " . $e->getMessage());
             throw new Exception("Impossible de créer un profil conducteur");
@@ -226,7 +224,6 @@ class User
             $statement->execute();
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);
-
         } catch (PDOException $e) {
             error_log("Error loading users by role ($roleId): " . $e->getMessage());
             throw new Exception("Impossible de charger la liste des utilisateurs");
@@ -305,7 +302,7 @@ class User
         if (empty($this->id)) {
             throw new Exception("Impossible de mettre à jour les crédits sans identifiant utilisateur");
         }
-        
+
         try {
             $sql = 'UPDATE users SET credit = :newCredit WHERE id = :idUser';
             $statement = $this->pdo->prepare($sql);

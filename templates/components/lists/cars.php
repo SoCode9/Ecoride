@@ -24,10 +24,11 @@ if (empty($cars)): ?>
                 <?= formatDate(htmlspecialchars($car['car_first_registration_date'])) ?></span>
             <span>Marque : <?= htmlspecialchars($car['name']) ?></span>
             <span>Modèle : <?= htmlspecialchars($car['car_model']) ?></span>
-            <span>Electrique : <?php
-            $electric = (htmlspecialchars($car['car_electric']) == 1) ? 'Oui' : 'Non';
-            echo $electric;
-            ?>
+            <span>Electrique :
+                <?php
+                $electric = (htmlspecialchars($car['car_electric']) == 1) ? 'Oui' : 'Non';
+                echo $electric;
+                ?>
             </span>
             <span>Couleur : <?= htmlspecialchars($car['car_color']) ?></span>
             <span>Nombre de passagers possible : <?= htmlspecialchars($car['car_seats_offered']) ?></span>
@@ -36,9 +37,9 @@ if (empty($cars)): ?>
                 <img src="<?= BASE_URL ?>/icons/Supprimer.png" class="img-width-20" style="cursor: pointer;">
             </a>
             <?php if ($index !== $totalCars - 1):
-            echo '<hr>';
-        endif; ?>
+                echo '<hr>';
+            endif; ?>
         </div>
-       
+
     <?php endforeach; ?>
 <?php endif; ?>

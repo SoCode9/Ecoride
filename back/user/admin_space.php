@@ -9,7 +9,7 @@ require_once __DIR__ . "/../../class/Travel.php";
 
 $pdo = pdo();
 
-$administrator = User::fromId ($pdo, $_SESSION['user_id']);
+$administrator = User::fromId($pdo, $_SESSION['user_id']);
 
 try {
     //display the users on the tabs
@@ -37,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
         }
         header('Location: ../../controllers/admin_space.php?tab=employees-management');
         exit();
-
     } elseif ($_GET['action'] === 'reactivate-employee') {
         $idUser = $_GET['id'];
         try {
@@ -62,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
         }
         header('Location: ../../controllers/admin_space.php?tab=users-management');
         exit();
-
     } elseif ($_GET['action'] === 'reactivate-user') {
         $idUser = $_GET['id'];
         try {
@@ -84,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'create-employ
         $mailEmployee = $_POST['mail-employee'];
         $passwordEmployee = $_POST['password-employee'];
 
-        $newEmployee = User::register($pdo,$pseudoEmployee, $mailEmployee, $passwordEmployee,4);
+        $newEmployee = User::register($pdo, $pseudoEmployee, $mailEmployee, $passwordEmployee, 4);
         $_SESSION['success_message'] = "Compte employé créé avec succès";
         header('Location:../../controllers/admin_space.php');
         exit;
@@ -94,5 +92,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'create-employ
         header('Location: ../../controllers/admin_space.php');
         exit();
     }
-
 }

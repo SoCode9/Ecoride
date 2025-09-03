@@ -35,7 +35,6 @@ try {
     // pagination
     $totalBadComments = $reservation->countAllBadComments();
     $totalPagesBadComments = ceil($totalBadComments / $badCommentsPerPage);
-
 } catch (Exception $e) {
     error_log("Error loading employee_space : " . $e->getMessage());
     $_SESSION['error_message'] = "Une erreur est survenue";

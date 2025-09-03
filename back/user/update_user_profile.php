@@ -40,7 +40,7 @@ $speakPref = processPreference($_POST['speak_pref'] ?? null, "discussion");
 $musicPref = processPreference($_POST['music_pref'] ?? null, "musique");
 
 try {
-    $user = User::fromId ($pdo, $userId);
+    $user = User::fromId($pdo, $userId);
     try {
         $driver = new Driver($pdo, $userId);
     } catch (Exception $e) {

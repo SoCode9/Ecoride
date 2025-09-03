@@ -69,7 +69,6 @@ class Rating
             $statement->execute();
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);
-
         } catch (PDOException $e) {
             error_log("Database error in loadRatingsInValidation() : " . $e->getMessage());
             throw new Exception("Impossible de charger les évaluations en attente de validation");

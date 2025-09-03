@@ -130,7 +130,6 @@ class Car
         if (!empty($driverId)) {
             $conditions[] = "driver.user_id = :driver_id";
             $params[':driver_id'] = $driverId;
-
         }
 
         // Apply WHERE clause if needed
@@ -164,7 +163,6 @@ class Car
             $this->seatsOffered = $carData['car_seats_offered'];
             $this->electric = $carData['car_electric'];
             $this->color = $carData['car_color'];
-
         } elseif (!empty($driverId)) {
             // Expecting multiple cars
             $this->cars = $statement->fetchAll(PDO::FETCH_ASSOC);

@@ -59,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'edit-photo-us
         // Update the user's photo path in the database
         $connectedUser->setPhoto($uniqueName);
         $_SESSION['success_message'] = "Votre photo a été mise à jour avec succès";
-
     } catch (Exception $e) {
         error_log("Erreur upload photo (user ID $userId) : " . $e->getMessage());
         $_SESSION['error_message'] = $e->getMessage();

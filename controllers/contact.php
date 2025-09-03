@@ -2,9 +2,6 @@
 if (session_status() === PHP_SESSION_NONE)
     session_start();
 
-
-//require_once '../back/carpool/search.php';
-
 $pageTitle = "Contact";
 $customScript = null;
 $templatePage = "pages/contact.php";

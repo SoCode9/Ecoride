@@ -73,11 +73,9 @@ try {
     // Save the result in the session to be retrieved by carpool-search.php
     $_SESSION['travelsSearched'] = $travelsSearched;
     $_SESSION['nextTravelDate'] = $nextTravelDate ?? [];
-
 } catch (Exception $e) {
     error_log("Error in search carpool : " . $e->getMessage());
     header('Location:../../controllers/carpool_search.php');
     $_SESSION['error_message'] = "Une erreur est survenue";
     exit;
 }
-
