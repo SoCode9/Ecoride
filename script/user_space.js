@@ -17,17 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    document.querySelectorAll(".tab1-btn").forEach(button => {
-        button.addEventListener("click", function () {
-            document.querySelectorAll(".tab1-btn").forEach(btn => btn.classList.remove("active"));
-            document.querySelectorAll(".main-tab-content").forEach(content => content.classList.remove("active"));
-
-            this.classList.add("active");
-            document.getElementById(this.dataset.target).classList.add("active");
-
-        });
-    });
-
     const editButton = document.getElementById('edit-button');
     const saveButton = document.getElementById('save-button');
     const addCarButton = document.getElementById("add-car-button");
