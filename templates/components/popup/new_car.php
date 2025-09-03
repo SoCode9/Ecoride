@@ -97,10 +97,10 @@ ob_start(); ?>
         nbPassengers.removeAttribute('required', '');
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const carForm = document.getElementById('car-form-id');
         if (carForm) {
-            carForm.addEventListener('submit', function (event) {
+            carForm.addEventListener('submit', function(event) {
                 event.preventDefault();
                 submitJS();
             });
@@ -118,7 +118,7 @@ ob_start(); ?>
                     return;
                 }
 
-                carContainer.innerHTML = html; 
+                carContainer.innerHTML = html;
             })
             .catch(error => {
                 console.error("Erreur de mise à jour car-field :", error);
@@ -137,26 +137,26 @@ ob_start(); ?>
 
         fetch('../back/car/add.php', {
 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
 
-            body: new URLSearchParams({
-                licence_plate: licencePlate,
-                first_registration_date: firstRegistrationDate,
-                brand: brand,
-                model: model,
-                electric: electric,
-                color: color,
-                nb_passengers: nbPassengers
+                body: new URLSearchParams({
+                    licence_plate: licencePlate,
+                    first_registration_date: firstRegistrationDate,
+                    brand: brand,
+                    model: model,
+                    electric: electric,
+                    color: color,
+                    nb_passengers: nbPassengers
+                })
             })
-        })
             .then(result => result.text())
             .then(data => {
                 console.log("Réponse du backend :", data);
                 closePopupCar();
-                refreshCarField(); 
+                refreshCarField();
             })
             .catch(error => {
                 console.error("Erreur :", error);

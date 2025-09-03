@@ -23,7 +23,6 @@ try {
     if ($userId !== null) {
         $user = User::fromId($pdo, $userId);
     }
-
 } catch (Exception $e) {
     error_log("Error in details carpool : " . $e->getMessage());
     header('Location:../../controllers/carpool_details.php');

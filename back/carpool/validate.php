@@ -59,5 +59,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'negative') {
         $_SESSION['error_message'] = "Une erreur est survenue";
         exit;
     }
-
 }

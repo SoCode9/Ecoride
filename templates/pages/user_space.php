@@ -65,20 +65,20 @@
                         <div class="flex-row">
                             <label for="role-passenger" class="radio-not-edit">passager</label>
                             <input type="radio" name="user_role" id="role-passenger" <?php if ($connectedUser->getIdRole() === 1) {
-                                echo 'checked';
-                            } ?> class="radio-not-edit">
+                                                                                            echo 'checked';
+                                                                                        } ?> class="radio-not-edit">
                         </div>
                         <div class="flex-row">
                             <label for="role-driver" class="radio-not-edit">chauffeur</label>
                             <input type="radio" name="user_role" id="role-driver" <?php if ($connectedUser->getIdRole() === 2) {
-                                echo 'checked';
-                            } ?> class="radio-not-edit">
+                                                                                        echo 'checked';
+                                                                                    } ?> class="radio-not-edit">
                         </div>
                         <div class="flex-row">
                             <label for="role-both" class="radio-not-edit">les deux</label>
                             <input type="radio" name="user_role" id="role-both" <?php if ($connectedUser->getIdRole() === 3) {
-                                echo 'checked';
-                            } ?> class="radio-not-edit">
+                                                                                    echo 'checked';
+                                                                                } ?> class="radio-not-edit">
                         </div>
                     </div>
                 </div>
@@ -170,15 +170,15 @@
                                     <div class="flex-row">
                                         <label for="smoke-no" class="radio-not-edit">Non</label>
                                         <input type="radio" class="radio-not-edit" name="smoke_pref" id="smoke-no" <?php if (isset($connectedDriver) && ($connectedDriver->getSmokerPreference() === false)) {
-                                            echo 'checked';
-                                        } ?>>
+                                                                                                                        echo 'checked';
+                                                                                                                    } ?>>
                                     </div>
                                     <div class="flex-row">
                                         <label for="smoke-undefined" class="radio-not-edit">Pas de préférence</label>
                                         <input type="radio" class="radio-not-edit" name="smoke_pref"
                                             id="smoke-undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getSmokerPreference() === null)) {
-                                                echo 'checked';
-                                            } ?>>
+                                                                        echo 'checked';
+                                                                    } ?>>
                                     </div>
                                 </div>
 
@@ -190,14 +190,14 @@
                                     <div class="flex-row">
                                         <label for="pet-yes" class="radio-not-edit">Oui</label>
                                         <input type="radio" class="radio-not-edit" name="pet_pref" id="pet-yes" <?php if (isset($connectedDriver) && ($connectedDriver->getPetPreference() === true)) {
-                                            echo 'checked';
-                                        } ?>>
+                                                                                                                    echo 'checked';
+                                                                                                                } ?>>
                                     </div>
                                     <div class="flex-row">
                                         <label for="pet-no" class="radio-not-edit">Non</label>
                                         <input type="radio" class="radio-not-edit" name="pet_pref" id="pet-no" <?php if (isset($connectedDriver) && ($connectedDriver->getPetPreference() === false)) {
-                                            echo 'checked';
-                                        } ?>>
+                                                                                                                    echo 'checked';
+                                                                                                                } ?>>
                                     </div>
                                     <div class="flex-row">
                                         <label for="pet-undefined" class="radio-not-edit">Pas de préférence</label>
@@ -215,14 +215,14 @@
                                     <div class="flex-row">
                                         <label for="food-yes" class="radio-not-edit">Oui</label>
                                         <input type="radio" class="radio-not-edit" name="food_pref" id="food-yes" <?php if (isset($connectedDriver) && ($connectedDriver->getFoodPreference() === true)) {
-                                            echo 'checked';
-                                        } ?>>
+                                                                                                                        echo 'checked';
+                                                                                                                    } ?>>
                                     </div>
                                     <div class="flex-row">
                                         <label for="food-no" class="radio-not-edit">Non</label>
                                         <input type="radio" class="radio-not-edit" name="food_pref" id="food-no" <?php if (isset($connectedDriver) && ($connectedDriver->getFoodPreference() === false)) {
-                                            echo 'checked';
-                                        } ?>>
+                                                                                                                        echo 'checked';
+                                                                                                                    } ?>>
                                     </div>
                                     <div class="flex-row">
                                         <label for="food-undefined" class="radio-not-edit">Pas de préférence</label>
@@ -247,15 +247,15 @@
                                     <div class="flex-row">
                                         <label for="speak-no" class="radio-not-edit">Non</label>
                                         <input type="radio" class="radio-not-edit" name="speak_pref" id="speak-no" <?php if (isset($connectedDriver) && ($connectedDriver->getSpeakerPreference() === false)) {
-                                            echo 'checked';
-                                        } ?>>
+                                                                                                                        echo 'checked';
+                                                                                                                    } ?>>
                                     </div>
                                     <div class="flex-row">
                                         <label for="speak_undefined" class="radio-not-edit">Pas de préférence</label>
                                         <input type="radio" class="radio-not-edit" name="speak_pref"
                                             id="speak-undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getSpeakerPreference() === null)) {
-                                                echo 'checked';
-                                            } ?>>
+                                                                        echo 'checked';
+                                                                    } ?>>
                                     </div>
                                 </div>
                                 <hr>
@@ -273,15 +273,15 @@
                                     <div class="flex-row">
                                         <label for="music-no" class="radio-not-edit">Non</label>
                                         <input type="radio" class="radio-not-edit" name="music_pref" id="music-no" <?php if (isset($connectedDriver) && ($connectedDriver->getMusicPreference() === false)) {
-                                            echo 'checked';
-                                        } ?>>
+                                                                                                                        echo 'checked';
+                                                                                                                    } ?>>
                                     </div>
                                     <div class="flex-row">
                                         <label for="music-undefined" class="radio-not-edit">Pas de préférence</label>
                                         <input type="radio" class="radio-not-edit" name="music_pref"
                                             id="music-undefined" <?php if (!isset($connectedDriver) || ($connectedDriver->getMusicPreference() === null)) {
-                                                echo 'checked';
-                                            } ?>>
+                                                                        echo 'checked';
+                                                                    } ?>>
                                     </div>
                                 </div>
                             </div>
@@ -312,11 +312,10 @@
                         <button class="btn action-btn hidden" id="add-pref-button">Ajouter une préférence</button>
                     </div>
                 </div>
+            </section>
         </div>
-
-
-        </section>
     </div>
+
     <!-- User's carpool -->
     <div class="main-tab-content <?= $currentTab === 'carpools' ? 'active' : '' ?>" id="carpools">
         <section class="flex-column gap-12">
@@ -338,8 +337,6 @@
             <div id="completed" class="tab-content">
                 <?php include __DIR__ . '/../components/lists/carpools_completed.php'; ?>
             </div>
-
         </section>
-    </div>
     </div>
 </main>

@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === "GET" && $_GET['action'] == 'delete_pref') {
         $driver->deleteCustomPreference($prefToDelete);
         header('Location:../../controllers/user_space.php');
         $_SESSION['success_message'] = "La préférence a été supprimée";
-        
     } catch (Exception $e) {
         error_log("Error in delete preference (driver ID: {$driverId}) : " . $e->getMessage());
         $_SESSION['error_message'] = "Une erreur est survenue";
