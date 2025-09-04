@@ -188,17 +188,6 @@
 /*RESPONSIVE*/
 
 @media (max-width: 1023px) {
-  .block-filter-details {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-
-  #filter-toggle {
-    width: fit-content;
-    height: 35px;
-    justify-self: right;
-  }
-
   .block-search {
     flex-direction: column;
     gap: 10px;
@@ -211,6 +200,17 @@
 
   #search-btn {
     width: 100%;
+  }
+
+  .block-filter-details {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  #filter-toggle {
+    width: fit-content;
+    height: 35px;
+    justify-self: right;
   }
 
   #filter-icon {
