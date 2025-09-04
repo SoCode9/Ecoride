@@ -46,15 +46,6 @@
   overflow: hidden;
 }
 
-@media (max-width: 1023px) {
-  .travel {
-    display: flex !important;
-    flex-direction: column;
-    padding: 12px;
-    gap: 10px;
-  }
-}
-
 .travel:hover {
   background-color: #eaf5ee;
 }
@@ -220,5 +211,12 @@
 
   #filter-block {
     display: none;
+  }
+
+  .travel {
+    display: flex !important;
+    flex-direction: column;
+    padding: 12px;
+    gap: 10px;
   }
 }
