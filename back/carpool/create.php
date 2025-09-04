@@ -17,7 +17,6 @@ if (empty($_SESSION['user_id'])) {
 
 /**To get all the driver's cars */
 $driverId = $_SESSION['user_id'];
-$driver = new Driver($pdo, $driverId);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
