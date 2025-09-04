@@ -8,12 +8,82 @@ require_once __DIR__ . "/../../class/Travel.php";
 
 $pdo = pdo();
 
+
+if (empty($_SESSION['user_id'])) {
+    $_SESSION['error_message'] = "Vous devez être connecté pour proposer un covoiturage.";
+    header('Location: ../../controllers/user_space.php?tab=carpools');
+    exit;
+}
+
 /**To get all the driver's cars */
 $driverId = $_SESSION['user_id'];
 $driver = new Driver($pdo, $driverId);
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    // 1) Required fields
+    $required = [
+        'travel-date',
+        'departure-city-search',
+        'arrival-city-search',
+        'travel-departure-time',
+        'travel-arrival-time',
+        'travel-price',
+        'carSelected',
+    ];
+
+    $errors = [];
+    $old = [];
+
+    foreach ($required as $name) {
+        $value = $_POST[$name] ?? '';
+        $old[$name] = $value;
+        if (trim((string)$value) === '') {
+            $errors[$name] = "Ce champ est obligatoire.";
+        }
+    }
+
+    // 2) Other validations
+    if (!isset($errors['travel-date'])) {
+        $today = date('Y-m-d');
+        if (trim($_POST['travel-date']) < $today) {
+            $errors['travel-date'] = "La date ne peut pas être dans le passé.";
+        }
+    }
+
+    if (!isset($errors['travel-price'])) {
+        // entier ≥ 2
+        if (!ctype_digit($_POST['travel-price']) || $_POST['travel-price'] < 2) {
+            $errors['travel-price'] = "Le prix doit être un entier positif supérieur ou égal à 2.";
+        }
+    }
+
+    if (
+        !isset($errors['departure-city-search']) &&
+        !isset($errors['arrival-city-search']) &&
+        mb_strtolower(trim($_POST['departure-city-search'])) === mb_strtolower(trim($_POST['arrival-city-search']))
+    ) {
+        $errors['arrival-city-search'] = "La ville d'arrivée doit être différente de la ville de départ.";
+    }
+
+    if (
+        !isset($errors['travel-departure-time']) &&
+        !isset($errors['travel-arrival-time']) &&
+        (trim($_POST['travel-departure-time'])) >= mb_strtolower(trim($_POST['travel-arrival-time']))
+    ) {
+        $errors['travel-arrival-time'] = "L'heure d'arrivée doit être supérieure à l'heure de départ.";
+    }
+
+    // 3) If error → feedback + retour
+    if (!empty($errors)) {
+        $_SESSION['form_errors'] = $errors;
+        $_SESSION['form_old'] = $old;
+        $_SESSION['error_message'] = "Veuillez corriger les erreurs de complétion du formulaire.";
+        header('Location: ../../controllers/create_carpool.php');
+        exit;
+    }
+
+    // 4) OK -> creation
     try {
         $travelDate = $_POST["travel-date"];
         $travelDepartureCity = $_POST["departure-city-search"];
