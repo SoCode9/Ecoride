@@ -29,7 +29,7 @@
                                 echo '<img src="..\icons\EtoileJaune.png" class="img-width-20" alt="Icone étoile">'
                                     . htmlspecialchars($averageRating);
                             } else {
-                                echo "<span class = 'italic'>0 avis</span>";
+                                echo "<span class = 'italic font-size-very-small'>0 avis</span>";
                             } ?>
                         </div>
                     </div>

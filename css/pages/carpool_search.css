@@ -46,6 +46,15 @@
   overflow: hidden;
 }
 
+@media (max-width: 1023px) {
+  .travel {
+    display: flex !important;
+    flex-direction: column;
+    padding: 12px;
+    gap: 10px;
+  }
+}
+
 .travel:hover {
   background-color: #eaf5ee;
 }
@@ -182,6 +191,12 @@
   .block-filter-details {
     display: flex !important;
     flex-direction: column !important;
+  }
+
+  #filter-toggle {
+    width: fit-content;
+    height: 35px;
+    justify-self: right;
   }
 
   .block-search {

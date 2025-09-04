@@ -34,10 +34,10 @@
                     <img class="img-width-20" src="<?= BASE_URL ?>/icons/LoupeRecherche.png" alt="">
                     <input type="submit" value="Rechercher">
                 </div>
-                <div id="filter-icon" class="inactive" style="display: none;">
-                    <a href="#" id="filter-toggle" class="btn" style="border-radius: 50%; width: fit-content; height: 35px; justify-self:right;">
+                <div id="filter-icon" class="hidden">
+                    <button type="button" id="filter-toggle" class="btn">
                         <img class="img-width-20" src="<?= BASE_URL ?>/icons/Filtre.png" alt="">
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -97,7 +97,6 @@
                     les
                     filtres</button>
             </form>
-
         </div>
         <div class="flex-column">
             <span class="flex-row flex-center text-bold font-size-big">
@@ -210,7 +209,6 @@
                 <?php } ?>
 
             </div>
-
         </div>
 
     </div>

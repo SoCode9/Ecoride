@@ -9,15 +9,6 @@
 
 /*Auto and preferences sections*/
 
-.hidden {
-  display: none !important;
-}
-
-.scrollable-container {
-  max-height: 600px;
-  overflow: auto;
-  /* Scroll bar only if necessary  */
-}
 
 .btn.action-btn.content-btn {
   display: none;
@@ -27,10 +18,6 @@
 .btn.action-btn.content-btn.active {
   display: block;
   /* Display only if button isn't clicked  */
-}
-
-.active {
-  display: inline-flex;
 }
 
 /*Popup validate carpool*/
@@ -72,13 +59,6 @@
   background-color: var(--col-very-light-grey);
 }
 
-.photo-user {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
 /* Conteneur texte */
 .user-info-mobile {
   display: flex;
@@ -90,15 +70,6 @@
   display: flex;
   align-items: center;
   gap: 5px;
-}
-
-@media (max-width: 1023px) {
-  .travel {
-    display: flex !important;
-    flex-direction: column;
-    padding: 12px;
-    gap: 10px;
-  }
 }
 
 /* Responsive mobile */
