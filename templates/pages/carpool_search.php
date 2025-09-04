@@ -2,7 +2,7 @@
     <!-- Find a carpool -->
     <div class="flex-column gap-24 block-light-grey">
         <h2 class="text-green text-bold">Rechercher un covoiturage</h2>
-        <form class="block-search" action="carpool_search.php" method="POST">
+        <form class="block-search flex-column-ms" action="carpool_search.php" method="POST">
             <input type="hidden" name="action" value="search"> <!--identify request-->
 
             <div class="flex-row search-field">
@@ -34,10 +34,10 @@
                     <img class="img-width-20" src="<?= BASE_URL ?>/icons/LoupeRecherche.png" alt="">
                     <input type="submit" value="Rechercher">
                 </div>
-                <div id="filter-icon" class="inactive" style="display: none;">
-                    <a href="#" id="filter-toggle" class="btn" style="border-radius: 50%; width: fit-content; height: 35px; justify-self:right;">
+                <div id="filter-icon" class="hidden">
+                    <button type="button" id="filter-toggle" class="btn">
                         <img class="img-width-20" src="<?= BASE_URL ?>/icons/Filtre.png" alt="">
-                    </a>
+                    </button>
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
 
 
 
-    <div class="block-filter-details">
+    <div class="block-filter-details flex-column-ms">
 
         <!--Search filters-->
 
@@ -97,7 +97,6 @@
                     les
                     filtres</button>
             </form>
-
         </div>
         <div class="flex-column">
             <span class="flex-row flex-center text-bold font-size-big">
@@ -110,7 +109,7 @@
                 <?php
                 if (!empty($travelsSearched)) {
                     foreach ($travelsSearched as $t): ?>
-                        <div class="travel"
+                        <div class="travel flex-column-ms"
                             onclick="window.location.href='carpool_details.php?id=<?= htmlspecialchars($t['id']) ?>'"
                             <?php if (isset($_SESSION['user_id']) && ($t['driver_id'] === $_SESSION['user_id'])) {
                                 echo " style='border:2px solid var(--col-green);cursor:pointer;'";
@@ -210,7 +209,6 @@
                 <?php } ?>
 
             </div>
-
         </div>
 
     </div>

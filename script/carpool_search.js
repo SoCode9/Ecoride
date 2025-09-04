@@ -12,11 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (isActive) {
                 filterBlock.style.display = 'none';
                 filterIcon.classList.remove('active');
-                filterIcon.classList.add('inactive');
+                filterIcon.classList.add('hidden');
             } else {
                 filterBlock.style.display = 'block';
                 filterIcon.classList.add('active');
-                filterIcon.classList.remove('inactive');
+                filterIcon.classList.remove('hidden');
             }
         });
     }
