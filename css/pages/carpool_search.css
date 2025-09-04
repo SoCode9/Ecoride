@@ -179,23 +179,12 @@
 /*RESPONSIVE*/
 
 @media (max-width: 1023px) {
-  .block-search {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-
   .search-field {
     width: 100%;
   }
 
   #search-btn {
     width: 100%;
-  }
-
-  .block-filter-details {
-    display: flex !important;
-    flex-direction: column !important;
   }
 
   #filter-toggle {
@@ -213,10 +202,8 @@
     display: none;
   }
 
-  .travel {
-    display: flex !important;
-    flex-direction: column;
+   .travel {
     padding: 12px;
     gap: 10px;
-  }
+  } 
 }
