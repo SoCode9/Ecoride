@@ -74,7 +74,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    // 4) OK -> creation
+    // 4) Check CSRF
+    if (!isset($_POST['csrf']) || !hash_equals($_SESSION['csrf'] ?? '', $_POST['csrf'])) {
+        $_SESSION['form_old'] = $old;
+        $_SESSION['error_message'] = "Une erreur est survenue";
+        error_log("CSRF check failed in create_carpool.php (user ID: " . ($_SESSION['user_id'] ?? 'inconnu') . ")");
+        header('Location: ' . BASE_URL . '/controllers/create_carpool.php');
+        exit;
+    }
+
+    // 5) OK -> creation
     try {
         $travelDate = $_POST["travel-date"];
         $travelDepartureCity = $_POST["departure-city-search"];

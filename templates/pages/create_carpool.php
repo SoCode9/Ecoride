@@ -23,6 +23,8 @@
     </div>
 
     <form action="../back/carpool/create.php" method="POST" class="half-separation">
+        <input type="hidden" name="csrf" value='<?= htmlspecialchars($_SESSION['csrf'], ENT_QUOTES, 'UTF-8')?>'>
+
         <div class="form-group full-width-grid">
             <label for="travel-date">Date du départ</label>
             <input type="date" id="travel-date" name="travel-date" required value="<?= htmlspecialchars($_SESSION['form_old']['travel-date'] ?? '') ?>" />
