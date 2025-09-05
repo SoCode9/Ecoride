@@ -2,7 +2,6 @@
 require_once __DIR__ . "/../../back/user/auth.php";
 requireLogin(); // Checks whether a user is logged in
 requireDriver(); // Checks whether the user is a driver
-
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Travel.php";
 

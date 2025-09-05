@@ -1,7 +1,6 @@
 <?PHP
-if (session_status() === PHP_SESSION_NONE)
-    session_start();
-
+require_once __DIR__ . "/../../back/user/auth.php";
+requireLogin(); // Checks whether a user is logged in
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/User.php";
 
@@ -20,8 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'edit-photo-us
         $file = $_FILES['new_photo'];
         $maxFileSize = 8000000; // 8 MB
         $allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
-
-
 
         // Check if the file size is acceptable
         if ($file['size'] > $maxFileSize) {
@@ -54,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'edit-photo-us
         if (!move_uploaded_file($file['tmp_name'], $destination)) {
             throw new Exception("Erreur lors de l'enregistrement du fichier");
         }
-
 
         // Update the user's photo path in the database
         $connectedUser->setPhoto($uniqueName);

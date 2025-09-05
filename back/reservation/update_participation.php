@@ -1,8 +1,6 @@
 <?php
-
-if (session_status() === PHP_SESSION_NONE)
-    session_start();
-
+require_once __DIR__ . "/../../back/user/auth.php";
+requireLogin(); // Checks whether a user is logged in
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 require_once __DIR__ . "/../../class/Car.php";
@@ -15,14 +13,11 @@ try {
     $pdo->beginTransaction();
 
     ### second check ###
+    $userId = $_SESSION['user_id'];
 
     $travelId = $_POST['travel_id'] ?? null;
-    $userId = $_SESSION['user_id'] ?? null;
 
-    // Check if travel ID and user ID are sent
-    if (!isset($userId)) {
-        throw new Exception("Utilisateur non connecte");
-    }
+    // Check if travel ID is sent
     if (!isset($travelId)) {
         throw new Exception("ID du covoiturage manquant");
     }

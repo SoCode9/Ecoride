@@ -1,5 +1,7 @@
 <?php
-
+require_once __DIR__ . "/../../back/user/auth.php";
+requireLogin(); // Checks whether a user is logged in
+requireAdmin(); // Checks whether the user is an administrator
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/User.php";
 require_once __DIR__ . "/../../class/Travel.php";

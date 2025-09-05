@@ -1,13 +1,13 @@
 <?php
-if (session_status() === PHP_SESSION_NONE)
-    session_start();
-
+require_once __DIR__ . "/../../back/user/auth.php";
+requireLogin(); // Checks whether a user is logged in
+requireDriver(); // Checks whether the user is a driver
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Car.php";
 
 $pdo = pdo();
 
-$idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+$idUser = $_SESSION['user_id'];
 
 if (($_SERVER['REQUEST_METHOD'] === "POST")) {
     header('Content-Type: application/json');

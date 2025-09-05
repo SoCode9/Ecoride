@@ -1,7 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE)
-    session_start();
-
+require_once __DIR__ . "/../../back/user/auth.php";
+requireLogin(); // Checks whether a user is logged in
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/User.php";
 require_once __DIR__ . "/../../class/Driver.php";
@@ -54,7 +53,7 @@ try {
     $driver->setFoodPreference($foodPref);
     $driver->setSpeakPreference($speakPref);
     $driver->setMusicPreference($musicPref);
-
+    $_SESSION['role_user'] = $roleId;
     echo json_encode(["success" => true, "message" => "Rôle et préférences mis à jour"]);
     $_SESSION['success_message'] = "Profil mis à jour";
     exit;

@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
  */
 function requireLogin(string $redirectUrl = '../../controllers/login.php'): void
 {
-    if (empty($_SESSION['user_id'])) {
+    if (empty($_SESSION['user_id']) || empty($_SESSION['role_user'])) {
         $_SESSION['error_message'] = "Connectez-vous pour accéder à cette page.";
         header('Location: ' . $redirectUrl);
         exit;

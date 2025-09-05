@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . "/../back/user/auth.php";
-requireLogin();
-
+requireLogin(); // Checks whether a user is logged in
 require_once "../back/user/login.php";
 require_once "../back/user/user_space.php";
 
