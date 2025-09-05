@@ -21,6 +21,10 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         $_SESSION['success_message'] = 'Compte créé avec succès ! Vous avez été crédité de 20 crédits 🎉';
         $_SESSION['user_id'] = $newUser->getId();
         $_SESSION['role_user'] = $newUser->getIdRole();
+        // token creation
+        if (empty($_SESSION['csrf'])) {
+            $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        }
         header('Location: ' . BASE_URL . '/index.php');
         exit();
     } catch (Exception $e) {
@@ -40,6 +44,10 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccoun
         $_SESSION['success_message'] = 'Connexion réussie !';
         $_SESSION['user_id'] = $searchUser->getId();
         $_SESSION['role_user'] = $searchUser->getIdRole();
+        // token creation
+        if (empty($_SESSION['csrf'])) {
+            $_SESSION['csrf'] = bin2hex(random_bytes(32));
+        }
         header('Location: ' . BASE_URL . '/index.php');
         exit();
     } catch (Exception $e) {
