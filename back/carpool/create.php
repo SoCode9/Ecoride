@@ -1,18 +1,12 @@
 <?php
-if (session_status() === PHP_SESSION_NONE)
-    session_start();
+require_once __DIR__ . "/../../back/user/auth.php";
+requireLogin(); // Checks whether a user is logged in
+requireDriver(); // Checks whether the user is a driver
 
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Travel.php";
 
 $pdo = pdo();
-
-
-if (empty($_SESSION['user_id'])) {
-    $_SESSION['error_message'] = "Vous devez être connecté pour proposer un covoiturage.";
-    header('Location: ../../controllers/user_space.php?tab=carpools');
-    exit;
-}
 
 /**To get all the driver's cars */
 $driverId = $_SESSION['user_id'];
