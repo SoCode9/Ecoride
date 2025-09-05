@@ -1,7 +1,5 @@
 <?php
-
 declare(strict_types=1);
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 // --- Mini loader .env (local seulement) ---
@@ -20,7 +18,6 @@ function env(string $key, ?string $default = null): ?string
     return $v === false ? $default : $v;
 }
 
-// --- Singleton PDO ---
 function pdo(): PDO
 {
     static $pdo = null;
@@ -38,7 +35,6 @@ function pdo(): PDO
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES   => false,
         ];
 
         $pdo = new PDO($dsn, $user, $pass, $options);
@@ -51,7 +47,6 @@ function pdo(): PDO
     }
 }
 
-// --- Singleton MongoDB ---
 function mongo_db(): ?MongoDB\Database
 {
     static $db = null;
