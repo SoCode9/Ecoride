@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . "/../back/user/auth.php";
+requireLogin();
 
 require_once "../back/user/login.php";
 require_once "../back/user/user_space.php";

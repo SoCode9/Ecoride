@@ -47,3 +47,18 @@ function requireDriver(string $redirectUrl = '../index.php'): void
         exit;
     }
 }
+
+/**
+ * Checks whether the user is an employee.
+ * If not, redirects to the home page with an error message.
+ *
+ * @param string $redirectUrl  Redirect URL to the home page
+ */
+function requireEmployee(string $redirectUrl = '../index.php'): void
+{
+    if (empty($_SESSION['role_user']) || $_SESSION['role_user'] !== 4) {
+        $_SESSION['error_message'] = "Seul un employé peut accéder à cette page.";
+        header('Location: ' . $redirectUrl);
+        exit;
+    }
+}
