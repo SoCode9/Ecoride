@@ -30,3 +30,9 @@ a {
   overflow-wrap: break-word;
   hyphens: auto;
 }
+
+.text-error {
+  color: var(--col-dark-red);
+  font-style: italic;
+  font-size: calc(100% - 3px);
+}

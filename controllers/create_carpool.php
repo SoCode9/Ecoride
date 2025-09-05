@@ -1,7 +1,8 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE)
-    session_start();
+require_once __DIR__ . "/../back/user/auth.php";
+requireLogin(); // Checks whether a user is logged in
+requireDriver(); // Checks whether the user is a driver
 
 require_once '../back/carpool/create.php';
 

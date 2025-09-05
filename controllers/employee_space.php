@@ -1,7 +1,7 @@
 <?php
-
-if (session_status() === PHP_SESSION_NONE)
-    session_start();
+require_once __DIR__ . "/../back/user/auth.php";
+requireLogin(); // Checks whether a user is logged in
+requireEmployee(); // Checks whether the user is an employee
 
 require_once "../back/user/employee_space.php";
 

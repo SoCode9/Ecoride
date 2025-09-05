@@ -1,6 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE)
-    session_start();
+require_once __DIR__ . "/../back/user/auth.php";
 
 require_once '../back/carpool/search.php';
 require_once '../back/carpool/detail.php';

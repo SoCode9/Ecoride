@@ -1,8 +1,5 @@
 <?php
-
-if (session_status() === PHP_SESSION_NONE)
-    session_start();
-
+require_once __DIR__ . "/../../back/user/auth.php";
 require_once __DIR__ . "/../../database.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 require_once __DIR__ . "/../../class/Car.php";
