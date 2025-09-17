@@ -1,13 +1,13 @@
 <?php
 require_once __DIR__ . "/../../back/user/auth.php";
 requireLogin(); // Checks whether a user is logged in
-require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../init.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 require_once __DIR__ . "/../../class/Car.php";
 require_once __DIR__ . "/../../class/Travel.php";
 require_once __DIR__ . "/../../class/User.php";
 
-$pdo = pdo();
+$pdo = MysqlConnection::getPdo();
 
 try {
     $pdo->beginTransaction();

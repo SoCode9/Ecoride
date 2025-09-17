@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . "/../../back/user/auth.php";
 require_once __DIR__ . "/../../functions.php";
-require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../init.php";
 require_once __DIR__ . "/../../class/User.php";
 
-$pdo = pdo();
+$pdo = MysqlConnection::getPdo();
 
 //CONNECTION WITH DATABASE WHEN AN ACCOUNT IS CREATE
 if (($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === "createAccount")) {

@@ -1,10 +1,10 @@
 <?PHP
 require_once __DIR__ . "/../../back/user/auth.php";
 requireLogin(); // Checks whether a user is logged in
-require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../init.php";
 require_once __DIR__ . "/../../class/User.php";
 
-$pdo = pdo();
+$pdo = MysqlConnection::getPdo();
 
 $userId = $_SESSION['user_id'];
 $connectedUser = User::fromId($pdo, $userId);

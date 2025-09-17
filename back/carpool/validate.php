@@ -1,12 +1,12 @@
 <?php
 require_once __DIR__ . "/../../back/user/auth.php";
 requireLogin(); // Checks whether a user is logged in
-require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../init.php";
 require_once __DIR__ . "/../../class/Travel.php";
 require_once __DIR__ . "/../../class/Rating.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 
-$pdo = pdo();
+$pdo = MysqlConnection::getPdo();
 
 $passengerId = $_SESSION['user_id'];
 
