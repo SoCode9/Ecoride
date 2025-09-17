@@ -10,12 +10,19 @@ class MongoConnection
 
     private function __construct()
     {
-        $uri  = getenv('MONGO_URI');
-        $name = getenv('MONGO_DB');
+        try {
+            $uri  = getenv('MONGO_URI');
+            $name = getenv('MONGO_DB');
 
-        if ($uri && $name) {
-            $client = new MongoClient($uri);
-            $this->mongoDb = $client->selectDatabase($name);
+            if ($uri && $name) {
+                $client = new MongoClient($uri);
+                $this->mongoDb = $client->selectDatabase($name);
+            }
+        } catch (Exception $e) {
+            error_log("Connection MongoDB error : " . $e->getMessage());
+            $_SESSION['error_message'] = "Une erreur est survenue";
+            header('Location: ../index.php');
+            exit;
         }
     }
 
