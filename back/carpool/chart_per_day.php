@@ -2,10 +2,10 @@
 require_once __DIR__ . "/../../back/user/auth.php";
 requireLogin(); // Checks whether a user is logged in
 requireAdmin(); // Checks whether the user is an administrator
-require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../init.php";
 require_once __DIR__ . "/../../functions.php";
 
-$pdo = pdo();
+$pdo = MysqlConnection::getPdo();
 
 try {
     $today = date('Y-m-d');

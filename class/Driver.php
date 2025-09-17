@@ -1,24 +1,27 @@
 <?php
 
 require_once "User.php";
-require_once __DIR__ . "/../database.php";
+require_once __DIR__ . "/../init.php";
 
-$pdo = pdo();
+use MongoDB\Database as MongoDatabase;
 
 class Driver extends User
 {
 
     protected ?string $id;
+    private ?MongoDatabase $mongoDb;
     private ?bool $petPreference;
     private ?bool $smokerPreference;
     private ?bool $musicPreference;
     private ?bool $speakerPreference;
     private ?bool $foodPreference;
 
-    public function __construct(PDO $pdo, string $driverId)
+    public function __construct(PDO $pdo, string $driverId, ?MongoDatabase $mongoDb = null)
     {
         parent::__construct($pdo);
         $this->id = $driverId;
+        $this->mongoDb = $mongoDb ?? MongoConnection::getMongoDb();
+
         $this->loadUserFromDB();
         $this->loadDriverFromDB();
     }
@@ -93,14 +96,13 @@ class Driver extends User
      */
     public function loadCustomPreferences(): array
     {
-        global $mongoDb;
         if (empty($this->id)) {
             error_log("loadCustomPreferences() failed: driver ID is empty");
             throw new Exception("Impossible de charger les préférences sans identifiant utilisateur");
         }
 
         try {
-            $preferenceCollection = $mongoDb->preferences;
+            $preferenceCollection = $this->mongoDb->preferences;
             $result = $preferenceCollection->find([
                 'id_user' => $this->id
             ])->toArray();
@@ -121,14 +123,13 @@ class Driver extends User
      */
     public function addCustomPreference(string $customPrefToAdd): void
     {
-        global $mongoDb;
         if (empty($this->id)) {
             error_log("addCustomPreference() failed: user ID is empty.");
             throw new Exception("Impossible d'ajouter une préférence sans identifiant utilisateur");
         }
 
         try {
-            $preferenceCollection = $mongoDb->preferences;
+            $preferenceCollection = $this->mongoDb->preferences;
             $preferenceCollection->insertOne([
                 'id_user' => $this->id,
                 'custom_preference' => $customPrefToAdd,
@@ -150,14 +151,13 @@ class Driver extends User
      */
     public function deleteCustomPreference(string $customPrefToDelete): void
     {
-        global $mongoDb;
         if (empty($this->id)) {
             error_log("deleteCustomPreference() failed: user ID is empty.");
             throw new Exception("Impossible de supprimer une préférence sans identifiant utilisateur");
         }
 
         try {
-            $preferenceCollection = $mongoDb->preferences;
+            $preferenceCollection = $this->mongoDb->preferences;
             $preferenceCollection->deleteOne([
                 'id_user' => $this->id,
                 'custom_preference' => $customPrefToDelete,

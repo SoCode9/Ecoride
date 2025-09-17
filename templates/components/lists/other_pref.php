@@ -2,11 +2,11 @@
 if (session_status() === PHP_SESSION_NONE)
     session_start();
 
-require_once __DIR__ . "/../../../database.php";
+require_once __DIR__ . "/../../../init.php";
 require_once __DIR__ . "/../../../class/Driver.php";
 require_once __DIR__ . "/../../../back/user/user_space.php";
 
-$pdo = pdo();
+$pdo = MysqlConnection::getPdo();
 
 $idUser = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 

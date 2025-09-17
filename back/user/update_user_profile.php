@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . "/../../back/user/auth.php";
 requireLogin(); // Checks whether a user is logged in
-require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../init.php";
 require_once __DIR__ . "/../../class/User.php";
 require_once __DIR__ . "/../../class/Driver.php";
 
-$pdo = pdo();
+$pdo = MysqlConnection::getPdo();
 
 // check if role ID is sent
 if (!isset($_POST['role_id'])) {

@@ -2,12 +2,12 @@
 require_once __DIR__ . "/../../back/user/auth.php";
 requireLogin(); // Checks whether a user is logged in
 requireEmployee(); // Checks whether the user is an employee
-require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../init.php";
 require_once __DIR__ . "/../../class/Driver.php";
 require_once __DIR__ . "/../../class/Rating.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 
-$pdo = pdo();
+$pdo = MysqlConnection::getPdo();
 
 try {
     $employee = User::fromId($pdo, $_SESSION['user_id']);

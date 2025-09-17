@@ -2,10 +2,10 @@
 require_once __DIR__ . "/../../back/user/auth.php";
 requireLogin(); // Checks whether a user is logged in
 requireAdmin(); // Checks whether the user is an administrator
-require_once __DIR__ . "/../../database.php";
+require_once __DIR__ . "/../../init.php";
 require_once __DIR__ . "/../../functions.php";
 
-$pdo = pdo();
+$pdo = MysqlConnection::getPdo();
 
 try {
     $sql = 'SELECT validated_at AS validationCarpoolDate, count(validated_at)*2 AS carpoolsValidated FROM travels WHERE validated_at IS NOT NULL GROUP BY validationCarpoolDate ORDER BY validationCarpoolDate ASC LIMIT 10';
