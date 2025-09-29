@@ -34,23 +34,24 @@ class Driver extends User
     private function loadDriverFromDB()
     {
 
-        $sql = "SELECT driver.*,users.pseudo FROM driver JOIN users ON driver.user_id = users.id 
+        try {
+            $sql = "SELECT driver.*,users.pseudo FROM driver JOIN users ON driver.user_id = users.id 
         WHERE driver.user_id = :driver_id";
-        $statement = $this->pdo->prepare($sql);
-        $statement->bindParam(':driver_id', $this->id, PDO::PARAM_STR);
-        $statement->execute();
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindParam(':driver_id', $this->id, PDO::PARAM_STR);
+            $statement->execute();
 
-        $driverData = $statement->fetch(PDO::FETCH_ASSOC);
-
-        if ($driverData) {
-            // special Driver information
-            $this->petPreference = $driverData['pets'];
-            $this->smokerPreference = $driverData['smoker'];
-            $this->musicPreference = $driverData['music'];
-            $this->speakerPreference = $driverData['speaker'];
-            $this->foodPreference = $driverData['food'];
-        } else {
-            error_log("loadDriverFromDB() failed for user ID: {$this->id}");
+            $driverData = $statement->fetch(PDO::FETCH_ASSOC);
+            if ($driverData) {
+                // special Driver information
+                $this->petPreference = $driverData['pets'];
+                $this->smokerPreference = $driverData['smoker'];
+                $this->musicPreference = $driverData['music'];
+                $this->speakerPreference = $driverData['speaker'];
+                $this->foodPreference = $driverData['food'];
+            }
+        } catch (PDOException $e) {
+            error_log("loadDriverFromDB() failed for user ID: {$this->id}" . $e->getMessage());
             throw new Exception("Une erreur est survenue lors du chargement des informations de l'utilisateur");
         }
     }
@@ -110,7 +111,7 @@ class Driver extends User
             return array_map(fn($doc) => (array)$doc, $result);
         } catch (Exception $e) {
             error_log("Database error in loadCustomPreferences() (user ID: {$this->id}) : " . $e->getMessage());
-            throw new Exception("Une erreur est survenue");
+            return [];
         }
     }
 
