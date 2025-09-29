@@ -143,14 +143,14 @@ function seatsAvailable(int $seatsOfferedNb, int $seatsAllocatedNb): int
 function displayPhoto(?string $fileName = null): string
 {
     if (!$fileName) {
-        return BASE_URL . '/photos/default-user.png';
+        return BASE_URL . '/icons/default-user.png';
     }
 
     $safeFileName = basename($fileName);
     $realPath = __DIR__ . '/photos/' . $safeFileName;
 
     if (!file_exists($realPath)) {
-        return BASE_URL . '/photos/default-user.png';
+        return BASE_URL . '/icons/default-user.png';
     }
 
     return BASE_URL . '/photos/' . $safeFileName;

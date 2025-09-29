@@ -5,6 +5,7 @@ services:
       volumes: 
         - ./:/var/www/html:cached
         - ./docker/config/default.conf:/etc/apache2/sites-available/000-default.conf:ro
+        - user_photos:/var/www/html/photos
       ports:
          - 8080:80
       environment:
@@ -83,3 +84,4 @@ services:
 volumes:
   db_data:
   mongo_data:
+  user_photos:
