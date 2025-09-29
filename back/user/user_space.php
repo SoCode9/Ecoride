@@ -7,6 +7,7 @@ require_once __DIR__ . "/../../class/Driver.php";
 require_once __DIR__ . "/../../class/Car.php";
 require_once __DIR__ . "/../../class/Reservation.php";
 require_once __DIR__ . "/../../class/Travel.php";
+require_once __DIR__ . "/../../back/MailService.php";
 
 $pdo = MysqlConnection::getPdo();
 
@@ -55,10 +56,17 @@ if (isset($_GET['action'])) {
                 $travelArrival = $travel->getArrivalCity();
                 $message = "Le covoiturage du $travelDate de $travelDeparture à $travelArrival a été annulé par le chauffeur.";
 
+                $mailer = new MailService();
+
                 foreach ($passengersIdOfTheCarpool as $passengerId) {
                     $passenger = User::fromId($pdo, $passengerId['user_id']);
-                    $passengerMail = $passenger->getMail();
-                    mail($passengerMail, 'Annulation du covoiturage', $message, 'FROM: test@ecoride.local');
+                    $to = $passenger->getMail();
+                    $subject = 'Annulation du covoiturage';
+                    $html = nl2br($message);
+
+                    if (!$mailer->send($to, $subject, $html, 'no-reply@ecoride.fr', 'EcoRide')) {
+                        error_log("Mail annulation non envoyé à $to");
+                    }
                     $reservation->cancelCarpool($passengerId['user_id'], $idTravel);
                 }
                 $travel->setTravelStatus('cancelled', $idTravel); //change travel's status
@@ -118,10 +126,17 @@ if (isset($_GET['action'])) {
         Merci de valider que tout s'est bien passé en vous rendant sur votre espace utilisateur. 
         N'hésitez pas à soumettre un avis.";
 
+            $mailer = $mailer ?? new MailService();
+
             foreach ($passengersIdOfTheCarpool as $passengerId) {
                 $passenger = User::fromId($pdo, $passengerId['user_id']);
-                $passengerMail = $passenger->getMail();
-                mail($passengerMail, 'Validation du covoiturage', $message, 'FROM: test@ecoride.local');
+                $to = $passenger->getMail();
+                $subject = 'Validation du covoiturage';
+                $html = nl2br($message);
+
+                if (!$mailer->send($to, $subject, $html, 'no-reply@ecoride.fr', 'EcoRide')) {
+                    error_log("Mail validation non envoyé à $to");
+                }
             }
             $_SESSION['success_message'] = "Vos crédits seront mis à jour une fois que les passagers auront validé le covoiturage.";
         } catch (Exception $e) {
