@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../back/user/auth.php";
-
+require_once __DIR__ . '/../init.php';
 require_once '../back/carpool/search.php';
 
 $travelsSearched = $_SESSION['travelsSearched'] ?? [];

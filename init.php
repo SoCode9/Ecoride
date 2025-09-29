@@ -1,6 +1,11 @@
 <?php
 
-// --- Chargement du .env (local uniquement) ---
+// 1) Session
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
+// 2) Chargement du .env (local uniquement)
 $envFile = __DIR__ . '/.env';
 if (is_file($envFile)) {
     foreach (file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
@@ -11,9 +16,24 @@ if (is_file($envFile)) {
     }
 }
 
-// --- Autoload Composer ---
+// 3) BASE_URL
+if (!defined('BASE_URL')) {
+    $host = $_SERVER['HTTP_HOST'] ?? '';
+    if (file_exists('/.dockerenv')) {
+        // Conteneur Docker (localhost:8080) -> racine
+        define('BASE_URL', '');
+    } elseif (in_array($host, ['localhost', '127.0.0.1', '::1'], true)) {
+        // XAMPP local (projet sous /EcoRide)
+        define('BASE_URL', '/EcoRide');
+    } else {
+        // Prod (domaine)
+        define('BASE_URL', '');
+    }
+}
+
+// 4)  Autoload Composer 
 require_once __DIR__ . '/vendor/autoload.php';
 
-// --- Connexions DB ---
+// 5) Connexions DB 
 require_once __DIR__ . '/database/MysqlConnection.php';
 require_once __DIR__ . '/database/MongoConnection.php';
