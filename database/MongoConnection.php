@@ -11,8 +11,8 @@ class MongoConnection
     private function __construct()
     {
         try {
-            $uri  = getenv('MONGO_URI');
-            $name = getenv('MONGO_DB');
+            $uri  = getenv('MONGO_URI') ?: 'mongodb://mongo:27017';
+            $name = getenv('MONGO_DB') ?: 'ecoride';
 
             if ($uri && $name) {
                 $client = new MongoClient($uri);

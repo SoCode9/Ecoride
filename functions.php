@@ -2,11 +2,6 @@
 
 $host = $_SERVER['HTTP_HOST'];
 
-if (in_array($host, ['localhost', '127.0.0.1', '::1'])) {
-    define('BASE_URL', '/EcoRide');
-} else {
-    define('BASE_URL', '');
-}
 //to store useful functions for all pages
 
 /*---------------- FORMATING ----------------*/
@@ -148,14 +143,14 @@ function seatsAvailable(int $seatsOfferedNb, int $seatsAllocatedNb): int
 function displayPhoto(?string $fileName = null): string
 {
     if (!$fileName) {
-        return BASE_URL . '/photos/default-user.png';
+        return BASE_URL . '/icons/default-user.png';
     }
 
     $safeFileName = basename($fileName);
     $realPath = __DIR__ . '/photos/' . $safeFileName;
 
     if (!file_exists($realPath)) {
-        return BASE_URL . '/photos/default-user.png';
+        return BASE_URL . '/icons/default-user.png';
     }
 
     return BASE_URL . '/photos/' . $safeFileName;

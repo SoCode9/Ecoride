@@ -14,7 +14,7 @@ $userId = $_SESSION['user_id'];
 
 try {
     $connectedUser = User::fromId($pdo, $userId);
-    if (($connectedUser->getIdRole() === 2) or ($connectedUser->getIdRole() === 3)) {
+    if (($connectedUser->getIdRole() === 2) || ($connectedUser->getIdRole() === 3)) {
         $connectedDriver = new Driver($pdo, $connectedUser->getId());
         $carsOfConnectedDriver = new Car($pdo, $connectedDriver->getId(), null);
         $cars = $carsOfConnectedDriver->getCars();

@@ -71,15 +71,21 @@ class Reservation
     public function getCarpoolsToValidate(string $userId): array
     {
         try {
-            $sql = "SELECT travels.*, users.pseudo, users.photo, ratings.rating, reservations.is_validated, reservations.id AS reservationId 
-                FROM travels 
-                LEFT JOIN reservations ON reservations.travel_id = travels.id AND reservations.user_id = :userConnectedId1
-                JOIN driver ON driver.user_id = travels.driver_id 
-                JOIN users ON users.id = travels.driver_id
-                LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
-                WHERE (travel_status = 'in validation') AND ((reservations.user_id =:userConnectedId2 AND reservations.is_validated = 0) OR (travels.driver_id =:userConnectedId3))
-                GROUP BY travels.id, users.pseudo
-                ORDER BY travel_date ASC ";
+            $sql = "SELECT travels.*, users.pseudo, users.photo, AVG(ratings.rating) AS rating, 
+                MAX(reservations.is_validated) AS is_validated,
+                MAX(reservations.id) AS reservationId
+            FROM travels
+            LEFT JOIN reservations ON reservations.travel_id = travels.id AND reservations.user_id   = :userConnectedId1
+            JOIN driver ON driver.user_id = travels.driver_id
+            JOIN users ON users.id = travels.driver_id
+            LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
+            WHERE travels.travel_status = 'in validation' 
+              AND (
+                    (reservations.user_id = :userConnectedId2 AND reservations.is_validated = 0)
+                    OR (travels.driver_id = :userConnectedId3)
+                  )
+            GROUP BY travels.id, users.id
+            ORDER BY travels.travel_date ASC ";
 
             $statement = $this->pdo->prepare($sql);
             $statement->bindParam(":userConnectedId1", $userId, PDO::PARAM_STR);
@@ -102,20 +108,23 @@ class Reservation
     public function getCarpoolsNotStarted(string $userId): array
     {
         try {
-            $sql = "SELECT travels.*, users.pseudo, users.photo, ratings.rating FROM travels 
-                LEFT JOIN reservations ON reservations.travel_id = travels.id 
-                JOIN driver ON driver.user_id = travels.driver_id 
-                JOIN users ON users.id = travels.driver_id
-                LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
-                
-                WHERE ((travel_status = 'not started') OR (travel_status = 'in progress')) 
-                AND ((reservations.user_id =:userConnectedId1) OR (driver.user_id = :userConnectedId2))
-                GROUP BY travels.id
-                ORDER BY travel_date ASC ";
+            $sql = "SELECT travels.*, users.pseudo, users.photo, AVG(ratings.rating) AS rating
+            FROM travels
+            LEFT JOIN reservations ON reservations.travel_id = travels.id AND reservations.user_id = :userId
+            JOIN driver ON driver.user_id = travels.driver_id
+            JOIN users ON users.id = travels.driver_id
+            LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
+            WHERE (travels.travel_status IN ('not started', 'in progress'))
+              AND (
+                    reservations.user_id IS NOT NULL   
+                    OR travels.driver_id = :userId     
+                  )
+            GROUP BY travels.id, users.id
+            ORDER BY travels.travel_date ASC ";
 
             $statement = $this->pdo->prepare($sql);
-            $statement->bindParam(":userConnectedId1", $userId, PDO::PARAM_STR);
-            $statement->bindParam(":userConnectedId2", $userId, PDO::PARAM_STR);
+            $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+
             $statement->execute();
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -133,18 +142,24 @@ class Reservation
     public function getCarpoolsCompleted(string $userId): array
     {
         try {
-            $sql = "SELECT travels.*, users.pseudo,  users.photo, ratings.rating, reservations.is_validated FROM travels 
-                LEFT JOIN reservations ON reservations.travel_id = travels.id 
-                JOIN driver ON driver.user_id = travels.driver_id 
-                JOIN users ON users.id = travels.driver_id
-                LEFT JOIN ratings ON ratings.driver_id = travels.driver_id
-                WHERE (reservations.user_id =:userConnectedId1 AND (travel_status = 'cancelled' OR reservations.is_validated = 1)) OR (driver.user_id = :userConnectedId2 AND (travel_status = 'cancelled' OR travel_status = 'ended'))
-                GROUP BY travels.id
-                ORDER BY travel_date ASC ";
+            $sql = "SELECT t.*, u.pseudo, u.photo, AVG(r.rating) AS rating, MAX(res.is_validated) AS is_validated
+            FROM travels t
+            LEFT JOIN reservations res ON res.travel_id = t.id AND res.user_id   = :userId
+            JOIN driver d ON d.user_id = t.driver_id
+            JOIN users u ON u.id = t.driver_id
+            LEFT JOIN ratings r ON r.driver_id = t.driver_id
+            WHERE (
+                    (res.user_id IS NOT NULL 
+                     AND (t.travel_status = 'cancelled' OR res.is_validated = 1))
+                 OR (t.driver_id = :userId 
+                     AND (t.travel_status = 'cancelled' OR t.travel_status = 'ended'))
+                  )
+            GROUP BY t.id, u.id
+            ORDER BY t.travel_date ASC ";
 
             $statement = $this->pdo->prepare($sql);
-            $statement->bindParam(":userConnectedId1", $userId, PDO::PARAM_STR);
-            $statement->bindParam(":userConnectedId2", $userId, PDO::PARAM_STR);
+            $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+
             $statement->execute();
 
             return $statement->fetchAll(PDO::FETCH_ASSOC);

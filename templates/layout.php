@@ -16,9 +16,6 @@
 
 <body>
 
-
-    <?php require_once __DIR__ . "/../functions.php"; ?>
-
     <?php
     include __DIR__ . '/../templates/components/header.php'; ?>
 
