@@ -8,7 +8,7 @@ class MysqlConnection
     private function __construct()
     {
         try {
-            $host    = getenv('DB_HOST') ?: '127.0.0.1';
+            $host    = getenv('DB_HOST') ?: 'db';
             $port    = (int)(getenv('DB_PORT') ?: '3306');
             $name    = getenv('DB_NAME') ?: 'ecoride';
             $user    = getenv('DB_USER') ?: 'root';
