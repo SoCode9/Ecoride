@@ -209,6 +209,21 @@ class User
         }
     }
 
+    public function isDriver(string $userId): bool
+    {
+        try {
+            $sql = "SELECT user_id FROM driver WHERE user_id=:userId";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $statement->execute();
+
+            return $statement->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Database error in isDriver(): ($userId): " . $e->getMessage());
+            throw new Exception("Impossible de savoir si l'utilisateur est un chauffeur");
+        }
+    }
+
     /**
      * Loads a list of users by role
      * @param int $idRole Role ID to filter users (1 = passenger ; 2 = driver ; 3 = both ; 4 = employee ; 5 = administrator)

@@ -40,11 +40,10 @@ $musicPref = processPreference($_POST['music_pref'] ?? null, "musique");
 
 try {
     $user = User::fromId($pdo, $userId);
-    try {
-        $driver = new Driver($pdo, $userId);
-    } catch (Exception $e) {
-        error_log("Driver not found, creating one for user $userId");
+    if (($user->isDriver($userId)) === false) {
         $user->createDriver($userId);
+        $driver = new Driver($pdo, $userId);
+    } else {
         $driver = new Driver($pdo, $userId);
     }
     $user->setIdRole($roleId);
