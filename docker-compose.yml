@@ -3,14 +3,13 @@ services:
     container_name: ecoride-app
     build: .
     volumes:
-      - ./:/var/www/html:cached
+      - ./:/var/www/html
+      - ./storage/photos:/var/www/storage/photos
       - ./docker/config/default.conf:/etc/apache2/sites-available/000-default.conf:ro
-      - user_photos:/var/www/html/photos
     ports:
       - 8080:80
     environment:
       DB_HOST: db
-      DB_PORT: 3306
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
@@ -18,9 +17,6 @@ services:
       MONGO_DB: ${MONGO_DB}
       MAIL_HOST: mailpit
       MAIL_PORT: 1025
-      MAIL_USER:
-      MAIL_PASS:
-      MAIL_SECURE:
       MAIL_FROM: no-reply@ecoride.local
       MAIL_FROM_NAME: EcoRide
     depends_on:
@@ -28,10 +24,11 @@ services:
         condition: service_healthy
       mongo:
         condition: service_healthy
+    restart: unless-stopped
 
   db:
-    image: mysql:8.0
     container_name: ecoride-db
+    image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
@@ -42,27 +39,26 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD",
-        ]
+      test: ["CMD-SHELL","mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD"]
       interval: 5s
       timeout: 3s
       retries: 30
+    restart: unless-stopped
+
   phpmyadmin:
-    image: phpmyadmin:5.2.2
     container_name: ecoride-phpmyadmin
+    image: phpmyadmin:5.2.2
     environment:
       PMA_HOST: db
       PMA_USER: ${DB_USER}
       PMA_PASSWORD: ${DB_PASS}
     ports:
       - "8081:80"
+    restart: unless-stopped
 
   mongo:
-    image: mongo:7
     container_name: ecoride-mongo
+    image: mongo:7
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASS}
@@ -72,18 +68,15 @@ services:
     volumes:
       - mongo_data:/data/db
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "mongosh --quiet --username $$MONGO_INITDB_ROOT_USERNAME --password $$MONGO_INITDB_ROOT_PASSWORD --eval 'db.adminCommand({ ping: 1 })' --authenticationDatabase admin || exit 1",
-        ]
+      test: ["CMD-SHELL","mongosh --quiet --username $$MONGO_INITDB_ROOT_USERNAME --password $$MONGO_INITDB_ROOT_PASSWORD --eval 'db.adminCommand({ ping: 1 })' --authenticationDatabase admin || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 30
+    restart: unless-stopped
 
   mongo-express:
-    image: mongo-express:1.0.2
     container_name: ecoride-mongo-express
+    image: mongo-express:1.0.2
     depends_on:
       - mongo
     environment:
@@ -97,13 +90,13 @@ services:
     restart: unless-stopped
 
   mailpit:
-    image: axllent/mailpit
     container_name: ecoride-mailpit
+    image: axllent/mailpit
     ports:
       - "8025:8025"   # UI
       - "1025:1025"   # SMTP
+    restart: unless-stopped
 
 volumes:
   db_data:
   mongo_data:
-  user_photos:
